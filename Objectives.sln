@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualStudioObjectives", "V
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsObjectives", "WindowsObjectives\WindowsObjectives.csproj", "{5D71DD42-137D-45F3-A062-FEC75D18C7FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordObjectives", "WordObjectives\WordObjectives.csproj", "{219588A6-942D-4EA7-AA41-3C622E693736}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{5D71DD42-137D-45F3-A062-FEC75D18C7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D71DD42-137D-45F3-A062-FEC75D18C7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D71DD42-137D-45F3-A062-FEC75D18C7FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{219588A6-942D-4EA7-AA41-3C622E693736}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{219588A6-942D-4EA7-AA41-3C622E693736}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{219588A6-942D-4EA7-AA41-3C622E693736}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{219588A6-942D-4EA7-AA41-3C622E693736}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
