@@ -51,7 +51,6 @@
             CheckDocuments();
         }
 
-
         /// <summary>
         /// Event handler to manage when documents are closed.</br>
         /// Occurs immediately before any open document closes.
@@ -284,6 +283,15 @@
             {
                 if (workItem.Start != workItem.Finish)
                 {
+                    if(StartSize != FinishSize)
+                    {
+                        workItem.Application = ApplicationType.WordWrite;
+                    }
+                    else
+                    {
+                        workItem.Application = ApplicationType.WordRead;
+                    }
+
                     string json = JsonConvert.SerializeObject(workItem, Formatting.Indented);
                     File.WriteAllText(StorageFolder + @"\" + (int)ApplicationType.Word + "-" + Guid.NewGuid().ToString() + ".json", json);
                     workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));

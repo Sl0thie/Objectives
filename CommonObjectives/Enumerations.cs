@@ -26,6 +26,14 @@
         VisioRead = 21,
     }
 
+    public enum SystemType
+    {
+        None = 0,
+        Uptime = 101,
+        Idle = 102,
+        Sleep = 103,
+    }
+
     public enum AppointmentType
     {
         None = 0,

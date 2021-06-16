@@ -40,9 +40,9 @@
 
         private void ReadFiles()
         {
-            DirectoryInfo ImportXMLDirectory = new DirectoryInfo(InTouch.ObjectivesStorageFolder);
+            DirectoryInfo ImportDataDirectory = new DirectoryInfo(InTouch.ObjectivesStorageFolder);
 
-            foreach (FileInfo nextFile in ImportXMLDirectory.EnumerateFiles())
+            foreach (FileInfo nextFile in ImportDataDirectory.EnumerateFiles())
             {
                 string json = File.ReadAllText(nextFile.FullName);
                 string filename = nextFile.Name;
@@ -54,6 +54,27 @@
                     case "2":
                     case "3":
                         if (ImportWorkItem(json))
+                        {
+                            File.Delete(nextFile.FullName);
+                        }
+                        break;
+
+                    case "101":
+                        if (ImportSystemUptime(json))
+                        {
+                            File.Delete(nextFile.FullName);
+                        }
+                        break;
+
+                    case "102":
+                        if (ImportSystemIdle(json))
+                        {
+                            File.Delete(nextFile.FullName);
+                        }
+                        break;
+
+                    case "103":
+                        if (ImportSystemSleep(json))
                         {
                             File.Delete(nextFile.FullName);
                         }
@@ -123,85 +144,84 @@
 
         private bool ImportSystemUptime(string json)
         {
-            //try
-            //{
-            //    SystemUptime systemUptime = JsonConvert.DeserializeObject<SystemUptime>(json);
+            try
+            {
+                SystemUptime systemUptime = JsonConvert.DeserializeObject<SystemUptime>(json);
 
-            //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
-            //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
+                Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
+                Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
 
-            //    nextAppointment.Start = systemUptime.Start;
-            //    nextAppointment.End = systemUptime.Finish;
-            //    nextAppointment.Subject = "System - Uptime";
-            //    nextAppointment.Body = json;
-            //    nextAppointment.AllDayEvent = false;
-            //    nextAppointment.ReminderSet = false;
-            //    nextAppointment.Categories = "System - Uptime";
+                nextAppointment.Start = systemUptime.Start;
+                nextAppointment.End = systemUptime.Finish;
+                nextAppointment.Subject = "System - Uptime";
+                nextAppointment.Body = json;
+                nextAppointment.AllDayEvent = false;
+                nextAppointment.ReminderSet = false;
+                nextAppointment.Categories = "System - Uptime";
 
-            //    nextAppointment.Save();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error(ex);
-            //    return false;
-            //}
+                nextAppointment.Save();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return false;
+            }
 
             return true;
         }
 
         private bool ImportSystemIdle(string json)
         {
-            //try
-            //{
-            //    SystemIdle systemIdle = JsonConvert.DeserializeObject<SystemIdle>(json);
+            try
+            {
+                SystemIdle systemIdle = JsonConvert.DeserializeObject<SystemIdle>(json);
 
-            //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
-            //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
+                Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
+                Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
 
-            //    nextAppointment.Start = systemIdle.Start;
-            //    nextAppointment.End = systemIdle.Finish;
-            //    nextAppointment.Subject = "System - Idle";
-            //    nextAppointment.Body = json;
-            //    nextAppointment.AllDayEvent = false;
-            //    nextAppointment.ReminderSet = false;
-            //    nextAppointment.Categories = "System - Idle";
+                nextAppointment.Start = systemIdle.Start;
+                nextAppointment.End = systemIdle.Finish;
+                nextAppointment.Subject = "System - Idle";
+                nextAppointment.Body = json;
+                nextAppointment.AllDayEvent = false;
+                nextAppointment.ReminderSet = false;
+                nextAppointment.Categories = "System - Idle";
 
-            //    nextAppointment.Save();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error(ex);
-            //    return false;
-            //}
+                nextAppointment.Save();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return false;
+            }
 
             return true;
         }
 
-
         private bool ImportSystemSleep(string json)
         {
-            //try
-            //{
-            //    SystemSleep systemSleep = JsonConvert.DeserializeObject<SystemSleep>(json);
+            try
+            {
+                SystemSleep systemSleep = JsonConvert.DeserializeObject<SystemSleep>(json);
 
-            //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
-            //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
+                Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
+                Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
 
-            //    nextAppointment.Start = systemSleep.Start;
-            //    nextAppointment.End = systemSleep.Finish;
-            //    nextAppointment.Subject = "System - Sleep";
-            //    nextAppointment.Body = json;
-            //    nextAppointment.AllDayEvent = false;
-            //    nextAppointment.ReminderSet = false;
-            //    nextAppointment.Categories = "System - Sleep";
+                nextAppointment.Start = systemSleep.Start;
+                nextAppointment.End = systemSleep.Finish;
+                nextAppointment.Subject = "System - Sleep";
+                nextAppointment.Body = json;
+                nextAppointment.AllDayEvent = false;
+                nextAppointment.ReminderSet = false;
+                nextAppointment.Categories = "System - Sleep";
 
-            //    nextAppointment.Save();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error(ex);
-            //    return false;
-            //}
+                nextAppointment.Save();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return false;
+            }
 
             return true;
         }
