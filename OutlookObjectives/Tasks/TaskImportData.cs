@@ -62,7 +62,7 @@
                     default:
                         Log.Info("Unknown Id: " + id);
                         break;
-                }               
+                }
             }
         }
 
@@ -71,6 +71,28 @@
             try
             {
                 WorkItem workItem = JsonConvert.DeserializeObject<WorkItem>(json);
+                Objective obj = InTouch.GetObjective(InTouch.ObjectivesRootFolder + "\\" + workItem.ObjectiveName);
+
+                foreach (var next in obj.WorkTypes)
+                {
+                    if(next.Value.Application == workItem.Application)
+                    {
+                        workItem.WorkType = next.Value;
+                        break;
+                    }
+                }
+
+                if(workItem.WorkType is null)
+                {
+                    foreach (var next in InTouch.WorkTypes)
+                    {
+                        if (next.Value.Application == workItem.Application)
+                        {
+                            workItem.WorkType = next.Value;
+                            break;
+                        }
+                    }
+                }
 
                 Log.Info(workItem.Name);
                 Log.Info(workItem.ObjectiveName);
@@ -86,19 +108,7 @@
                 nextAppointment.ReminderSet = false;
                 nextAppointment.UserProperties.Add("Application", Outlook.OlUserPropertyType.olInteger);
                 nextAppointment.UserProperties["Application"].Value = (int)workItem.Application;
-
-                switch (workItem.Application)
-                {
-                    case ApplicationType.VisualStudioRead:
-                        nextAppointment.Categories = "Visual Studio - Read Only";
-                        break;
-
-                    case ApplicationType.VisualStudioWrite:
-                        nextAppointment.Categories = "Visual Studio";
-                        break;
-
-                    
-                }
+                nextAppointment.Categories = workItem.WorkType.Name;
 
                 nextAppointment.Save();
             }

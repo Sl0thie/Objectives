@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="VisualStudioObjectives.eb3c3504-8ca5-48da-82be-6907a9e72efa" Version="1.0.0" Language="en-US" Publisher="Dallas Adams" />
+        <Identity Id="VisualStudioObjectives.eb3c3504-8ca5-48da-82be-6907a9e72efa" Version="1.0.1" Language="en-US" Publisher="Dallas Adams" />
         <DisplayName>VisualStudioObjectives</DisplayName>
         <Description xml:space="preserve">VisualStudioObjectives is a Visual Studio Extension to monitor solutions.</Description>
         <Icon>IMPOSSBL.ICO</Icon>

@@ -42,8 +42,5 @@
         /// The application that is associated with this work type.
         /// </summary>
         public ApplicationType Application { get; set; }
-
-
-
     }
 }

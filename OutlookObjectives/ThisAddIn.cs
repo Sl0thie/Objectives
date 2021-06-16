@@ -159,7 +159,6 @@
                     SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
                     SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
                     SubKey.SetValue("Application", "0", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "false", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\1", true);
                     SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\1", true);
@@ -169,7 +168,6 @@
                     SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
                     SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
                     SubKey.SetValue("Application", "0", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "false", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\2", true);
                     SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\2", true);
@@ -179,7 +177,6 @@
                     SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
                     SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
                     SubKey.SetValue("Application", "0", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "false", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\3", true);
                     SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\3", true);
@@ -189,147 +186,24 @@
                     SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
                     SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
                     SubKey.SetValue("Application", "0", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "false", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\4", true);
                     SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\4", true);
                     SubKey.SetValue("Name", "Visual Studio", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Visual Studio.", RegistryValueKind.String);
+                    SubKey.SetValue("Description", "Developing Visual Studio solution.", RegistryValueKind.String);
                     SubKey.SetValue("CostPerHour", "50.00", RegistryValueKind.String);
                     SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
                     SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "1", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "true", RegistryValueKind.String);
+                    SubKey.SetValue("Application", "2", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\5", true);
                     SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\5", true);
-                    SubKey.SetValue("Name", "SSMS", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "SSMS.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "50.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "2", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "true", RegistryValueKind.String);
-
-                    Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\6", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\6", true);
-                    SubKey.SetValue("Name", "Excel", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Excel.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "50.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "4", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "true", RegistryValueKind.String);
-
-                    Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\7", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\7", true);
-                    SubKey.SetValue("Name", "Word", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Word.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "50.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "3", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "true", RegistryValueKind.String);
-
-                    Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\8", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\8", true);
-                    SubKey.SetValue("Name", "AutoCAD", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "AutoCAD.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "50.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "5", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "true", RegistryValueKind.String);
-
-                    Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\9", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\9", true);
-                    SubKey.SetValue("Name", "General Labor", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Cost of general labor.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "35.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "0", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "false", RegistryValueKind.String);
-
-                    Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\10", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\10", true);
-                    SubKey.SetValue("Name", "Training", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Cost of training.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "40.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "0", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "false", RegistryValueKind.String);
-
-                    Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\11", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\11", true);
-                    SubKey.SetValue("Name", "Research", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Cost of research.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "50.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "0", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "false", RegistryValueKind.String);
-
-                    Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\12", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\12", true);
-                    SubKey.SetValue("Name", "Travel", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Cost of traveling.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "10.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "0", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "false", RegistryValueKind.String);
-
-                    Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\13", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\13", true);
-                    SubKey.SetValue("Name", "Reviewing Visual Studio", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Viewing Visual Studio.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "1", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "false", RegistryValueKind.String);
-
-                    Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\14", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\14", true);
-                    SubKey.SetValue("Name", "Reviewing SSMS", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Cost of research.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "2", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "false", RegistryValueKind.String);
-
-                    Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\15", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\15", true);
-                    SubKey.SetValue("Name", "Reviewing Excel", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Viewing Excel.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "4", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "false", RegistryValueKind.String);
-
-                    Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\16", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\16", true);
-                    SubKey.SetValue("Name", "Reviewing Word", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Cost of research.", RegistryValueKind.String);
+                    SubKey.SetValue("Name", "Visual Studio - Review", RegistryValueKind.String);
+                    SubKey.SetValue("Description", "Reviewing Visual Studio solution.", RegistryValueKind.String);
                     SubKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
                     SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
                     SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
                     SubKey.SetValue("Application", "3", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "false", RegistryValueKind.String);
-
-                    Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\17", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\17", true);
-                    SubKey.SetValue("Name", "Reviewing AutoCAD", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Cost of research.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "5", RegistryValueKind.String);
-                    SubKey.SetValue("Active", "false", RegistryValueKind.String);
                 }
             }
             catch (Exception ex)

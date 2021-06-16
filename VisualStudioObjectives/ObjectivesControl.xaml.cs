@@ -257,6 +257,7 @@
                 StartFileSizeTotal = 0;
 
                 workItem = new WorkItem(dte.Solution.FileName.Substring(dte.Solution.FileName.LastIndexOf('\\') + 1));
+                workItem.Name = workItem.Name.Substring(0, workItem.Name.Length - 4);
                 workItem.FilePath = dte.Solution.FileName;
                 if (workItem.FilePath.Substring(0, RootFolder.Length) == RootFolder)
                 {

@@ -52,7 +52,10 @@
             get { return notes; }
         }
 
+        [Obsolete("Use WorkType instead.")]
         public int WorkTypeIndex { get; set; }
+
+        public WorkType WorkType { get; set; }
 
         public ApplicationType Application { get; set; }
 
