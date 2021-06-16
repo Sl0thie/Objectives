@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelObjectives", "ExcelObj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectObjectives", "ProjectObjectives\ProjectObjectives.csproj", "{6BA998B4-B129-4667-9C57-BA3E58F4650F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioObjectives", "VisioObjectives\VisioObjectives.csproj", "{4510232F-89EB-4330-B131-A894C0AD8930}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{6BA998B4-B129-4667-9C57-BA3E58F4650F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BA998B4-B129-4667-9C57-BA3E58F4650F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BA998B4-B129-4667-9C57-BA3E58F4650F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4510232F-89EB-4330-B131-A894C0AD8930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4510232F-89EB-4330-B131-A894C0AD8930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4510232F-89EB-4330-B131-A894C0AD8930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4510232F-89EB-4330-B131-A894C0AD8930}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
