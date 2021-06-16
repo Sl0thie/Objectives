@@ -9,25 +9,33 @@
 
     public class WorkItem : IWorkItem
     {
-        public Guid Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int Version { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string ObjectiveName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime Start { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime Finish { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private readonly Collection<Note> notes = new Collection<Note>();
 
-
-
-        private readonly Collection<string> notes = new Collection<string>();
 
         /// <summary>
-        /// File path to the project item's location.
+        /// GUID Index.
         /// </summary>
-        public string Path { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// Objective name.
         /// </summary>
-        public string Objective { get; set; }
+        public string ObjectiveName { get; set; }
+
+        /// <summary>
+        /// The start time of the work item.
+        /// </summary>
+        public DateTime Start { get; set; }
+
+        /// <summary>
+        /// The finish time of the work item.
+        /// </summary>
+        public DateTime Finish { get; set; }
+
+        /// <summary>
+        /// File path to the project item's location.
+        /// </summary>
+        public string FilePath { get; set; }
 
         /// <summary>
         /// Project name.
@@ -39,18 +47,31 @@
         /// </summary>
         public string Description { get; set; }
 
-        public Collection<string> Notes
+        public Collection<Note> Notes
         {
             get { return notes; }
         }
 
         public int WorkTypeIndex { get; set; }
 
+        public ApplicationType Application { get; set; }
+
         public int Minutes { get; set; }
 
         public decimal Cost { get; set; }
 
         public bool Invoiced { get; set; }
-        
+
+
+        public WorkItem()
+        {
+        }
+
+        public WorkItem(string name)
+        {
+            Id = Guid.NewGuid();
+            Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
+            Name = name;
+        }
     }
 }

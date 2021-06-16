@@ -1,11 +1,21 @@
-﻿using Microsoft.VisualStudio.Shell;
-using System;
-using System.Runtime.InteropServices;
-using System.Threading;
-using Task = System.Threading.Tasks.Task;
-
-namespace VisualStudioObjectives
+﻿namespace VisualStudioObjectives
 {
+    using Microsoft.VisualStudio;
+    using Microsoft.VisualStudio.OLE.Interop;
+    using Microsoft.VisualStudio.Shell;
+    using Microsoft.VisualStudio.Shell.Interop;
+    using Microsoft.Win32;
+    using System;
+    using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime.InteropServices;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Task = System.Threading.Tasks.Task;
+    using LogNET;
+
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
     /// </summary>
@@ -24,13 +34,28 @@ namespace VisualStudioObjectives
     /// </para>
     /// </remarks>
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-    [Guid(VisualStudioObjectivesPackage.PackageGuidString)]
-    public sealed class VisualStudioObjectivesPackage : AsyncPackage
+    [ProvideMenuResource("Menus.ctmenu", 1)]
+    [ProvideToolWindow(typeof(Objectives))]
+    [Guid(ObjectivesPackage.PackageGuidString)]
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "pkgdef, VS and vsixmanifest are valid VS terms")]
+    public sealed class ObjectivesPackage : AsyncPackage
     {
         /// <summary>
-        /// VisualStudioObjectivesPackage GUID string.
+        /// ObjectivesPackage GUID string.
         /// </summary>
-        public const string PackageGuidString = "2cffef90-cc00-4de2-af69-e78f94705b51";
+        public const string PackageGuidString = "63a8466f-5ebc-431e-ab13-c9e67d24865b";
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ObjectivesPackage"/> class.
+        /// </summary>
+        public ObjectivesPackage()
+        {
+            // Inside this method you can place any initialization code that does not require
+            // any Visual Studio service because at this point the package object is created but
+            // not sited yet inside Visual Studio environment. The place to do all the other
+            // initialization is the Initialize method.
+            Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
+        }
 
         #region Package Members
 
@@ -46,8 +71,7 @@ namespace VisualStudioObjectives
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-
-            SolutionMonitor sm = new SolutionMonitor();
+            await ObjectivesCommand.InitializeAsync(this);
         }
 
         #endregion

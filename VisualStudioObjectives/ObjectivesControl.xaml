@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="VisualStudioObjectives.ObjectivesControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vsshell="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.15.0"
+             Background="#202020"
+             Foreground="#FFFFFF"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"            
+             Name="MyToolWindow" Loaded="MyToolWindow_Loaded" MinHeight="160" MaxHeight="160" Unloaded="MyToolWindow_Unloaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2"/>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="21"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox x:Name="labelObjective" Grid.Column="1" Grid.Row="1" Text="Objective" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#00000000" Foreground="Gray" BorderBrush="#00000000"/>
+        <TextBox x:Name="valueObjective" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="1" Text="" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#00000000" Foreground="White" BorderBrush="#00000000"/>
+
+        <TextBox x:Name="labelTime" Grid.Column="1" Grid.Row="2" Text="Time" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#00000000" Foreground="Gray" BorderBrush="#00000000"/>
+        <TextBox x:Name="valueTimeStart" Grid.Column="2" Grid.Row="2" Text="0:00" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#00000000" Foreground="White" BorderBrush="#00000000"/>
+        <TextBox x:Name="valueTimeNow" Grid.Column="3" Grid.Row="2" Text="0:00" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#00000000" Foreground="White" BorderBrush="#00000000"/>
+        <TextBox x:Name="valueTimeDiff" Grid.Column="4" Grid.Row="2" Text="0:00" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#00000000" Foreground="White" BorderBrush="#00000000"/>
+
+        <TextBox x:Name="labelFiles" Grid.Column="1" Grid.Row="3" Text="Files" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#00000000" Foreground="Gray" BorderBrush="#00000000"/>
+        <TextBox x:Name="valueFilesStart" Grid.Column="2" Grid.Row="3" Text="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#00000000" Foreground="White" BorderBrush="#00000000"/>
+        <TextBox x:Name="valueFilesNow" Grid.Column="3" Grid.Row="3" Text="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#00000000" Foreground="White" BorderBrush="#00000000"/>
+        <TextBox x:Name="valueFilesDiff" Grid.Column="4" Grid.Row="3" Text="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#00000000" Foreground="White" BorderBrush="#00000000"/>
+
+        <TextBox x:Name="labelSize" Grid.Column="1" Grid.Row="4" Text="Size" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#00000000" Foreground="Gray" BorderBrush="#00000000"/>
+        <TextBox x:Name="valueSizeStart" Grid.Column="2" Grid.Row="4" Text="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#00000000" Foreground="White" BorderBrush="#00000000"/>
+        <TextBox x:Name="valueSizeNow" Grid.Column="3" Grid.Row="4" Text="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#00000000" Foreground="White" BorderBrush="#00000000"/>
+        <TextBox x:Name="valueSizeDiff" Grid.Column="4" Grid.Row="4" Text="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#00000000" Foreground="White" BorderBrush="#00000000"/>
+
+        <TextBox x:Name="labelBuilds" Grid.Column="1" Grid.Row="5" Text="Builds" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#00000000" Foreground="Gray" BorderBrush="#00000000"/>
+        <TextBox x:Name="valueBuildsStart" Grid.Column="2" Grid.Row="5" Text="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#00000000" Foreground="White" BorderBrush="#00000000"/>
+        <TextBox x:Name="valueBuildsNow" Grid.Column="3" Grid.Row="5" Text="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#00000000" Foreground="White" BorderBrush="#00000000"/>
+        <TextBox x:Name="valueBuildsDiff" Grid.Column="4" Grid.Row="5" Text="0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#00000000" Foreground="White" BorderBrush="#00000000"/>
+    </Grid>
+</UserControl>

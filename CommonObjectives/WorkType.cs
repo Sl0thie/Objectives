@@ -43,9 +43,7 @@
         /// </summary>
         public ApplicationType Application { get; set; }
 
-        /// <summary>
-        /// If the work type is active. Some applications are just viewing.
-        /// </summary>
-        public bool Active { get; set; }
+
+
     }
 }
