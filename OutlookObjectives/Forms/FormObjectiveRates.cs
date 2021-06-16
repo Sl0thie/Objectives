@@ -50,7 +50,7 @@
                 nextItem.SubItems.Add(next.Value.MinimumNoOfMinutes.ToString());
                 nextItem.SubItems.Add(next.Value.MaximNoOfMinutes.ToString());
                 nextItem.SubItems.Add(next.Value.Application.ToString());
-                nextItem.SubItems.Add(next.Value.Active.ToString());
+                //nextItem.SubItems.Add(next.Value.Active.ToString());
 
                 ListWorkTypes.Items.Add(nextItem);
             }
@@ -105,11 +105,11 @@
                     nextItem.SubItems[6].Text = next.Value.Application.ToString();
                 }
 
-                if (next.Value.Active.ToString() != nextItem.SubItems[7].Text)
-                {
-                    Same = false;
-                    nextItem.SubItems[7].Text = next.Value.Active.ToString();
-                }
+                //if (next.Value.Active.ToString() != nextItem.SubItems[7].Text)
+                //{
+                //    Same = false;
+                //    nextItem.SubItems[7].Text = next.Value.Active.ToString();
+                //}
 
                 if(!Same)
                 {

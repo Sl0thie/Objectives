@@ -272,7 +272,7 @@
                     if (!dayReport.WorkItems.ContainsKey(dayReport.Minutes[i].PrimaryPath +  dayReport.Minutes[i].PrimaryWorkTypeIndex.ToString()))
                     {
                         WorkItem newWorkItem = new WorkItem();
-                        newWorkItem.Objective = dayReport.Minutes[i].PrimaryObjective;
+                        newWorkItem.ObjectiveName = dayReport.Minutes[i].PrimaryObjective;
                         newWorkItem.Name = dayReport.Minutes[i].PrimaryName;
                         newWorkItem.WorkTypeIndex = dayReport.Minutes[i].PrimaryWorkTypeIndex;
                         newWorkItem.Minutes = 1;
@@ -289,10 +289,10 @@
         private void CalculateBillableItems()
         {
             // Loop though the work items.
-            foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.Objective).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkTypeIndex))
+            foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkTypeIndex))
             {
                 decimal rate;
-                Objective obj = InTouch.GetObjective(InTouch.ObjectivesRootFolder + "\\" + next.Value.Objective);
+                Objective obj = InTouch.GetObjective(InTouch.ObjectivesRootFolder + "\\" + next.Value.ObjectiveName);
                 if (obj.WorkTypes.ContainsKey(next.Value.WorkTypeIndex))
                 {
                     rate = obj.WorkTypes[next.Value.WorkTypeIndex].CostPerHour;
@@ -356,10 +356,10 @@
 
             int i = 0;
 
-            foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.Objective).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkTypeIndex))
+            foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkTypeIndex))
             {
                 rv += "<tr>" + "\n";
-                rv += "<td style=\"max-height:18px;\">" + next.Value.Objective + "</td>\n";
+                rv += "<td style=\"max-height:18px;\">" + next.Value.ObjectiveName + "</td>\n";
                 rv += "<td style=\"max-height:18px;\">" + next.Value.Name + "</td>\n";
                 rv += "<td style=\"max-height:18px;text-align:right;\">" + InTouch.GetTimeStringFromMinutes(next.Value.Minutes) + "</td>\n";
                 rv += "<td style=\"max-height:18px;text-align:right;\">$" + next.Value.Cost.ToString("0.00") + "</td>\n";
@@ -700,7 +700,7 @@
             chart.ChartAreas[Series2].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
 
             // Loop though the work items.
-            foreach(var next in dayReport.WorkItems.OrderBy(x => x.Value.Objective).OrderBy(x => x.Value.Name))
+            foreach(var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).OrderBy(x => x.Value.Name))
             {
                 int rv;
                 int rv2;

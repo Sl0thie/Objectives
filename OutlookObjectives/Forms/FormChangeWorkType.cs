@@ -45,7 +45,7 @@
             NumMaxMinutes.Value = workType.MaximNoOfMinutes;
             ComboApplication.SelectedText = workType.Application.ToString();
 
-            CheckActive.Checked = workType.Active;
+            //CheckActive.Checked = workType.Active;
         }
 
         private void TextName_TextChanged(object sender, EventArgs e)
@@ -80,7 +80,7 @@
 
         private void CheckActive_CheckedChanged(object sender, EventArgs e)
         {
-            workType.Active = CheckActive.Checked;
+            //workType.Active = CheckActive.Checked;
         }
     }
 }

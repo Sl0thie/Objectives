@@ -380,9 +380,9 @@
                                     nextType.Application = (ApplicationType)Convert.ToInt32(val);
                                     break;
 
-                                case "Active":
-                                    nextType.Active = Convert.ToBoolean(val);
-                                    break;
+                                //case "Active":
+                                //    nextType.Active = Convert.ToBoolean(val);
+                                //    break;
                             }
                         }
 

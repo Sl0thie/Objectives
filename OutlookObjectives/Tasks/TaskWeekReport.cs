@@ -146,9 +146,9 @@
             for (int i = 0; i < 7; i++)
             {
                 // Loop though the work items.
-                foreach (var next in dayReports[i].WorkItems.OrderBy(x => x.Value.Objective).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkTypeIndex))
+                foreach (var next in dayReports[i].WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkTypeIndex))
                 {
-                    weekReport.WorkItems.Add(dayReports[i].Day.ToString("yyyy-MM-dd") + next.Value.Objective + next.Value.Name + next.Value.WorkTypeIndex, next.Value); ;
+                    weekReport.WorkItems.Add(dayReports[i].Day.ToString("yyyy-MM-dd") + next.Value.ObjectiveName + next.Value.Name + next.Value.WorkTypeIndex, next.Value); ;
                 }
             }
         }
@@ -171,10 +171,10 @@
             rv += "<h2>Objectives Totals</h2>" + "\n";
             rv += "<table width=\"100%\">" + "\n";
 
-            foreach (var next in weekReport.WorkItems.OrderBy(x => x.Value.Objective).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkTypeIndex))
+            foreach (var next in weekReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkTypeIndex))
             {
                 rv += "<tr>" + "\n";
-                rv += "<td style=\"max-height:18px;\">" + next.Value.Objective + "</td>\n";
+                rv += "<td style=\"max-height:18px;\">" + next.Value.ObjectiveName + "</td>\n";
                 rv += "<td style=\"max-height:18px;\">" + next.Value.Name + "</td>\n";
                 rv += "<td style=\"max-height:18px;text-align:right;\">" + InTouch.GetTimeStringFromMinutes(next.Value.Minutes) + "</td>\n";
                 rv += "<td style=\"max-height:18px;text-align:right;\">$" + next.Value.Cost.ToString("0.00") + "</td>\n";
