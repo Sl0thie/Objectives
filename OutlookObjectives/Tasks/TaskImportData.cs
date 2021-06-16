@@ -103,7 +103,7 @@
                 nextAppointment.Start = workItem.Start;
                 nextAppointment.End = workItem.Finish;
                 nextAppointment.Subject = workItem.Name;
-                nextAppointment.Body = json;
+                nextAppointment.Body = JsonConvert.SerializeObject(workItem, Formatting.Indented);
                 nextAppointment.AllDayEvent = false;
                 nextAppointment.ReminderSet = false;
                 nextAppointment.UserProperties.Add("Application", Outlook.OlUserPropertyType.olInteger);
