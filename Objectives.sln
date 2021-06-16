@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonObjectives", "CommonO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCADObjectives", "AutoCADObjectives\AutoCADObjectives.csproj", "{47A34847-BA5E-41DE-A35A-D9004BC6D2F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelObjectives", "ExcelObjectives\ExcelObjectives.csproj", "{3EFA3667-A8C6-45A9-8387-35A68FAD381C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{47A34847-BA5E-41DE-A35A-D9004BC6D2F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47A34847-BA5E-41DE-A35A-D9004BC6D2F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47A34847-BA5E-41DE-A35A-D9004BC6D2F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EFA3667-A8C6-45A9-8387-35A68FAD381C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EFA3667-A8C6-45A9-8387-35A68FAD381C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EFA3667-A8C6-45A9-8387-35A68FAD381C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EFA3667-A8C6-45A9-8387-35A68FAD381C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
