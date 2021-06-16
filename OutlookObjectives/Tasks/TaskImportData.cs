@@ -19,8 +19,6 @@
 
         public void RunTask()
         {
-            Log.Info("Starting Import XML Task.");
-
             Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess));
             BackgroundThread.Name = "Objectives.TaskImportData";
             BackgroundThread.IsBackground = true;
@@ -33,8 +31,7 @@
         {
             try
             {
-                Log.Info("Starting Import XML Task.");
-
+                Log.Info("Starting import JSON data task.");
                 ReadFiles();
             }
             catch (Exception ex) { Log.Error(ex); }
@@ -49,75 +46,69 @@
             {
                 string json = File.ReadAllText(nextFile.FullName);
                 string filename = nextFile.Name;
+                string id = filename.Substring(0, filename.IndexOf('-'));
 
-                switch (filename.Substring(0,1))
+                switch (id)
                 {
-                    case "0":
-
-                        break;
-
                     case "1":
-                        if(ImportVisualStudioData(json))
-                        {
-                            File.Delete(nextFile.FullName);
-                        }
-                        break;
-
                     case "2":
-                        if (ImportSSMSData(json))
-                        {
-                            File.Delete(nextFile.FullName);
-                        }
-                        break;
-
                     case "3":
-                        if (ImportWordData(json))
+                        if (ImportWorkItem(json))
                         {
                             File.Delete(nextFile.FullName);
                         }
                         break;
-
-                    case "4":
-                        if (ImportExceloData(json))
-                        {
-                            File.Delete(nextFile.FullName);
-                        }
-                        break;
-
-                    case "5":
-                        if (ImportAutoCADData(json))
-                        {
-                            File.Delete(nextFile.FullName);
-                        }
-                        break;
-
-                    case "6":
-                        if (ImportSystemSleep(json))
-                        {
-                            File.Delete(nextFile.FullName);
-                        }
-                        break;
-
-                    case "7":
-                        if (ImportSystemIdle(json))
-                        {
-                            File.Delete(nextFile.FullName);
-                        }
-                        break;
-
-                    case "8":
-                        if (ImportSystemUptime(json))
-                        {
-                            File.Delete(nextFile.FullName);
-                        }
-                        break;
-
 
                     default:
-
+                        Log.Info("Unknown Id: " + id);
                         break;
-                }
+                }               
             }
+        }
+
+        private bool ImportWorkItem(string json)
+        {
+            try
+            {
+                WorkItem workItem = JsonConvert.DeserializeObject<WorkItem>(json);
+
+                Log.Info(workItem.Name);
+                Log.Info(workItem.ObjectiveName);
+
+                Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
+                Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
+
+                nextAppointment.Start = workItem.Start;
+                nextAppointment.End = workItem.Finish;
+                nextAppointment.Subject = workItem.Name;
+                nextAppointment.Body = json;
+                nextAppointment.AllDayEvent = false;
+                nextAppointment.ReminderSet = false;
+                nextAppointment.UserProperties.Add("Application", Outlook.OlUserPropertyType.olInteger);
+                nextAppointment.UserProperties["Application"].Value = (int)workItem.Application;
+
+                switch (workItem.Application)
+                {
+                    case ApplicationType.VisualStudioRead:
+                        nextAppointment.Categories = "Visual Studio - Read Only";
+                        break;
+
+                    case ApplicationType.VisualStudioWrite:
+                        nextAppointment.Categories = "Visual Studio";
+                        break;
+
+                    
+                }
+
+                nextAppointment.Save();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+                return false;
+            }
+
+            return true;
         }
 
         private bool ImportSystemUptime(string json)
