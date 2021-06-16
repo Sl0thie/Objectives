@@ -79,6 +79,10 @@
     <VSCTCompile Include="ObjectivesPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
+    <Content Include="IMPOSSBL.ICO">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\ObjectivesCommand.png" />
     <Content Include="Resources\ObjectivesPackage.ico" />
   </ItemGroup>
