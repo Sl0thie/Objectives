@@ -23,7 +23,6 @@
         /// </summary>
         public string Description { get; set; }
 
-
         /// <summary>
         /// The cost per hour for the work type.
         /// </summary>
@@ -44,14 +43,9 @@
         /// </summary>
         public ApplicationType Application { get; set; }
 
-
-        public bool ApplicationActive { get; set; }
-
         /// <summary>
         /// If the work type is active. Some applications are just viewing.
         /// </summary>
         public bool Active { get; set; }
-
-
     }
 }

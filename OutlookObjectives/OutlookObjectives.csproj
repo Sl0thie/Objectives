@@ -106,10 +106,14 @@
     <Reference Include="LogNET">
       <HintPath>..\..\..\..\LogTool\Projects\LogTool\LogNET\bin\Debug\LogNET.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -165,9 +169,58 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Controls\UCObjectives.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UCObjectives.Designer.cs">
+      <DependentUpon>UCObjectives.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormChangeWorkType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormChangeWorkType.Designer.cs">
+      <DependentUpon>FormChangeWorkType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCreateObjective.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCreateObjective.Designer.cs">
+      <DependentUpon>FormCreateObjective.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormObjectiveRates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormObjectiveRates.Designer.cs">
+      <DependentUpon>FormObjectiveRates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSettings.Designer.cs">
+      <DependentUpon>FormSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inspector Wrappers\IAppointment.cs" />
+    <Compile Include="Inspector Wrappers\IWAppointment.cs" />
+    <Compile Include="Inspector Wrappers\IWAppointmentObjectivesDayReport.cs" />
+    <Compile Include="InTouch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <EmbeddedResource Include="Controls\UCObjectives.resx">
+      <DependentUpon>UCObjectives.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormChangeWorkType.resx">
+      <DependentUpon>FormChangeWorkType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCreateObjective.resx">
+      <DependentUpon>FormCreateObjective.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormObjectiveRates.resx">
+      <DependentUpon>FormObjectiveRates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSettings.resx">
+      <DependentUpon>FormSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -177,6 +230,22 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Regions\FRObjectivesDayReport.resx">
+      <DependentUpon>FRObjectivesDayReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Regions\FRObjectivesMonthReport.resx">
+      <DependentUpon>FRObjectivesMonthReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Regions\FRObjectivesWeekReport.resx">
+      <DependentUpon>FRObjectivesWeekReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbons\RibAppointment.resx">
+      <DependentUpon>RibAppointment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ribbons\RibExplorer.resx">
+      <DependentUpon>RibExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -185,6 +254,41 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Regions\FRObjectivesDayReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Regions\FRObjectivesDayReport.Designer.cs">
+      <DependentUpon>FRObjectivesDayReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Regions\FRObjectivesMonthReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Regions\FRObjectivesMonthReport.Designer.cs">
+      <DependentUpon>FRObjectivesMonthReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Regions\FRObjectivesWeekReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Regions\FRObjectivesWeekReport.Designer.cs">
+      <DependentUpon>FRObjectivesWeekReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbons\RibAppointment.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Ribbons\RibAppointment.Designer.cs">
+      <DependentUpon>RibAppointment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ribbons\RibExplorer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Ribbons\RibExplorer.Designer.cs">
+      <DependentUpon>RibExplorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks\TaskDayReport.cs" />
+    <Compile Include="Tasks\TaskImportData.cs" />
+    <Compile Include="Tasks\TaskManager.cs" />
+    <Compile Include="Tasks\TaskMonthReport.cs" />
+    <Compile Include="Tasks\TaskWeekReport.cs" />
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
     </Compile>
