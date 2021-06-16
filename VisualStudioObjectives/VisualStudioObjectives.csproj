@@ -54,6 +54,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CommonObjectives">
+      <HintPath>..\CommonObjectives\bin\Debug\CommonObjectives.dll</HintPath>
+    </Reference>
+    <Reference Include="LogNET">
+      <HintPath>..\..\..\..\LogTool\Projects\LogTool\LogNET\bin\Debug\LogNET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
