@@ -244,11 +244,6 @@
             return ((idleTime > 0) ? (idleTime / 1000) : idleTime);
         }
 
-        private void exitToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private string GetCaptionOfActiveWindow()
         {
             var strTitle = string.Empty;

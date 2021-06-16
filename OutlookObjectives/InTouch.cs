@@ -37,6 +37,9 @@
         }
 
 
+        public static int WorkItemVersion = 5;
+
+
 
         /// <summary>
         /// Get an Objective object from a path.

@@ -65,14 +65,15 @@ namespace WindowsObjectives
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // eventLogApplication
             // 
@@ -100,6 +101,7 @@ namespace WindowsObjectives
             // 
             this.timerMain.Enabled = true;
             this.timerMain.Interval = 50000;
+            this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
             // 
             // FormMain
             // 
@@ -112,7 +114,9 @@ namespace WindowsObjectives
             this.Name = "FormMain";
             this.Opacity = 0D;
             this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.contextMenuStripMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.eventLogApplication)).EndInit();

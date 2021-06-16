@@ -129,6 +129,9 @@
                 nextAppointment.ReminderSet = false;
                 nextAppointment.UserProperties.Add("Application", Outlook.OlUserPropertyType.olInteger);
                 nextAppointment.UserProperties["Application"].Value = (int)workItem.Application;
+                nextAppointment.UserProperties.Add("WorkItemVersion", Outlook.OlUserPropertyType.olInteger);
+                nextAppointment.UserProperties["WorkItemVersion"].Value = InTouch.WorkItemVersion;
+
                 nextAppointment.Categories = workItem.WorkType.Name;
 
                 nextAppointment.Save();

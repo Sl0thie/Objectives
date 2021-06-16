@@ -11,11 +11,12 @@
     {
         private readonly Collection<Note> notes = new Collection<Note>();
 
-
         /// <summary>
         /// GUID Index.
         /// </summary>
         public Guid Id { get; set; }
+
+        public int Version { get; set; } = 5;
 
         /// <summary>
         /// Objective name.

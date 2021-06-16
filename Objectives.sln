@@ -4,22 +4,46 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlookObjectives", "OutlookObjectives\OutlookObjectives.csproj", "{0398AA00-228F-4F4C-9FA8-E98338FD2D5E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{810F481E-81B5-4001-B81F-A86445928D5E} = {810F481E-81B5-4001-B81F-A86445928D5E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonObjectives", "CommonObjectives\CommonObjectives.csproj", "{810F481E-81B5-4001-B81F-A86445928D5E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCADObjectives", "AutoCADObjectives\AutoCADObjectives.csproj", "{47A34847-BA5E-41DE-A35A-D9004BC6D2F8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{810F481E-81B5-4001-B81F-A86445928D5E} = {810F481E-81B5-4001-B81F-A86445928D5E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelObjectives", "ExcelObjectives\ExcelObjectives.csproj", "{3EFA3667-A8C6-45A9-8387-35A68FAD381C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{810F481E-81B5-4001-B81F-A86445928D5E} = {810F481E-81B5-4001-B81F-A86445928D5E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectObjectives", "ProjectObjectives\ProjectObjectives.csproj", "{6BA998B4-B129-4667-9C57-BA3E58F4650F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{810F481E-81B5-4001-B81F-A86445928D5E} = {810F481E-81B5-4001-B81F-A86445928D5E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisioObjectives", "VisioObjectives\VisioObjectives.csproj", "{4510232F-89EB-4330-B131-A894C0AD8930}"
+	ProjectSection(ProjectDependencies) = postProject
+		{810F481E-81B5-4001-B81F-A86445928D5E} = {810F481E-81B5-4001-B81F-A86445928D5E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsObjectives", "WindowsObjectives\WindowsObjectives.csproj", "{5D71DD42-137D-45F3-A062-FEC75D18C7FA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{810F481E-81B5-4001-B81F-A86445928D5E} = {810F481E-81B5-4001-B81F-A86445928D5E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordObjectives", "WordObjectives\WordObjectives.csproj", "{219588A6-942D-4EA7-AA41-3C622E693736}"
+	ProjectSection(ProjectDependencies) = postProject
+		{810F481E-81B5-4001-B81F-A86445928D5E} = {810F481E-81B5-4001-B81F-A86445928D5E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualStudioObjectives", "VisualStudioObjectives\VisualStudioObjectives.csproj", "{D96046E3-9989-4ABC-AFC3-0AA507BCA65A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{810F481E-81B5-4001-B81F-A86445928D5E} = {810F481E-81B5-4001-B81F-A86445928D5E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

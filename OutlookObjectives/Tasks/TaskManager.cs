@@ -23,6 +23,7 @@
         private readonly TaskDayReport taskDayReport;
         private readonly TaskWeekReport taskWeekReport;
         private readonly TaskMonthReport taskMonthReport;
+        private readonly TaskConvertVersion taskConvertVersion;
 
         public TaskManager()
         {
@@ -31,6 +32,7 @@
             taskDayReport = new TaskDayReport(TaskFinished);
             taskWeekReport = new TaskWeekReport(TaskFinished);
             taskMonthReport = new TaskMonthReport(TaskFinished);
+            taskConvertVersion = new TaskConvertVersion(TaskFinished);
 
             //Configure and start a background thread.
             Thread backgroundThread = new Thread(new ThreadStart(BackgroundProcess))
@@ -97,6 +99,11 @@
         public void EnqueueMonthReportTask()
         {
             backgroundTasks.Enqueue(taskMonthReport.RunTask);
+        }
+
+        public void EnqueueConvertVersionTask()
+        {
+            backgroundTasks.Enqueue(taskConvertVersion.RunTask);
         }
     }
 }
