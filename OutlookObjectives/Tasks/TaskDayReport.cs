@@ -835,27 +835,27 @@
         /// <param name="isWork"></param>
         private void ProcessVisualStudio(string json,bool isWork)
         {
-            SolutionSession item = JsonConvert.DeserializeObject<SolutionSession>(json);
-            if (!dayReport.UniqueSessions.ContainsKey(item.Path))
-            {
-                dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
-            }
+            //SolutionSession item = JsonConvert.DeserializeObject<SolutionSession>(json);
+            //if (!dayReport.UniqueSessions.ContainsKey(item.Path))
+            //{
+            //    dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
+            //}
 
-            int start = (item.Start.Hour * 60) + item.Start.Minute;
-            int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
+            //int start = (item.Start.Hour * 60) + item.Start.Minute;
+            //int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
 
-            for (int i = start; i < finish; i++)
-            {
-                if (isWork)
-                {
-                    dayReport.Minutes[i].Billable = true;
-                    dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(4, item.Path, item.ObjectiveName, item.Name));
-                }
-                else
-                {
-                    dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(13, item.Path, item.ObjectiveName, item.Name));
-                }
-            }
+            //for (int i = start; i < finish; i++)
+            //{
+            //    if (isWork)
+            //    {
+            //        dayReport.Minutes[i].Billable = true;
+            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(4, item.Path, item.ObjectiveName, item.Name));
+            //    }
+            //    else
+            //    {
+            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(13, item.Path, item.ObjectiveName, item.Name));
+            //    }
+            //}
         }
 
         /// <summary>
@@ -865,26 +865,26 @@
         /// <param name="isWork"></param>
         private void ProcessWord(string json, bool isWork)
         {
-            WordSession item = JsonConvert.DeserializeObject<WordSession>(json);
-            if (!dayReport.UniqueSessions.ContainsKey(item.Path))
-            {
-                dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
-            }
+            //WordSession item = JsonConvert.DeserializeObject<WordSession>(json);
+            //if (!dayReport.UniqueSessions.ContainsKey(item.Path))
+            //{
+            //    dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
+            //}
 
-            int start = (item.Start.Hour * 60) + item.Start.Minute;
-            int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
+            //int start = (item.Start.Hour * 60) + item.Start.Minute;
+            //int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
 
-            for (int i = start; i < finish; i++)
-            {
-                if (isWork)
-                {
-                    dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(7, item.Path, item.ObjectiveName, item.Name));
-                }
-                else
-                {
-                    dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(16, item.Path, item.ObjectiveName, item.Name));
-                }
-            }
+            //for (int i = start; i < finish; i++)
+            //{
+            //    if (isWork)
+            //    {
+            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(7, item.Path, item.ObjectiveName, item.Name));
+            //    }
+            //    else
+            //    {
+            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(16, item.Path, item.ObjectiveName, item.Name));
+            //    }
+            //}
         }
 
         /// <summary>
@@ -894,27 +894,27 @@
         /// <param name="isWork"></param>
         private void ProcessExcel(string json,bool isWork)
         {
-            ExcelSession item = JsonConvert.DeserializeObject<ExcelSession>(json);
-            if (!dayReport.UniqueSessions.ContainsKey(item.Path))
-            {
-                dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
-            }
+            //ExcelSession item = JsonConvert.DeserializeObject<ExcelSession>(json);
+            //if (!dayReport.UniqueSessions.ContainsKey(item.Path))
+            //{
+            //    dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
+            //}
 
-            int start = (item.Start.Hour * 60) + item.Start.Minute;
-            int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
+            //int start = (item.Start.Hour * 60) + item.Start.Minute;
+            //int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
 
-            for (int i = start; i < finish; i++)
-            {
-                if (isWork)
-                {
-                    dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(6, item.Path, item.ObjectiveName, item.Name));
-                }
-                else
-                {
-                    dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(15, item.Path, item.ObjectiveName, item.Name));
-                }
+            //for (int i = start; i < finish; i++)
+            //{
+            //    if (isWork)
+            //    {
+            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(6, item.Path, item.ObjectiveName, item.Name));
+            //    }
+            //    else
+            //    {
+            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(15, item.Path, item.ObjectiveName, item.Name));
+            //    }
                 
-            }
+            //}
         }
 
         /// <summary>
@@ -924,26 +924,26 @@
         /// <param name="isWork"></param>
         private void ProcessAutoCAD(string json, bool isWork)
         {
-            DrawingSession item = JsonConvert.DeserializeObject<DrawingSession>(json);
-            if (!dayReport.UniqueSessions.ContainsKey(item.Path))
-            {
-                dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
-            }
+            //DrawingSession item = JsonConvert.DeserializeObject<DrawingSession>(json);
+            //if (!dayReport.UniqueSessions.ContainsKey(item.Path))
+            //{
+            //    dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
+            //}
 
-            int start = (item.Start.Hour * 60) + item.Start.Minute;
-            int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
+            //int start = (item.Start.Hour * 60) + item.Start.Minute;
+            //int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
 
-            for (int i = start; i < finish; i++)
-            {
-                if (isWork)
-                {
-                    dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(8, item.Path, item.ObjectiveName, item.Name));
-                }
-                else
-                {
-                    dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(17, item.Path, item.ObjectiveName, item.Name));
-                }
-            }
+            //for (int i = start; i < finish; i++)
+            //{
+            //    if (isWork)
+            //    {
+            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(8, item.Path, item.ObjectiveName, item.Name));
+            //    }
+            //    else
+            //    {
+            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(17, item.Path, item.ObjectiveName, item.Name));
+            //    }
+            //}
         }
 
         /// <summary>

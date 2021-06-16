@@ -369,7 +369,7 @@
                                     break;
 
                                 case "MiniumNoOfMinutes":
-                                    nextType.MiniumNoOfMinutes = Convert.ToInt32(val);
+                                    nextType.MinimumNoOfMinutes = Convert.ToInt32(val);
                                     break;
 
                                 case "MaximNoOfMinutes":
