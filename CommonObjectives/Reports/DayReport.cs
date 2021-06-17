@@ -8,8 +8,11 @@
     {
         //[Obsolete]
         //private Dictionary<string, Tuple<string, string>> uniqueSessions = new Dictionary<string, Tuple<string, string>>();
-        
-        
+
+
+        //private Dictionary<string, Tuple<WorkItem, int, decimal>> billableItems = new Dictionary<string, Tuple<WorkItem, int, decimal>>();
+
+
         private Dictionary<string, WorkItem> workItems = new Dictionary<string, WorkItem>();
         private Dictionary<string, int> uniqueApplications = new Dictionary<string, int>();
         private DateTime day;
@@ -56,6 +59,12 @@
             get { return workItems; }
             set { workItems = value; }
         }
+
+        //public Dictionary<string, Tuple<WorkItem, int, decimal>> BillableItems
+        //{
+        //    get { return billableItems; }
+        //    set { billableItems = value; }
+        //}
 
         /// <summary>
         /// A dictionary of the unique applications from the system monitor.

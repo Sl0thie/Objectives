@@ -1,16 +1,16 @@
 ﻿namespace OutlookObjectives
 {
-    using System;
-    using System.Threading;
-    using Outlook = Microsoft.Office.Interop.Outlook;
     using CommonObjectives;
-    using Newtonsoft.Json;
     using LogNET;
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.Linq;
+    using Newtonsoft.Json;
+    using System;
     using System.Drawing;
     using System.Drawing.Drawing2D;
+    using System.Linq;
     using System.Runtime.InteropServices;
+    using System.Threading;
+    using System.Windows.Forms.DataVisualization.Charting;
+    using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
     /// Day Report Task to generate Objectives Day Reports.
@@ -25,6 +25,11 @@
         // Get references to the Outlook Calendars. 
         readonly Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
         readonly Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
+
+        Color colorUptime = Color.FromArgb(72,72,72);
+        Color colorBillable = Color.FromArgb(64,64,255);
+        Color colorIdle= Color.FromArgb(255, 64, 64);
+        Color colorOther = Color.FromArgb(255, 128, 255);
 
         /// <summary>
         /// Returns control back to the TaskManager.
@@ -68,8 +73,10 @@
 
                 ProcessAppointments();
                 CalculateMinutes();
-                CalculateObjectiveTotals();
+
                 CalculateBillableItems();
+
+
                 DrawSystemTimeImage();
                 DrawObjectiveImage();
                 DrawApplicationsImage();
@@ -92,7 +99,6 @@
         /// <returns></returns>
         private DateTime FindDay()
         {
-            //Outlook.Folder ObjectivesCalendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
             DateTime returnValue = DateTime.Parse(DateTime.Now.Subtract(new TimeSpan(1, 0, 0, 0, 0)).ToString(@"yyyy-MM-dd 00:00"));
 
             bool keepLooking = true;
@@ -234,67 +240,29 @@
                     }
                 }
 
-
-
-                //// Find primary work item for the minute.
-                //foreach (Tuple<int, string, string, string> next in dayReport.Minutes[i].Projects)
-                //{
-                //    if (next.Item1 != 0)
-                //    {
-                //        if ((next.Item1 <= dayReport.Minutes[i].PrimaryWorkTypeIndex) || (dayReport.Minutes[i].PrimaryWorkTypeIndex == 0))
-                //        {
-                //            dayReport.Minutes[i].PrimaryWorkTypeIndex = next.Item1;
-                //            dayReport.Minutes[i].PrimaryPath = next.Item2;
-                //            dayReport.Minutes[i].PrimaryObjective = next.Item3;
-                //            dayReport.Minutes[i].PrimaryName = next.Item4;
-                //        }
-                //    }
-                //}
+                if (dayReport.Minutes[i].PrimaryWorkItem is object)
+                {
+                    string key = dayReport.Minutes[i].PrimaryWorkItem.ObjectiveName + "-" + dayReport.Minutes[i].PrimaryWorkItem.Name + "-" + dayReport.Minutes[i].PrimaryWorkItem.WorkType.Index;
+                    if (!dayReport.WorkItems.ContainsKey(key))
+                    {
+                        dayReport.Minutes[i].PrimaryWorkItem.Minutes = 1;
+                        dayReport.WorkItems.Add(key, dayReport.Minutes[i].PrimaryWorkItem);
+                    }
+                    else
+                    {
+                        dayReport.WorkItems[key].Minutes++;
+                    }
+                }
             }
-        }
-
-        private void CalculateObjectiveTotals()
-        {
-            //// Get the Objective Totals.
-            //for (int i = 0; i < 1440; i++)
-            //{
-            //    if (dayReport.Minutes[i].PrimaryPath is object)
-            //    {
-            //        if (!dayReport.WorkItems.ContainsKey(dayReport.Minutes[i].PrimaryPath +  dayReport.Minutes[i].PrimaryWorkTypeIndex.ToString()))
-            //        {
-            //            WorkItem newWorkItem = new WorkItem();
-            //            newWorkItem.ObjectiveName = dayReport.Minutes[i].PrimaryObjective;
-            //            newWorkItem.Name = dayReport.Minutes[i].PrimaryName;
-            //            newWorkItem.WorkTypeIndex = dayReport.Minutes[i].PrimaryWorkTypeIndex;
-            //            newWorkItem.Minutes = 1;
-            //            dayReport.WorkItems.Add(dayReport.Minutes[i].PrimaryPath + dayReport.Minutes[i].PrimaryWorkTypeIndex.ToString(), newWorkItem);
-            //        }
-            //        else
-            //        {
-            //            dayReport.WorkItems[dayReport.Minutes[i].PrimaryPath + dayReport.Minutes[i].PrimaryWorkTypeIndex.ToString()].Minutes++;
-            //        }
-            //    }
-            //}
         }
 
         private void CalculateBillableItems()
         {
             // Loop though the work items.
-            foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
+            foreach (var next in dayReport.WorkItems)
             {
-                decimal rate;
-                Objective obj = InTouch.GetObjective(InTouch.ObjectivesRootFolder + "\\" + next.Value.ObjectiveName);
-                if (obj.WorkTypes.ContainsKey(next.Value.WorkType.Index))
-                {
-                    rate = obj.WorkTypes[next.Value.WorkType.Index].CostPerHour;
-                }
-                else
-                {
-                    rate = InTouch.WorkTypes[next.Value.WorkType.Index].CostPerHour;
-                }
-
-                next.Value.Cost = next.Value.Minutes * (rate / (decimal)60);
-
+                // Calculate the cost of the total minutes for the day.
+                next.Value.Cost = (next.Value.WorkType.CostPerHour / (decimal)60) * (decimal)next.Value.Minutes;
                 // Parse to truncate the precision to suit dollars and cents. 
                 next.Value.Cost = decimal.Parse(next.Value.Cost.ToString("0.00"));
             }
@@ -334,15 +302,55 @@
             rv += "<div class=\"divWholePage\">" + "\n";
             rv += "<h1>Day Report for " + dayReport.Day.ToString("dddd d/MM/yyyy") + "</h1>" + "\n";
 
-            rv += "<h2>Objectives Totals</h2>" + "\n";
+            rv += "<h2>Billable Items</h2>" + "\n";
             rv += "<table width=\"100%\">" + "\n";
 
             rv += "<tr>" + "\n";
             rv += "<td><b>Objective</b></td>\n";
             rv += "<td><b>Project</b></td>\n";
+            rv += "<td><b>Work Type</b></td>\n";
             rv += "<td style=\"text-align:right;\"><b>Time</b></td>\n";
             rv += "<td style=\"text-align:right;\"><b>Cost</b></td>\n";
-            rv += "<td rowspan=\"10\" style=\"text-align:right;\"><img src=\"[[[TEMPDIRECTORY]]]ObjectivesChart.png\" alt=\"Objectives Chart\"></td>\n";
+            rv += "</tr>" + "\n";
+
+            int totaltime = 0;
+            decimal totalcost = 0;
+
+            foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
+            {
+                if (next.Value.Cost > 0)
+                {
+                    rv += "<tr>" + "\n";
+                    rv += "<td style=\"max-height:18px;\">" + next.Value.ObjectiveName + "</td>\n";
+                    rv += "<td style=\"max-height:18px;\">" + next.Value.Name + "</td>\n";
+                    rv += "<td style=\"max-height:18px;\">" + next.Value.WorkType.Name + "</td>\n";
+                    rv += "<td style=\"max-height:18px;text-align:right;\">" + InTouch.GetTimeStringFromMinutes(next.Value.Minutes) + "</td>\n";
+                    rv += "<td style=\"max-height:18px;text-align:right;\">$" + next.Value.Cost.ToString("0.00") + "</td>\n";
+                    rv += "</tr>" + "\n";
+
+                    totaltime += next.Value.Minutes;
+                    totalcost += next.Value.Cost;
+                }
+            }
+
+            rv += "<tr>" + "\n";
+            rv += "<td>&nbsp;</td>\n";
+            rv += "<td></td>\n";
+            rv += "<td></td>\n";
+            rv += "<td style=\"text-align:right;\"><b>" + InTouch.GetTimeStringFromMinutes(totaltime) + "</b></td>\n";
+            rv += "<td style=\"text-align:right;\"><b>$" + totalcost.ToString("0.00") + "</b></td>\n";
+            rv += "</tr>" + "\n";
+
+            rv += "</table>" + "\n";
+
+
+            rv += "<h2>Objectives</h2>" + "\n";
+            rv += "<table width=\"100%\">" + "\n";
+
+            rv += "<tr>" + "\n";
+            rv += "<td><b>Objective</b></td>\n";
+            rv += "<td><b>Project</b></td>\n";
+            rv += "<td rowspan=\"12\" style=\"text-align:right;\"><img src=\"[[[TEMPDIRECTORY]]]ObjectivesChart.png\" alt=\"Objectives Chart\"></td>\n";
             rv += "</tr>" + "\n";
 
             int i = 0;
@@ -350,15 +358,13 @@
             foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
             {
                 rv += "<tr>" + "\n";
-                rv += "<td style=\"max-height:18px;\">" + next.Value.ObjectiveName + "</td>\n";
-                rv += "<td style=\"max-height:18px;\">" + next.Value.Name + "</td>\n";
-                rv += "<td style=\"max-height:18px;text-align:right;\">" + InTouch.GetTimeStringFromMinutes(next.Value.Minutes) + "</td>\n";
-                rv += "<td style=\"max-height:18px;text-align:right;\">$" + next.Value.Cost.ToString("0.00") + "</td>\n";
+                rv += "<td>" + next.Value.ObjectiveName + "</td>\n";
+                rv += "<td>" + next.Value.Name + "</td>\n";
                 rv += "</tr>" + "\n";
                 i++;
             }
 
-            while (i < 10)
+            while (i < 12)
             {
                 rv += "<tr>" + "\n";
                 rv += "<td>&nbsp;</td>\n";
@@ -414,7 +420,7 @@
             rv += "<td style=\"text-align:right;\">" + ((1440 - ((double)dayReport.TotalUptime)) / 1440 * 100).ToString("#.00") + "%</td>\n";
             rv += "</tr>" + "\n";
 
-            rv += "<tr style=\"height:140px;\">" + "\n";
+            rv += "<tr style=\"height:100px;\">" + "\n";
             rv += "<td>&nbsp;</td>\n";
             rv += "<td>&nbsp;</td>\n";
             rv += "<td>&nbsp;</td>\n";
@@ -424,10 +430,6 @@
 
             rv += "<h2>Applications</h2>" + "\n";
             rv += "<img src =\"[[[TEMPDIRECTORY]]]Applications.png\" alt=\"Applications Chart\">\n";
-
-            
-
-            
 
             rv += "</div>" + "\n";
             rv += "</body>" + "\n";
@@ -443,12 +445,15 @@
         private void DrawDayBarImage()
         {
             // Art supplies.
-            Pen penUptime = new Pen(Color.DarkGray, 1);
-            Pen penWork = new Pen(Color.Blue, 1);
-            Pen penIdle = new Pen(Color.Red, 1);
+            Pen penUptime = new Pen(colorUptime, 1);
+            Pen penWork = new Pen(colorBillable, 1);
+            Pen penIdle = new Pen(colorIdle, 1);
             Pen penLabel = new Pen(Color.Gray, 1);
             Font fontLabel = new Font("Arial", 8);
             Brush brushLabel = Brushes.Gray;
+
+            Brush brushBackground = new SolidBrush(Color.FromArgb(40,40,40));
+
             Bitmap bm = new Bitmap(800, 120);
 
             // Draw Day Bar.
@@ -456,7 +461,7 @@
             {
                 gr.SmoothingMode = SmoothingMode.AntiAlias;
                 Rectangle rect = new Rectangle(40, 0, 720, 100);
-                gr.FillRectangle(Brushes.Black, rect);
+                gr.FillRectangle(brushBackground, rect);
 
                 // Draw time labels and lines on lowest layer.
                 for (int i = 0; i < 25; i++)
@@ -485,6 +490,9 @@
                         gr.DrawString((i - 12).ToString() + "PM", fontLabel, brushLabel, x - 20, 105);
                     }
                 }
+
+                gr.DrawLine(penLabel, 40, 0, 760, 0);
+                gr.DrawLine(penLabel, 40, 100, 760, 100);
 
                 // Draw lines for each minute.
                 for (int i = 0; i < 1440; i++)
@@ -583,8 +591,8 @@
         /// </summary>
         private void DrawSystemTimeImage()
         {
-            float ChartWidth = 240;
-            float ChartHeight = 240;
+            float ChartWidth = 200;
+            float ChartHeight = 200;
             Chart chart = new Chart
             {
                 Width = (int)ChartWidth,
@@ -624,7 +632,7 @@
 
             // Draw the uptime segment.
             int rv1 = chart.Series[Series2].Points.AddXY("Up Time",dayReport.TotalUptime);
-            chart.Series[Series2].Points[rv1].Color = System.Drawing.Color.FromArgb(128,128,255);
+            chart.Series[Series2].Points[rv1].Color = colorUptime;
             chart.Series[Series2].Points[rv1].LabelForeColor = System.Drawing.Color.FromArgb(255,255,255);
 
             // Draw the uptime segment.
@@ -634,17 +642,17 @@
 
             // Draw the billable segment.
             int rv3 = chart.Series[Series1].Points.AddXY("Billable Time",dayReport.TotalWork);
-            chart.Series[Series1].Points[rv3].Color = System.Drawing.Color.FromArgb(64,64,192);
+            chart.Series[Series1].Points[rv3].Color = colorBillable;
             chart.Series[Series1].Points[rv3].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
             // Draw the other time segment.
             int rv4 = chart.Series[Series1].Points.AddXY("Other Time", dayReport.TotalUptime - dayReport.TotalIdle - dayReport.TotalWork);
-            chart.Series[Series1].Points[rv4].Color = System.Drawing.Color.FromArgb(148, 64, 148);
+            chart.Series[Series1].Points[rv4].Color = colorOther;
             chart.Series[Series1].Points[rv4].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
             // Draw the idle time segment.
             int rv5 = chart.Series[Series1].Points.AddXY("Idle Time", dayReport.TotalIdle);
-            chart.Series[Series1].Points[rv5].Color = System.Drawing.Color.FromArgb(128,128,128);
+            chart.Series[Series1].Points[rv5].Color = colorIdle;
             chart.Series[Series1].Points[rv5].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
             // Draw the downtime segment as transparent.
@@ -844,7 +852,6 @@
                     dayReport.Minutes[i].Billable = true;
                 }
 
-                //dayReport.Minutes[i].WorkItems.Add(workItem);
                 if (dayReport.Minutes[i].PrimaryWorkItem is object)
                 {
                     if (workItem.WorkType.Index != 0)
@@ -859,11 +866,6 @@
                 {
                     dayReport.Minutes[i].PrimaryWorkItem = workItem;
                 }
-            }
-
-            if (!dayReport.WorkItems.ContainsKey(workItem.ObjectiveName + "-" + workItem.Name + "-" + workItem.WorkType.Index))
-            {
-                dayReport.WorkItems.Add(workItem.ObjectiveName + "-" + workItem.Name + "-" + workItem.WorkType.Index, workItem);
             }
         }
 
