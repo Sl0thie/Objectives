@@ -4,6 +4,7 @@
     using LogNET;
     using Newtonsoft.Json;
     using System;
+    using System.Collections.Generic;
     using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.Linq;
@@ -25,11 +26,10 @@
         // Get references to the Outlook Calendars. 
         readonly Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
         readonly Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
-
-        Color colorUptime = Color.FromArgb(72, 72, 72);
-        Color colorBillable = Color.FromArgb(64, 64, 255);
-        Color colorIdle = Color.FromArgb(255, 64, 64);
-        Color colorOther = Color.FromArgb(255, 128, 255);
+        readonly Color colorUptime = Color.FromArgb(32,32,32);
+        readonly Color colorBillable = Color.FromArgb(64, 64, 255);
+        readonly Color colorIdle = Color.FromArgb(255, 64, 64);
+        readonly Color colorOther = Color.FromArgb(255, 128, 64);
 
         /// <summary>
         /// Returns control back to the TaskManager.
@@ -704,20 +704,42 @@
             chart.ChartAreas[Series2].Position.Height = 75F;
             chart.ChartAreas[Series2].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
 
-            // Loop though the work items.
+
+            HashSet<string> ObjectiveNames = new HashSet<string>();
+
             foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).OrderBy(x => x.Value.Name))
             {
-                int rv;
-                int rv2;
-                int rv3;
-                rv = chart.Series[Series2].Points.AddXY(next.Value.Name, next.Value.Minutes);
-                chart.Series[Series2].Points[rv].LabelForeColor = Color.FromArgb(255, 255, 255);
+                ObjectiveNames.Add(next.Value.ObjectiveName);
+            }
 
-                rv2 = chart.Series[Series1].Points.AddY(next.Value.Minutes);
-                chart.Series[Series1].Points[rv2].Color = chart.Series[Series2].Points[rv].Color;
+            foreach (string outer in ObjectiveNames)
+            {
+                int totalminutes = 0;
 
-                rv3 = chart.Series[Series1].Points.AddY(next.Value.Minutes);
-                chart.Series[Series1].Points[rv3].Color = Color.DarkGray;
+                foreach (var inner in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.Application))
+                {
+
+                    if (inner.Value.ObjectiveName == outer)
+                    {
+                        totalminutes += inner.Value.Minutes;
+
+                        switch (inner.Value.Application)
+                        {
+                            case ApplicationType.VisualStudioWrite:
+                                int rv = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[Series1].Points[rv].Color = Color.FromArgb(156, 64, 156);
+                                break;
+
+                            case ApplicationType.VisualStudioRead:
+                                int rv2 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[Series1].Points[rv2].Color = Color.FromArgb(72,72,72);
+                                break;
+                        }
+                    }
+                }
+
+                int rv3 = chart.Series[Series2].Points.AddXY(outer, totalminutes);
+                chart.Series[Series2].Points[rv3].LabelForeColor = Color.FromArgb(255, 255, 255);
             }
 
             // Save the image to file.

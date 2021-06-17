@@ -189,7 +189,6 @@
             weekReport.HTML = rv;
         }
 
-
         private void CreateAppointment()
         {
             // Create the DayReport appointment and add the images as attachments.

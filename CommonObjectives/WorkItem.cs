@@ -63,6 +63,11 @@
 
         public bool Invoiced { get; set; }
 
+        public long StartSize { get; set; }
+
+        public long FinishSize { get; set; }
+
+
 
         public WorkItem()
         {

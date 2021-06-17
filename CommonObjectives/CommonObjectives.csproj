@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveApplication.cs" />
+    <Compile Include="DrawingSession.cs" />
     <Compile Include="Reports\DayReport.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="IWorkItem.cs" />
