@@ -1,15 +1,14 @@
 ﻿namespace WindowsObjectives
 {
+    using CommonObjectives;
+    using Microsoft.Win32;
+    using Newtonsoft.Json;
     using System;
     using System.Diagnostics;
-    using System.Windows.Forms;
-    using System.Runtime.InteropServices;
-    using Microsoft.Win32;
-    using System.Threading;
-    using CommonObjectives;
-    using Newtonsoft.Json;
     using System.IO;
+    using System.Runtime.InteropServices;
     using System.Text;
+    using System.Windows.Forms;
 
     public partial class FormMain : Form
     {

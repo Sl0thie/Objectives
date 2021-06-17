@@ -1,7 +1,6 @@
 ﻿namespace CommonObjectives
 {
     using System;
-    using System.Collections.ObjectModel;
 
     public class Minute
     {

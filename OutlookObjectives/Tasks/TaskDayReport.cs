@@ -26,9 +26,9 @@
         readonly Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
         readonly Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
 
-        Color colorUptime = Color.FromArgb(72,72,72);
-        Color colorBillable = Color.FromArgb(64,64,255);
-        Color colorIdle= Color.FromArgb(255, 64, 64);
+        Color colorUptime = Color.FromArgb(72, 72, 72);
+        Color colorBillable = Color.FromArgb(64, 64, 255);
+        Color colorIdle = Color.FromArgb(255, 64, 64);
         Color colorOther = Color.FromArgb(255, 128, 255);
 
         /// <summary>
@@ -177,7 +177,7 @@
                 if (CustomProperty is null)
                 {
                     Log.Info("No Application Type " + next.Subject + " " + next.Start.ToString());
-                    
+
                 }
                 else
                 {
@@ -393,19 +393,19 @@
             rv += "<tr>" + "\n";
             rv += "<td>Up Time" + "</td>\n";
             rv += "<td style=\"text-align:right;\">" + InTouch.GetTimeStringFromMinutes(dayReport.TotalUptime) + "</td>\n";
-            rv += "<td style=\"text-align:right;\">" + (((double)dayReport.TotalUptime)/1440 * 100).ToString("0.00") + "%</td>\n";
+            rv += "<td style=\"text-align:right;\">" + (((double)dayReport.TotalUptime) / 1440 * 100).ToString("0.00") + "%</td>\n";
             rv += "</tr>" + "\n";
 
             rv += "<tr>" + "\n";
             rv += "<td>Billable Time" + "</td>\n";
             rv += "<td style=\"text-align:right;\">" + InTouch.GetTimeStringFromMinutes(dayReport.TotalWork) + "</td>\n";
-            rv += "<td style=\"text-align:right;\">" + (((double)dayReport.TotalWork)/1440 * 100).ToString("#.00") + "%</td>\n";
+            rv += "<td style=\"text-align:right;\">" + (((double)dayReport.TotalWork) / 1440 * 100).ToString("#.00") + "%</td>\n";
             rv += "</tr>" + "\n";
 
             rv += "<tr>" + "\n";
             rv += "<td>Other Time" + "</td>\n";
             rv += "<td style=\"text-align:right;\">" + InTouch.GetTimeStringFromMinutes(dayReport.TotalUptime - dayReport.TotalWork - dayReport.TotalIdle) + "</td>\n";
-            rv += "<td style=\"text-align:right;\">" + (((double)(dayReport.TotalUptime - dayReport.TotalWork - dayReport.TotalIdle))  / 1440 * 100).ToString("#.00") + "%</td>\n";
+            rv += "<td style=\"text-align:right;\">" + (((double)(dayReport.TotalUptime - dayReport.TotalWork - dayReport.TotalIdle)) / 1440 * 100).ToString("#.00") + "%</td>\n";
             rv += "</tr>" + "\n";
 
             rv += "<tr>" + "\n";
@@ -452,7 +452,7 @@
             Font fontLabel = new Font("Arial", 8);
             Brush brushLabel = Brushes.Gray;
 
-            Brush brushBackground = new SolidBrush(Color.FromArgb(40,40,40));
+            Brush brushBackground = new SolidBrush(Color.FromArgb(40, 40, 40));
 
             Bitmap bm = new Bitmap(800, 120);
 
@@ -548,7 +548,7 @@
             chart.Series.Add(Series1);
             chart.Series[Series1].ChartArea = Series1;
             chart.Series[Series1].ChartType = SeriesChartType.Bar;
-            
+
             chart.ChartAreas[Series1].BackColor = Color.Transparent;
             chart.ChartAreas[Series1].Position.X = 0;
             chart.ChartAreas[Series1].Position.Y = 0;
@@ -557,7 +557,7 @@
             chart.ChartAreas[Series1].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
 
             chart.ChartAreas[Series1].AxisX.LabelStyle.Font = new Font("Verdana", 10F, FontStyle.Regular);
-            chart.ChartAreas[Series1].AxisX.LabelStyle.ForeColor = Color.FromArgb(180,180,180);
+            chart.ChartAreas[Series1].AxisX.LabelStyle.ForeColor = Color.FromArgb(180, 180, 180);
             chart.ChartAreas[Series1].AxisX.Interval = 1;
             chart.ChartAreas[Series1].AxisX.LineColor = Color.FromArgb(0, 0, 0, 0);
             chart.ChartAreas[Series1].AxisX.MajorGrid.LineColor = Color.FromArgb(0, 0, 0, 0);
@@ -631,17 +631,17 @@
             chart.ChartAreas[Series2].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
 
             // Draw the uptime segment.
-            int rv1 = chart.Series[Series2].Points.AddXY("Up Time",dayReport.TotalUptime);
+            int rv1 = chart.Series[Series2].Points.AddXY("Up Time", dayReport.TotalUptime);
             chart.Series[Series2].Points[rv1].Color = colorUptime;
-            chart.Series[Series2].Points[rv1].LabelForeColor = System.Drawing.Color.FromArgb(255,255,255);
+            chart.Series[Series2].Points[rv1].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
             // Draw the uptime segment.
             int rv2 = chart.Series[Series2].Points.AddY(1440 - dayReport.TotalUptime);
-            chart.Series[Series2].Points[rv2].Color = System.Drawing.Color.FromArgb(0,0,0,0);
+            chart.Series[Series2].Points[rv2].Color = System.Drawing.Color.FromArgb(0, 0, 0, 0);
             chart.Series[Series2].Points[rv2].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
             // Draw the billable segment.
-            int rv3 = chart.Series[Series1].Points.AddXY("Billable Time",dayReport.TotalWork);
+            int rv3 = chart.Series[Series1].Points.AddXY("Billable Time", dayReport.TotalWork);
             chart.Series[Series1].Points[rv3].Color = colorBillable;
             chart.Series[Series1].Points[rv3].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
@@ -656,8 +656,8 @@
             chart.Series[Series1].Points[rv5].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
             // Draw the downtime segment as transparent.
-            int rv6 = chart.Series[Series1].Points.AddY( 1440 - dayReport.TotalUptime);
-            chart.Series[Series1].Points[rv6].Color = System.Drawing.Color.FromArgb(0,0,0,0);
+            int rv6 = chart.Series[Series1].Points.AddY(1440 - dayReport.TotalUptime);
+            chart.Series[Series1].Points[rv6].Color = System.Drawing.Color.FromArgb(0, 0, 0, 0);
             chart.Series[Series1].Points[rv6].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
             // Save the image to file.
@@ -705,7 +705,7 @@
             chart.ChartAreas[Series2].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
 
             // Loop though the work items.
-            foreach(var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).OrderBy(x => x.Value.Name))
+            foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).OrderBy(x => x.Value.Name))
             {
                 int rv;
                 int rv2;
@@ -716,7 +716,7 @@
                 rv2 = chart.Series[Series1].Points.AddY(next.Value.Minutes);
                 chart.Series[Series1].Points[rv2].Color = chart.Series[Series2].Points[rv].Color;
 
-                rv3 = chart.Series[Series1].Points.AddY( next.Value.Minutes);
+                rv3 = chart.Series[Series1].Points.AddY(next.Value.Minutes);
                 chart.Series[Series1].Points[rv3].Color = Color.DarkGray;
             }
 
@@ -744,15 +744,15 @@
             }
 
             // Process the active applications.
-            foreach(ActiveApplication next in item.ActiveApplications)
+            foreach (ActiveApplication next in item.ActiveApplications)
             {
                 // Get the index for the minute.
                 int minute = (next.Time.Hour * 60) + next.Time.Minute;
 
                 // Trim the application data.
-                if(next.Application is object)
+                if (next.Application is object)
                 {
-                    if(next.Application == "Unknown")
+                    if (next.Application == "Unknown")
                     {
                         dayReport.Minutes[minute].ActiveApplication = "Unknown";
                     }
@@ -767,7 +767,7 @@
                         {
                             dayReport.Minutes[minute].ActiveApplication = next.Application;
                         }
-                    }               
+                    }
                 }
 
                 // Rename the more common programs and add to the minute.
@@ -802,7 +802,7 @@
 
                         if (dayReport.Minutes[minute].ActiveApplication.Substring(dayReport.Minutes[minute].ActiveApplication.Length - 4).ToLower() == ".exe")
                         {
-                            dayReport.Minutes[minute].ActiveApplication = dayReport.Minutes[minute].ActiveApplication.Substring(0,dayReport.Minutes[minute].ActiveApplication.Length - 4);
+                            dayReport.Minutes[minute].ActiveApplication = dayReport.Minutes[minute].ActiveApplication.Substring(0, dayReport.Minutes[minute].ActiveApplication.Length - 4);
                         }
 
                         break;
@@ -924,7 +924,7 @@
         //    //    {
         //    //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(15, item.Path, item.ObjectiveName, item.Name));
         //    //    }
-                
+
         //    //}
         //}
 

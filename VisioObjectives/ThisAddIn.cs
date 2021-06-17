@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
-using Visio = Microsoft.Office.Interop.Visio;
-using Office = Microsoft.Office.Core;
-
-namespace VisioObjectives
+﻿namespace VisioObjectives
 {
     public partial class ThisAddIn
     {
@@ -29,7 +21,7 @@ namespace VisioObjectives
             this.Startup += new System.EventHandler(ThisAddIn_Startup);
             this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
         }
-        
+
         #endregion
     }
 }

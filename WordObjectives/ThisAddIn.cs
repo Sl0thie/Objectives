@@ -1,14 +1,14 @@
 ﻿namespace WordObjectives
 {
+    using CommonObjectives;
+    using LogNET;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    using Word = Microsoft.Office.Interop.Word;
-    using System.Threading;
     using System.IO;
-    using Newtonsoft.Json;
-    using CommonObjectives;
     using System.Linq;
-    using LogNET;
+    using System.Threading;
+    using Word = Microsoft.Office.Interop.Word;
 
     public partial class ThisAddIn
     {
@@ -283,7 +283,7 @@
             {
                 if (workItem.Start != workItem.Finish)
                 {
-                    if(StartSize != FinishSize)
+                    if (StartSize != FinishSize)
                     {
                         workItem.Application = ApplicationType.WordWrite;
                     }
@@ -314,7 +314,7 @@
         {
             this.Startup += new System.EventHandler(ThisAddIn_Startup);
         }
-        
+
         #endregion
     }
 }

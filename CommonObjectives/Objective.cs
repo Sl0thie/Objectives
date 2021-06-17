@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    
+
     public class Objective
     {
         public string ObjectiveName { get; set; }

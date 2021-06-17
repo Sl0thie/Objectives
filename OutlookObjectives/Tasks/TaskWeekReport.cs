@@ -1,15 +1,12 @@
 ﻿namespace OutlookObjectives
 {
+    using CommonObjectives;
+    using LogNET;
+    using Newtonsoft.Json;
     using System;
+    using System.Linq;
     using System.Threading;
     using Outlook = Microsoft.Office.Interop.Outlook;
-    using CommonObjectives;
-    using Newtonsoft.Json;
-    using LogNET;
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.Linq;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
 
     /// <summary>
     /// Task to process weekly totals.
@@ -82,7 +79,7 @@
 
             while (keepLooking)
             {
-                if(returnValue.DayOfWeek == DayOfWeek.Sunday)
+                if (returnValue.DayOfWeek == DayOfWeek.Sunday)
                 {
                     keepLooking = false;
                     Outlook.Items billingItems = GetAppointmentsInRange(calendar, returnValue, returnValue.AddDays(1));
@@ -95,7 +92,7 @@
                         }
                     }
                 }
-                
+
                 if (returnValue < firstDay)
                 {
                     return DateTime.MinValue;
@@ -115,7 +112,7 @@
         {
             bool rv = true;
 
-            for (int i = 0;i < 7;i++)
+            for (int i = 0; i < 7; i++)
             {
                 Outlook.Items billingItems = GetAppointmentsInRange(calendar, day.AddDays(0 - i), day.AddDays(1 - i));
                 foreach (Outlook.AppointmentItem nextItem in billingItems)
@@ -131,7 +128,7 @@
 
             for (int i = 0; i < 7; i++)
             {
-                if(dayReports[i] is null)
+                if (dayReports[i] is null)
                 {
                     rv = false;
                 }

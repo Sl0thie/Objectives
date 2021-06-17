@@ -1,12 +1,8 @@
 ﻿namespace OutlookObjectives
 {
-    using System;
-    using Outlook = Microsoft.Office.Interop.Outlook;
     using CommonObjectives;
     using Newtonsoft.Json;
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.IO;
-    using LogNET;
+    using Outlook = Microsoft.Office.Interop.Outlook;
 
     partial class FRObjectivesMonthReport
     {

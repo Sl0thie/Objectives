@@ -1,12 +1,12 @@
 ﻿namespace OutlookObjectives
 {
+    using CommonObjectives;
+    using LogNET;
     using Newtonsoft.Json;
     using System;
     using System.IO;
     using System.Threading;
     using Outlook = Microsoft.Office.Interop.Outlook;
-    using CommonObjectives;
-    using LogNET;
 
     public class TaskImportData
     {
@@ -98,14 +98,14 @@
 
                 foreach (var next in obj.WorkTypes)
                 {
-                    if(next.Value.Application == workItem.Application)
+                    if (next.Value.Application == workItem.Application)
                     {
                         workItem.WorkType = next.Value;
                         break;
                     }
                 }
 
-                if(workItem.WorkType is null)
+                if (workItem.WorkType is null)
                 {
                     foreach (var next in InTouch.WorkTypes)
                     {
@@ -276,7 +276,7 @@
         //{
         //    try
         //    {
-                
+
         //    }
         //    catch (Exception ex)
         //    {

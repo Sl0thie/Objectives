@@ -1,9 +1,9 @@
 ﻿namespace OutlookObjectives
 {
+    using LogNET;
     using System;
     using System.Collections.Concurrent;
     using System.Threading;
-    using LogNET;
 
     /// <summary>
     /// TaskManager manages the background tasks.

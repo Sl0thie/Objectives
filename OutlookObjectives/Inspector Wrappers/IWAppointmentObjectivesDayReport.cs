@@ -1,9 +1,9 @@
 ﻿namespace OutlookObjectives
 {
-    using Outlook = Microsoft.Office.Interop.Outlook;
     using CommonObjectives;
-    using System.Runtime.InteropServices;
     using LogNET;
+    using System.Runtime.InteropServices;
+    using Outlook = Microsoft.Office.Interop.Outlook;
 
     public class IWAppointmentObjectivesDayReport : IAppointment
     {

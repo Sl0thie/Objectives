@@ -1,10 +1,10 @@
 ﻿namespace OutlookObjectives
 {
-    using Microsoft.Office.Tools.Ribbon;
-    using Outlook = Microsoft.Office.Interop.Outlook;
-    using Microsoft.Office.Tools;
-    using System;
     using LogNET;
+    using Microsoft.Office.Tools;
+    using Microsoft.Office.Tools.Ribbon;
+    using System;
+    using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
     /// Ribbon for the Explorer.

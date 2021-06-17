@@ -1,9 +1,9 @@
 ﻿namespace OutlookObjectives
 {
-    using System;
-    using System.Windows.Forms;
     using CommonObjectives;
     using LogNET;
+    using System;
+    using System.Windows.Forms;
 
     /// <summary>
     /// Form to manage the Objectives Rates and Costs.
@@ -63,10 +63,10 @@
                 bool Same = true;
                 ListViewItem nextItem = ListWorkTypes.Items[next.Key];
 
-                if(next.Value.Index.ToString("000") != nextItem.Text)
+                if (next.Value.Index.ToString("000") != nextItem.Text)
                 {
                     Same = false;
-                    nextItem.Text=next.Value.Index.ToString("000");
+                    nextItem.Text = next.Value.Index.ToString("000");
                 }
 
                 if (next.Value.Name != nextItem.SubItems[1].Text)
@@ -111,7 +111,7 @@
                 //    nextItem.SubItems[7].Text = next.Value.Active.ToString();
                 //}
 
-                if(!Same)
+                if (!Same)
                 {
                     Log.Info("Not the same");
                 }
@@ -125,9 +125,9 @@
         /// <param name="e">Unused.</param>
         private void ListWorkTypes_DoubleClick(object sender, EventArgs e)
         {
-            if(ListWorkTypes.SelectedItems.Count > 0)
+            if (ListWorkTypes.SelectedItems.Count > 0)
             {
-                if(ListWorkTypes.SelectedItems[0] is object)
+                if (ListWorkTypes.SelectedItems[0] is object)
                 {
                     if (objective.WorkTypes.ContainsKey((int)ListWorkTypes.SelectedItems[0].Tag))
                     {
@@ -150,7 +150,7 @@
                         {
                             objective.WorkTypes.Add(newForm.WorkType.Index, newForm.WorkType);
                         }
-                        
+
                     }
 
                     SetupControl();

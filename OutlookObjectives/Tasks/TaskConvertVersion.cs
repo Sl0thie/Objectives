@@ -1,16 +1,12 @@
 ﻿namespace OutlookObjectives
 {
+    using CommonObjectives;
+    using LogNET;
+    using Newtonsoft.Json;
     using System;
+    using System.Runtime.InteropServices;
     using System.Threading;
     using Outlook = Microsoft.Office.Interop.Outlook;
-    using CommonObjectives;
-    using Newtonsoft.Json;
-    using LogNET;
-    using System.Windows.Forms.DataVisualization.Charting;
-    using System.Linq;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
-    using System.Runtime.InteropServices;
 
     /// <summary>
     /// Day Report Task to generate Objectives Day Reports.
@@ -108,7 +104,7 @@
                         }
                         else
                         {
-                            if(CustomProperty.Value == 5)
+                            if (CustomProperty.Value == 5)
                             {
                                 Log.Info("Found WorkItemVersion - Skipping " + next.Subject + " " + next.Start.ToString());
                             }
@@ -190,12 +186,12 @@
             {
                 item = JsonConvert.DeserializeObject<SolutionSession>(appointment.Body);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Error(ex);
             }
-            
-            if(item is object)
+
+            if (item is object)
             {
                 Log.Info(item.Name);
 

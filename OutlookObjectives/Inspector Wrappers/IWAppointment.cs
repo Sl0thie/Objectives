@@ -1,12 +1,7 @@
 ﻿namespace OutlookObjectives
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Outlook = Microsoft.Office.Interop.Outlook;
     using CommonObjectives;
+    using Outlook = Microsoft.Office.Interop.Outlook;
 
     class IWAppointment : IAppointment
     {
@@ -35,7 +30,7 @@
         public AppointmentType AppointmentType { get; set; }
 
 
-        public IWAppointment(Outlook.Inspector Inspector, string folderPath,AppointmentType appointmentType)
+        public IWAppointment(Outlook.Inspector Inspector, string folderPath, AppointmentType appointmentType)
         {
             this.inspector = Inspector;
             this.folderPath = folderPath;

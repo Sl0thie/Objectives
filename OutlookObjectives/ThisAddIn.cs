@@ -1,12 +1,12 @@
 ﻿namespace OutlookObjectives
 {
+    using CommonObjectives;
+    using LogNET;
+    using Microsoft.Win32;
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using Microsoft.Win32;
     using Outlook = Microsoft.Office.Interop.Outlook;
-    using CommonObjectives;
-    using LogNET;
 
     public partial class ThisAddIn
     {
@@ -257,9 +257,9 @@
                                     nextType.Application = (ApplicationType)Convert.ToInt32(val);
                                     break;
 
-                                //case "Active":
-                                //    nextType.Active = Convert.ToBoolean(val);
-                                //    break;
+                                    //case "Active":
+                                    //    nextType.Active = Convert.ToBoolean(val);
+                                    //    break;
                             }
                         }
 
@@ -387,7 +387,7 @@
         {
             this.Startup += new System.EventHandler(ThisAddIn_Startup);
         }
-        
+
         #endregion
     }
 }

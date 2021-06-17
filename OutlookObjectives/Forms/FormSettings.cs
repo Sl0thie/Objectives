@@ -1,10 +1,10 @@
 ﻿namespace OutlookObjectives
 {
+    using LogNET;
+    using Microsoft.Win32;
     using System;
     using System.IO;
     using System.Windows.Forms;
-    using Microsoft.Win32;
-    using LogNET;
 
     /// <summary>
     /// Form to manage Objectives Settings.
@@ -181,7 +181,7 @@
             // Check if the registry keys exist.
             try
             {
-                ObjectiveKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives",true);
+                ObjectiveKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives", true);
                 if (ObjectiveKey == null)
                 {
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives");

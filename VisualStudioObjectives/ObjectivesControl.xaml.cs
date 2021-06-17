@@ -1,15 +1,15 @@
 ﻿namespace VisualStudioObjectives
 {
-    using System.Windows;
-    using System.Windows.Controls;
+    using CommonObjectives;
     using EnvDTE;
+    using LogNET;
     using Microsoft.VisualStudio.Shell;
+    using Newtonsoft.Json;
     using System;
     using System.IO;
-    using Newtonsoft.Json;
-    using CommonObjectives;
-    using LogNET;
     using System.Text;
+    using System.Windows;
+    using System.Windows.Controls;
 
     /// <summary>
     /// Interaction logic for ObjectivesControl.
@@ -395,7 +395,7 @@
                     }
                 }
 
-                if((StartFileCountTotal != FinishFileCountTotal) || (StartFileSizeTotal != FinishFileSizeTotal))
+                if ((StartFileCountTotal != FinishFileCountTotal) || (StartFileSizeTotal != FinishFileSizeTotal))
                 {
                     workItem.Application = ApplicationType.VisualStudioWrite;
                 }

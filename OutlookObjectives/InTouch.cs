@@ -1,18 +1,18 @@
 ﻿namespace OutlookObjectives
 {
-    using System;
     using CommonObjectives;
-    using Newtonsoft.Json;
-    using System.IO;
     using LogNET;
+    using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
+    using System.IO;
 
     /// <summary>
     /// Class to hold the static objects and helper functions.
     /// </summary>
     public static class InTouch
     {
-        
+
         private static readonly TaskManager taskManager = new TaskManager();
 
         public static TaskManager TaskManager
@@ -50,7 +50,7 @@
         {
             Objective item = new Objective();
 
-            if(path == InTouch.ObjectivesRootFolder + "\\None")
+            if (path == InTouch.ObjectivesRootFolder + "\\None")
             {
                 item.ObjectiveName = "None";
                 return item;

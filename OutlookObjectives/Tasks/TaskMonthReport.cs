@@ -1,11 +1,10 @@
 ﻿namespace OutlookObjectives
 {
+    using CommonObjectives;
+    using LogNET;
     using System;
     using System.Threading;
     using Outlook = Microsoft.Office.Interop.Outlook;
-    using CommonObjectives;
-    using Newtonsoft.Json;
-    using LogNET;
 
     /// <summary>
     /// Task to process Monthly totals.

@@ -1,20 +1,12 @@
 ﻿namespace VisualStudioObjectives
 {
-    using Microsoft.VisualStudio;
-    using Microsoft.VisualStudio.OLE.Interop;
+    using LogNET;
     using Microsoft.VisualStudio.Shell;
-    using Microsoft.VisualStudio.Shell.Interop;
-    using Microsoft.Win32;
     using System;
-    using System.ComponentModel.Design;
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
     using System.Runtime.InteropServices;
     using System.Threading;
-    using System.Threading.Tasks;
     using Task = System.Threading.Tasks.Task;
-    using LogNET;
 
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.

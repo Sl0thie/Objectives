@@ -1,8 +1,8 @@
 ﻿namespace OutlookObjectives
 {
     using System;
-    using System.Windows.Forms;
     using System.IO;
+    using System.Windows.Forms;
 
     public partial class FormCreateObjective : Form
     {
@@ -14,7 +14,7 @@
         private void ButtonCreateObjective_Click(object sender, EventArgs e)
         {
             // Check if the new objective name is valid first.
-            if(TextBoxObjective.Text.Length > 0)
+            if (TextBoxObjective.Text.Length > 0)
             {
                 if (!Directory.Exists(InTouch.ObjectivesRootFolder + @"\" + TextBoxObjective.Text))
                 {

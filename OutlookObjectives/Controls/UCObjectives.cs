@@ -1,9 +1,9 @@
 ﻿namespace OutlookObjectives
 {
-    using System;
-    using System.Windows.Forms;
-    using System.IO;
     using CommonObjectives;
+    using System;
+    using System.IO;
+    using System.Windows.Forms;
 
     public partial class UCObjectives : UserControl
     {
@@ -49,7 +49,7 @@
 
         private void ListObjectives_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(ListObjectives.SelectedItems.Count > 0)
+            if (ListObjectives.SelectedItems.Count > 0)
             {
                 if (ListObjectives.SelectedItems[0] is object)
                 {
