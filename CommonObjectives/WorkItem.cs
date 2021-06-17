@@ -58,6 +58,7 @@
 
         public WorkType WorkType { get; set; }
 
+
         public ApplicationType Application { get; set; }
 
         public int Minutes { get; set; }

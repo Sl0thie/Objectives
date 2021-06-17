@@ -10,6 +10,7 @@
     using System.Linq;
     using System.Drawing;
     using System.Drawing.Drawing2D;
+    using System.Runtime.InteropServices;
 
     /// <summary>
     /// Day Report Task to generate Objectives Day Reports.
@@ -166,48 +167,40 @@
             {
                 Outlook.AppointmentItem next = (Outlook.AppointmentItem)appointment;
 
-                switch (next.Categories)
+
+                Outlook.UserProperty CustomProperty = next.UserProperties.Find("Application");
+                if (object.ReferenceEquals(CustomProperty, null))
                 {
-                    case "Visual Studio":
-                        ProcessVisualStudio(next.Body, true);
-                        break;
-
-                    case "Visual Studio - Read Only":
-                        ProcessVisualStudio(next.Body, false);
-                        break;
-
-                    case "Word":
-                        ProcessWord(next.Body, true);
-                        break;
-
-                    case "Word - Read Only":
-                        ProcessWord(next.Body, false);
-                        break;
-
-                    case "Excel":
-                        ProcessExcel(next.Body, true);
-                        break;
-
-                    case "Excel - Read Only":
-                        ProcessExcel(next.Body, false);
-                        break;
-
-                    case "AutoCAD":
-                        ProcessAutoCAD(next.Body, true);
-                        break;
-
-                    case "AutoCAD - Read Only":
-                        ProcessAutoCAD(next.Body, false);
-                        break;
-
-                    default:
-                        Log.Info("Category : " + next.Categories);
-                        break;
+                    Log.Info("No Application Type " + next.Subject + " " + next.Start.ToString());
+                    
                 }
-            }
+                else
+                {
+                    switch ((ApplicationType)CustomProperty.Value)
+                    {
+                        case ApplicationType.None:
+                            //TODO Process based on work type? Or replace this whole switch with work type in the future?
+                            break;
 
-            
+                        case ApplicationType.VisualStudioRead:
+                            ProcessVisualStudio(next.Body);
+                            break;
+
+                        case ApplicationType.VisualStudioWrite:
+                            ProcessVisualStudio(next.Body);
+                            break;
+
+                        default:
+                            Log.Info("Unmanaged Application Type: " + (ApplicationType)CustomProperty.Value);
+                            break;
+                    }
+                }
+
+                if (CustomProperty != null) Marshal.ReleaseComObject(CustomProperty);
+
+            }
         }
+
 
         private void CalculateMinutes()
         {
@@ -230,32 +223,34 @@
                 }
 
                 // Count the number of minutes each application is in the foreground.
-                if (dayReport.Minutes[i].Application is object)
+                if (dayReport.Minutes[i].ActiveApplication is object)
                 {
-                    if (dayReport.UniqueApplications.ContainsKey(dayReport.Minutes[i].Application))
+                    if (dayReport.UniqueApplications.ContainsKey(dayReport.Minutes[i].ActiveApplication))
                     {
-                        dayReport.UniqueApplications[dayReport.Minutes[i].Application]++;
+                        dayReport.UniqueApplications[dayReport.Minutes[i].ActiveApplication]++;
                     }
                     else
                     {
-                        dayReport.UniqueApplications.Add(dayReport.Minutes[i].Application, 1);
+                        dayReport.UniqueApplications.Add(dayReport.Minutes[i].ActiveApplication, 1);
                     }
                 }
 
-                // Find primary work item for the minute.
-                foreach (Tuple<int, string, string, string> next in dayReport.Minutes[i].Projects)
-                {
-                    if (next.Item1 != 0)
-                    {
-                        if ((next.Item1 <= dayReport.Minutes[i].PrimaryWorkTypeIndex) || (dayReport.Minutes[i].PrimaryWorkTypeIndex == 0))
-                        {
-                            dayReport.Minutes[i].PrimaryWorkTypeIndex = next.Item1;
-                            dayReport.Minutes[i].PrimaryPath = next.Item2;
-                            dayReport.Minutes[i].PrimaryObjective = next.Item3;
-                            dayReport.Minutes[i].PrimaryName = next.Item4;
-                        }
-                    }
-                }
+
+
+                //// Find primary work item for the minute.
+                //foreach (Tuple<int, string, string, string> next in dayReport.Minutes[i].Projects)
+                //{
+                //    if (next.Item1 != 0)
+                //    {
+                //        if ((next.Item1 <= dayReport.Minutes[i].PrimaryWorkTypeIndex) || (dayReport.Minutes[i].PrimaryWorkTypeIndex == 0))
+                //        {
+                //            dayReport.Minutes[i].PrimaryWorkTypeIndex = next.Item1;
+                //            dayReport.Minutes[i].PrimaryPath = next.Item2;
+                //            dayReport.Minutes[i].PrimaryObjective = next.Item3;
+                //            dayReport.Minutes[i].PrimaryName = next.Item4;
+                //        }
+                //    }
+                //}
             }
         }
 
@@ -746,62 +741,62 @@
                 {
                     if(next.Application == "Unknown")
                     {
-                        dayReport.Minutes[minute].Application = "Unknown";
+                        dayReport.Minutes[minute].ActiveApplication = "Unknown";
                     }
                     else
                     {
                         if (next.Application.Substring(0, 34) == "System.Diagnostics.ProcessModule (")
                         {
-                            dayReport.Minutes[minute].Application = next.Application.Substring(34);
-                            dayReport.Minutes[minute].Application = dayReport.Minutes[minute].Application.Substring(0, dayReport.Minutes[minute].Application.Length - 1);
+                            dayReport.Minutes[minute].ActiveApplication = next.Application.Substring(34);
+                            dayReport.Minutes[minute].ActiveApplication = dayReport.Minutes[minute].ActiveApplication.Substring(0, dayReport.Minutes[minute].ActiveApplication.Length - 1);
                         }
                         else
                         {
-                            dayReport.Minutes[minute].Application = next.Application;
+                            dayReport.Minutes[minute].ActiveApplication = next.Application;
                         }
                     }               
                 }
 
                 // Rename the more common programs and add to the minute.
-                switch (dayReport.Minutes[minute].Application.ToLower())
+                switch (dayReport.Minutes[minute].ActiveApplication.ToLower())
                 {
 
                     case "cmd.exe":
-                        dayReport.Minutes[minute].Application = "Command Prompt";
+                        dayReport.Minutes[minute].ActiveApplication = "Command Prompt";
                         break;
 
                     case "devenv.exe":
-                        dayReport.Minutes[minute].Application = "Visual Studio";
+                        dayReport.Minutes[minute].ActiveApplication = "Visual Studio";
                         break;
 
                     case "explorer.exe":
-                        dayReport.Minutes[minute].Application = "Explorer";
+                        dayReport.Minutes[minute].ActiveApplication = "Explorer";
                         break;
 
                     case "msedge.exe":
-                        dayReport.Minutes[minute].Application = "Edge Browser";
+                        dayReport.Minutes[minute].ActiveApplication = "Edge Browser";
                         break;
 
                     case "outlook.exe":
-                        dayReport.Minutes[minute].Application = "Outlook";
+                        dayReport.Minutes[minute].ActiveApplication = "Outlook";
                         break;
 
                     case "winword.exe":
-                        dayReport.Minutes[minute].Application = "Word";
+                        dayReport.Minutes[minute].ActiveApplication = "Word";
                         break;
 
                     default:
 
-                        if (dayReport.Minutes[minute].Application.Substring(dayReport.Minutes[minute].Application.Length - 4).ToLower() == ".exe")
+                        if (dayReport.Minutes[minute].ActiveApplication.Substring(dayReport.Minutes[minute].ActiveApplication.Length - 4).ToLower() == ".exe")
                         {
-                            dayReport.Minutes[minute].Application = dayReport.Minutes[minute].Application.Substring(0,dayReport.Minutes[minute].Application.Length - 4);
+                            dayReport.Minutes[minute].ActiveApplication = dayReport.Minutes[minute].ActiveApplication.Substring(0,dayReport.Minutes[minute].ActiveApplication.Length - 4);
                         }
 
                         break;
                 }
 
                 // Add the title to the minute.
-                dayReport.Minutes[minute].Title = next.Title;
+                dayReport.Minutes[minute].ActiveApplicationTitle = next.Title;
             }
         }
 
@@ -830,29 +825,41 @@
         /// </summary>
         /// <param name="json"></param>
         /// <param name="isWork"></param>
-        private void ProcessVisualStudio(string json,bool isWork)
+        private void ProcessVisualStudio(string json)
         {
-            //SolutionSession item = JsonConvert.DeserializeObject<SolutionSession>(json);
-            //if (!dayReport.UniqueSessions.ContainsKey(item.Path))
-            //{
-            //    dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
-            //}
+            WorkItem workItem = JsonConvert.DeserializeObject<WorkItem>(json);
 
-            //int start = (item.Start.Hour * 60) + item.Start.Minute;
-            //int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
+            int start = (workItem.Start.Hour * 60) + workItem.Start.Minute;
+            int finish = (workItem.Finish.Hour * 60) + workItem.Finish.Minute;
 
-            //for (int i = start; i < finish; i++)
-            //{
-            //    if (isWork)
-            //    {
-            //        dayReport.Minutes[i].Billable = true;
-            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(4, item.Path, item.ObjectiveName, item.Name));
-            //    }
-            //    else
-            //    {
-            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(13, item.Path, item.ObjectiveName, item.Name));
-            //    }
-            //}
+            for (int i = start; i < finish; i++)
+            {
+                if (workItem.Application == ApplicationType.VisualStudioWrite)
+                {
+                    dayReport.Minutes[i].Billable = true;
+                }
+
+                //dayReport.Minutes[i].WorkItems.Add(workItem);
+                if (dayReport.Minutes[i].PrimaryWorkItem is object)
+                {
+                    if (workItem.WorkType.Index != 0)
+                    {
+                        if (workItem.WorkType.Index <= dayReport.Minutes[i].PrimaryWorkItem.WorkType.Index)
+                        {
+                            dayReport.Minutes[i].PrimaryWorkItem = workItem;
+                        }
+                    }
+                }
+                else
+                {
+                    dayReport.Minutes[i].PrimaryWorkItem = workItem;
+                }
+            }
+
+            if (!dayReport.WorkItems.ContainsKey(workItem.ObjectiveName + "-" + workItem.Name + "-" + workItem.WorkType.Index))
+            {
+                dayReport.WorkItems.Add(workItem.ObjectiveName + "-" + workItem.Name + "-" + workItem.WorkType.Index, workItem);
+            }
         }
 
         /// <summary>

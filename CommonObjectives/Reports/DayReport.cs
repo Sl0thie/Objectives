@@ -6,7 +6,10 @@
 
     public class DayReport
     {
-        private Dictionary<string, Tuple<string, string>> uniqueSessions = new Dictionary<string, Tuple<string, string>>();
+        //[Obsolete]
+        //private Dictionary<string, Tuple<string, string>> uniqueSessions = new Dictionary<string, Tuple<string, string>>();
+        
+        
         private Dictionary<string, WorkItem> workItems = new Dictionary<string, WorkItem>();
         private Dictionary<string, int> uniqueApplications = new Dictionary<string, int>();
         private DateTime day;
@@ -39,11 +42,11 @@
         /// <summary>
         /// A dictionary of the unique sessions.
         /// </summary>
-        public Dictionary<string, Tuple<string, string>> UniqueSessions
-        {
-            get { return uniqueSessions; }
-            set { uniqueSessions = value; }
-        }
+        //public Dictionary<string, Tuple<string, string>> UniqueSessions
+        //{
+        //    get { return uniqueSessions; }
+        //    set { uniqueSessions = value; }
+        //}
 
         /// <summary>
         /// A dictionary for the Objective's Totals.
