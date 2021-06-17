@@ -128,19 +128,38 @@
         /// <param name="day">The day to create a report for.</param>
         private void ProcessAppointments()
         {
-            // Get references to the Outlook Calendars. 
-            //Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-            //Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
-
             // DateTimes for start and finish of the day.
             DateTime start = day;
             DateTime finsh = day.AddHours(24);
             dayReport.Day = day;
 
-            
+
+            // Find all the appointment items within the start and finish times from the System Calendar.
+            Outlook.Items appointments = GetAppointmentsWithinRange(system, start, finsh);
+
+            // Process all the system appointments.
+            foreach (var appointment in appointments)
+            {
+                Outlook.AppointmentItem next = (Outlook.AppointmentItem)appointment;
+
+                switch (next.Categories)
+                {
+                    case "System - Uptime":
+                        ProcessSystemUptime(next.Body);
+                        break;
+
+                    case "System - Idle":
+                        ProcessSystemIdle(next.Body);
+                        break;
+
+                    default:
+                        Log.Info("Category : " + next.Categories);
+                        break;
+                }
+            }
 
             // Find all the appointment items within the start and finish times from the Objectives Calendar.
-            Outlook.Items appointments = GetAppointmentsWithinRange(calendar, start, finsh);
+            appointments = GetAppointmentsWithinRange(calendar, start, finsh);
 
             // Process the appointments based on the application type.
             foreach (var appointment in appointments)
@@ -187,29 +206,7 @@
                 }
             }
 
-            // Find all the appointment items within the start and finish times from the System Calendar.
-            appointments = GetAppointmentsWithinRange(system, start, finsh);
-
-            // Process all the system appointments.
-            foreach (var appointment in appointments)
-            {
-                Outlook.AppointmentItem next = (Outlook.AppointmentItem)appointment;
-
-                switch (next.Categories)
-                {
-                    case "System - Uptime":
-                        ProcessSystemUptime(next.Body);
-                        break;
-
-                    case "System - Idle":
-                        ProcessSystemIdle(next.Body);
-                        break;
-
-                    default:
-                        Log.Info("Category : " + next.Categories);
-                        break;
-                }
-            }
+            
         }
 
         private void CalculateMinutes()

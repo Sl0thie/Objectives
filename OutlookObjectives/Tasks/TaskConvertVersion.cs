@@ -19,8 +19,8 @@
     {
         private readonly Action CallBack;
         private readonly DayReport dayReport = new DayReport();
-        private readonly DateTime finishDay = new DateTime(2021, 6, 15);
-        private readonly DateTime startDay = new DateTime(2021, 6, 16);
+        private readonly DateTime finishDay = new DateTime(2021, 3, 15);
+        private readonly DateTime startDay = new DateTime(2021, 6, 17);
         private DateTime day;
 
         // Get references to the Outlook Calendars. 
@@ -65,7 +65,7 @@
                 Log.Info("Processing Day: " + day.ToString());
                 ProcessAppointments();
 
-                if (day < finishDay)
+                if (day <= finishDay)
                 {
                     keepLooking = false;
                 }
@@ -114,7 +114,8 @@
                             }
                             else
                             {
-                                Log.Info("Wrong WorkItemVersion - Processing " + next.Subject + " " + next.Start.ToString());
+                                Log.Info("Wrong WorkItemVersion - Error " + next.Subject + " " + next.Start.ToString());
+                                //ProcessVisualStudio(next);
                             }
                         }
 
@@ -125,6 +126,30 @@
                     case "Visual Studio - Read Only":
                         ProcessVisualStudio(next);
                         break;
+
+                    case "Visual Studio - Review":
+                        Outlook.UserProperty CustomProperty2 = next.UserProperties.Find("WorkItemVersion");
+                        if (object.ReferenceEquals(CustomProperty2, null))
+                        {
+                            Log.Info("No WorkItemVersion - Error " + next.Subject + " " + next.Start.ToString());
+                            ProcessVisualStudio(next);
+
+                        }
+                        else
+                        {
+                            if (CustomProperty2.Value == 5)
+                            {
+                                Log.Info("Found WorkItemVersion - Ok " + next.Subject + " " + next.Start.ToString());
+                            }
+                            else
+                            {
+                                Log.Info("Wrong WorkItemVersion - Error " + CustomProperty2.Value + " " + next.Subject + " " + next.Start.ToString());
+                            }
+                        }
+
+                        if (CustomProperty2 != null) Marshal.ReleaseComObject(CustomProperty2);
+                        break;
+
 
                     //case "Word":
                     //    ProcessWord(next.Body, true);
@@ -220,6 +245,10 @@
                 appointment.ReminderSet = false;
                 appointment.UserProperties.Add("Application", Outlook.OlUserPropertyType.olInteger);
                 appointment.UserProperties["Application"].Value = (int)workItem.Application;
+                appointment.UserProperties.Add("WorkTypeIndex", Outlook.OlUserPropertyType.olInteger);
+                appointment.UserProperties["WorkTypeIndex"].Value = (int)workItem.WorkType.Index;
+                appointment.UserProperties.Add("WorkItemVersion", Outlook.OlUserPropertyType.olInteger);
+                appointment.UserProperties["WorkItemVersion"].Value = InTouch.WorkItemVersion;
                 appointment.Categories = workItem.WorkType.Name;
 
                 appointment.Save();

@@ -33,10 +33,10 @@
 
             // Enqueue the starting Tasks.
             InTouch.TaskManager.EnqueueImportDataTask();
-            //InTouch.TaskManager.EnqueueDayReportTask();
+            InTouch.TaskManager.EnqueueDayReportTask();
             //InTouch.TaskManager.EnqueueWeekReportTask();
             //InTouch.TaskManager.EnqueueMonthReportTask();
-            InTouch.TaskManager.EnqueueConvertVersionTask();
+            //InTouch.TaskManager.EnqueueConvertVersionTask();
 
             // Setup the main timer.
             System.Timers.Timer mainTimer = new System.Timers.Timer(50000);
