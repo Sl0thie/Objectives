@@ -26,8 +26,8 @@
         TimeSpan refreshIntervalTime;
         Timer refreshTimer;
 
-        long StartSize = 0;
-        long FinishSize = 0;
+        //long StartSize = 0;
+        //long FinishSize = 0;
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -187,8 +187,8 @@
                 WorkItem workItem = new WorkItem();
                 workItem.FilePath = doc.FullName;
                 workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
-                FileInfo fileInfo = new FileInfo(doc.FullName);
-                StartSize = fileInfo.Length;
+                //FileInfo fileInfo = new FileInfo(doc.FullName);
+                //workItem.StartSize = fileInfo.Length;
 
                 if (workItem.FilePath.LastIndexOf("\\") > 0)
                 {
@@ -213,7 +213,7 @@
                 if (File.Exists(workItem.FilePath))
                 {
                     FileInfo fileInf = new FileInfo(workItem.FilePath);
-                    StartSize = fileInf.Length;
+                    workItem.StartSize = fileInf.Length;
                 }
 
                 Documents.Add(workItem.FilePath, workItem);
@@ -274,7 +274,7 @@
             if (File.Exists(workItem.FilePath))
             {
                 FileInfo wordFile = new FileInfo(workItem.FilePath);
-                FinishSize = wordFile.Length;
+                workItem.FinishSize = wordFile.Length;
             }
 
             Log.Info("SaveData has fired. Path = " + workItem.FilePath + " " + workItem.Start + " " + workItem.Finish);
@@ -283,7 +283,7 @@
             {
                 if (workItem.Start != workItem.Finish)
                 {
-                    if (StartSize != FinishSize)
+                    if (workItem.StartSize != workItem.FinishSize)
                     {
                         workItem.Application = ApplicationType.WordWrite;
                     }
@@ -295,7 +295,7 @@
                     string json = JsonConvert.SerializeObject(workItem, Formatting.Indented);
                     File.WriteAllText(StorageFolder + @"\" + (int)ApplicationType.Word + "-" + Guid.NewGuid().ToString() + ".json", json);
                     workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
-                    StartSize = FinishSize;
+                    workItem.StartSize = workItem.FinishSize;
                 }
             }
             catch (Exception ex)

@@ -107,6 +107,7 @@
             else
             {
                 WorkItem workItem = new WorkItem();
+                workItem.Id = Guid.NewGuid();
                 workItem.FilePath = workbook.FullName;
                 workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
 
@@ -182,9 +183,17 @@
             {
                 if (workItem.Start != workItem.Finish)
                 {
+                    if (workItem.StartSize != workItem.FinishSize)
+                    {
+                        workItem.Application = ApplicationType.ExcelWrite;
+                    }
+                    else
+                    {
+                        workItem.Application = ApplicationType.ExcelRead;
+                    }
 
                     string json = JsonConvert.SerializeObject(workItem, Formatting.Indented);
-                    File.WriteAllText(StorageFolder + @"\" + (int)ApplicationType.Excel + "-" + Guid.NewGuid().ToString() + ".json", json);
+                    File.WriteAllText(StorageFolder + @"\" + (int)workItem.Application + "-" + workItem.Id.ToString() + ".json", json);
                     workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
                     workItem.StartSize = workItem.FinishSize;
                 }
