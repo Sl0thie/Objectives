@@ -24,8 +24,8 @@
         private DateTime day;
 
         // Get references to the Outlook Calendars. 
-        Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-        Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
+        readonly Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
+        readonly Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
 
 
         /// <summary>
@@ -101,7 +101,7 @@
                     case "Visual Studio":
 
                         Outlook.UserProperty CustomProperty = next.UserProperties.Find("WorkItemVersion");
-                        if (object.ReferenceEquals(CustomProperty, null))
+                        if (CustomProperty is null)
                         {
                             Log.Info("No WorkItemVersion - Processing " + next.Subject + " " + next.Start.ToString());
                             ProcessVisualStudio(next);
@@ -129,7 +129,7 @@
 
                     case "Visual Studio - Review":
                         Outlook.UserProperty CustomProperty2 = next.UserProperties.Find("WorkItemVersion");
-                        if (object.ReferenceEquals(CustomProperty2, null))
+                        if (CustomProperty2 is null)
                         {
                             Log.Info("No WorkItemVersion - Error " + next.Subject + " " + next.Start.ToString());
                             ProcessVisualStudio(next);
@@ -199,11 +199,13 @@
             {
                 Log.Info(item.Name);
 
-                WorkItem workItem = new WorkItem(item.Name);
-                workItem.ObjectiveName = item.ObjectiveName;
-                workItem.Start = item.Start;
-                workItem.Finish = item.Finish;
-                workItem.FilePath = item.SolutionFileName;
+                WorkItem workItem = new WorkItem(item.Name)
+                {
+                    ObjectiveName = item.ObjectiveName,
+                    Start = item.Start,
+                    Finish = item.Finish,
+                    FilePath = item.SolutionFileName
+                };
 
                 if ((item.StartFileCountTotal != item.FinishFileCountTotal) || (item.StartFileSizeTotal != item.FinishFileSizeTotal))
                 {

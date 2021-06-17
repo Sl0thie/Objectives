@@ -23,9 +23,8 @@
         private DateTime day;
 
         // Get references to the Outlook Calendars. 
-        Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-        Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
-
+        readonly Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
+        readonly Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
 
         /// <summary>
         /// Returns control back to the TaskManager.
@@ -169,7 +168,7 @@
 
 
                 Outlook.UserProperty CustomProperty = next.UserProperties.Find("Application");
-                if (object.ReferenceEquals(CustomProperty, null))
+                if (CustomProperty is null)
                 {
                     Log.Info("No Application Type " + next.Subject + " " + next.Start.ToString());
                     
@@ -256,42 +255,42 @@
 
         private void CalculateObjectiveTotals()
         {
-            // Get the Objective Totals.
-            for (int i = 0; i < 1440; i++)
-            {
-                if (dayReport.Minutes[i].PrimaryPath is object)
-                {
-                    if (!dayReport.WorkItems.ContainsKey(dayReport.Minutes[i].PrimaryPath +  dayReport.Minutes[i].PrimaryWorkTypeIndex.ToString()))
-                    {
-                        WorkItem newWorkItem = new WorkItem();
-                        newWorkItem.ObjectiveName = dayReport.Minutes[i].PrimaryObjective;
-                        newWorkItem.Name = dayReport.Minutes[i].PrimaryName;
-                        newWorkItem.WorkTypeIndex = dayReport.Minutes[i].PrimaryWorkTypeIndex;
-                        newWorkItem.Minutes = 1;
-                        dayReport.WorkItems.Add(dayReport.Minutes[i].PrimaryPath + dayReport.Minutes[i].PrimaryWorkTypeIndex.ToString(), newWorkItem);
-                    }
-                    else
-                    {
-                        dayReport.WorkItems[dayReport.Minutes[i].PrimaryPath + dayReport.Minutes[i].PrimaryWorkTypeIndex.ToString()].Minutes++;
-                    }
-                }
-            }
+            //// Get the Objective Totals.
+            //for (int i = 0; i < 1440; i++)
+            //{
+            //    if (dayReport.Minutes[i].PrimaryPath is object)
+            //    {
+            //        if (!dayReport.WorkItems.ContainsKey(dayReport.Minutes[i].PrimaryPath +  dayReport.Minutes[i].PrimaryWorkTypeIndex.ToString()))
+            //        {
+            //            WorkItem newWorkItem = new WorkItem();
+            //            newWorkItem.ObjectiveName = dayReport.Minutes[i].PrimaryObjective;
+            //            newWorkItem.Name = dayReport.Minutes[i].PrimaryName;
+            //            newWorkItem.WorkTypeIndex = dayReport.Minutes[i].PrimaryWorkTypeIndex;
+            //            newWorkItem.Minutes = 1;
+            //            dayReport.WorkItems.Add(dayReport.Minutes[i].PrimaryPath + dayReport.Minutes[i].PrimaryWorkTypeIndex.ToString(), newWorkItem);
+            //        }
+            //        else
+            //        {
+            //            dayReport.WorkItems[dayReport.Minutes[i].PrimaryPath + dayReport.Minutes[i].PrimaryWorkTypeIndex.ToString()].Minutes++;
+            //        }
+            //    }
+            //}
         }
 
         private void CalculateBillableItems()
         {
             // Loop though the work items.
-            foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkTypeIndex))
+            foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
             {
                 decimal rate;
                 Objective obj = InTouch.GetObjective(InTouch.ObjectivesRootFolder + "\\" + next.Value.ObjectiveName);
-                if (obj.WorkTypes.ContainsKey(next.Value.WorkTypeIndex))
+                if (obj.WorkTypes.ContainsKey(next.Value.WorkType.Index))
                 {
-                    rate = obj.WorkTypes[next.Value.WorkTypeIndex].CostPerHour;
+                    rate = obj.WorkTypes[next.Value.WorkType.Index].CostPerHour;
                 }
                 else
                 {
-                    rate = InTouch.WorkTypes[next.Value.WorkTypeIndex].CostPerHour;
+                    rate = InTouch.WorkTypes[next.Value.WorkType.Index].CostPerHour;
                 }
 
                 next.Value.Cost = next.Value.Minutes * (rate / (decimal)60);
@@ -348,7 +347,7 @@
 
             int i = 0;
 
-            foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkTypeIndex))
+            foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
             {
                 rv += "<tr>" + "\n";
                 rv += "<td style=\"max-height:18px;\">" + next.Value.ObjectiveName + "</td>\n";
@@ -530,10 +529,12 @@
             float ChartWidth = 800;
             float ChartHeight = dayReport.UniqueApplications.Count * 44;
 
-            Chart chart = new Chart();
-            chart.Width = (int)ChartWidth;
-            chart.Height = (int)ChartHeight;
-            chart.BackColor = Color.Transparent;
+            Chart chart = new Chart
+            {
+                Width = (int)ChartWidth,
+                Height = (int)ChartHeight,
+                BackColor = Color.Transparent
+            };
 
             chart.ChartAreas.Add(Series1);
             chart.Series.Add(Series1);
@@ -584,10 +585,12 @@
         {
             float ChartWidth = 240;
             float ChartHeight = 240;
-            Chart chart = new Chart();
-            chart.Width = (int)ChartWidth;
-            chart.Height = (int)ChartHeight;
-            chart.BackColor = Color.Transparent;
+            Chart chart = new Chart
+            {
+                Width = (int)ChartWidth,
+                Height = (int)ChartHeight,
+                BackColor = Color.Transparent
+            };
 
             // Setup the first (outer) series.
             string Series1 = "Series1";
@@ -660,10 +663,12 @@
         {
             float ChartWidth = 300;
             float ChartHeight = 300;
-            Chart chart = new Chart();
-            chart.Width = (int)ChartWidth;
-            chart.Height = (int)ChartHeight;
-            chart.BackColor = Color.Transparent;
+            Chart chart = new Chart
+            {
+                Width = (int)ChartWidth,
+                Height = (int)ChartHeight,
+                BackColor = Color.Transparent
+            };
 
             // Setup the first series.
             string Series1 = "Series1";
@@ -862,93 +867,93 @@
             }
         }
 
-        /// <summary>
-        /// Process the Microsoft Word data.
-        /// </summary>
-        /// <param name="json"></param>
-        /// <param name="isWork"></param>
-        private void ProcessWord(string json, bool isWork)
-        {
-            //WordSession item = JsonConvert.DeserializeObject<WordSession>(json);
-            //if (!dayReport.UniqueSessions.ContainsKey(item.Path))
-            //{
-            //    dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
-            //}
+        ///// <summary>
+        ///// Process the Microsoft Word data.
+        ///// </summary>
+        ///// <param name="json"></param>
+        ///// <param name="isWork"></param>
+        //private void ProcessWord(string json, bool isWork)
+        //{
+        //    //WordSession item = JsonConvert.DeserializeObject<WordSession>(json);
+        //    //if (!dayReport.UniqueSessions.ContainsKey(item.Path))
+        //    //{
+        //    //    dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
+        //    //}
 
-            //int start = (item.Start.Hour * 60) + item.Start.Minute;
-            //int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
+        //    //int start = (item.Start.Hour * 60) + item.Start.Minute;
+        //    //int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
 
-            //for (int i = start; i < finish; i++)
-            //{
-            //    if (isWork)
-            //    {
-            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(7, item.Path, item.ObjectiveName, item.Name));
-            //    }
-            //    else
-            //    {
-            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(16, item.Path, item.ObjectiveName, item.Name));
-            //    }
-            //}
-        }
+        //    //for (int i = start; i < finish; i++)
+        //    //{
+        //    //    if (isWork)
+        //    //    {
+        //    //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(7, item.Path, item.ObjectiveName, item.Name));
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(16, item.Path, item.ObjectiveName, item.Name));
+        //    //    }
+        //    //}
+        //}
 
-        /// <summary>
-        /// Process the Microsoft Excel data.
-        /// </summary>
-        /// <param name="json"></param>
-        /// <param name="isWork"></param>
-        private void ProcessExcel(string json,bool isWork)
-        {
-            //ExcelSession item = JsonConvert.DeserializeObject<ExcelSession>(json);
-            //if (!dayReport.UniqueSessions.ContainsKey(item.Path))
-            //{
-            //    dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
-            //}
+        ///// <summary>
+        ///// Process the Microsoft Excel data.
+        ///// </summary>
+        ///// <param name="json"></param>
+        ///// <param name="isWork"></param>
+        //private void ProcessExcel(string json,bool isWork)
+        //{
+        //    //ExcelSession item = JsonConvert.DeserializeObject<ExcelSession>(json);
+        //    //if (!dayReport.UniqueSessions.ContainsKey(item.Path))
+        //    //{
+        //    //    dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
+        //    //}
 
-            //int start = (item.Start.Hour * 60) + item.Start.Minute;
-            //int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
+        //    //int start = (item.Start.Hour * 60) + item.Start.Minute;
+        //    //int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
 
-            //for (int i = start; i < finish; i++)
-            //{
-            //    if (isWork)
-            //    {
-            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(6, item.Path, item.ObjectiveName, item.Name));
-            //    }
-            //    else
-            //    {
-            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(15, item.Path, item.ObjectiveName, item.Name));
-            //    }
+        //    //for (int i = start; i < finish; i++)
+        //    //{
+        //    //    if (isWork)
+        //    //    {
+        //    //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(6, item.Path, item.ObjectiveName, item.Name));
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(15, item.Path, item.ObjectiveName, item.Name));
+        //    //    }
                 
-            //}
-        }
+        //    //}
+        //}
 
-        /// <summary>
-        /// Process the AutoCAD data.
-        /// </summary>
-        /// <param name="json"></param>
-        /// <param name="isWork"></param>
-        private void ProcessAutoCAD(string json, bool isWork)
-        {
-            //DrawingSession item = JsonConvert.DeserializeObject<DrawingSession>(json);
-            //if (!dayReport.UniqueSessions.ContainsKey(item.Path))
-            //{
-            //    dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
-            //}
+        ///// <summary>
+        ///// Process the AutoCAD data.
+        ///// </summary>
+        ///// <param name="json"></param>
+        ///// <param name="isWork"></param>
+        //private void ProcessAutoCAD(string json, bool isWork)
+        //{
+        //    //DrawingSession item = JsonConvert.DeserializeObject<DrawingSession>(json);
+        //    //if (!dayReport.UniqueSessions.ContainsKey(item.Path))
+        //    //{
+        //    //    dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
+        //    //}
 
-            //int start = (item.Start.Hour * 60) + item.Start.Minute;
-            //int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
+        //    //int start = (item.Start.Hour * 60) + item.Start.Minute;
+        //    //int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
 
-            //for (int i = start; i < finish; i++)
-            //{
-            //    if (isWork)
-            //    {
-            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(8, item.Path, item.ObjectiveName, item.Name));
-            //    }
-            //    else
-            //    {
-            //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(17, item.Path, item.ObjectiveName, item.Name));
-            //    }
-            //}
-        }
+        //    //for (int i = start; i < finish; i++)
+        //    //{
+        //    //    if (isWork)
+        //    //    {
+        //    //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(8, item.Path, item.ObjectiveName, item.Name));
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(17, item.Path, item.ObjectiveName, item.Name));
+        //    //    }
+        //    //}
+        //}
 
         /// <summary>
         /// Get the appointments within the timespan.

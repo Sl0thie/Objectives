@@ -73,7 +73,7 @@ namespace WindowsObjectives
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // eventLogApplication
             // 
@@ -101,7 +101,7 @@ namespace WindowsObjectives
             // 
             this.timerMain.Enabled = true;
             this.timerMain.Interval = 50000;
-            this.timerMain.Tick += new System.EventHandler(this.timerMain_Tick);
+            this.timerMain.Tick += new System.EventHandler(this.TimerMain_Tick);
             // 
             // FormMain
             // 

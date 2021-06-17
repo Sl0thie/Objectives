@@ -38,14 +38,14 @@
         [DllImport("user32.dll", SetLastError = true)]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
-        private int IdleMin = 300;
+        private readonly int IdleMin = 300;
         private int lastValue;
         private bool armed = false;
         private bool IsIdle = false;
         private bool IsAsleep = false;
-        private SystemSleep systemSleep = new SystemSleep();
-        private SystemIdle systemIdle = new SystemIdle();
-        private SystemUptime systemUptime = new SystemUptime();
+        private readonly SystemSleep systemSleep = new SystemSleep();
+        private readonly SystemIdle systemIdle = new SystemIdle();
+        private readonly SystemUptime systemUptime = new SystemUptime();
         private string StorageFolder;
 
         public FormMain()
@@ -151,12 +151,12 @@
             ProcessUptime();
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void timerMain_Tick(object sender, EventArgs e)
+        private void TimerMain_Tick(object sender, EventArgs e)
         {
             int nextValue = GetLastInputTime();
             if (armed)
@@ -201,8 +201,10 @@
                 ProcessUptime();
             }
 
-            ActiveApplication app = new ActiveApplication();
-            app.Time = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
+            ActiveApplication app = new ActiveApplication
+            {
+                Time = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"))
+            };
 
             try
             {
@@ -214,8 +216,7 @@
                     app.Title = stringBuilder.ToString();
                 }
 
-                uint procId = 0;
-                GetWindowThreadProcessId(handle, out procId);
+                GetWindowThreadProcessId(handle, out uint procId);
                 var proc = Process.GetProcessById((int)procId);
                 app.Application = proc.MainModule.ToString();
             }
@@ -244,19 +245,19 @@
             return ((idleTime > 0) ? (idleTime / 1000) : idleTime);
         }
 
-        private string GetCaptionOfActiveWindow()
-        {
-            var strTitle = string.Empty;
-            var handle = GetForegroundWindow();
-            // Obtain the length of the text   
-            var intLength = GetWindowTextLength(handle) + 1;
-            var stringBuilder = new StringBuilder(intLength);
-            if (GetWindowText(handle, stringBuilder, intLength) > 0)
-            {
-                strTitle = stringBuilder.ToString();
-            }
-            return strTitle;
-        }
+        //private string GetCaptionOfActiveWindow()
+        //{
+        //    var strTitle = string.Empty;
+        //    var handle = GetForegroundWindow();
+        //    // Obtain the length of the text   
+        //    var intLength = GetWindowTextLength(handle) + 1;
+        //    var stringBuilder = new StringBuilder(intLength);
+        //    if (GetWindowText(handle, stringBuilder, intLength) > 0)
+        //    {
+        //        strTitle = stringBuilder.ToString();
+        //    }
+        //    return strTitle;
+        //}
 
     }
 }

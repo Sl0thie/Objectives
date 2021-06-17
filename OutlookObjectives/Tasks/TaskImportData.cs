@@ -10,7 +10,7 @@
 
     public class TaskImportData
     {
-        Action CallBack;
+        readonly Action CallBack;
 
         public TaskImportData(Action callBack)
         {
@@ -19,10 +19,12 @@
 
         public void RunTask()
         {
-            Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess));
-            BackgroundThread.Name = "Objectives.TaskImportData";
-            BackgroundThread.IsBackground = true;
-            BackgroundThread.Priority = ThreadPriority.Normal;
+            Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess))
+            {
+                Name = "Objectives.TaskImportData",
+                IsBackground = true,
+                Priority = ThreadPriority.Normal
+            };
             BackgroundThread.SetApartmentState(ApartmentState.STA);
             BackgroundThread.Start();
         }
@@ -231,175 +233,175 @@
             return true;
         }
 
-        private bool ImportVisualStudioData(string json)
-        {
-            //try
-            //{
-            //    SolutionSession solutionSession = JsonConvert.DeserializeObject<SolutionSession>(json);
+        //private bool ImportVisualStudioData(string json)
+        //{
+        //    //try
+        //    //{
+        //    //    SolutionSession solutionSession = JsonConvert.DeserializeObject<SolutionSession>(json);
 
-            //    Log.Info(solutionSession.Name);
-            //    Log.Info(solutionSession.ObjectiveName);
+        //    //    Log.Info(solutionSession.Name);
+        //    //    Log.Info(solutionSession.ObjectiveName);
 
-            //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-            //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
+        //    //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
+        //    //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
 
-            //    nextAppointment.Start = solutionSession.Start;
-            //    nextAppointment.End = solutionSession.Finish;
-            //    nextAppointment.Subject = solutionSession.Name;
-            //    nextAppointment.Body = json;
-            //    nextAppointment.AllDayEvent = false;
-            //    nextAppointment.ReminderSet = false;
+        //    //    nextAppointment.Start = solutionSession.Start;
+        //    //    nextAppointment.End = solutionSession.Finish;
+        //    //    nextAppointment.Subject = solutionSession.Name;
+        //    //    nextAppointment.Body = json;
+        //    //    nextAppointment.AllDayEvent = false;
+        //    //    nextAppointment.ReminderSet = false;
 
-            //    if (solutionSession.StartFileSizeTotal == solutionSession.FinishFileSizeTotal)
-            //    {
-            //        nextAppointment.Categories = "Visual Studio - Read Only";
-            //    }
-            //    else
-            //    {
-            //        nextAppointment.Categories = "Visual Studio";
-            //    }
+        //    //    if (solutionSession.StartFileSizeTotal == solutionSession.FinishFileSizeTotal)
+        //    //    {
+        //    //        nextAppointment.Categories = "Visual Studio - Read Only";
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        nextAppointment.Categories = "Visual Studio";
+        //    //    }
 
-            //    nextAppointment.Save();
-            //}
-            //catch(Exception ex)
-            //{
-            //    Log.Error(ex);
-            //    return false;
-            //}
+        //    //    nextAppointment.Save();
+        //    //}
+        //    //catch(Exception ex)
+        //    //{
+        //    //    Log.Error(ex);
+        //    //    return false;
+        //    //}
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        private bool ImportSSMSData(string json)
-        {
-            try
-            {
+        //private bool ImportSSMSData(string json)
+        //{
+        //    try
+        //    {
                 
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-                return false;
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Log.Error(ex);
+        //        return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        private bool ImportWordData(string json)
-        {
-            //try
-            //{
-            //    WordSession wordSession = JsonConvert.DeserializeObject<WordSession>(json);
+        //private bool ImportWordData(string json)
+        //{
+        //    //try
+        //    //{
+        //    //    WordSession wordSession = JsonConvert.DeserializeObject<WordSession>(json);
 
-            //    Log.Info(wordSession.Name);
-            //    Log.Info(wordSession.ObjectiveName);
+        //    //    Log.Info(wordSession.Name);
+        //    //    Log.Info(wordSession.ObjectiveName);
 
-            //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-            //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
+        //    //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
+        //    //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
 
-            //    nextAppointment.Start = wordSession.Start;
-            //    nextAppointment.End = wordSession.Finish;
-            //    nextAppointment.Subject = wordSession.Name;
-            //    nextAppointment.Body = json;
-            //    nextAppointment.AllDayEvent = false;
-            //    nextAppointment.ReminderSet = false;
+        //    //    nextAppointment.Start = wordSession.Start;
+        //    //    nextAppointment.End = wordSession.Finish;
+        //    //    nextAppointment.Subject = wordSession.Name;
+        //    //    nextAppointment.Body = json;
+        //    //    nextAppointment.AllDayEvent = false;
+        //    //    nextAppointment.ReminderSet = false;
 
-            //    if (wordSession.StartSize == wordSession.FinishSize)
-            //    {
-            //        nextAppointment.Categories = "Word - Read Only";
-            //    }
-            //    else
-            //    {
-            //        nextAppointment.Categories = "Word";
-            //    }
+        //    //    if (wordSession.StartSize == wordSession.FinishSize)
+        //    //    {
+        //    //        nextAppointment.Categories = "Word - Read Only";
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        nextAppointment.Categories = "Word";
+        //    //    }
 
-            //    nextAppointment.Save();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error(ex);
-            //    return false;
-            //}
+        //    //    nextAppointment.Save();
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    Log.Error(ex);
+        //    //    return false;
+        //    //}
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        private bool ImportExceloData(string json)
-        {
-            //try
-            //{
-            //    ExcelSession excelSession = JsonConvert.DeserializeObject<ExcelSession>(json);
+        //private bool ImportExceloData(string json)
+        //{
+        //    //try
+        //    //{
+        //    //    ExcelSession excelSession = JsonConvert.DeserializeObject<ExcelSession>(json);
 
-            //    Log.Info(excelSession.Name);
-            //    Log.Info(excelSession.ObjectiveName);
+        //    //    Log.Info(excelSession.Name);
+        //    //    Log.Info(excelSession.ObjectiveName);
 
-            //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-            //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
+        //    //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
+        //    //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
 
-            //    nextAppointment.Start = excelSession.Start;
-            //    nextAppointment.End = excelSession.Finish;
-            //    nextAppointment.Subject = excelSession.Name;
-            //    nextAppointment.Body = json;
-            //    nextAppointment.AllDayEvent = false;
-            //    nextAppointment.ReminderSet = false;
+        //    //    nextAppointment.Start = excelSession.Start;
+        //    //    nextAppointment.End = excelSession.Finish;
+        //    //    nextAppointment.Subject = excelSession.Name;
+        //    //    nextAppointment.Body = json;
+        //    //    nextAppointment.AllDayEvent = false;
+        //    //    nextAppointment.ReminderSet = false;
 
-            //    if (excelSession.StartSize == excelSession.FinishSize)
-            //    {
-            //        nextAppointment.Categories = "Excel - Read Only";
-            //    }
-            //    else
-            //    {
-            //        nextAppointment.Categories = "Excel";
-            //    }
+        //    //    if (excelSession.StartSize == excelSession.FinishSize)
+        //    //    {
+        //    //        nextAppointment.Categories = "Excel - Read Only";
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        nextAppointment.Categories = "Excel";
+        //    //    }
 
-            //    nextAppointment.Save();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error(ex);
-            //    return false;
-            //}
+        //    //    nextAppointment.Save();
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    Log.Error(ex);
+        //    //    return false;
+        //    //}
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        private bool ImportAutoCADData(string json)
-        {
-            //try
-            //{
-            //    DrawingSession drawingSession = JsonConvert.DeserializeObject<DrawingSession>(json);
+        //private bool ImportAutoCADData(string json)
+        //{
+        //    //try
+        //    //{
+        //    //    DrawingSession drawingSession = JsonConvert.DeserializeObject<DrawingSession>(json);
 
-            //    Log.Info(drawingSession.Name);
-            //    Log.Info(drawingSession.ObjectiveName);
+        //    //    Log.Info(drawingSession.Name);
+        //    //    Log.Info(drawingSession.ObjectiveName);
 
-            //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-            //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
+        //    //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
+        //    //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
 
-            //    nextAppointment.Start = drawingSession.Start;
-            //    nextAppointment.End = drawingSession.Finish;
-            //    nextAppointment.Subject = drawingSession.Name;
-            //    nextAppointment.Body = json;
-            //    nextAppointment.AllDayEvent = false;
-            //    nextAppointment.ReminderSet = false;
+        //    //    nextAppointment.Start = drawingSession.Start;
+        //    //    nextAppointment.End = drawingSession.Finish;
+        //    //    nextAppointment.Subject = drawingSession.Name;
+        //    //    nextAppointment.Body = json;
+        //    //    nextAppointment.AllDayEvent = false;
+        //    //    nextAppointment.ReminderSet = false;
 
-            //    if (drawingSession.StartSize == drawingSession.FinishSize)
-            //    {
-            //        nextAppointment.Categories = "AutoCAD - Read Only";
-            //    }
-            //    else
-            //    {
-            //        nextAppointment.Categories = "AutoCAD";
-            //    }
+        //    //    if (drawingSession.StartSize == drawingSession.FinishSize)
+        //    //    {
+        //    //        nextAppointment.Categories = "AutoCAD - Read Only";
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        nextAppointment.Categories = "AutoCAD";
+        //    //    }
 
-            //    nextAppointment.Save();
-            //}
-            //catch (Exception ex)
-            //{
-            //    Log.Error(ex);
-            //    return false;
-            //}
+        //    //    nextAppointment.Save();
+        //    //}
+        //    //catch (Exception ex)
+        //    //{
+        //    //    Log.Error(ex);
+        //    //    return false;
+        //    //}
 
-            return true;
-        }
+        //    return true;
+        //}
     }
 }

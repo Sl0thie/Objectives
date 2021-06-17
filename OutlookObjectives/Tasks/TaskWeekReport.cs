@@ -16,16 +16,16 @@
     /// </summary>
     public class TaskWeekReport
     {
-        private Action CallBack;
+        private readonly Action CallBack;
         private readonly WeekReport weekReport = new WeekReport();
         private readonly DateTime firstDay = new DateTime(2021, 5, 25);
         private DateTime day;
 
         // Get references to the Outlook Calendars. 
-        Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-        Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
+        readonly Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
+        //readonly Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
 
-        private DayReport[] dayReports = new DayReport[7];
+        private readonly DayReport[] dayReports = new DayReport[7];
 
         public TaskWeekReport(Action callBack)
         {
@@ -34,10 +34,12 @@
 
         public void RunTask()
         {
-            Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess));
-            BackgroundThread.Name = "Objectives.TaskWeekReport";
-            BackgroundThread.IsBackground = true;
-            BackgroundThread.Priority = ThreadPriority.Normal;
+            Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess))
+            {
+                Name = "Objectives.TaskWeekReport",
+                IsBackground = true,
+                Priority = ThreadPriority.Normal
+            };
             BackgroundThread.SetApartmentState(ApartmentState.STA);
             BackgroundThread.Start();
         }
@@ -146,9 +148,9 @@
             for (int i = 0; i < 7; i++)
             {
                 // Loop though the work items.
-                foreach (var next in dayReports[i].WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkTypeIndex))
+                foreach (var next in dayReports[i].WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
                 {
-                    weekReport.WorkItems.Add(dayReports[i].Day.ToString("yyyy-MM-dd") + next.Value.ObjectiveName + next.Value.Name + next.Value.WorkTypeIndex, next.Value); ;
+                    weekReport.WorkItems.Add(dayReports[i].Day.ToString("yyyy-MM-dd") + next.Value.ObjectiveName + next.Value.Name + next.Value.WorkType.Index, next.Value); ;
                 }
             }
         }
@@ -171,7 +173,7 @@
             rv += "<h2>Objectives Totals</h2>" + "\n";
             rv += "<table width=\"100%\">" + "\n";
 
-            foreach (var next in weekReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkTypeIndex))
+            foreach (var next in weekReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
             {
                 rv += "<tr>" + "\n";
                 rv += "<td style=\"max-height:18px;\">" + next.Value.ObjectiveName + "</td>\n";
@@ -211,30 +213,30 @@
         /// <param name="startTime"></param>
         /// <param name="endTime"></param>
         /// <returns></returns>
-        private Outlook.Items GetAppointmentsWithinRange(Outlook.Folder folder, DateTime startTime, DateTime endTime)
-        {
-            string filter = "[Start] >= '"
-                + startTime.ToString("g")
-                + "' AND [End] <= '"
-                + endTime.ToString("g") + "'";
+        //private Outlook.Items GetAppointmentsWithinRange(Outlook.Folder folder, DateTime startTime, DateTime endTime)
+        //{
+        //    string filter = "[Start] >= '"
+        //        + startTime.ToString("g")
+        //        + "' AND [End] <= '"
+        //        + endTime.ToString("g") + "'";
 
-            try
-            {
-                Outlook.Items calItems = folder.Items;
-                calItems.IncludeRecurrences = true;
-                calItems.Sort("[Start]", Type.Missing);
-                Outlook.Items restrictItems = calItems.Restrict(filter);
-                if (restrictItems.Count > 0)
-                {
-                    return restrictItems;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch { return null; }
-        }
+        //    try
+        //    {
+        //        Outlook.Items calItems = folder.Items;
+        //        calItems.IncludeRecurrences = true;
+        //        calItems.Sort("[Start]", Type.Missing);
+        //        Outlook.Items restrictItems = calItems.Restrict(filter);
+        //        if (restrictItems.Count > 0)
+        //        {
+        //            return restrictItems;
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //    catch { return null; }
+        //}
 
         /// <summary>
         /// Get the appointments that fall in the range of the timespan.

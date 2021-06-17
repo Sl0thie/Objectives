@@ -39,8 +39,10 @@
             //InTouch.TaskManager.EnqueueConvertVersionTask();
 
             // Setup the main timer.
-            System.Timers.Timer mainTimer = new System.Timers.Timer(50000);
-            mainTimer.AutoReset = true;
+            System.Timers.Timer mainTimer = new System.Timers.Timer(50000)
+            {
+                AutoReset = true
+            };
             mainTimer.Elapsed += OnMainTimerEvent;
             mainTimer.Enabled = true;
 
