@@ -14,6 +14,8 @@
     /// </summary>
     public partial class ThisAddIn
     {
+        // TODO Handle workbooks being renamed.
+
         // Dictionary to hold the document data collected.
         private Dictionary<string, WorkItem> WorkItems = new Dictionary<string, WorkItem>();
 
@@ -61,27 +63,43 @@
             }
         }
 
-        private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
-        {
-        }
-
+        /// <summary>
+        /// Event handler for when the workbook is deactivated.</br>
+        /// Not currently implemented.
+        /// </summary>
+        /// <param name="workbook"></param>
         private void Application_WorkbookDeactivate(Excel.Workbook workbook)
         {
-            Log.Info("Application_WorkbookDeactivate() " + workbook.FullName);
+            Log.Info(workbook.FullName);
         }
 
+        /// <summary>
+        /// Event handler for when the workbook is activated.</br>
+        /// Not currently implemented.
+        /// </summary>
+        /// <param name="workbook"></param>
         private void Application_WorkbookActivate(Excel.Workbook workbook)
         {
-            Log.Info("Application_WorkbookActivate() " + workbook.FullName);
+            Log.Info(workbook.FullName);
         }
 
+        /// <summary>
+        /// Event handler for when the workbook is closed.</br>
+        /// </summary>
+        /// <param name="workbook"></param>
         private void Application_WorkbookBeforeClose(Excel.Workbook workbook, ref bool Cancel)
         {
+            Log.Info(workbook.FullName);
             RemoveWorkbook(workbook);
         }
 
+        /// <summary>
+        /// Event handler for when the workbook is opened.</br>
+        /// </summary>
+        /// <param name="workbook"></param>
         private void Application_WorkbookOpen(Excel.Workbook workbook)
         {
+            Log.Info(workbook.FullName);
             AddWorkbook(workbook);
         }
 
@@ -96,6 +114,10 @@
             }
         }
 
+        /// <summary>
+        /// Adds a workbook to the dictionary.
+        /// </summary>
+        /// <param name="workbook"></param>
         private void AddWorkbook(Excel.Workbook workbook)
         {
             Log.Info("AddWorkbook " + workbook.FullName);
@@ -153,6 +175,10 @@
             }
         }
 
+        /// <summary>
+        /// Removes a workbook from the dictionary.
+        /// </summary>
+        /// <param name="workbook"></param>
         private void RemoveWorkbook(Excel.Workbook workbook)
         {
             Log.Info("RemoveWorkbook " + workbook.FullName);
@@ -169,6 +195,10 @@
             }
         }
 
+        /// <summary>
+        /// Save the data to the storage folder.
+        /// </summary>
+        /// <param name="workItem"></param>
         private void SaveData(WorkItem workItem)
         {
             workItem.Finish = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
@@ -214,6 +244,10 @@
         {
             this.Startup += new System.EventHandler(ThisAddIn_Startup);
             this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
+        }
+
+        private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
+        {
         }
 
         #endregion

@@ -4,10 +4,6 @@
 
     public class Minute
     {
-        //private readonly Collection<Tuple<int, string, string, string>> projects = new Collection<Tuple<int, string, string, string>>();
-
-        //private readonly Collection<WorkItem> workItems = new Collection<WorkItem>();
-
         /// <summary>
         /// Index is the minute of the day. (hour * 60 + minute)
         /// </summary>
@@ -43,12 +39,6 @@
 
         public WorkItem PrimaryWorkItem { get; set; }
 
-
-        //public Collection<WorkItem> WorkItems
-        //{
-        //    get { return workItems; }
-        //}
-
         /// <summary>
         /// The Objective name that has been deemed the primary.</br>
         /// If two or more are active at the same time, one must be chosen for billing.
@@ -80,20 +70,6 @@
         /// </summary>
         [Obsolete]
         public int PrimaryWorkTypeIndex { get; set; }
-
-        /// <summary>
-        /// A collection of information to help in deciding the primary items.</br>
-        /// This is not of fixed design yet. Still in process.
-        /// Item1: WorkType.
-        /// Item2: Path.
-        /// Item3: Objective Name.
-        /// Item4: Name.
-        /// Item5: IsWork.
-        /// </summary>
-        //public Collection<Tuple<int, string, string, string>> Projects
-        //{
-        //    get { return projects; }
-        //}
 
         /// <summary>
         /// Empty constructor for serialization.
