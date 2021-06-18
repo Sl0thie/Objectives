@@ -14,7 +14,7 @@ using EnvDTE;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace VisualStudioObectives
+namespace VisualStudioObjectives
 {
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [Guid(VisualStudioObectivesPackage.PackageGuidString)]
