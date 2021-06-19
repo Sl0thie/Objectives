@@ -14,14 +14,16 @@ namespace AutoCADObjectives
 {
     /// <summary>
     /// AutoCAD extension to track time spent on drawings.
-    /// NOTE: Output project directly to AutoCAD's Support directory.
-    /// 
-    /// Example, "C:\Program Files\Autodesk\AutoCAD 2018\Support\"
-    /// 
-    /// This directory is considered secure by AutoCAD so there is no need to add the normal project output directory to AutoCAD's security.
-    /// Use the command "NETLOAD" to load the DLL into AutoCAD.
-    /// Or copy the file acad.lsp to the support directory to load the DLL automatically on startup.
     /// </summary>
+    /// <remarks>
+    /// Output project directly to AutoCAD's Support directory.
+    /// <example>
+    /// C:\Program Files\Autodesk\AutoCAD 2018\Support
+    /// </example>
+    /// This directory is considered secure by AutoCAD so there is no need to add the normal project output directory to AutoCAD's security.
+    /// Use the command <c>NETLOAD</c> to load the DLL into AutoCAD manually.
+    /// Or copy the file acad.lsp to the support directory to load the DLL automatically on startup.
+    /// </remarks>
     public class ExtApp : IExtensionApplication
     {
         // TODO Check that the file path is saving the correct path.
@@ -40,8 +42,10 @@ namespace AutoCADObjectives
 
         /// <summary>
         /// Terminate method.
-        /// Not 100% sure this is called by AutoCAD yet.
         /// </summary>
+        /// <remarks>
+        /// Not 100% sure this is called by AutoCAD yet.
+        /// </remarks>
         public void Terminate()
         {
 
@@ -81,8 +85,8 @@ namespace AutoCADObjectives
         /// <summary>
         /// Event for the main timer tick.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">parameter is unused.</param>
+        /// <param name="e">parameter is unused.</param>
         private void TimerUpdate_Elapsed(object sender, ElapsedEventArgs e)
         {
             if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
@@ -98,8 +102,8 @@ namespace AutoCADObjectives
         /// <summary>
         /// Event for when documents are created.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">parameter is unused.</param>
+        /// <param name="e">parameter is unused.</param>
         private void Callback_DocumentCreated(Object sender, DocumentCollectionEventArgs e)
         {
             if(e.Document is object)
@@ -167,8 +171,8 @@ namespace AutoCADObjectives
         /// WARNING: When AutoCAD starts this event is fired for "Drawing1.dwg" as the very first event.
         /// even though there is not drawing of that name. There is also no previous create event either.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">parameter is unused.</param>
+        /// <param name="e">parameter is unused.</param>
         private void Callback_DocumentToBeDestroyed(Object sender, DocumentCollectionEventArgs e)
         {
             if (e.Document is object)
@@ -211,8 +215,8 @@ namespace AutoCADObjectives
         /// Event for activated documents.
         /// WARNING: When AutoCAD starts this event fires but the document is null.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">parameter is unused.</param>
+        /// <param name="e">parameter is unused.</param>
         private void Callback_DocumentActivated(Object sender, DocumentCollectionEventArgs e)
         {
             if (e.Document is object)
@@ -256,8 +260,8 @@ namespace AutoCADObjectives
         /// Event for when a document is activated.
         /// Currently not used as this level of detail is not implemented yet.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">parameter is unused.</param>
+        /// <param name="e">parameter is unused.</param>
         private void Callback_DocumentToBeActivated(Object sender, DocumentCollectionEventArgs e)
         {
 
@@ -267,8 +271,8 @@ namespace AutoCADObjectives
         /// Event for when a document is deactivated.
         /// As with Callback_DocumentToBeActivated this is not implemented yet.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">parameter is unused.</param>
+        /// <param name="e">parameter is unused.</param>
         private void Callback_DocumentToBeDeactivated(Object sender, DocumentCollectionEventArgs e)
         {
             if (e.Document is object)
@@ -308,7 +312,7 @@ namespace AutoCADObjectives
         /// <summary>
         /// Saves the Data to the storage folder.
         /// </summary>
-        /// <param name="drawing"></param>
+        /// <param name="drawing">parameter is unused.</param>
         private void SaveData(WorkItem drawing)
         {
             if(drawing is object)

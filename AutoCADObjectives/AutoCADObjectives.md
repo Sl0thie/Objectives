@@ -25,12 +25,15 @@ AutoCADObjectives
 ##### Summary
 
 AutoCAD extension to track time spent on drawings.
-NOTE: Output project directly to AutoCAD's Support directory.
 
-Example, "C:\Program Files\Autodesk\AutoCAD 2018\Support\"
+##### Remarks
+
+Output project directly to AutoCAD's Support directory.
+
+C:\Program Files\Autodesk\AutoCAD 2018\Support
 
 This directory is considered secure by AutoCAD so there is no need to add the normal project output directory to AutoCAD's security.
-Use the command "NETLOAD" to load the DLL into AutoCAD.
+Use the command `NETLOAD` to load the DLL into AutoCAD manually.
 Or copy the file acad.lsp to the support directory to load the DLL automatically on startup.
 
 <a name='M-AutoCADObjectives-ExtApp-#ctor'></a>
@@ -56,8 +59,8 @@ WARNING: When AutoCAD starts this event fires but the document is null.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | parameter is unused. |
+| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') | parameter is unused. |
 
 <a name='M-AutoCADObjectives-ExtApp-Callback_DocumentCreated-System-Object,Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs-'></a>
 ### Callback_DocumentCreated(sender,e) `method`
@@ -70,8 +73,8 @@ Event for when documents are created.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | parameter is unused. |
+| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') | parameter is unused. |
 
 <a name='M-AutoCADObjectives-ExtApp-Callback_DocumentToBeActivated-System-Object,Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs-'></a>
 ### Callback_DocumentToBeActivated(sender,e) `method`
@@ -85,8 +88,8 @@ Currently not used as this level of detail is not implemented yet.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | parameter is unused. |
+| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') | parameter is unused. |
 
 <a name='M-AutoCADObjectives-ExtApp-Callback_DocumentToBeDeactivated-System-Object,Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs-'></a>
 ### Callback_DocumentToBeDeactivated(sender,e) `method`
@@ -100,8 +103,8 @@ As with Callback_DocumentToBeActivated this is not implemented yet.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | parameter is unused. |
+| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') | parameter is unused. |
 
 <a name='M-AutoCADObjectives-ExtApp-Callback_DocumentToBeDestroyed-System-Object,Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs-'></a>
 ### Callback_DocumentToBeDestroyed(sender,e) `method`
@@ -116,8 +119,8 @@ even though there is not drawing of that name. There is also no previous create 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | parameter is unused. |
+| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') | parameter is unused. |
 
 <a name='M-AutoCADObjectives-ExtApp-Initialize'></a>
 ### Initialize() `method`
@@ -141,7 +144,7 @@ Saves the Data to the storage folder.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| drawing | [CommonObjectives.WorkItem](#T-CommonObjectives-WorkItem 'CommonObjectives.WorkItem') |  |
+| drawing | [CommonObjectives.WorkItem](#T-CommonObjectives-WorkItem 'CommonObjectives.WorkItem') | parameter is unused. |
 
 <a name='M-AutoCADObjectives-ExtApp-Terminate'></a>
 ### Terminate() `method`
@@ -149,11 +152,14 @@ Saves the Data to the storage folder.
 ##### Summary
 
 Terminate method.
-Not 100% sure this is called by AutoCAD yet.
 
 ##### Parameters
 
 This method has no parameters.
+
+##### Remarks
+
+Not 100% sure this is called by AutoCAD yet.
 
 <a name='M-AutoCADObjectives-ExtApp-TimerUpdate_Elapsed-System-Object,System-Timers-ElapsedEventArgs-'></a>
 ### TimerUpdate_Elapsed(sender,e) `method`
@@ -166,5 +172,5 @@ Event for the main timer tick.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [System.Timers.ElapsedEventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Timers.ElapsedEventArgs 'System.Timers.ElapsedEventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | parameter is unused. |
+| e | [System.Timers.ElapsedEventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Timers.ElapsedEventArgs 'System.Timers.ElapsedEventArgs') | parameter is unused. |
