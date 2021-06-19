@@ -16,17 +16,30 @@ using Newtonsoft.Json;
 
 namespace VisualStudioObjectives
 {
+    /// <summary>
+    /// VisualStudioObectivesPackage class.
+    /// </summary>
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [Guid(VisualStudioObectivesPackage.PackageGuidString)]
     [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionOpening_string, PackageAutoLoadFlags.BackgroundLoad)]
     public sealed class VisualStudioObectivesPackage : AsyncPackage
     {
-        public const string PackageGuidString = "b0a6e816-4dcc-40fa-8189-b772f5265fda";
         private DTE dte;
         private string RootFolder;
         private string StorageFolder;
         private WorkItem workItem;
 
+        /// <summary>
+        /// GUID for the Package.
+        /// </summary>
+        public const string PackageGuidString = "b0a6e816-4dcc-40fa-8189-b772f5265fda";
+
+        /// <summary>
+        /// Initializes the VisualStudioObectivesPackage.
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <param name="progress"></param>
+        /// <returns></returns>
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
@@ -56,6 +69,11 @@ namespace VisualStudioObjectives
             Microsoft.VisualStudio.Shell.Events.SolutionEvents.OnBeforeCloseSolution += SolutionEvents_OnBeforeCloseSolution;         
         }
 
+        /// <summary>
+        /// Handles the MainTimer event.
+        /// </summary>
+        /// <param name="sender">This parameter is unused.</param>
+        /// <param name="e">This parameter is unused.</param>
         private async void MainTimer_ElapsedAsync(object sender, System.Timers.ElapsedEventArgs e)
         {
             //ThreadHelper.ThrowIfNotOnUIThread();
@@ -67,6 +85,14 @@ namespace VisualStudioObjectives
             {
                 if (workItem is object)
                 {
+                    if (dte.Solution is object)
+                    {
+                        if (!dte.Solution.Saved)
+                        {
+                            workItem.IsActive = true;
+                        }
+                    }
+
                     if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
                     {
                         GetCurrentValues();
@@ -92,6 +118,9 @@ namespace VisualStudioObjectives
             }
         }
 
+        /// <summary>
+        /// Gets the settings from the Registry.
+        /// </summary>
         private void GetRegistrySettings()
         {
             try
@@ -105,6 +134,11 @@ namespace VisualStudioObjectives
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender">This parameter is unused.</param>
+        /// <param name="e">This parameter is unused.</param>
         private void SolutionEvents_OnAfterBackgroundSolutionLoadComplete(object sender, EventArgs e)
         {
             try
@@ -118,6 +152,11 @@ namespace VisualStudioObjectives
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender">This parameter is unused.</param>
+        /// <param name="e">This parameter is unused.</param>
         private void SolutionEvents_OnBeforeCloseSolution(object sender, EventArgs e)
         {
             try
@@ -131,6 +170,10 @@ namespace VisualStudioObjectives
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>True if the solution is loaded.</returns>
         private async Task<bool> IsSolutionLoadedAsync()
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync();
@@ -139,6 +182,9 @@ namespace VisualStudioObjectives
             return value is bool isSolOpen && isSolOpen;
         }
 
+        /// <summary>
+        /// Gets the starting values for the WorkItem.
+        /// </summary>
         private void GetStartValues()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
@@ -206,6 +252,9 @@ namespace VisualStudioObjectives
             }
         }
 
+        /// <summary>
+        /// Gets the current values for the WorkItem.
+        /// </summary>
         private void GetCurrentValues()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
@@ -279,6 +328,9 @@ namespace VisualStudioObjectives
             }
         }
 
+        /// <summary>
+        /// Gets the HEAD items from the git logs if available.
+        /// </summary>
         private void GetHEADItems()
         {
             try
@@ -305,6 +357,9 @@ namespace VisualStudioObjectives
             }
         }
 
+        /// <summary>
+        /// Saves the data to file.
+        /// </summary>
         private void SaveData()
         {
             try
@@ -313,7 +368,7 @@ namespace VisualStudioObjectives
                 {
                     GetHEADItems();
 
-                    if (workItem.StartSize != workItem.FinishSize)
+                    if ((workItem.IsActive) ||(workItem.StartSize != workItem.FinishSize))
                     {
                         workItem.Application = ApplicationType.VisualStudioWrite;
                     }

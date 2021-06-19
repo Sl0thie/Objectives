@@ -98,6 +98,10 @@
         /// </summary>
         public long FinishSize { get; set; }
 
+        /// <summary>
+        /// True if the work item was active.
+        /// </summary>
+        public bool IsActive { get; set; }
 
         /// <summary>
         /// An empty constructor for serialization.
