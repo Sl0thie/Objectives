@@ -1,16 +1,14 @@
 # Objectives
 
-This solution is a collection of projects that are used to manage Objectives.  
+This solution is a collection of projects that are used to manage Objectives.
 ![Outlook Calendar View](./OutlookObjectives/Docs/ObjectivesCalendar.png "Outlook Calendar view")
 
 ## Projects
-
-
-### [AutoCAD Objectives](./AutoCADObjectives/Docs/README.md)  
+#### [AutoCAD Objectives](./AutoCADObjectives/Docs/README.md)  
 Is an extension for Autodesk's AutoCAD.  
 [Object Model](./AutoCADObjectives/Docs/ObjectModel.md)
 
-### [Common Objectives](./CommonObjectives/Docs/README.md)  
+#### [Common Objectives](./CommonObjectives/Docs/README.md)  
 Is a shared library of classes between all projects. 
 [Object Model](./CommonObjectives/Docs/ObjectModel.md)
 
