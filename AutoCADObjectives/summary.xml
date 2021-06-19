@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<docs>
+	<Project>AutoCADObjectives</Project>
+	<summary>AutoCADObjectives is an extension for AutoCAD.
+	This extension tracks the time spent on drawing items within Objectives.
+	</summary>
+</docs>

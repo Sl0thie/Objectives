@@ -58,7 +58,7 @@
         /// Event handler to manage when documents are closed.
         /// Occurs immediately before any open document closes.
         /// </summary>
-        /// <seealso cref="https://docs.microsoft.com/en-us/office/vba/api/word.application.documentbeforeclose"/>
+        /// <seealso href="Https://docs.microsoft.com/en-us/office/vba/api/word.application.documentbeforeclose">Application.DocumentBeforeClose event (Word)</seealso>
         /// <param name="Doc">The document that is closing.</param>
         /// <param name="Cancel">Bool value to cancel the closing of the document.</param>
         private void Application_DocumentBeforeClose(Word.Document Doc, ref bool Cancel)
@@ -70,7 +70,7 @@
         /// Event handler for when documents change.
         /// Occurs when a new document is created, when an existing document is opened, or when another document is made the active document.
         /// </summary>
-        /// <seealso cref="https://docs.microsoft.com/en-us/office/vba/api/word.application.documentchange"/>
+        /// <seealso href="https://docs.microsoft.com/en-us/office/vba/api/word.application.documentchange">Application.DocumentChange event (Word)</seealso>
         private void Application_DocumentChange()
         {
             // Event does not fire when existing file is saved as a new file.
@@ -79,7 +79,7 @@
 
         /// <summary>
         /// Event handler for when a document is opened.
-        /// <seealso cref="https://docs.microsoft.com/en-us/office/vba/api/word.application.documentopen"/>
+        /// <seealso href="https://docs.microsoft.com/en-us/office/vba/api/word.application.documentopen">Application.DocumentOpen event (Word)</seealso>
         /// </summary>
         /// <param name="Doc">The document that was opened.</param>
         private void Application_DocumentOpen(Word.Document Doc)
@@ -89,9 +89,11 @@
 
         /// <summary>
         /// Check to see if documents are in the dictionary.
+        /// </summary>
+        /// <remarks>
         /// First add all documents to the dictionary.
         /// Then remove all key-pairs that are not in the document collection.
-        /// </summary>
+        /// </remarks>
         private void CheckDocuments()
         {
             try
@@ -144,7 +146,7 @@
         /// <summary>
         /// The main timer event.
         /// </summary>
-        /// <param name="stateInfo"></param>
+        /// <param name="stateInfo">parameter is unused.</param>
         private void RefreshTimer_Tick(Object stateInfo)
         {
             // Documents renamed do not seem to have an event. Check every minute.

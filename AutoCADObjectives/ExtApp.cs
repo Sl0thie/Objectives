@@ -12,6 +12,8 @@ using LogNET;
 [assembly: CommandClass(null)]
 namespace AutoCADObjectives
 {
+    /// <include file='summary.xml' path="Docs/*"/>
+
     /// <summary>
     /// AutoCAD extension to track time spent on drawings.
     /// </summary>
@@ -24,6 +26,7 @@ namespace AutoCADObjectives
     /// Use the command <c>NETLOAD</c> to load the DLL into AutoCAD manually.
     /// Or copy the file acad.lsp to the support directory to load the DLL automatically on startup.
     /// </remarks>
+    /// 
     public class ExtApp : IExtensionApplication
     {
         // TODO Check that the file path is saving the correct path.

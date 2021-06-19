@@ -114,6 +114,7 @@
     <Content Include="Includes\AcCoreMgd.dll" />
     <Content Include="Includes\AcDbMgd.dll" />
     <Content Include="Includes\AcMgd.dll" />
+    <Content Include="summary.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

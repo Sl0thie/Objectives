@@ -5,6 +5,7 @@
     </assembly>
     <members>
         <member name="T:AutoCADObjectives.ExtApp">
+            <!-- No matching elements were found for the following include tag --><include file="summary.xml" path="Docs/*" />
             <summary>
             AutoCAD extension to track time spent on drawings.
             </summary>
@@ -17,6 +18,7 @@
             Use the command <c>NETLOAD</c> to load the DLL into AutoCAD manually.
             Or copy the file acad.lsp to the support directory to load the DLL automatically on startup.
             </remarks>
+            
         </member>
         <member name="M:AutoCADObjectives.ExtApp.#ctor">
             <summary>
