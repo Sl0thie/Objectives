@@ -1,5 +1,5 @@
 # Objectives  
-This solution is a collection of projects that are used to track time and costs spend working on a range of project types.  
+This solution is a collection of projects that are used to track time and costs spend working on a range of project types.
 ![Outlook Calendar View](./OutlookObjectives/Docs/ObjectivesCalendar.png "Outlook Calendar view")
 
 ## Projects
@@ -17,7 +17,7 @@ A Microsoft Excel VSTO AddIn that tracks time spent creating or reviewing Excel 
 
 ### Outlook Objectives  
 ###### [Overview](./OutlookObjectives/Docs/README.md) \- [Object Model](./OutlookObjectives/Docs/ObjectModel.md)  
-A Microsoft Outlook VSTO AddIn that is used to collect and track the time spent working. It creates several reports such as a daily, weekly and monthly report that summarise the time spent on each different Objective.  
+A Microsoft Outlook VSTO AddIn that is used to collect and track the time spent working. It creates several reports such as a daily, weekly and monthly report that summarise the time spent on each different Objective.  This is a work in progress, currently the ability to invoice the Objectives work is being implimented.  
 
 ### Project Objectives  
 ###### [Overview](./ProjectObjectives/Docs/README.md) \- [Object Model](./ProjectObjectives/Docs/ObjectModel.md)  
