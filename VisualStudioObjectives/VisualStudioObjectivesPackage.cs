@@ -91,12 +91,28 @@ namespace VisualStudioObjectives
                         {
                             workItem.IsActive = true;
                         }
+
+                        foreach (Project pjt in dte.Solution.Projects)
+                        {
+                            if (!pjt.Saved)
+                            {
+                                workItem.IsActive = true;
+                            }
+
+                            foreach (ProjectItem itm in pjt.ProjectItems)
+                            {
+                                if (!itm.Saved)
+                                {
+                                    workItem.IsActive = true;
+                                }
+                            }
+                        }
                     }
 
                     if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
                     {
                         GetCurrentValues();
-                        SaveData();
+                        SaveDataAsync();
                         GetStartValues();
                         GetCurrentValues();
                     }
@@ -162,7 +178,7 @@ namespace VisualStudioObjectives
             try
             {
                 GetCurrentValues();
-                SaveData();
+                SaveDataAsync();
             }
             catch (Exception ex)
             {
@@ -360,8 +376,10 @@ namespace VisualStudioObjectives
         /// <summary>
         /// Saves the WorkItem data to file.
         /// </summary>
-        private void SaveData()
+        private async Task SaveDataAsync()
         {
+            await JoinableTaskFactory.SwitchToMainThreadAsync();
+
             try
             {
                 if (workItem.Start != workItem.Finish)
@@ -371,6 +389,32 @@ namespace VisualStudioObjectives
                     if ((workItem.IsActive) ||(workItem.StartSize != workItem.FinishSize))
                     {
                         workItem.Application = ApplicationType.VisualStudioWrite;
+
+                        if (File.Exists(workItem.FilePath))
+                        {
+                            dte.Solution.SaveAs(workItem.FilePath);
+                        }
+
+                        if (!dte.Solution.Saved)
+                        {
+                            workItem.IsActive = true;
+                        }
+
+                        foreach (Project pjt in dte.Solution.Projects)
+                        {
+                            if (!pjt.Saved)
+                            {
+                                pjt.Save();
+                            }
+
+                            foreach (ProjectItem itm in pjt.ProjectItems)
+                            {
+                                if (!itm.Saved)
+                                {
+                                    itm.Save();
+                                }
+                            }
+                        }
                     }
                     else
                     {
@@ -380,6 +424,7 @@ namespace VisualStudioObjectives
                     string json = JsonConvert.SerializeObject(workItem, Formatting.Indented);
                     File.WriteAllText(StorageFolder + @"\" + (int)workItem.Application + "-" + workItem.Id.ToString() + ".json", json);
                     workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
+                    workItem.IsActive = false;
                     workItem.StartSize = workItem.FinishSize;
                 }
             }
