@@ -2,15 +2,13 @@
 
 This solution is a collection of projects that are used to manage Objectives.
 
-## Contents
+## Projects
 
-#### AutoCAD Objectives
-- [Read Me](./AutoCADObjectives/Docs/README.md)
-- [Object Model](./AutoCADObjectives/Docs/ObjectModel.md)
 
-#### Common Objectives
-- [Read Me](./CommonObjectives/Docs/README.md)
-- [Object Model](./CommonObjectives/Docs/ObjectModel.md)
+[#### AutoCAD Objectives](./AutoCADObjectives/Docs/README.md) \- [Object Model](./AutoCADObjectives/Docs/ObjectModel.md)
+Is an extension for Autodesk's AutoCAD.
+
+[#### Common Objectives](./CommonObjectives/Docs/README.md) \- [Object Model](./CommonObjectives/Docs/ObjectModel.md)
 
 #### Excel Objectives
 - [Read Me](./ExcelObjectives/Docs/README.md)
