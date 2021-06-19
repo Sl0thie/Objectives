@@ -1,5 +1,5 @@
 # Objectives  
-This solution is a collection of projects that are used to track time and costs spend working on a range of project types.
+This solution is a collection of projects that are used to track time and costs spend working on a range of project types. It is a work in progress and currently the ability to invoice the time tracked is being impimented. Microsoft Outlook is used as a central collection so a web server is not required and there are no uptime requirements.
   
 ![Outlook Calendar View](./OutlookObjectives/Docs/ObjectivesCalendar.png "Outlook Calendar view")
 
