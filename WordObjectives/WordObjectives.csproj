@@ -218,6 +218,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="Docs\ObjectModel.md" />
+    <None Include="Docs\README.md" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

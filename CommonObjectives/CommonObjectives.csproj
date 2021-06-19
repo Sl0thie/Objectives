@@ -113,6 +113,7 @@
   <ItemGroup>
     <None Include="CommonObjectivesKey.snk" />
     <None Include="Docs\ObjectModel.md" />
+    <None Include="Docs\README.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

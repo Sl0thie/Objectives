@@ -311,6 +311,7 @@
       <DependentUpon>RibExplorer.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Docs\ObjectModel.md" />
+    <None Include="Docs\README.md" />
     <None Include="OutlookObjectives.md" />
     <None Include="OutlookObjectives_TemporaryKey.pfx" />
     <None Include="packages.config" />
