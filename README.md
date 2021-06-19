@@ -25,7 +25,7 @@ Is a shared library of classes between all projects.
 
 
 ### [Word Objectives](./WordObjectives/Docs/README.md)  
-####### [Object Model](./WordObjectives/Docs/ObjectModel.md) ####### [Overview](./WordObjectives/Docs/README.md) 
+###### [Object Model](./WordObjectives/Docs/ObjectModel.md) ###### [Overview](./WordObjectives/Docs/README.md) 
 A Microsoft Word VSTO AddIn.
   
  
