@@ -6,7 +6,7 @@ This solution is a collection of projects that are used to track time and costs 
 # Projects
 ### AutoCAD Objectives  
 ###### [Overview](./AutoCADObjectives/Docs/README.md) \- [Object Model](./AutoCADObjectives/Docs/ObjectModel.md)  
-Is an extension for Autodesk's AutoCAD that tracks the time spent creating or viewing AutoCAD drawing files. This is a work in progress, has not been tested on drawing sets yet.  
+Is an extension for Autodesk's AutoCAD that tracks the time spent creating or viewing AutoCAD drawing files. This is a work in progress, it has not been tested on drawing sets yet.  
 
 ### Common Objectives  
 ###### [Overview](./CommonObjectives/Docs/README.md) \- [Object Model](./CommonObjectives/Docs/ObjectModel.md)  
@@ -18,7 +18,7 @@ A Microsoft Excel VSTO AddIn that tracks time spent creating or reviewing Excel 
 
 ### Outlook Objectives  
 ###### [Overview](./OutlookObjectives/Docs/README.md) \- [Object Model](./OutlookObjectives/Docs/ObjectModel.md)  
-A Microsoft Outlook VSTO AddIn that is used to collect and track the time spent working. It creates several reports such as a daily, weekly and monthly report that summarize the time spent on each different Objective.  This is a work in progress, currently the ability to invoice the Objectives work is being implimented.  
+A Microsoft Outlook VSTO AddIn that is used to collect and track the time spent working. It creates several reports such as a daily, weekly and monthly report that summarize the time spent on each different Objective.  This is a work in progress, currently the ability to invoice the Objectives work is being implemented.  
 
 ### Project Objectives  
 ###### [Overview](./ProjectObjectives/Docs/README.md) \- [Object Model](./ProjectObjectives/Docs/ObjectModel.md)  
