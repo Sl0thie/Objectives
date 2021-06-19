@@ -36,7 +36,7 @@ namespace AutoCADObjectives
         private readonly Timer timerUpdate = new Timer(50000);
 
         /// <summary>
-        /// Constructor.
+        /// Initializes a new instance of the <see cref="ExtApp"/> class.
         /// </summary>
         public ExtApp()
         {

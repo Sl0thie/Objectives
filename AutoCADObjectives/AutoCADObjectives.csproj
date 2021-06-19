@@ -26,7 +26,9 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
-    <DocumentationFile>AutoCADObjectives.xml</DocumentationFile>
+    <DocumentationFile>ObjectModel.xml</DocumentationFile>
+    <DocumentationMarkdown>$(MSBuildProjectDirectory)\Docs\ObjectModel.md</DocumentationMarkdown>
+    <VsxmdAutoDeleteXml>True</VsxmdAutoDeleteXml>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,7 +37,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>AutoCADObjectives.xml</DocumentationFile>
+    <DocumentationFile>ObjectModel.xml</DocumentationFile>
+    <DocumentationMarkdown>$(MSBuildProjectDirectory)\Docs\ObjectModel.md</DocumentationMarkdown>
+    <VsxmdAutoDeleteXml>True</VsxmdAutoDeleteXml>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AcCoreMgd">
@@ -102,7 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="acad.lsp" />
-    <None Include="AutoCADObjectives.md" />
+    <None Include="Docs\ObjectModel.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -110,12 +114,11 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.2\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AutoCADObjectives.xml" />
     <Content Include="Includes\AcCoreMgd.dll" />
     <Content Include="Includes\AcDbMgd.dll" />
     <Content Include="Includes\AcMgd.dll" />
-    <Content Include="summary.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -98,7 +98,9 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
-    <DocumentationFile>OutlookObjectives.xml</DocumentationFile>
+    <DocumentationFile>ObjectModel.xml</DocumentationFile>
+    <DocumentationMarkdown>$(MSBuildProjectDirectory)\Docs\ObjectModel.md</DocumentationMarkdown>
+    <VsxmdAutoDeleteXml>True</VsxmdAutoDeleteXml>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
@@ -123,7 +125,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>OutlookObjectives.xml</DocumentationFile>
+    <DocumentationFile>ObjectModel.xml</DocumentationFile>
+    <DocumentationMarkdown>$(MSBuildProjectDirectory)\Docs\ObjectModel.md</DocumentationMarkdown>
+    <VsxmdAutoDeleteXml>True</VsxmdAutoDeleteXml>
   </PropertyGroup>
   <!--
     This section specifies references for the project.
@@ -306,6 +310,7 @@
     <EmbeddedResource Include="Ribbons\RibExplorer.resx">
       <DependentUpon>RibExplorer.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Docs\ObjectModel.md" />
     <None Include="OutlookObjectives.md" />
     <None Include="OutlookObjectives_TemporaryKey.pfx" />
     <None Include="packages.config" />

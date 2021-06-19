@@ -20,12 +20,46 @@
               resource lookups using this strongly typed resource class.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:ExcelObjectives.ThisAddIn" -->
-        <!-- Badly formed XML comment ignored for member "M:ExcelObjectives.ThisAddIn.ThisAddIn_Startup(System.Object,System.EventArgs)" -->
-        <!-- Badly formed XML comment ignored for member "M:ExcelObjectives.ThisAddIn.Application_WorkbookDeactivate(Microsoft.Office.Interop.Excel.Workbook)" -->
-        <!-- Badly formed XML comment ignored for member "M:ExcelObjectives.ThisAddIn.Application_WorkbookActivate(Microsoft.Office.Interop.Excel.Workbook)" -->
-        <!-- Badly formed XML comment ignored for member "M:ExcelObjectives.ThisAddIn.Application_WorkbookBeforeClose(Microsoft.Office.Interop.Excel.Workbook,System.Boolean@)" -->
-        <!-- Badly formed XML comment ignored for member "M:ExcelObjectives.ThisAddIn.Application_WorkbookOpen(Microsoft.Office.Interop.Excel.Workbook)" -->
+        <member name="T:ExcelObjectives.ThisAddIn">
+            <summary>
+            Excel VSTO AddIn to track document times.
+            </summary>
+            
+        </member>
+        <member name="M:ExcelObjectives.ThisAddIn.ThisAddIn_Startup(System.Object,System.EventArgs)">
+            <summary>
+            The startup event for the AddIn.
+            WARNING: This may not start before documents are opened.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ExcelObjectives.ThisAddIn.Application_WorkbookDeactivate(Microsoft.Office.Interop.Excel.Workbook)">
+            <summary>
+            Event handler for when the workbook is deactivated.
+            Not currently implemented.
+            </summary>
+            <param name="workbook"></param>
+        </member>
+        <member name="M:ExcelObjectives.ThisAddIn.Application_WorkbookActivate(Microsoft.Office.Interop.Excel.Workbook)">
+            <summary>
+            Event handler for when the workbook is activated.
+            Not currently implemented.
+            </summary>
+            <param name="workbook"></param>
+        </member>
+        <member name="M:ExcelObjectives.ThisAddIn.Application_WorkbookBeforeClose(Microsoft.Office.Interop.Excel.Workbook,System.Boolean@)">
+            <summary>
+            Event handler for when the workbook is closed.
+            </summary>
+            <param name="workbook"></param>
+        </member>
+        <member name="M:ExcelObjectives.ThisAddIn.Application_WorkbookOpen(Microsoft.Office.Interop.Excel.Workbook)">
+            <summary>
+            Event handler for when the workbook is opened.
+            </summary>
+            <param name="workbook"></param>
+        </member>
         <member name="M:ExcelObjectives.ThisAddIn.AddWorkbook(Microsoft.Office.Interop.Excel.Workbook)">
             <summary>
             Adds a workbook to the dictionary.

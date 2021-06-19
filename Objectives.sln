@@ -40,7 +40,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordObjectives", "WordObjec
 		{810F481E-81B5-4001-B81F-A86445928D5E} = {810F481E-81B5-4001-B81F-A86445928D5E}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualStudioObjectives", "VisualStudioObjectives\VisualStudioObjectives\VisualStudioObjectives.csproj", "{F3E0B2CF-ADC2-4DC0-8865-5E9BBE2F1B51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualStudioObjectives", "VisualStudioObjectives\VisualStudioObjectives.csproj", "{F3E0B2CF-ADC2-4DC0-8865-5E9BBE2F1B51}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{258D5E7C-D236-4C1C-81FD-403D0847E21C}"
 	ProjectSection(SolutionItems) = preProject

@@ -5,7 +5,6 @@
     /// <summary>
     /// ActiveApplication class contains related to the application that was in focus at the time..
     /// </summary>
-    /// <
     public class ActiveApplication
     {
         /// <summary>

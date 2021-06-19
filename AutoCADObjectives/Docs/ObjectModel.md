@@ -41,7 +41,7 @@ Or copy the file acad.lsp to the support directory to load the DLL automatically
 
 ##### Summary
 
-Constructor.
+Initializes a new instance of the [ExtApp](#T-AutoCADObjectives-ExtApp 'AutoCADObjectives.ExtApp') class.
 
 ##### Parameters
 
