@@ -82,7 +82,7 @@
             <summary>
             Method to remove documents from the collection.
             </summary>
-            <param name="doc">The document to remove from the dictionary.</param>
+            <param name="path">The path to the document to remove from the dictionary.</param>
         </member>
         <member name="M:WordObjectives.ThisAddIn.SaveData(CommonObjectives.WorkItem)">
             <summary>

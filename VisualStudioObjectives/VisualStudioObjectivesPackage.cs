@@ -358,7 +358,7 @@ namespace VisualStudioObjectives
         }
 
         /// <summary>
-        /// Saves the data to file.
+        /// Saves the WorkItem data to file.
         /// </summary>
         private void SaveData()
         {

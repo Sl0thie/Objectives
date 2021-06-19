@@ -105,6 +105,21 @@
 
         private void RefreshTimer_Tick(Object stateInfo)
         {
+            foreach (WorkItem workItem in WorkItems.Values)
+            {
+                foreach (Excel.Workbook workbook in Application.Workbooks)
+                {
+                    if (workItem.FilePath == workbook.FullName)
+                    {
+                        if (!workbook.Saved)
+                        {
+                            workItem.IsActive = true;
+                        }
+                        break;
+                    }
+                }
+            }
+
             if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
             {
                 foreach (WorkItem wordSession in WorkItems.Values)
@@ -213,7 +228,7 @@
 
             try
             {
-                if (workItem.Start != workItem.Finish)
+                if ((workItem.IsActive) || (workItem.Start != workItem.Finish))
                 {
                     if (workItem.StartSize != workItem.FinishSize)
                     {

@@ -29,9 +29,6 @@
         TimeSpan refreshIntervalTime;
         Timer refreshTimer;
 
-        //long StartSize = 0;
-        //long FinishSize = 0;
-
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
@@ -108,6 +105,13 @@
                             Log.Info("Adding " + next.FullName);
                             AddDocument(next);
                         }
+                        else
+                        {
+                            if (!next.Saved)
+                            {
+                                Documents[next.FullName].IsActive = true;
+                            }
+                        }
                     }
                 }
             }
@@ -154,17 +158,17 @@
 
             if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
             {
-                if (Application.Documents.Count > 0)
-                {
-                    // Check if documents are in dictionary. Add if not. 
-                    foreach (Word.Document next in Application.Documents)
-                    {
-                        if (File.Exists(next.FullName))
-                        {
-                            next.Save();
-                        }
-                    }
-                }
+                //if (Application.Documents.Count > 0)
+                //{
+                //    // Check if documents are in dictionary. Add if not. 
+                //    foreach (Word.Document next in Application.Documents)
+                //    {
+                //        if (File.Exists(next.FullName))
+                //        {
+                //            next.Save();
+                //        }
+                //    }
+                //}
 
                 foreach (WorkItem wordSession in Documents.Values)
                 {
@@ -194,8 +198,6 @@
                     FilePath = doc.FullName,
                     Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"))
                 };
-                //FileInfo fileInfo = new FileInfo(doc.FullName);
-                //workItem.StartSize = fileInfo.Length;
 
                 if (workItem.FilePath.LastIndexOf("\\") > 0)
                 {
@@ -232,14 +234,13 @@
         /// Method to remove documents from the collection.
         /// </summary>
         /// <param name="doc">The document to remove from the dictionary.</param>
+        [Obsolete]
         private void RemoveDocumentOld(Word.Document doc)
         {
             Log.Info(doc.FullName);
 
             if (Documents.ContainsKey(doc.FullName))
             {
-
-
                 SaveData(Documents[doc.FullName]);
                 Documents.Remove(doc.FullName);
                 Log.Info("Removed document " + doc.FullName);
@@ -253,7 +254,7 @@
         /// <summary>
         /// Method to remove documents from the collection.
         /// </summary>
-        /// <param name="doc">The document to remove from the dictionary.</param>
+        /// <param name="path">The path to the document to remove from the dictionary.</param>
         private void RemoveDocument(string path)
         {
             Log.Info(path);
@@ -290,7 +291,7 @@
             {
                 if (workItem.Start != workItem.Finish)
                 {
-                    if (workItem.StartSize != workItem.FinishSize)
+                    if ((workItem.IsActive) || (workItem.StartSize != workItem.FinishSize))
                     {
                         workItem.Application = ApplicationType.WordWrite;
                     }
