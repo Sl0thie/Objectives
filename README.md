@@ -5,11 +5,12 @@ This solution is a collection of projects that are used to manage Objectives.
 
 ## Projects
 ### [AutoCAD Objectives](./AutoCADObjectives/Docs/README.md)  
-[Object Model](./AutoCADObjectives/Docs/ObjectModel.md)  
+- [Object Model](./AutoCADObjectives/Docs/ObjectModel.md)  
 Is an extension for Autodesk's AutoCAD.  
 
 ### [Common Objectives](./CommonObjectives/Docs/README.md)   
-[Object Model](./CommonObjectives/Docs/ObjectModel.md) Is a shared library of classes between all projects. 
+- [Object Model](./CommonObjectives/Docs/ObjectModel.md) 
+Is a shared library of classes between all projects. 
 ### [Excel Objectives](./ExcelObjectives/Docs/README.md)  
 [Object Model](./ExcelObjectives/Docs/ObjectModel.md)
 ### [Outlook Objectives](./OutlookObjectives/Docs/README.md)  
