@@ -8,15 +8,25 @@
     using System.Threading;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
+    /// <summary>
+    /// Processes data files in the storage folder into appointment items.
+    /// </summary>
     public class TaskImportData
     {
         readonly Action CallBack;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TaskImportData"/> class.
+        /// </summary>
+        /// <param name="callBack"></param>
         public TaskImportData(Action callBack)
         {
             CallBack = callBack;
         }
 
+        /// <summary>
+        /// Method to create and start a background thread to perform the task.
+        /// </summary>
         public void RunTask()
         {
             Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess))
@@ -29,6 +39,9 @@
             BackgroundThread.Start();
         }
 
+        /// <summary>
+        /// The process to perform the data import.
+        /// </summary>
         private void BackgroundProcess()
         {
             try
@@ -40,6 +53,9 @@
             CallBack?.Invoke();
         }
 
+        /// <summary>
+        /// This method reads all the files and converts them to JSON.
+        /// </summary>
         private void ReadFiles()
         {
             DirectoryInfo ImportDataDirectory = new DirectoryInfo(InTouch.ObjectivesStorageFolder);
@@ -89,6 +105,11 @@
             }
         }
 
+        /// <summary>
+        /// Converts the WorkItem and stores it in an appointment item.
+        /// </summary>
+        /// <param name="json">JSON Data containing a WorkItem.</param>
+        /// <returns></returns>
         private bool ImportWorkItem(string json)
         {
             try
@@ -149,6 +170,11 @@
             return true;
         }
 
+        /// <summary>
+        /// Converts the Uptime event and stores it in an appointment item.
+        /// </summary>
+        /// <param name="json">JSON Data containing a Uptime event.</param>
+        /// <returns></returns>
         private bool ImportSystemUptime(string json)
         {
             try
@@ -177,6 +203,11 @@
             return true;
         }
 
+        /// <summary>
+        /// Converts the Idle event and stores it in an appointment item.
+        /// </summary>
+        /// <param name="json">JSON Data containing a idle event.</param>
+        /// <returns></returns>
         private bool ImportSystemIdle(string json)
         {
             try
@@ -205,6 +236,11 @@
             return true;
         }
 
+        /// <summary>
+        /// Converts the sleep event and stores it in an appointment item.
+        /// </summary>
+        /// <param name="json">JSON Data containing a sleep event.</param>
+        /// <returns></returns>
         private bool ImportSystemSleep(string json)
         {
             try

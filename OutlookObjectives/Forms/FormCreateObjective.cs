@@ -18,7 +18,7 @@
         }
 
         /// <summary>
-        /// Checks is the Objective is correct and if so then creates a new Objective.</be>
+        /// Checks is the Objective is correct and if so then creates a new Objective.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

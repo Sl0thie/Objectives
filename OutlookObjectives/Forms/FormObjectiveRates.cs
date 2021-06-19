@@ -28,6 +28,9 @@
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FormObjectiveRates"/> class.
+        /// </summary>
         public FormObjectiveRates()
         {
             InitializeComponent();

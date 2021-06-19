@@ -16,11 +16,18 @@
         private readonly DateTime firstDay = new DateTime(2021, 5, 25);
         private DateTime day;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TaskMonthReport"/> class.
+        /// </summary>
+        /// <param name="callBack">The action to call when finished.</param>
         public TaskMonthReport(Action callBack)
         {
             CallBack = callBack;
         }
 
+        /// <summary>
+        /// Method to start the task.
+        /// </summary>
         public void RunTask()
         {
             Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess))
@@ -33,6 +40,9 @@
             BackgroundThread.Start();
         }
 
+        /// <summary>
+        /// Method to perform in the background.
+        /// </summary>
         private void BackgroundProcess()
         {
             day = FindDay();

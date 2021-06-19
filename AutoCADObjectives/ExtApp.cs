@@ -12,8 +12,6 @@ using LogNET;
 [assembly: CommandClass(null)]
 namespace AutoCADObjectives
 {
-    /// <include file='summary.xml' path="Docs/*"/>
-
     /// <summary>
     /// AutoCAD extension to track time spent on drawings.
     /// </summary>

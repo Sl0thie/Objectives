@@ -28,17 +28,24 @@
         /// </summary>
         public DateTime Created { get; set; }
 
+        
+        private Dictionary<int, WorkType> workTypes = new Dictionary<int, WorkType>();
+
         /// <summary>
         /// The current WorkType values for the Objective.
-        /// If they are not found here then the default values are used.
         /// </summary>
-        private Dictionary<int, WorkType> workTypes = new Dictionary<int, WorkType>();
+        /// <remarks>
+        /// If they are not found here then the default values are used.
+        /// </remarks>
         public Dictionary<int, WorkType> WorkTypes
         {
             get { return workTypes; }
             set { workTypes = value; }
         }
 
+        /// <summary>
+        /// Implements a new Objective object.
+        /// </summary>
         public Objective()
         {
 

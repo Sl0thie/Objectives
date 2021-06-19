@@ -8,6 +8,9 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RibAppointment"/> class.
+        /// </summary>
         public RibAppointment()
             : base(Globals.Factory.GetRibbonFactory())
         {

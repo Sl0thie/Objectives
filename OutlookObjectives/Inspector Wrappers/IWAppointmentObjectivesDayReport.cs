@@ -5,9 +5,18 @@
     using System.Runtime.InteropServices;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
+    /// <summary>
+    /// IWAppointmentObjectivesDayReport class.
+    /// </summary>
     public class IWAppointmentObjectivesDayReport : IAppointment
     {
         private Outlook.Inspector inspector;
+        private readonly Outlook.AppointmentItem appointment;
+        private string folderPath;
+
+        /// <summary>
+        /// A reference to the Inspector displaying the appointment.
+        /// </summary>
         public Outlook.Inspector Inspector
         {
             get
@@ -16,21 +25,34 @@
             }
         }
 
-        private readonly Outlook.AppointmentItem appointment;
+        /// <summary>
+        /// A reference to the appointment object.
+        /// </summary>
         public Outlook.AppointmentItem Appointment
         {
             get { return appointment; }
         }
 
-        private string folderPath;
+        /// <summary>
+        /// The Outlook path to the folder that contains the appointment.
+        /// </summary>
         public string FolderPath
         {
             get { return folderPath; }
             set { folderPath = value; }
         }
 
+        /// <summary>
+        /// The type of appointment.
+        /// </summary>
         public AppointmentType AppointmentType { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IWAppointmentObjectivesDayReport"/> class.
+        /// </summary>
+        /// <param name="Inspector">Passes the Inspector of the appointment.</param>
+        /// <param name="folderPath">The Outlook folder path to the appointment.</param>
+        /// <param name="appointmentType">The type of appointment.</param>
         public IWAppointmentObjectivesDayReport(Outlook.Inspector Inspector, string folderPath, AppointmentType appointmentType)
         {
             Log.MethodEntry();
@@ -47,6 +69,9 @@
 
         }
 
+        /// <summary>
+        /// Method to remove the event handlers and remove this from the collection of inspectors.
+        /// </summary>
         void InspectorWrapper_Close()
         {
             Log.MethodEntry();
@@ -59,6 +84,10 @@
             Log.MethodExit();
         }
 
+        /// <summary>
+        /// Method to save the appointment when it is closed.
+        /// </summary>
+        /// <param name="cancel">This parameter is unused.</param>
         private void Appointment_Close(ref bool cancel)
         {
             Log.MethodEntry();

@@ -131,7 +131,6 @@
         /// <summary>
         /// Primary process to create a DayReport.
         /// </summary>
-        /// <param name="day">The day to create a report for.</param>
         private void ProcessAppointments()
         {
             // DateTimes for start and finish of the day.
@@ -859,7 +858,6 @@
         /// Process the Visual Studio data.
         /// </summary>
         /// <param name="json"></param>
-        /// <param name="isWork"></param>
         private void ProcessVisualStudio(string json)
         {
             WorkItem workItem = JsonConvert.DeserializeObject<WorkItem>(json);

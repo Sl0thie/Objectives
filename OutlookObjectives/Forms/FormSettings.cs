@@ -11,6 +11,9 @@
     /// </summary>
     public partial class FormSettings : Form
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FormSettings"/> class.
+        /// </summary>
         public FormSettings()
         {
             InitializeComponent();

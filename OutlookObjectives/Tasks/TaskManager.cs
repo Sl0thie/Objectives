@@ -15,16 +15,26 @@
     {
         private bool taskRunning = false; //Is a task currently running.
         private readonly ConcurrentQueue<Action> backgroundTasks = new ConcurrentQueue<Action>(); //Queue for the tasks.
-        public ConcurrentQueue<Action> BackgroundTasks { get => backgroundTasks; }
         private Action currentAction;
-        public Action CurrentAction { get => currentAction; set => currentAction = value; }
-
         private readonly TaskImportData taskImportData;
         private readonly TaskDayReport taskDayReport;
         private readonly TaskWeekReport taskWeekReport;
         private readonly TaskMonthReport taskMonthReport;
         private readonly TaskConvertVersion taskConvertVersion;
 
+        /// <summary>
+        /// A queue of Task to be performed.
+        /// </summary>
+        public ConcurrentQueue<Action> BackgroundTasks { get => backgroundTasks; }
+        
+        /// <summary>
+        /// The current action to be called when finished.
+        /// </summary>
+        public Action CurrentAction { get => currentAction; set => currentAction = value; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TaskManager"/> class.
+        /// </summary>
         public TaskManager()
         {
             //Create task objects.
@@ -81,26 +91,41 @@
             }
         }
 
+        /// <summary>
+        /// Enqueues a Import Data Task.
+        /// </summary>
         public void EnqueueImportDataTask()
         {
             backgroundTasks.Enqueue(taskImportData.RunTask);
         }
 
+        /// <summary>
+        /// Enqueues a Day Report Task.
+        /// </summary>
         public void EnqueueDayReportTask()
         {
             backgroundTasks.Enqueue(taskDayReport.RunTask);
         }
 
+        /// <summary>
+        /// Enqueues a Week Report Task.
+        /// </summary>
         public void EnqueueWeekReportTask()
         {
             backgroundTasks.Enqueue(taskWeekReport.RunTask);
         }
 
+        /// <summary>
+        /// Enqueues a Month Report Task.
+        /// </summary>
         public void EnqueueMonthReportTask()
         {
             backgroundTasks.Enqueue(taskMonthReport.RunTask);
         }
 
+        /// <summary>
+        /// Enqueues a Conversion Task.
+        /// </summary>
         public void EnqueueConvertVersionTask()
         {
             backgroundTasks.Enqueue(taskConvertVersion.RunTask);

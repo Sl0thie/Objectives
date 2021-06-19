@@ -3,6 +3,9 @@
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// DayReport class manages data for the daily report.
+    /// </summary>
     public class DayReport
     {
         private Dictionary<string, WorkItem> workItems = new Dictionary<string, WorkItem>();
@@ -67,8 +70,11 @@
         }
 
         /// <summary>
-        /// Empty constructor for serialization.
+        /// Initializes a new instance of the <see cref="DayReport"/> class.
         /// </summary>
+        /// <remarks>
+        /// Empty constructor for serialization.
+        /// </remarks>
         public DayReport()
         {
 

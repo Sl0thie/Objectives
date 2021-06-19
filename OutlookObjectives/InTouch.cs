@@ -12,34 +12,64 @@
     /// </summary>
     public static class InTouch
     {
-
+        private static Dictionary<int, WorkType> workTypes = new Dictionary<int, WorkType>();
         private static readonly TaskManager taskManager = new TaskManager();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TaskManager"/> class.
+        /// </summary>
         public static TaskManager TaskManager
         {
             get { return taskManager; }
         }
 
-        public static int RibbonHeight { get; } = 162;
+        /// <summary>
+        /// The height of the ribbon in pixels.
+        /// </summary>
+        public const int RibbonHeight = 162;
+
+        /// <summary>
+        /// The path to the Objectives root folder.
+        /// </summary>
         public static string ObjectivesRootFolder { get; set; }
+
+        /// <summary>
+        /// The path to the Objectives archive folder.
+        /// </summary>
         public static string ObjectivesArchiveFolder { get; set; }
+
+        /// <summary>
+        /// The path to the Objectives storage folder.
+        /// </summary>
         public static string ObjectivesStorageFolder { get; set; }
 
+        /// <summary>
+        /// Value to multiply the DPI X scale.
+        /// </summary>
         public static readonly double DpiX = 1;
+
+        /// <summary>
+        /// Value to multiply the DPI Y scale.
+        /// </summary>
         public static readonly double DpiY = 1;
 
 
-        private static Dictionary<int, WorkType> workTypes = new Dictionary<int, WorkType>();
+        /// <summary>
+        /// Dictionary of WorkTypes.
+        /// </summary>
+        /// <remarks>
+        /// These are the default WorkTypes to use if the Objective does not contain a similar WorkType.
+        /// </remarks>
         public static Dictionary<int, WorkType> WorkTypes
         {
             get { return workTypes; }
             set { workTypes = value; }
         }
 
-
-        public static int WorkItemVersion = 5;
-
-
+        /// <summary>
+        /// Version number for the WorkItem.
+        /// </summary>
+        public const int WorkItemVersion = 5;
 
         /// <summary>
         /// Get an Objective object from a path.

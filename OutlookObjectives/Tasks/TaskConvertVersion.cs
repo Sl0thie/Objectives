@@ -76,7 +76,6 @@
         /// <summary>
         /// Primary process to create a DayReport.
         /// </summary>
-        /// <param name="day">The day to create a report for.</param>
         private void ProcessAppointments()
         {
             // DateTimes for start and finish of the day.
@@ -145,31 +144,6 @@
 
                         if (CustomProperty2 != null) Marshal.ReleaseComObject(CustomProperty2);
                         break;
-
-
-                    //case "Word":
-                    //    ProcessWord(next.Body, true);
-                    //    break;
-
-                    //case "Word - Read Only":
-                    //    ProcessWord(next.Body, false);
-                    //    break;
-
-                    //case "Excel":
-                    //    ProcessExcel(next.Body, true);
-                    //    break;
-
-                    //case "Excel - Read Only":
-                    //    ProcessExcel(next.Body, false);
-                    //    break;
-
-                    //case "AutoCAD":
-                    //    ProcessAutoCAD(next.Body, true);
-                    //    break;
-
-                    //case "AutoCAD - Read Only":
-                    //    ProcessAutoCAD(next.Body, false);
-                    //    break;
 
                     default:
                         Log.Info("Unmanaged Category : " + next.Categories);

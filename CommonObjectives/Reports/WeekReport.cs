@@ -3,14 +3,23 @@
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// WeekReport class to manage the weekly report data.
+    /// </summary>
     public class WeekReport
     {
         private DateTime day;
         private Dictionary<string, WorkItem> workItems = new Dictionary<string, WorkItem>();
         private string hTML;
 
+        /// <summary>
+        /// The day of the beginning of the report period.
+        /// </summary>
         public DateTime Day { get => day; set => day = value; }
 
+        /// <summary>
+        /// A dictionary of WorkItems from the report period.
+        /// </summary>
         public Dictionary<string, WorkItem> WorkItems
         {
             get { return workItems; }

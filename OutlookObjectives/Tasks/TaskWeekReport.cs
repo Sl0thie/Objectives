@@ -24,11 +24,18 @@
 
         private readonly DayReport[] dayReports = new DayReport[7];
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TaskWeekReport"/> class.
+        /// </summary>
+        /// <param name="callBack">The action to call when finished.</param>
         public TaskWeekReport(Action callBack)
         {
             CallBack = callBack;
         }
 
+        /// <summary>
+        /// Method to start the process.
+        /// </summary>
         public void RunTask()
         {
             Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess))
@@ -41,6 +48,9 @@
             BackgroundThread.Start();
         }
 
+        /// <summary>
+        /// Method to start in the background.
+        /// </summary>
         private void BackgroundProcess()
         {
             day = FindDay();
@@ -201,38 +211,6 @@
             NewAppointmentItem.Body = JsonConvert.SerializeObject(weekReport, Formatting.Indented);
             NewAppointmentItem.Save();
         }
-
-        /// <summary>
-        /// Get the appointments within the timespan.
-        /// </summary>
-        /// <param name="folder"></param>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
-        /// <returns></returns>
-        //private Outlook.Items GetAppointmentsWithinRange(Outlook.Folder folder, DateTime startTime, DateTime endTime)
-        //{
-        //    string filter = "[Start] >= '"
-        //        + startTime.ToString("g")
-        //        + "' AND [End] <= '"
-        //        + endTime.ToString("g") + "'";
-
-        //    try
-        //    {
-        //        Outlook.Items calItems = folder.Items;
-        //        calItems.IncludeRecurrences = true;
-        //        calItems.Sort("[Start]", Type.Missing);
-        //        Outlook.Items restrictItems = calItems.Restrict(filter);
-        //        if (restrictItems.Count > 0)
-        //        {
-        //            return restrictItems;
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //    catch { return null; }
-        //}
 
         /// <summary>
         /// Get the appointments that fall in the range of the timespan.

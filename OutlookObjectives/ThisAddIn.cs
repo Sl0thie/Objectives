@@ -17,7 +17,9 @@
         private static Outlook.AppointmentItem CurrentAppointment;
         private readonly Dictionary<Outlook.Inspector, IAppointment> iAppointments = new Dictionary<Outlook.Inspector, IAppointment>();
 
-        // Dictionary to hold the wrappers for Appointments.
+        /// <summary>
+        /// Dictionary to hold the wrappers for Appointments.
+        /// </summary>
         public Dictionary<Outlook.Inspector, IAppointment> IAppointments
         {
             get
