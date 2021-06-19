@@ -2,12 +2,12 @@
 This solution is a collection of projects that are used to track time and costs spend working on a range of project types.
 ![Outlook Calendar View](./OutlookObjectives/Docs/ObjectivesCalendar.png "Outlook Calendar view")
 
-## Projects
-### AutoCAD Objectives  
+# Projects
+## AutoCAD Objectives  
 ###### [Overview](./AutoCADObjectives/Docs/README.md) \- [Object Model](./AutoCADObjectives/Docs/ObjectModel.md)  
 Is an extension for Autodesk's AutoCAD that tracks the time spent creating or viewing AutoCAD drawing files. This is a work in progress, has not been tested on drawing sets yet.  
 
-### Common Objectives  
+## Common Objectives  
 ###### [Overview](./CommonObjectives/Docs/README.md) \- [Object Model](./CommonObjectives/Docs/ObjectModel.md)  
 Is a shared library of classes between all projects. The most commonly used are the WorkItem class and WorkType class.  
 
