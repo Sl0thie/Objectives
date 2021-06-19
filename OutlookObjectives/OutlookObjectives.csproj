@@ -312,7 +312,6 @@
     </EmbeddedResource>
     <None Include="Docs\ObjectModel.md" />
     <None Include="Docs\README.md" />
-    <None Include="OutlookObjectives.md" />
     <None Include="OutlookObjectives_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -376,7 +375,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Docs\ObjectivesCalendar.png" />
-    <Content Include="OutlookObjectives.xml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
