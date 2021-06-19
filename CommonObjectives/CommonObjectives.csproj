@@ -87,7 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveApplication.cs" />
-    <Compile Include="DrawingSession.cs" />
+    <Compile Include="Obsolete\DrawingSession.cs" />
     <Compile Include="Reports\DayReport.cs" />
     <Compile Include="Enumerations.cs" />
     <Compile Include="IWorkItem.cs" />
@@ -96,7 +96,7 @@
     <Compile Include="Note.cs" />
     <Compile Include="Objective.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SolutionSession.cs" />
+    <Compile Include="Obsolete\SolutionSession.cs" />
     <Compile Include="System\SystemIdle.cs" />
     <Compile Include="System\SystemSleep.cs" />
     <Compile Include="System\SystemUptime.cs" />

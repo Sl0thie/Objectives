@@ -3,6 +3,7 @@
     using System;
     using System.Collections.ObjectModel;
 
+    [Obsolete("Replaced by WorkItem")]
     public class SolutionSession
     {
         public string Name { get; set; }

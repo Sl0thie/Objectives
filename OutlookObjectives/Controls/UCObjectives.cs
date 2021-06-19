@@ -5,13 +5,24 @@
     using System.IO;
     using System.Windows.Forms;
 
+    /// <summary>
+    /// A User Control to be used as the UI for the Objectives Pane.</br>
+    /// </summary>
     public partial class UCObjectives : UserControl
     {
+        /// <summary>
+        /// Constructor.</br>
+        /// </summary>
         public UCObjectives()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Fills the UI with Objectives.</br>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UCObjectives_Load(object sender, EventArgs e)
         {
 
@@ -38,6 +49,11 @@
             }
         }
 
+        /// <summary>
+        /// Manage the control being resized.</br>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UCObjectives_Resize(object sender, EventArgs e)
         {
             panel1.Width = this.Width;
@@ -47,6 +63,11 @@
             ListObjectives.Height = this.Height;
         }
 
+        /// <summary>
+        /// Mange the change of selection.</br>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListObjectives_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ListObjectives.SelectedItems.Count > 0)
@@ -67,16 +88,31 @@
             }
         }
 
+        /// <summary>
+        /// Archive the Objective.</br>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuArchive_Click(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Re-activate the Objective from archive.</br>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuActivate_Click(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Display the Rates and Costs for the Objective.</br>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuRates_Click(object sender, EventArgs e)
         {
             if (ListObjectives.SelectedItems[0] is object)

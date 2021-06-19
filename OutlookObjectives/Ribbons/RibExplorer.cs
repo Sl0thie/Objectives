@@ -7,7 +7,7 @@
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
-    /// Ribbon for the Explorer.
+    /// Ribbon for the Explorer.</br>
     /// </summary>
     public partial class RibExplorer
     {
@@ -15,7 +15,7 @@
         private CustomTaskPane taskPaneObjectives;
 
         /// <summary>
-        /// Load event for the ribbon.
+        /// Load event for the ribbon.</br>
         /// </summary>
         /// <param name="sender">Unused.</param>
         /// <param name="e">Unused.</param>
@@ -34,7 +34,7 @@
         }
 
         /// <summary>
-        /// Manage the folder switch event.
+        /// Manage the folder switch event.</br>
         /// </summary>
         private void Explorer_FolderSwitch()
         {
@@ -81,7 +81,7 @@
         }
 
         /// <summary>
-        /// Event for the New Objective button.
+        /// Event for the New Objective button.</br>
         /// </summary>
         /// <param name="sender">Unused.</param>
         /// <param name="e">Unused.</param>

@@ -4,6 +4,9 @@
     using System;
     using System.Windows.Forms;
 
+    /// <summary>
+    /// UI to review or make changes to the WorkTypes.</br>
+    /// </summary>
     public partial class FormChangeWorkType : Form
     {
         private WorkType workType;
@@ -18,16 +21,27 @@
             }
         }
 
+        /// <summary>
+        /// Constructor.</br>
+        /// </summary>
         public FormChangeWorkType()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Setup the UI.</br>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormChangeWorkType_Load(object sender, EventArgs e)
         {
             ComboApplication.DataSource = Enum.GetValues(typeof(ApplicationType));
         }
 
+        /// <summary>
+        /// Load the data from the WorkType to the UI.</br>
+        /// </summary>
         private void SetupForm()
         {
             TextName.Text = workType.Name;
@@ -36,8 +50,6 @@
             NumMinMinutes.Value = workType.MinimumNoOfMinutes;
             NumMaxMinutes.Value = workType.MaximNoOfMinutes;
             ComboApplication.SelectedText = workType.Application.ToString();
-
-            //CheckActive.Checked = workType.Active;
         }
 
         private void TextName_TextChanged(object sender, EventArgs e)
@@ -68,11 +80,6 @@
         private void ComboApplication_SelectedIndexChanged(object sender, EventArgs e)
         {
             workType.Application = (ApplicationType)ComboApplication.SelectedValue;
-        }
-
-        private void CheckActive_CheckedChanged(object sender, EventArgs e)
-        {
-            //workType.Active = CheckActive.Checked;
         }
     }
 }

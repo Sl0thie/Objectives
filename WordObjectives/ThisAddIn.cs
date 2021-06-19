@@ -10,6 +10,9 @@
     using System.Threading;
     using Word = Microsoft.Office.Interop.Word;
 
+    /// <summary>
+    /// Microsoft Word VSTO AddIn to track Objectives.
+    /// </summary>
     public partial class ThisAddIn
     {
         // Dictionary to hold the document data collected.
@@ -264,7 +267,7 @@
         }
 
         /// <summary>
-        /// Method to save the data to a json file in the storage folder.
+        /// Method to save the data to a json file in the storage folder.</br>
         /// </summary>
         /// <param name="workItem">A WordSession object to save to file.</param>
         private void SaveData(WorkItem workItem)

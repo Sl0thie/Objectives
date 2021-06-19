@@ -20,7 +20,7 @@ namespace AutoCADObjectives
     /// 
     /// This directory is considered secure by AutoCAD so there is no need to add the normal project output directory to AutoCAD's security.
     /// Use the command "NETLOAD" to load the DLL into AutoCAD.
-    /// Or copy the file acad.lsp to the support directory to load the DLL automatically.
+    /// Or copy the file acad.lsp to the support directory to load the DLL automatically on startup.
     /// </summary>
     public class ExtApp : IExtensionApplication
     {

@@ -8,7 +8,7 @@
     using System.IO;
 
     /// <summary>
-    /// Class to hold the static objects and helper functions.
+    /// Class to hold the static objects and helper functions.</br>
     /// </summary>
     public static class InTouch
     {
@@ -42,7 +42,7 @@
 
 
         /// <summary>
-        /// Get an Objective object from a path.
+        /// Get an Objective object from a path.</br>
         /// </summary>
         /// <param name="path">The path to the objective.</param>
         /// <returns></returns>
@@ -120,7 +120,7 @@
         }
 
         /// <summary>
-        /// Create a new Objective.
+        /// Create a new Objective.</br>
         /// </summary>
         /// <param name="objectiveName">The name of the new Objective.</param>
         public static void CreateObjective(string objectiveName)
@@ -145,7 +145,7 @@
         }
 
         /// <summary>
-        /// Saves and Objective object to file.
+        /// Saves and Objective object to file.</br>
         /// </summary>
         /// <param name="objective"></param>
         public static void SaveObjective(Objective objective)
@@ -155,7 +155,7 @@
         }
 
         /// <summary>
-        /// Gets a formatted time string from an int of minutes.
+        /// Gets a formatted time string from an int of minutes.</br>
         /// </summary>
         /// <param name="minutes">The number of minutes.</param>
         /// <returns></returns>
@@ -186,8 +186,7 @@
         }
 
         /// <summary>
-        /// Creates a CSS file for use by the reports.
-        /// 
+        /// Creates a CSS file for use by the reports.</br>
         /// </summary>
         public static void CreateCSS()
         {

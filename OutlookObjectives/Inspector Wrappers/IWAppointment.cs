@@ -3,6 +3,7 @@
     using CommonObjectives;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
+
     class IWAppointment : IAppointment
     {
         private Outlook.Inspector inspector;

@@ -40,7 +40,6 @@
             this.ComboApplication = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.CheckActive = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.NumCostPerHour)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumMinMinutes)).BeginInit();
@@ -183,19 +182,6 @@
             this.label5.TabIndex = 40;
             this.label5.Text = "Max Minutes per Day";
             // 
-            // CheckActive
-            // 
-            this.CheckActive.AutoSize = true;
-            this.CheckActive.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.CheckActive.Location = new System.Drawing.Point(109, 199);
-            this.CheckActive.Name = "CheckActive";
-            this.CheckActive.Size = new System.Drawing.Size(69, 24);
-            this.CheckActive.TabIndex = 41;
-            this.CheckActive.Text = "Active";
-            this.CheckActive.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.CheckActive.UseVisualStyleBackColor = true;
-            this.CheckActive.CheckedChanged += new System.EventHandler(this.CheckActive_CheckedChanged);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -212,7 +198,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
             this.ClientSize = new System.Drawing.Size(543, 235);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.CheckActive);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.ComboApplication);
@@ -255,7 +240,6 @@
         private System.Windows.Forms.ComboBox ComboApplication;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckBox CheckActive;
         private System.Windows.Forms.Label label6;
     }
 }

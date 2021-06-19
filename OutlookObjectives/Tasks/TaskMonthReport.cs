@@ -7,7 +7,7 @@
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
-    /// Task to process Monthly totals.
+    /// Task to process Monthly totals.</br>
     /// </summary>
     public class TaskMonthReport
     {
@@ -48,7 +48,7 @@
         }
 
         /// <summary>
-        /// Find the day that is suitable to create the report for.
+        /// Find the day that is suitable to create the report for.</br>
         /// </summary>
         /// <returns></returns>
         private DateTime FindDay()
@@ -88,7 +88,7 @@
         }
 
         /// <summary>
-        /// Get the appointments within the timespan.
+        /// Get the appointments within the timespan.</br>
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="startTime"></param>
@@ -120,7 +120,7 @@
         }
 
         /// <summary>
-        /// Get the appointments that fall in the range of the timespan.
+        /// Get the appointments that fall in the range of the timespan.</br>
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="startTime"></param>

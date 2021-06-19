@@ -8,6 +8,9 @@
     using System.IO;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
+    /// <summary>
+    /// Microsoft Outlook VSTO AddIn to track Objectives.
+    /// </summary>
     public partial class ThisAddIn
     {
         private Outlook.Inspectors inspectors;
@@ -23,6 +26,11 @@
             }
         }
 
+        /// <summary>
+        /// Primary entry for the AddIn.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             // Start the logging.
@@ -256,10 +264,6 @@
                                 case "Application":
                                     nextType.Application = (ApplicationType)Convert.ToInt32(val);
                                     break;
-
-                                    //case "Active":
-                                    //    nextType.Active = Convert.ToBoolean(val);
-                                    //    break;
                             }
                         }
 

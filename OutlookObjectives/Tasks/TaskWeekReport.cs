@@ -9,7 +9,7 @@
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
-    /// Task to process weekly totals.
+    /// Task to process weekly totals.</br>
     /// </summary>
     public class TaskWeekReport
     {
@@ -69,7 +69,7 @@
         }
 
         /// <summary>
-        /// Find the day that is suitable to create the report for.
+        /// Find the day that is suitable to create the report for.</br>
         /// </summary>
         /// <returns></returns>
         private DateTime FindDay()
@@ -105,7 +105,7 @@
         }
 
         /// <summary>
-        /// Get the DayReports for the week.
+        /// Get the DayReports for the week.</br>
         /// </summary>
         /// <returns></returns>
         private bool GetDays()
@@ -138,7 +138,7 @@
         }
 
         /// <summary>
-        /// Get all the work items from the days.
+        /// Get all the work items from the days.</br>
         /// </summary>
         private void GetWorkItemFromDays()
         {
@@ -153,7 +153,7 @@
         }
 
         /// <summary>
-        /// Creates the HTML for the report.
+        /// Creates the HTML for the report.</br>
         /// </summary>
         private void CreateHTML()
         {
@@ -203,7 +203,7 @@
         }
 
         /// <summary>
-        /// Get the appointments within the timespan.
+        /// Get the appointments within the timespan.</br>
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="startTime"></param>
@@ -235,7 +235,7 @@
         //}
 
         /// <summary>
-        /// Get the appointments that fall in the range of the timespan.
+        /// Get the appointments that fall in the range of the timespan.</br>
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="startTime"></param>

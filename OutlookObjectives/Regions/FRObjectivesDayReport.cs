@@ -5,7 +5,7 @@
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
-    /// A Form Region for the Objectives Day Report.
+    /// A Form Region for the Objectives Day Report.</br>
     /// </summary>
     partial class FRObjectivesDayReport
     {
@@ -62,9 +62,6 @@
             webBrowser.DocumentText = HTML;
         }
 
-        // Occurs when the form region is closed.
-        // Use this.OutlookItem to get a reference to the current Outlook item.
-        // Use this.OutlookFormRegion to get a reference to the form region.
         private void FRObjectivesDayReport_FormRegionClosed(object sender, System.EventArgs e)
         {
 

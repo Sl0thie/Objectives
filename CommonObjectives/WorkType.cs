@@ -1,5 +1,8 @@
 ﻿namespace CommonObjectives
 {
+    /// <summary>
+    /// WorkType holds data for work types.
+    /// </summary>
     public class WorkType
     {
         /// <summary>

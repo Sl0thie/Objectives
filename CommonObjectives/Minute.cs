@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Minute holds data related to the minute of the day.</br>
+    /// </summary>
     public class Minute
     {
         /// <summary>
@@ -36,40 +39,11 @@
         /// </summary>
         public bool Billable { get; set; }
 
-
+        /// <summary>
+        /// WorkItem that was deemed as the primary work item for that minute.</br>
+        /// This is currently decided by the lowest workType index.
+        /// </summary>
         public WorkItem PrimaryWorkItem { get; set; }
-
-        /// <summary>
-        /// The Objective name that has been deemed the primary.</br>
-        /// If two or more are active at the same time, one must be chosen for billing.
-        /// TODO: The User should have more control over this.
-        /// </summary>
-        [Obsolete]
-        public string PrimaryObjective { get; set; }
-
-        /// <summary>
-        /// The Name of the Project that was deemed the primary.
-        /// </summary>
-        [Obsolete]
-        public string PrimaryName { get; set; }
-
-        /// <summary>
-        /// The path to the primary.
-        /// </summary>
-        [Obsolete]
-        public string PrimaryPath { get; set; }
-
-        /// <summary>
-        /// The Application type of the primary.
-        /// </summary>
-        [Obsolete]
-        public ApplicationType PrimaryApplicationType { get; set; }
-
-        /// <summary>
-        /// The primary work type index for the minute.
-        /// </summary>
-        [Obsolete]
-        public int PrimaryWorkTypeIndex { get; set; }
 
         /// <summary>
         /// Empty constructor for serialization.

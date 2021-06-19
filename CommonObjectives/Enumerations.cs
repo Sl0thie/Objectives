@@ -1,5 +1,10 @@
 ﻿namespace CommonObjectives
 {
+    /// <summary>
+    /// Enumeration of applications and their state of use.</br>
+    /// Write denotes the application was used to produce.
+    /// Read denotes the application was used to review.
+    /// </summary>
     public enum ApplicationType
     {
         None = 0,
@@ -26,6 +31,9 @@
         VisioRead = 21,
     }
 
+    /// <summary>
+    /// Enumeration of System event types.</br>
+    /// </summary>
     public enum SystemType
     {
         None = 0,
@@ -34,6 +42,9 @@
         Sleep = 103,
     }
 
+    /// <summary>
+    /// Enumeration of Outlook Appointment types.</br>
+    /// </summary>
     public enum AppointmentType
     {
         None = 0,

@@ -4,13 +4,24 @@
     using System.IO;
     using System.Windows.Forms;
 
+    /// <summary>
+    /// UI form to provide an interface for the user to create a new Objective.</br>
+    /// </summary>
     public partial class FormCreateObjective : Form
     {
+        /// <summary>
+        /// Constructor.</br>
+        /// </summary>
         public FormCreateObjective()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Checks is the Objective is correct and if so then creates a new Objective.</be>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonCreateObjective_Click(object sender, EventArgs e)
         {
             // Check if the new objective name is valid first.
