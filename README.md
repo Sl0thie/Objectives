@@ -24,19 +24,25 @@ Is a shared library of classes between all projects.
 [Object Model](./WindowsObjectives/Docs/ObjectModel.md)
 
 <table>
+  
   <tr>
+    
     <td>
       
       ### [Word Objectives](./WordObjectives/Docs/README.md)  
       
     </td>
+    
      <td>
        
       [Object Model](./WordObjectives/Docs/ObjectModel.md)
        
     </td>
+    
   </tr>
+  
   </table>
+  
   A Microsoft Word VSTO AddIn.
 
 
