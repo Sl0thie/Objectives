@@ -375,6 +375,7 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.2\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Docs\ObjectivesCalendar.png" />
     <Content Include="OutlookObjectives.xml" />
   </ItemGroup>
   <PropertyGroup>
