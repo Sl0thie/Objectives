@@ -12,11 +12,12 @@
   - [#ctor()](#M-ExcelObjectives-ThisAddIn-#ctor-Microsoft-Office-Tools-Excel-ApplicationFactory,System-IServiceProvider- 'ExcelObjectives.ThisAddIn.#ctor(Microsoft.Office.Tools.Excel.ApplicationFactory,System.IServiceProvider)')
   - [AddWorkbook(workbook)](#M-ExcelObjectives-ThisAddIn-AddWorkbook-Microsoft-Office-Interop-Excel-Workbook- 'ExcelObjectives.ThisAddIn.AddWorkbook(Microsoft.Office.Interop.Excel.Workbook)')
   - [Application_WorkbookActivate(workbook)](#M-ExcelObjectives-ThisAddIn-Application_WorkbookActivate-Microsoft-Office-Interop-Excel-Workbook- 'ExcelObjectives.ThisAddIn.Application_WorkbookActivate(Microsoft.Office.Interop.Excel.Workbook)')
-  - [Application_WorkbookBeforeClose(workbook)](#M-ExcelObjectives-ThisAddIn-Application_WorkbookBeforeClose-Microsoft-Office-Interop-Excel-Workbook,System-Boolean@- 'ExcelObjectives.ThisAddIn.Application_WorkbookBeforeClose(Microsoft.Office.Interop.Excel.Workbook,System.Boolean@)')
+  - [Application_WorkbookBeforeClose(workbook,Cancel)](#M-ExcelObjectives-ThisAddIn-Application_WorkbookBeforeClose-Microsoft-Office-Interop-Excel-Workbook,System-Boolean@- 'ExcelObjectives.ThisAddIn.Application_WorkbookBeforeClose(Microsoft.Office.Interop.Excel.Workbook,System.Boolean@)')
   - [Application_WorkbookDeactivate(workbook)](#M-ExcelObjectives-ThisAddIn-Application_WorkbookDeactivate-Microsoft-Office-Interop-Excel-Workbook- 'ExcelObjectives.ThisAddIn.Application_WorkbookDeactivate(Microsoft.Office.Interop.Excel.Workbook)')
   - [Application_WorkbookOpen(workbook)](#M-ExcelObjectives-ThisAddIn-Application_WorkbookOpen-Microsoft-Office-Interop-Excel-Workbook- 'ExcelObjectives.ThisAddIn.Application_WorkbookOpen(Microsoft.Office.Interop.Excel.Workbook)')
   - [BeginInitialization()](#M-ExcelObjectives-ThisAddIn-BeginInitialization 'ExcelObjectives.ThisAddIn.BeginInitialization')
   - [BindToData()](#M-ExcelObjectives-ThisAddIn-BindToData 'ExcelObjectives.ThisAddIn.BindToData')
+  - [CheckWorkbooks()](#M-ExcelObjectives-ThisAddIn-CheckWorkbooks 'ExcelObjectives.ThisAddIn.CheckWorkbooks')
   - [EndInitialization()](#M-ExcelObjectives-ThisAddIn-EndInitialization 'ExcelObjectives.ThisAddIn.EndInitialization')
   - [FinishInitialization()](#M-ExcelObjectives-ThisAddIn-FinishInitialization 'ExcelObjectives.ThisAddIn.FinishInitialization')
   - [Initialize()](#M-ExcelObjectives-ThisAddIn-Initialize 'ExcelObjectives.ThisAddIn.Initialize')
@@ -29,7 +30,7 @@
   - [IsCached()](#M-ExcelObjectives-ThisAddIn-IsCached-System-String- 'ExcelObjectives.ThisAddIn.IsCached(System.String)')
   - [NeedsFill()](#M-ExcelObjectives-ThisAddIn-NeedsFill-System-String- 'ExcelObjectives.ThisAddIn.NeedsFill(System.String)')
   - [OnShutdown()](#M-ExcelObjectives-ThisAddIn-OnShutdown 'ExcelObjectives.ThisAddIn.OnShutdown')
-  - [RemoveWorkbook(workbook)](#M-ExcelObjectives-ThisAddIn-RemoveWorkbook-Microsoft-Office-Interop-Excel-Workbook- 'ExcelObjectives.ThisAddIn.RemoveWorkbook(Microsoft.Office.Interop.Excel.Workbook)')
+  - [RemoveWorkbook(path)](#M-ExcelObjectives-ThisAddIn-RemoveWorkbook-System-String- 'ExcelObjectives.ThisAddIn.RemoveWorkbook(System.String)')
   - [SaveData(workItem)](#M-ExcelObjectives-ThisAddIn-SaveData-CommonObjectives-WorkItem- 'ExcelObjectives.ThisAddIn.SaveData(CommonObjectives.WorkItem)')
   - [StartCaching()](#M-ExcelObjectives-ThisAddIn-StartCaching-System-String- 'ExcelObjectives.ThisAddIn.StartCaching(System.String)')
   - [StopCaching()](#M-ExcelObjectives-ThisAddIn-StopCaching-System-String- 'ExcelObjectives.ThisAddIn.StopCaching(System.String)')
@@ -123,7 +124,7 @@ Not currently implemented.
 | workbook | [Microsoft.Office.Interop.Excel.Workbook](#T-Microsoft-Office-Interop-Excel-Workbook 'Microsoft.Office.Interop.Excel.Workbook') |  |
 
 <a name='M-ExcelObjectives-ThisAddIn-Application_WorkbookBeforeClose-Microsoft-Office-Interop-Excel-Workbook,System-Boolean@-'></a>
-### Application_WorkbookBeforeClose(workbook) `method`
+### Application_WorkbookBeforeClose(workbook,Cancel) `method`
 
 ##### Summary
 
@@ -134,6 +135,7 @@ Event handler for when the workbook is closed.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | workbook | [Microsoft.Office.Interop.Excel.Workbook](#T-Microsoft-Office-Interop-Excel-Workbook 'Microsoft.Office.Interop.Excel.Workbook') |  |
+| Cancel | [System.Boolean@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean@ 'System.Boolean@') |  |
 
 <a name='M-ExcelObjectives-ThisAddIn-Application_WorkbookDeactivate-Microsoft-Office-Interop-Excel-Workbook-'></a>
 ### Application_WorkbookDeactivate(workbook) `method`
@@ -175,6 +177,24 @@ This method has no parameters.
 ##### Parameters
 
 This method has no parameters.
+
+<a name='M-ExcelObjectives-ThisAddIn-CheckWorkbooks'></a>
+### CheckWorkbooks() `method`
+
+##### Summary
+
+Check the workbooks against the WorkItems.
+
+##### Parameters
+
+This method has no parameters.
+
+##### Remarks
+
+Testing the events seems to exposed some faults. 
+To accommodate this the method first checks all workbooks against the work items.
+Then it checks all the work items against the workbooks.
+A secondary function is that it checks if the workbooks have been active.
 
 <a name='M-ExcelObjectives-ThisAddIn-EndInitialization'></a>
 ### EndInitialization() `method`
@@ -265,8 +285,8 @@ This method has no parameters.
 
 This method has no parameters.
 
-<a name='M-ExcelObjectives-ThisAddIn-RemoveWorkbook-Microsoft-Office-Interop-Excel-Workbook-'></a>
-### RemoveWorkbook(workbook) `method`
+<a name='M-ExcelObjectives-ThisAddIn-RemoveWorkbook-System-String-'></a>
+### RemoveWorkbook(path) `method`
 
 ##### Summary
 
@@ -276,7 +296,7 @@ Removes a workbook from the dictionary.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| workbook | [Microsoft.Office.Interop.Excel.Workbook](#T-Microsoft-Office-Interop-Excel-Workbook 'Microsoft.Office.Interop.Excel.Workbook') |  |
+| path | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The path to the workbook. |
 
 <a name='M-ExcelObjectives-ThisAddIn-SaveData-CommonObjectives-WorkItem-'></a>
 ### SaveData(workItem) `method`
@@ -317,8 +337,8 @@ WARNING: This may not start before documents are opened.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | This parameter is unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter is unused. |
 
 <a name='T-ExcelObjectives-ThisRibbonCollection'></a>
 ## ThisRibbonCollection `type`
