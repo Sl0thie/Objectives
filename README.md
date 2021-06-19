@@ -5,9 +5,8 @@ This solution is a collection of projects that are used to manage Objectives.
 
 ## Projects
 ### [AutoCAD Objectives](./AutoCADObjectives/Docs/README.md)  
-- [Object Model](./AutoCADObjectives/Docs/ObjectModel.md)  
 Is an extension for Autodesk's AutoCAD.  
-
++ [Object Model](./AutoCADObjectives/Docs/ObjectModel.md)  
 ### [Common Objectives](./CommonObjectives/Docs/README.md)   
 - [Object Model](./CommonObjectives/Docs/ObjectModel.md) 
 Is a shared library of classes between all projects. 
