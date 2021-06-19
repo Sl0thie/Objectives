@@ -10,7 +10,7 @@
     using LogNET;
 
     /// <summary>
-    /// Excel VSTO AddIn to track document times.</br>
+    /// Excel VSTO AddIn to track document times.
     /// </summary>
     public partial class ThisAddIn
     {
@@ -31,7 +31,7 @@
         private Timer refreshTimer;
 
         /// <summary>
-        /// The startup event for the AddIn.</br>
+        /// The startup event for the AddIn.
         /// WARNING: This may not start before documents are opened.
         /// </summary>
         /// <param name="sender"></param>
@@ -64,7 +64,7 @@
         }
 
         /// <summary>
-        /// Event handler for when the workbook is deactivated.</br>
+        /// Event handler for when the workbook is deactivated.
         /// Not currently implemented.
         /// </summary>
         /// <param name="workbook"></param>
@@ -74,7 +74,7 @@
         }
 
         /// <summary>
-        /// Event handler for when the workbook is activated.</br>
+        /// Event handler for when the workbook is activated.
         /// Not currently implemented.
         /// </summary>
         /// <param name="workbook"></param>
@@ -84,7 +84,7 @@
         }
 
         /// <summary>
-        /// Event handler for when the workbook is closed.</br>
+        /// Event handler for when the workbook is closed.
         /// </summary>
         /// <param name="workbook"></param>
         private void Application_WorkbookBeforeClose(Excel.Workbook workbook, ref bool Cancel)
@@ -94,7 +94,7 @@
         }
 
         /// <summary>
-        /// Event handler for when the workbook is opened.</br>
+        /// Event handler for when the workbook is opened.
         /// </summary>
         /// <param name="workbook"></param>
         private void Application_WorkbookOpen(Excel.Workbook workbook)

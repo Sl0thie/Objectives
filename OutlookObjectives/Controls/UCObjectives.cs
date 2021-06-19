@@ -6,12 +6,12 @@
     using System.Windows.Forms;
 
     /// <summary>
-    /// A User Control to be used as the UI for the Objectives Pane.</br>
+    /// A User Control to be used as the UI for the Objectives Pane.
     /// </summary>
     public partial class UCObjectives : UserControl
     {
         /// <summary>
-        /// Constructor.</br>
+        /// Constructor.
         /// </summary>
         public UCObjectives()
         {
@@ -19,7 +19,7 @@
         }
 
         /// <summary>
-        /// Fills the UI with Objectives.</br>
+        /// Fills the UI with Objectives.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -50,7 +50,7 @@
         }
 
         /// <summary>
-        /// Manage the control being resized.</br>
+        /// Manage the control being resized.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -64,7 +64,7 @@
         }
 
         /// <summary>
-        /// Mange the change of selection.</br>
+        /// Mange the change of selection.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -89,7 +89,7 @@
         }
 
         /// <summary>
-        /// Archive the Objective.</br>
+        /// Archive the Objective.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -99,7 +99,7 @@
         }
 
         /// <summary>
-        /// Re-activate the Objective from archive.</br>
+        /// Re-activate the Objective from archive.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -109,7 +109,7 @@
         }
 
         /// <summary>
-        /// Display the Rates and Costs for the Objective.</br>
+        /// Display the Rates and Costs for the Objective.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

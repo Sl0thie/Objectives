@@ -75,7 +75,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
-    <DocumentationFile>bin\Debug\VisioObjectives.xml</DocumentationFile>
+    <DocumentationFile>VisioObjectives.xml</DocumentationFile>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
@@ -100,7 +100,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\VisioObjectives.xml</DocumentationFile>
+    <DocumentationFile>VisioObjectives.xml</DocumentationFile>
   </PropertyGroup>
   <!--
     This section specifies references for the project.

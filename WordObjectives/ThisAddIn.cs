@@ -55,7 +55,7 @@
         }
 
         /// <summary>
-        /// Event handler to manage when documents are closed.</br>
+        /// Event handler to manage when documents are closed.
         /// Occurs immediately before any open document closes.
         /// </summary>
         /// <seealso cref="https://docs.microsoft.com/en-us/office/vba/api/word.application.documentbeforeclose"/>
@@ -67,7 +67,7 @@
         }
 
         /// <summary>
-        /// Event handler for when documents change.</br>
+        /// Event handler for when documents change.
         /// Occurs when a new document is created, when an existing document is opened, or when another document is made the active document.
         /// </summary>
         /// <seealso cref="https://docs.microsoft.com/en-us/office/vba/api/word.application.documentchange"/>
@@ -78,7 +78,7 @@
         }
 
         /// <summary>
-        /// Event handler for when a document is opened.</br>
+        /// Event handler for when a document is opened.
         /// <seealso cref="https://docs.microsoft.com/en-us/office/vba/api/word.application.documentopen"/>
         /// </summary>
         /// <param name="Doc">The document that was opened.</param>
@@ -88,7 +88,7 @@
         }
 
         /// <summary>
-        /// Check to see if documents are in the dictionary.</br>
+        /// Check to see if documents are in the dictionary.
         /// First add all documents to the dictionary.
         /// Then remove all key-pairs that are not in the document collection.
         /// </summary>
@@ -142,7 +142,7 @@
         }
 
         /// <summary>
-        /// The main timer event.</br>
+        /// The main timer event.
         /// </summary>
         /// <param name="stateInfo"></param>
         private void RefreshTimer_Tick(Object stateInfo)
@@ -172,7 +172,7 @@
         }
 
         /// <summary>
-        /// Method to manage the addition of documents.</br>
+        /// Method to manage the addition of documents.
         /// Documents are checked to see if they already exist. The reason for this is some office events fire more than once.
         /// The document's detail are then collected and added to the dictionary of document details.
         /// </summary>
@@ -227,7 +227,7 @@
         }
 
         /// <summary>
-        /// Method to remove documents from the collection.</br>
+        /// Method to remove documents from the collection.
         /// </summary>
         /// <param name="doc">The document to remove from the dictionary.</param>
         private void RemoveDocumentOld(Word.Document doc)
@@ -249,7 +249,7 @@
         }
 
         /// <summary>
-        /// Method to remove documents from the collection.</br>
+        /// Method to remove documents from the collection.
         /// </summary>
         /// <param name="doc">The document to remove from the dictionary.</param>
         private void RemoveDocument(string path)
@@ -269,7 +269,7 @@
         }
 
         /// <summary>
-        /// Method to save the data to a json file in the storage folder.</br>
+        /// Method to save the data to a json file in the storage folder.
         /// </summary>
         /// <param name="workItem">A WordSession object to save to file.</param>
         private void SaveData(WorkItem workItem)

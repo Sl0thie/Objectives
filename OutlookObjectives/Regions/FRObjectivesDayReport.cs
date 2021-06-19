@@ -5,7 +5,7 @@
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
-    /// A Form Region for the Objectives Day Report.</br>
+    /// A Form Region for the Objectives Day Report.
     /// </summary>
     partial class FRObjectivesDayReport
     {

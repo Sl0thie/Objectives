@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// Minute holds data related to the minute of the day.</br>
+    /// Minute holds data related to the minute of the day.
     /// </summary>
     public class Minute
     {
@@ -28,7 +28,7 @@
         public bool Up { get; set; } = false;
 
         /// <summary>
-        /// True if the system in an idle state.</br>
+        /// True if the system in an idle state.
         /// True is the screen save would be on if enabled.
         /// WARNING: The value is false when the system is off-line.
         /// </summary>
@@ -40,7 +40,7 @@
         public bool Billable { get; set; }
 
         /// <summary>
-        /// WorkItem that was deemed as the primary work item for that minute.</br>
+        /// WorkItem that was deemed as the primary work item for that minute.
         /// This is currently decided by the lowest workType index.
         /// </summary>
         public WorkItem PrimaryWorkItem { get; set; }

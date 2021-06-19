@@ -140,7 +140,7 @@
         }
 
         /// <summary>
-        /// Checks the system requirements.</br>
+        /// Checks the system requirements.
         /// Required: registry settings.
         /// Required: Root Folder.
         /// Required: Storage folder.

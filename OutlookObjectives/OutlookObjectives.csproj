@@ -98,7 +98,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
-    <DocumentationFile>bin\Debug\OutlookObjectives.xml</DocumentationFile>
+    <DocumentationFile>OutlookObjectives.xml</DocumentationFile>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
@@ -123,7 +123,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\OutlookObjectives.xml</DocumentationFile>
+    <DocumentationFile>OutlookObjectives.xml</DocumentationFile>
   </PropertyGroup>
   <!--
     This section specifies references for the project.
@@ -306,6 +306,7 @@
     <EmbeddedResource Include="Ribbons\RibExplorer.resx">
       <DependentUpon>RibExplorer.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="OutlookObjectives.md" />
     <None Include="OutlookObjectives_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -366,6 +367,9 @@
   <ItemGroup>
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.2\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.2\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="OutlookObjectives.xml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

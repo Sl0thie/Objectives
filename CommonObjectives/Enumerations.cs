@@ -1,7 +1,7 @@
 ﻿namespace CommonObjectives
 {
     /// <summary>
-    /// Enumeration of applications and their state of use.</br>
+    /// Enumeration of applications and their state of use.
     /// Write denotes the application was used to produce.
     /// Read denotes the application was used to review.
     /// </summary>
@@ -32,7 +32,7 @@
     }
 
     /// <summary>
-    /// Enumeration of System event types.</br>
+    /// Enumeration of System event types.
     /// </summary>
     public enum SystemType
     {
@@ -43,7 +43,7 @@
     }
 
     /// <summary>
-    /// Enumeration of Outlook Appointment types.</br>
+    /// Enumeration of Outlook Appointment types.
     /// </summary>
     public enum AppointmentType
     {

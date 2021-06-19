@@ -5,7 +5,7 @@
     using System.Windows.Forms;
 
     /// <summary>
-    /// UI to review or make changes to the WorkTypes.</br>
+    /// UI to review or make changes to the WorkTypes.
     /// </summary>
     public partial class FormChangeWorkType : Form
     {
@@ -22,7 +22,7 @@
         }
 
         /// <summary>
-        /// Constructor.</br>
+        /// Constructor.
         /// </summary>
         public FormChangeWorkType()
         {
@@ -30,7 +30,7 @@
         }
 
         /// <summary>
-        /// Setup the UI.</br>
+        /// Setup the UI.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -40,7 +40,7 @@
         }
 
         /// <summary>
-        /// Load the data from the WorkType to the UI.</br>
+        /// Load the data from the WorkType to the UI.
         /// </summary>
         private void SetupForm()
         {

@@ -13,7 +13,7 @@ using LogNET;
 namespace AutoCADObjectives
 {
     /// <summary>
-    /// AutoCAD extension to track time spent on drawings.</br>
+    /// AutoCAD extension to track time spent on drawings.
     /// NOTE: Output project directly to AutoCAD's Support directory.
     /// 
     /// Example, "C:\Program Files\Autodesk\AutoCAD 2018\Support\"
@@ -31,7 +31,7 @@ namespace AutoCADObjectives
         private readonly Timer timerUpdate = new Timer(50000);
 
         /// <summary>
-        /// Constructor.</br>
+        /// Constructor.
         /// </summary>
         public ExtApp()
         {
@@ -39,7 +39,7 @@ namespace AutoCADObjectives
         }
 
         /// <summary>
-        /// Terminate method.</br>
+        /// Terminate method.
         /// Not 100% sure this is called by AutoCAD yet.
         /// </summary>
         public void Terminate()
@@ -48,7 +48,7 @@ namespace AutoCADObjectives
         }
 
         /// <summary>
-        /// Main entry point from AutoCAD.</br>
+        /// Main entry point from AutoCAD.
         /// </summary>
         public void Initialize()
         {
@@ -79,7 +79,7 @@ namespace AutoCADObjectives
         }
 
         /// <summary>
-        /// Event for the main timer tick.</br>
+        /// Event for the main timer tick.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -96,7 +96,7 @@ namespace AutoCADObjectives
         }
 
         /// <summary>
-        /// Event for when documents are created.</br>
+        /// Event for when documents are created.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -163,7 +163,7 @@ namespace AutoCADObjectives
         }
 
         /// <summary>
-        /// Event for when documents are destroyed.</br>
+        /// Event for when documents are destroyed.
         /// WARNING: When AutoCAD starts this event is fired for "Drawing1.dwg" as the very first event.
         /// even though there is not drawing of that name. There is also no previous create event either.
         /// </summary>
@@ -208,7 +208,7 @@ namespace AutoCADObjectives
         }
 
         /// <summary>
-        /// Event for activated documents.</br>
+        /// Event for activated documents.
         /// WARNING: When AutoCAD starts this event fires but the document is null.
         /// </summary>
         /// <param name="sender"></param>
@@ -253,7 +253,7 @@ namespace AutoCADObjectives
         }
 
         /// <summary>
-        /// Event for when a document is activated.</br>
+        /// Event for when a document is activated.
         /// Currently not used as this level of detail is not implemented yet.
         /// </summary>
         /// <param name="sender"></param>
@@ -264,7 +264,7 @@ namespace AutoCADObjectives
         }
 
         /// <summary>
-        /// Event for when a document is deactivated.</br>
+        /// Event for when a document is deactivated.
         /// As with Callback_DocumentToBeActivated this is not implemented yet.
         /// </summary>
         /// <param name="sender"></param>
@@ -306,7 +306,7 @@ namespace AutoCADObjectives
         }
 
         /// <summary>
-        /// Saves the Data to the storage folder.</br>
+        /// Saves the Data to the storage folder.
         /// </summary>
         /// <param name="drawing"></param>
         private void SaveData(WorkItem drawing)

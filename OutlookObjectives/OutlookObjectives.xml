@@ -1,0 +1,445 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OutlookObjectives</name>
+    </assembly>
+    <members>
+        <member name="T:OutlookObjectives.UCObjectives">
+            <summary>
+            A User Control to be used as the UI for the Objectives Pane.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.UCObjectives.#ctor" -->
+        <member name="M:OutlookObjectives.UCObjectives.UCObjectives_Load(System.Object,System.EventArgs)">
+            <summary>
+            Fills the UI with Objectives.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:OutlookObjectives.UCObjectives.UCObjectives_Resize(System.Object,System.EventArgs)">
+            <summary>
+            Manage the control being resized.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.UCObjectives.ListObjectives_SelectedIndexChanged(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.UCObjectives.MenuArchive_Click(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.UCObjectives.MenuActivate_Click(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.UCObjectives.MenuRates_Click(System.Object,System.EventArgs)" -->
+        <member name="F:OutlookObjectives.UCObjectives.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.UCObjectives.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OutlookObjectives.UCObjectives.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:OutlookObjectives.FormChangeWorkType" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.FormChangeWorkType.#ctor" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.FormChangeWorkType.FormChangeWorkType_Load(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.FormChangeWorkType.SetupForm" -->
+        <member name="F:OutlookObjectives.FormChangeWorkType.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormChangeWorkType.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormChangeWorkType.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:OutlookObjectives.FormCreateObjective" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.FormCreateObjective.#ctor" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.FormCreateObjective.ButtonCreateObjective_Click(System.Object,System.EventArgs)" -->
+        <member name="F:OutlookObjectives.FormCreateObjective.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormCreateObjective.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormCreateObjective.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.FormObjectiveRates">
+            <summary>
+            Form to manage the Objectives Rates and Costs.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.FormObjectiveRates.Objective">
+            <summary>
+            The objective to manage.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormObjectiveRates.SetupControl">
+            <summary>
+            Setup the form to suit the supplied objective.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormObjectiveRates.ListWorkTypes_DoubleClick(System.Object,System.EventArgs)">
+            <summary>
+            Show the Change WorkType form when an item is double clicked.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormObjectiveRates.FormObjectiveRates_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Save the objective when the form closes.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Unused.</param>
+        </member>
+        <member name="F:OutlookObjectives.FormObjectiveRates.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormObjectiveRates.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormObjectiveRates.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:OutlookObjectives.FormSettings" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.FormSettings.FormSettings_Load(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.FormSettings.TextBoxObjectivesRootFolder_TextChanged(System.Object,System.EventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.FormSettings.TextBoxArchiveFolder_TextChanged(System.Object,System.EventArgs)" -->
+        <member name="F:OutlookObjectives.FormSettings.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormSettings.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormSettings.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:OutlookObjectives.IAppointment" -->
+        <!-- Badly formed XML comment ignored for member "P:OutlookObjectives.IAppointment.FolderPath" -->
+        <!-- Badly formed XML comment ignored for member "P:OutlookObjectives.IAppointment.AppointmentType" -->
+        <!-- Badly formed XML comment ignored for member "T:OutlookObjectives.InTouch" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.InTouch.GetObjective(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.InTouch.CreateObjective(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.InTouch.SaveObjective(CommonObjectives.Objective)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.InTouch.GetTimeStringFromMinutes(System.Int32)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.InTouch.CreateCSS" -->
+        <member name="T:OutlookObjectives.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:OutlookObjectives.FRObjectivesDayReport" -->
+        <member name="M:OutlookObjectives.FRObjectivesDayReport.FRObjectivesDayReport_FormRegionShowing(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Unused.</param>
+        </member>
+        <member name="F:OutlookObjectives.FRObjectivesDayReport.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesDayReport.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesDayReport.InitializeManifest(Microsoft.Office.Tools.Outlook.FormRegionManifest,Microsoft.Office.Tools.Outlook.Factory)">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesDayReport.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.WindowFormRegionCollection">
+            
+        </member>
+        <member name="M:OutlookObjectives.WindowFormRegionCollection.#ctor(System.Collections.Generic.IList{Microsoft.Office.Tools.Outlook.IFormRegion})">
+            
+        </member>
+        <member name="F:OutlookObjectives.FRObjectivesMonthReport.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesMonthReport.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesMonthReport.InitializeManifest(Microsoft.Office.Tools.Outlook.FormRegionManifest,Microsoft.Office.Tools.Outlook.Factory)">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesMonthReport.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:OutlookObjectives.FRObjectivesWeekReport.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesWeekReport.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesWeekReport.InitializeManifest(Microsoft.Office.Tools.Outlook.FormRegionManifest,Microsoft.Office.Tools.Outlook.Factory)">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesWeekReport.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:OutlookObjectives.RibAppointment.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.RibAppointment.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OutlookObjectives.RibAppointment.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.ThisRibbonCollection">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisRibbonCollection.#ctor(Microsoft.Office.Tools.Ribbon.RibbonFactory)">
+            
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:OutlookObjectives.RibExplorer" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.RibExplorer.RibExplorer_Load(System.Object,Microsoft.Office.Tools.Ribbon.RibbonUIEventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.RibExplorer.Explorer_FolderSwitch" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.RibExplorer.ButtonNewObjective_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)" -->
+        <member name="F:OutlookObjectives.RibExplorer.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.RibExplorer.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OutlookObjectives.RibExplorer.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:OutlookObjectives.TaskConvertVersion" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskConvertVersion.#ctor(System.Action)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskConvertVersion.RunTask" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskConvertVersion.BackgroundProcess" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskConvertVersion.ProcessAppointments" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskConvertVersion.GetAppointmentsWithinRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskConvertVersion.GetAppointmentsInRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)" -->
+        <!-- Badly formed XML comment ignored for member "T:OutlookObjectives.TaskDayReport" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskDayReport.#ctor(System.Action)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskDayReport.RunTask" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskDayReport.BackgroundProcess" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskDayReport.FindDay" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskDayReport.ProcessAppointments" -->
+        <member name="M:OutlookObjectives.TaskDayReport.CreateHTML">
+            <summary>
+            Creates the HTML for the report.
+            </summary>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskDayReport.DrawDayBarImage" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskDayReport.DrawApplicationsImage" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskDayReport.DrawSystemTimeImage" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskDayReport.DrawObjectiveImage" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskDayReport.ProcessSystemUptime(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskDayReport.ProcessSystemIdle(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskDayReport.ProcessVisualStudio(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskDayReport.GetAppointmentsWithinRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskDayReport.GetAppointmentsInRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)" -->
+        <!-- Badly formed XML comment ignored for member "T:OutlookObjectives.TaskManager" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskManager.TaskFinished" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskManager.BackgroundProcess" -->
+        <!-- Badly formed XML comment ignored for member "T:OutlookObjectives.TaskMonthReport" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskMonthReport.FindDay" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskMonthReport.GetAppointmentsWithinRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskMonthReport.GetAppointmentsInRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)" -->
+        <!-- Badly formed XML comment ignored for member "T:OutlookObjectives.TaskWeekReport" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskWeekReport.FindDay" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskWeekReport.GetDays" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskWeekReport.GetWorkItemFromDays" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskWeekReport.CreateHTML" -->
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.TaskWeekReport.GetAppointmentsInRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)" -->
+        <member name="T:OutlookObjectives.ThisAddIn">
+            <summary>
+            Microsoft Outlook VSTO AddIn to track Objectives.
+            </summary>
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.ThisAddIn_Startup(System.Object,System.EventArgs)">
+            <summary>
+            Primary entry for the AddIn.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.Inspectors_NewInspector(Microsoft.Office.Interop.Outlook.Inspector)">
+            <summary>
+            Event when new inspectors are opened.
+            </summary>
+            <param name="inspector">The inspector to manage.</param>
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.OnMainTimerEvent(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+             Primary timer event.
+            </summary>
+            <param name="source">Unused.</param>
+            <param name="e">Unused.</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:OutlookObjectives.ThisAddIn.CheckSystemRequirements" -->
+        <member name="M:OutlookObjectives.ThisAddIn.ShowSettings">
+            <summary>
+            Shows the Settings Form.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.InternalStartup">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.#ctor(Microsoft.Office.Tools.Outlook.Factory,System.IServiceProvider)">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.Initialize">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.FinishInitialization">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.InitializeDataBindings">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.InitializeCachedData">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.InitializeData">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.BindToData">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.StartCaching(System.String)">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.StopCaching(System.String)">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.IsCached(System.String)">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.BeginInitialization">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.EndInitialization">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.InitializeControls">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.InitializeComponents">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.NeedsFill(System.String)">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.OnShutdown">
+            
+        </member>
+        <member name="T:OutlookObjectives.Globals">
+            
+        </member>
+        <member name="M:OutlookObjectives.Globals.#ctor">
+            
+        </member>
+        <member name="T:OutlookObjectives.ThisFormRegionCollection">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisFormRegionCollection.#ctor(System.Collections.Generic.IList{Microsoft.Office.Tools.Outlook.IFormRegion})">
+            
+        </member>
+    </members>
+</doc>

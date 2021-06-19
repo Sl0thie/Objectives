@@ -7,7 +7,7 @@
     using System.Windows.Forms;
 
     /// <summary>
-    /// Form to manage Objectives Settings.</br>
+    /// Form to manage Objectives Settings.
     /// </summary>
     public partial class FormSettings : Form
     {
@@ -17,7 +17,7 @@
         }
 
         /// <summary>
-        /// Populate the form with the original details.</br>
+        /// Populate the form with the original details.
         /// </summary>
         /// <param name="sender">Unused.</param>
         /// <param name="e">Unused.</param>
@@ -83,7 +83,7 @@
         }
 
         /// <summary>
-        /// Update the root folder.</br>
+        /// Update the root folder.
         /// </summary>
         /// <param name="sender">Unused.</param>
         /// <param name="e">Unused.</param>
@@ -106,7 +106,7 @@
         }
 
         /// <summary>
-        /// Update the archive folder.</br>
+        /// Update the archive folder.
         /// </summary>
         /// <param name="sender">Unused.</param>
         /// <param name="e">Unused.</param>

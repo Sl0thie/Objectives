@@ -5,12 +5,12 @@
     using System.Windows.Forms;
 
     /// <summary>
-    /// UI form to provide an interface for the user to create a new Objective.</br>
+    /// UI form to provide an interface for the user to create a new Objective.
     /// </summary>
     public partial class FormCreateObjective : Form
     {
         /// <summary>
-        /// Constructor.</br>
+        /// Constructor.
         /// </summary>
         public FormCreateObjective()
         {

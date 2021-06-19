@@ -14,7 +14,7 @@
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
-    /// Day Report Task to generate Objectives Day Reports.</br>
+    /// Day Report Task to generate Objectives Day Reports.
     /// </summary>
     public class TaskDayReport
     {
@@ -32,7 +32,7 @@
         readonly Color colorOther = Color.FromArgb(255, 128, 64);
 
         /// <summary>
-        /// Returns control back to the TaskManager.</br>
+        /// Returns control back to the TaskManager.
         /// </summary>
         /// <param name="callBack"></param>
         public TaskDayReport(Action callBack)
@@ -41,7 +41,7 @@
         }
 
         /// <summary>
-        /// Creates a thread to run the Task.</br>
+        /// Creates a thread to run the Task.
         /// </summary>
         public void RunTask()
         {
@@ -56,7 +56,7 @@
         }
 
         /// <summary>
-        /// The starting point for the new process.</br>
+        /// The starting point for the new process.
         /// </summary>
         private void BackgroundProcess()
         {
@@ -94,7 +94,7 @@
         }
 
         /// <summary>
-        /// Find the day that is suitable to create the report for.</br>
+        /// Find the day that is suitable to create the report for.
         /// </summary>
         /// <returns></returns>
         private DateTime FindDay()
@@ -129,7 +129,7 @@
         }
 
         /// <summary>
-        /// Primary process to create a DayReport.</br>
+        /// Primary process to create a DayReport.
         /// </summary>
         /// <param name="day">The day to create a report for.</param>
         private void ProcessAppointments()
@@ -440,7 +440,7 @@
         }
 
         /// <summary>
-        /// Draws the Day Bar image.</br>
+        /// Draws the Day Bar image.
         /// </summary>
         private void DrawDayBarImage()
         {
@@ -528,7 +528,7 @@
         }
 
         /// <summary>
-        /// Draw the applications graph.</br>
+        /// Draw the applications graph.
         /// </summary>
         private void DrawApplicationsImage()
         {
@@ -587,7 +587,7 @@
         }
 
         /// <summary>
-        /// Draw the system time graph.</br>
+        /// Draw the system time graph.
         /// </summary>
         private void DrawSystemTimeImage()
         {
@@ -665,7 +665,7 @@
         }
 
         /// <summary>
-        /// Draw the objectives graph.</br>
+        /// Draw the objectives graph.
         /// </summary>
         private void DrawObjectiveImage()
         {
@@ -747,7 +747,7 @@
         }
 
         /// <summary>
-        /// Process the system time data.</br>
+        /// Process the system time data.
         /// </summary>
         /// <param name="json"></param>
         private void ProcessSystemUptime(string json)
@@ -836,7 +836,7 @@
         }
 
         /// <summary>
-        /// Process the system idle data.</br>
+        /// Process the system idle data.
         /// </summary>
         /// <param name="json"></param>
         private void ProcessSystemIdle(string json)
@@ -856,7 +856,7 @@
         }
 
         /// <summary>
-        /// Process the Visual Studio data.</br>
+        /// Process the Visual Studio data.
         /// </summary>
         /// <param name="json"></param>
         /// <param name="isWork"></param>
@@ -980,7 +980,7 @@
         //}
 
         /// <summary>
-        /// Get the appointments within the timespan.</br>
+        /// Get the appointments within the timespan.
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="startTime"></param>
@@ -1012,7 +1012,7 @@
         }
 
         /// <summary>
-        /// Get the appointments that fall in the range of the timespan.</br>
+        /// Get the appointments that fall in the range of the timespan.
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="startTime"></param>

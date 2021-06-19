@@ -6,7 +6,7 @@
     using System.Threading;
 
     /// <summary>
-    /// TaskManager manages the background tasks.</br>
+    /// TaskManager manages the background tasks.
     /// </summary>
     /// <remarks>The TaskManager is used to manage the background tasks that perform 
     /// operations such as moving emails from the Inbox. It provides a queue to store tasks
@@ -46,7 +46,7 @@
         }
 
         /// <summary>
-        /// Callback for when the current task is finished.</br>
+        /// Callback for when the current task is finished.
         /// </summary>
         public void TaskFinished()
         {
@@ -54,7 +54,7 @@
         }
 
         /// <summary>
-        /// Main loop for managing tasks.</br>
+        /// Main loop for managing tasks.
         /// </summary>
         private void BackgroundProcess()
         {

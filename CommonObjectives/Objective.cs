@@ -4,32 +4,32 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// Objective holds data related to an Objective.</br>
+    /// Objective holds data related to an Objective.
     /// </summary>
     public class Objective
     {
         /// <summary>
-        /// The name of the Objective.</br>
+        /// The name of the Objective.
         /// </summary>
         public string ObjectiveName { get; set; }
 
         /// <summary>
-        /// The path to the folder that holds the Objective.</br>
+        /// The path to the folder that holds the Objective.
         /// </summary>
         public string Path { get; set; }
 
         /// <summary>
-        /// Value indicates whether the Objective is currently archived.</br>
+        /// Value indicates whether the Objective is currently archived.
         /// </summary>
         public bool Archived { get; set; }
 
         /// <summary>
-        /// The time the Objective is created.</br>
+        /// The time the Objective is created.
         /// </summary>
         public DateTime Created { get; set; }
 
         /// <summary>
-        /// The current WorkType values for the Objective.</br>
+        /// The current WorkType values for the Objective.
         /// If they are not found here then the default values are used.
         /// </summary>
         private Dictionary<int, WorkType> workTypes = new Dictionary<int, WorkType>();

@@ -9,7 +9,7 @@
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
-    /// Day Report Task to generate Objectives Day Reports.</br>
+    /// Day Report Task to generate Objectives Day Reports.
     /// </summary>
     public class TaskConvertVersion
     {
@@ -25,7 +25,7 @@
 
 
         /// <summary>
-        /// Returns control back to the TaskManager.</br>
+        /// Returns control back to the TaskManager.
         /// </summary>
         /// <param name="callBack"></param>
         public TaskConvertVersion(Action callBack)
@@ -34,7 +34,7 @@
         }
 
         /// <summary>
-        /// Creates a thread to run the Task.</br>
+        /// Creates a thread to run the Task.
         /// </summary>
         public void RunTask()
         {
@@ -49,7 +49,7 @@
         }
 
         /// <summary>
-        /// The starting point for the new process.</br>
+        /// The starting point for the new process.
         /// </summary>
         private void BackgroundProcess()
         {
@@ -74,7 +74,7 @@
         }
 
         /// <summary>
-        /// Primary process to create a DayReport.</br>
+        /// Primary process to create a DayReport.
         /// </summary>
         /// <param name="day">The day to create a report for.</param>
         private void ProcessAppointments()
@@ -254,7 +254,7 @@
         }
 
         /// <summary>
-        /// Get the appointments within the timespan.</br>
+        /// Get the appointments within the timespan.
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="startTime"></param>
@@ -286,7 +286,7 @@
         }
 
         /// <summary>
-        /// Get the appointments that fall in the range of the timespan.</br>
+        /// Get the appointments that fall in the range of the timespan.
         /// </summary>
         /// <param name="folder"></param>
         /// <param name="startTime"></param>

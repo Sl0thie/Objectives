@@ -65,15 +65,55 @@
             Empty constructor for serialization.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.ApplicationType" -->
-        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.SystemType" -->
-        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.AppointmentType" -->
-        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.IWorkItem" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.IWorkItem.Id" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.IWorkItem.ObjectiveName" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.IWorkItem.Start" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.IWorkItem.Finish" -->
-        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.Minute" -->
+        <member name="T:CommonObjectives.ApplicationType">
+            <summary>
+            Enumeration of applications and their state of use.
+            Write denotes the application was used to produce.
+            Read denotes the application was used to review.
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.SystemType">
+            <summary>
+            Enumeration of System event types.
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.AppointmentType">
+            <summary>
+            Enumeration of Outlook Appointment types.
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.IWorkItem">
+            <summary>
+            Interface to handle multiple work item types.
+            Currently not implemented.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.IWorkItem.Id">
+            <summary>
+            Index for the item.
+            GUID is used to make the item database friendly.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.IWorkItem.ObjectiveName">
+            <summary>
+            Objective Name related to the work item.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.IWorkItem.Start">
+            <summary>
+            The start of the work item.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.IWorkItem.Finish">
+            <summary>
+            The finish of the work item.
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.Minute">
+            <summary>
+            Minute holds data related to the minute of the day.
+            </summary>
+        </member>
         <member name="P:CommonObjectives.Minute.Index">
             <summary>
             Index is the minute of the day. (hour * 60 + minute)
@@ -94,13 +134,24 @@
             True is the system is on.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Minute.Idle" -->
+        <member name="P:CommonObjectives.Minute.Idle">
+            <summary>
+            True if the system in an idle state.
+            True is the screen save would be on if enabled.
+            WARNING: The value is false when the system is off-line.
+            </summary>
+        </member>
         <member name="P:CommonObjectives.Minute.Billable">
             <summary>
             True if the minute contains any Objective work.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Minute.PrimaryWorkItem" -->
+        <member name="P:CommonObjectives.Minute.PrimaryWorkItem">
+            <summary>
+            WorkItem that was deemed as the primary work item for that minute.
+            This is currently decided by the lowest workType index.
+            </summary>
+        </member>
         <member name="M:CommonObjectives.Minute.#ctor">
             <summary>
             Empty constructor for serialization.
@@ -117,38 +168,152 @@
             A string containing the HTML for the report.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.Note" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Note.Id" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Note.Created" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Note.Modified" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Note.Title" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Note.Content" -->
-        <!-- Badly formed XML comment ignored for member "M:CommonObjectives.Note.#ctor" -->
-        <!-- Badly formed XML comment ignored for member "M:CommonObjectives.Note.#ctor(System.String,System.String)" -->
-        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.Objective" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Objective.ObjectiveName" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Objective.Path" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Objective.Archived" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Objective.Created" -->
-        <!-- Badly formed XML comment ignored for member "F:CommonObjectives.Objective.workTypes" -->
+        <member name="T:CommonObjectives.Note">
+            <summary>
+            Note holds data for notes created for other objects.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Note.Id">
+            <summary>
+            Id for the note.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Note.Created">
+            <summary>
+            The time the note is first created.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Note.Modified">
+            <summary>
+            The time the note is modified.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Note.Title">
+            <summary>
+            The title for the note.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Note.Content">
+            <summary>
+            The content of the note.
+            </summary>
+        </member>
+        <member name="M:CommonObjectives.Note.#ctor">
+            <summary>
+            Empty constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:CommonObjectives.Note.#ctor(System.String,System.String)">
+            <summary>
+            Constructor to fill data on creation.
+            </summary>
+            <param name="title"></param>
+            <param name="content"></param>
+        </member>
+        <member name="T:CommonObjectives.Objective">
+            <summary>
+            Objective holds data related to an Objective.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Objective.ObjectiveName">
+            <summary>
+            The name of the Objective.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Objective.Path">
+            <summary>
+            The path to the folder that holds the Objective.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Objective.Archived">
+            <summary>
+            Value indicates whether the Objective is currently archived.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Objective.Created">
+            <summary>
+            The time the Objective is created.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.Objective.workTypes">
+            <summary>
+            The current WorkType values for the Objective.
+            If they are not found here then the default values are used.
+            </summary>
+        </member>
         <member name="P:CommonObjectives.WeekReport.HTML">
             <summary>
             A string containing the HTML for the report.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.WorkItem" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Id" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Version" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.ObjectiveName" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Start" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Finish" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.FilePath" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Name" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Description" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Notes" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.WorkType" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Application" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Minutes" -->
+        <member name="T:CommonObjectives.WorkItem">
+            <summary>
+            WorkItem holds data related to work items.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Id">
+            <summary>
+            GUID Index.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Version">
+            <summary>
+            The version of the WorkItem.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.ObjectiveName">
+            <summary>
+            Objective name.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Start">
+            <summary>
+            The start time of the work item.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Finish">
+            <summary>
+            The finish time of the work item.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.FilePath">
+            <summary>
+            File path to the project item's location.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Name">
+            <summary>
+            Project name.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Description">
+            <summary>
+            General description of the work item.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Notes">
+            <summary>
+            Collection of notes related to the work item.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.WorkType">
+            <summary>
+            The WorkType related to the work item.
+            This is stored here at the time of creation of the object as the WorkType can be changed.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Application">
+            <summary>
+            The application type of the work item.
+            Some work items are not computer related so have no Application type.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Minutes">
+            <summary>
+            The calculated number of minutes for the work item.
+            Some items have minimum and maximum values for this set contractually so may not be the number of minutes between the start and finish DateTimes.
+            </summary>
+        </member>
         <member name="P:CommonObjectives.WorkItem.Cost">
             <summary>
             The calculated cost of the work item.
@@ -159,8 +324,18 @@
             A value indicating whether the item has been invoiced.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.StartSize" -->
-        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.FinishSize" -->
+        <member name="P:CommonObjectives.WorkItem.StartSize">
+            <summary>
+            A value of the size of the work item at the start.
+            This is irreverent for non commuter based items.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.FinishSize">
+            <summary>
+            A value of the size of the work item at the finish.
+            This is irreverent for non commuter based items.
+            </summary>
+        </member>
         <member name="M:CommonObjectives.WorkItem.#ctor">
             <summary>
             An empty constructor for serialization.

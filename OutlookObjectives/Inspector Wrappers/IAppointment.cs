@@ -3,12 +3,12 @@
     using CommonObjectives;
 
     /// <summary>
-    /// Appointment Interface for the inspector wrapper.</br>
+    /// Appointment Interface for the inspector wrapper.
     /// </summary>
     public interface IAppointment
     {
         /// <summary>
-        /// The outlook folder path.</br>
+        /// The outlook folder path.
         /// </summary>
         string FolderPath
         {
@@ -17,7 +17,7 @@
         }
 
         /// <summary>
-        /// The type of appointment.</br>
+        /// The type of appointment.
         /// </summary>
         AppointmentType AppointmentType
         {

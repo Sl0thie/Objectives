@@ -3,44 +3,44 @@
     using System;
 
     /// <summary>
-    /// Note holds data for notes created for other objects.</br>
+    /// Note holds data for notes created for other objects.
     /// </summary>
     public class Note
     {
         /// <summary>
-        /// Id for the note.</br>
+        /// Id for the note.
         /// </summary>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// The time the note is first created.</br>
+        /// The time the note is first created.
         /// </summary>
         public DateTime Created { get; set; }
 
         /// <summary>
-        /// The time the note is modified.</br>
+        /// The time the note is modified.
         /// </summary>
         public DateTime Modified { get; set; }
 
         /// <summary>
-        /// The title for the note.</br>
+        /// The title for the note.
         /// </summary>
         public string Title { get; set; }
 
         /// <summary>
-        /// The content of the note.</br>
+        /// The content of the note.
         /// </summary>
         public string Content { get; set; }
 
         /// <summary>
-        /// Empty constructor for serialization.</br>
+        /// Empty constructor for serialization.
         /// </summary>
         public Note()
         {
         }
 
         /// <summary>
-        /// Constructor to fill data on creation.</br>
+        /// Constructor to fill data on creation.
         /// </summary>
         /// <param name="title"></param>
         /// <param name="content"></param>
