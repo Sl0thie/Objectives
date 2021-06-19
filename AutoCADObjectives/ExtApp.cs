@@ -17,9 +17,9 @@ namespace AutoCADObjectives
     /// </summary>
     /// <remarks>
     /// Output project directly to AutoCAD's Support directory.
-    /// <example>
+    /// <code>
     /// C:\Program Files\Autodesk\AutoCAD 2018\Support
-    /// </example>
+    /// </code>
     /// This directory is considered secure by AutoCAD so there is no need to add the normal project output directory to AutoCAD's security.
     /// Use the command <c>NETLOAD</c> to load the DLL into AutoCAD manually.
     /// Or copy the file acad.lsp to the support directory to load the DLL automatically on startup.
@@ -42,7 +42,7 @@ namespace AutoCADObjectives
         }
 
         /// <summary>
-        /// Terminate method.
+        /// Method AutoCAD calls to terminate the extension.
         /// </summary>
         /// <remarks>
         /// Not 100% sure this is called by AutoCAD yet.
@@ -53,7 +53,7 @@ namespace AutoCADObjectives
         }
 
         /// <summary>
-        /// Main entry point from AutoCAD.
+        /// Method AutoCAD calls to start the extension.
         /// </summary>
         public void Initialize()
         {
@@ -84,7 +84,7 @@ namespace AutoCADObjectives
         }
 
         /// <summary>
-        /// Event for the main timer tick.
+        /// Handles the main timer tick event.
         /// </summary>
         /// <param name="sender">parameter is unused.</param>
         /// <param name="e">parameter is unused.</param>
@@ -169,9 +169,11 @@ namespace AutoCADObjectives
 
         /// <summary>
         /// Event for when documents are destroyed.
-        /// WARNING: When AutoCAD starts this event is fired for "Drawing1.dwg" as the very first event.
-        /// even though there is not drawing of that name. There is also no previous create event either.
         /// </summary>
+        /// <remarks>
+        /// WARNING: When AutoCAD starts this event is fired for "Drawing1.dwg" as the very first event.
+        /// even though there is no drawing of that name. There is also no previous matching create event either.
+        /// </remarks>
         /// <param name="sender">parameter is unused.</param>
         /// <param name="e">parameter is unused.</param>
         private void Callback_DocumentToBeDestroyed(Object sender, DocumentCollectionEventArgs e)
@@ -214,8 +216,10 @@ namespace AutoCADObjectives
 
         /// <summary>
         /// Event for activated documents.
-        /// WARNING: When AutoCAD starts this event fires but the document is null.
         /// </summary>
+        /// <remarks>
+        /// WARNING: When AutoCAD starts this event fires but the document is null.
+        /// </remarks>
         /// <param name="sender">parameter is unused.</param>
         /// <param name="e">parameter is unused.</param>
         private void Callback_DocumentActivated(Object sender, DocumentCollectionEventArgs e)
@@ -313,14 +317,14 @@ namespace AutoCADObjectives
         /// <summary>
         /// Saves the Data to the storage folder.
         /// </summary>
-        /// <param name="drawing">parameter is unused.</param>
-        private void SaveData(WorkItem drawing)
+        /// <param name="workItem">The WorkItem object to save to file.</param>
+        private void SaveData(WorkItem workItem)
         {
-            if(drawing is object)
+            if(workItem is object)
             {
-                if (drawing.FilePath is object)
+                if (workItem.FilePath is object)
                 {
-                    Log.Info(drawing.FilePath);
+                    Log.Info(workItem.FilePath);
                 }
                 else
                 {
@@ -334,26 +338,26 @@ namespace AutoCADObjectives
 
             try
             {
-                if (drawing.Start != drawing.Finish)
+                if (workItem.Start != workItem.Finish)
                 {
                     // TODO Manually save the document before checking. Currently this is relying on auto-save within AutoCAD.
                     // Otherwise the file may not count as work done. Testing first to see the real need for this to be implemented.
-                    FileInfo drawingFile = new FileInfo(drawing.FilePath);
-                    drawing.FinishSize = drawingFile.Length;
+                    FileInfo drawingFile = new FileInfo(workItem.FilePath);
+                    workItem.FinishSize = drawingFile.Length;
 
-                    if (drawing.FinishSize != drawing.StartSize)
+                    if (workItem.FinishSize != workItem.StartSize)
                     {
-                        drawing.Application = ApplicationType.AutocadWrite;
+                        workItem.Application = ApplicationType.AutocadWrite;
                     }
                     else
                     {
-                        drawing.Application = ApplicationType.AutocadRead;
+                        workItem.Application = ApplicationType.AutocadRead;
                     }
 
-                    drawing.Finish = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
-                    string json = JsonConvert.SerializeObject(drawing, Formatting.Indented);
-                    File.WriteAllText(StorageFolder + @"\" + (int)drawing.Application + "-" + drawing.Id.ToString() + ".json", json);
-                    drawing.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
+                    workItem.Finish = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
+                    string json = JsonConvert.SerializeObject(workItem, Formatting.Indented);
+                    File.WriteAllText(StorageFolder + @"\" + (int)workItem.Application + "-" + workItem.Id.ToString() + ".json", json);
+                    workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
                 }
             }
             catch (System.Exception ex)
