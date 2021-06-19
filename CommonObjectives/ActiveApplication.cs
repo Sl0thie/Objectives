@@ -3,8 +3,9 @@
     using System;
 
     /// <summary>
-    /// ActiveApplication holds data for the application that is focused.</br>
+    /// ActiveApplication class contains related to the application that was in focus at the time..
     /// </summary>
+    /// <
     public class ActiveApplication
     {
         /// <summary>

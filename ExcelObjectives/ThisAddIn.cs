@@ -17,7 +17,7 @@
         // TODO Handle workbooks being renamed.
 
         // Dictionary to hold the document data collected.
-        private Dictionary<string, WorkItem> WorkItems = new Dictionary<string, WorkItem>();
+        private readonly Dictionary<string, WorkItem> WorkItems = new Dictionary<string, WorkItem>();
 
         // Path to the root folder of where the Objectives are stored.
         private static string RootFolder;
@@ -45,7 +45,7 @@
             Globals.ThisAddIn.Application.WorkbookOpen += Application_WorkbookOpen;
             Globals.ThisAddIn.Application.WorkbookBeforeClose += Application_WorkbookBeforeClose;
 
-            timerDelegate = new TimerCallback(refreshTimer_Tick);
+            timerDelegate = new TimerCallback(RefreshTimer_Tick);
             refreshIntervalTime = new TimeSpan(0, 0, 0, 50, 1000);
             refreshTimer = new Timer(timerDelegate, null, TimeSpan.Zero, refreshIntervalTime);
 
@@ -103,7 +103,7 @@
             AddWorkbook(workbook);
         }
 
-        private void refreshTimer_Tick(Object stateInfo)
+        private void RefreshTimer_Tick(Object stateInfo)
         {
             if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
             {
@@ -128,10 +128,12 @@
             }
             else
             {
-                WorkItem workItem = new WorkItem();
-                workItem.Id = Guid.NewGuid();
-                workItem.FilePath = workbook.FullName;
-                workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
+                WorkItem workItem = new WorkItem
+                {
+                    Id = Guid.NewGuid(),
+                    FilePath = workbook.FullName,
+                    Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"))
+                };
 
                 if (workItem.FilePath.LastIndexOf("\\") > 0)
                 {

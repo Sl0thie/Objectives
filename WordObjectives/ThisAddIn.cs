@@ -16,7 +16,7 @@
     public partial class ThisAddIn
     {
         // Dictionary to hold the document data collected.
-        private Dictionary<string, WorkItem> Documents = new Dictionary<string, WorkItem>();
+        private readonly Dictionary<string, WorkItem> Documents = new Dictionary<string, WorkItem>();
 
         // Path to the root folder of where the Objectives are stored.
         private static string RootFolder;
@@ -187,9 +187,11 @@
             }
             else
             {
-                WorkItem workItem = new WorkItem();
-                workItem.FilePath = doc.FullName;
-                workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
+                WorkItem workItem = new WorkItem
+                {
+                    FilePath = doc.FullName,
+                    Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"))
+                };
                 //FileInfo fileInfo = new FileInfo(doc.FullName);
                 //workItem.StartSize = fileInfo.Length;
 

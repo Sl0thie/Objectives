@@ -11,7 +11,7 @@
     /// </summary>
     public class TaskMonthReport
     {
-        private Action CallBack;
+        private readonly Action CallBack;
         private readonly MonthReport monthReport = new MonthReport();
         private readonly DateTime firstDay = new DateTime(2021, 5, 25);
         private DateTime day;
@@ -23,10 +23,12 @@
 
         public void RunTask()
         {
-            Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess));
-            BackgroundThread.Name = "Objectives.TaskMonthReport";
-            BackgroundThread.IsBackground = true;
-            BackgroundThread.Priority = ThreadPriority.Normal;
+            Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess))
+            {
+                Name = "Objectives.TaskMonthReport",
+                IsBackground = true,
+                Priority = ThreadPriority.Normal
+            };
             BackgroundThread.SetApartmentState(ApartmentState.STA);
             BackgroundThread.Start();
         }

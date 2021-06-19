@@ -42,8 +42,10 @@
 
             foreach (var next in InTouch.WorkTypes)
             {
-                ListViewItem nextItem = new ListViewItem(next.Value.Index.ToString("000"));
-                nextItem.Tag = next.Value.Index;
+                ListViewItem nextItem = new ListViewItem(next.Value.Index.ToString("000"))
+                {
+                    Tag = next.Value.Index
+                };
                 nextItem.SubItems.Add(next.Value.Name);
                 nextItem.SubItems.Add(next.Value.Description);
                 nextItem.SubItems.Add(next.Value.CostPerHour.ToString());
@@ -123,15 +125,19 @@
                 {
                     if (objective.WorkTypes.ContainsKey((int)ListWorkTypes.SelectedItems[0].Tag))
                     {
-                        FormChangeWorkType newForm = new FormChangeWorkType();
-                        newForm.WorkType = objective.WorkTypes[(int)ListWorkTypes.SelectedItems[0].Tag];
+                        FormChangeWorkType newForm = new FormChangeWorkType
+                        {
+                            WorkType = objective.WorkTypes[(int)ListWorkTypes.SelectedItems[0].Tag]
+                        };
                         newForm.ShowDialog();
                         objective.WorkTypes[(int)ListWorkTypes.SelectedItems[0].Tag] = newForm.WorkType;
                     }
                     else if (InTouch.WorkTypes.ContainsKey((int)ListWorkTypes.SelectedItems[0].Tag))
                     {
-                        FormChangeWorkType newForm = new FormChangeWorkType();
-                        newForm.WorkType = InTouch.WorkTypes[(int)ListWorkTypes.SelectedItems[0].Tag];
+                        FormChangeWorkType newForm = new FormChangeWorkType
+                        {
+                            WorkType = InTouch.WorkTypes[(int)ListWorkTypes.SelectedItems[0].Tag]
+                        };
                         newForm.ShowDialog();
 
                         if (objective.WorkTypes.ContainsKey((int)ListWorkTypes.SelectedItems[0].Tag))

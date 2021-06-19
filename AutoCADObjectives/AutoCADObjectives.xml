@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutoCADObjectives</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "T:AutoCADObjectives.ExtApp" -->
+        <!-- Badly formed XML comment ignored for member "M:AutoCADObjectives.ExtApp.#ctor" -->
+        <!-- Badly formed XML comment ignored for member "M:AutoCADObjectives.ExtApp.Terminate" -->
+        <!-- Badly formed XML comment ignored for member "M:AutoCADObjectives.ExtApp.Initialize" -->
+        <!-- Badly formed XML comment ignored for member "M:AutoCADObjectives.ExtApp.TimerUpdate_Elapsed(System.Object,System.Timers.ElapsedEventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:AutoCADObjectives.ExtApp.Callback_DocumentCreated(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:AutoCADObjectives.ExtApp.Callback_DocumentToBeDestroyed(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:AutoCADObjectives.ExtApp.Callback_DocumentActivated(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:AutoCADObjectives.ExtApp.Callback_DocumentToBeActivated(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:AutoCADObjectives.ExtApp.Callback_DocumentToBeDeactivated(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)" -->
+        <!-- Badly formed XML comment ignored for member "M:AutoCADObjectives.ExtApp.SaveData(CommonObjectives.WorkItem)" -->
+    </members>
+</doc>

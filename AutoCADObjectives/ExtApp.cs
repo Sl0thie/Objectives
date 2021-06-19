@@ -27,8 +27,8 @@ namespace AutoCADObjectives
         // TODO Check that the file path is saving the correct path.
         private string RootFolder;
         private string StorageFolder;
-        private Dictionary<string, WorkItem> WorkItems = new Dictionary<string, WorkItem>();
-        private Timer timerUpdate = new Timer(50000);
+        private readonly Dictionary<string, WorkItem> WorkItems = new Dictionary<string, WorkItem>();
+        private readonly Timer timerUpdate = new Timer(50000);
 
         /// <summary>
         /// Constructor.</br>
@@ -124,10 +124,12 @@ namespace AutoCADObjectives
 
                 if (doc.IsNamedDrawing)
                 {
-                    WorkItem newDrawing = new WorkItem();
-                    newDrawing.Id = Guid.NewGuid();
-                    newDrawing.FilePath = doc.Name;
-                    newDrawing.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
+                    WorkItem newDrawing = new WorkItem
+                    {
+                        Id = Guid.NewGuid(),
+                        FilePath = doc.Name,
+                        Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"))
+                    };
 
                     if (newDrawing.FilePath.LastIndexOf("\\") > 0)
                     {

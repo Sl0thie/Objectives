@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CommonObjectives</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.ActiveApplication" -->
+        <member name="P:CommonObjectives.ActiveApplication.Time">
+            <summary>
+            The time is was measured.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.ActiveApplication.Title">
+            <summary>
+            The title of the focused application.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.ActiveApplication.Application">
+            <summary>
+            The application name that is focused.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.Day">
+            <summary>
+            The Date value of the report.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.TotalUptime">
+            <summary>
+            An int value returning the total number of minutes the system was up that day.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.TotalIdle">
+            <summary>
+            An int value returning the total number of minutes the system was idle during up time.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.TotalWork">
+            <summary>
+            An int value returning how many minutes of work time was determined.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.WorkItems">
+            <summary>
+            A dictionary for the Objective's Totals.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.UniqueApplications">
+            <summary>
+            A dictionary of the unique applications from the system monitor.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.Minutes">
+            <summary>
+            An array of the minute objects for the day.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.HTML">
+            <summary>
+            A string containing the HTML for the report.
+            </summary>
+        </member>
+        <member name="M:CommonObjectives.DayReport.#ctor">
+            <summary>
+            Empty constructor for serialization.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.ApplicationType" -->
+        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.SystemType" -->
+        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.AppointmentType" -->
+        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.IWorkItem" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.IWorkItem.Id" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.IWorkItem.ObjectiveName" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.IWorkItem.Start" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.IWorkItem.Finish" -->
+        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.Minute" -->
+        <member name="P:CommonObjectives.Minute.Index">
+            <summary>
+            Index is the minute of the day. (hour * 60 + minute)
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Minute.ActiveApplication">
+            <summary>
+            The active application from the system monitor.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Minute.ActiveApplicationTitle">
+            <summary>
+            The title from the application from the system monitor.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Minute.Up">
+            <summary>
+            True is the system is on.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Minute.Idle" -->
+        <member name="P:CommonObjectives.Minute.Billable">
+            <summary>
+            True if the minute contains any Objective work.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Minute.PrimaryWorkItem" -->
+        <member name="M:CommonObjectives.Minute.#ctor">
+            <summary>
+            Empty constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:CommonObjectives.Minute.#ctor(System.Int32)">
+            <summary>
+            Constructor to assign the minute on creation.
+            </summary>
+            <param name="index">The minute to use as an index.</param>
+        </member>
+        <member name="P:CommonObjectives.MonthReport.HTML">
+            <summary>
+            A string containing the HTML for the report.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.Note" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Note.Id" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Note.Created" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Note.Modified" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Note.Title" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Note.Content" -->
+        <!-- Badly formed XML comment ignored for member "M:CommonObjectives.Note.#ctor" -->
+        <!-- Badly formed XML comment ignored for member "M:CommonObjectives.Note.#ctor(System.String,System.String)" -->
+        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.Objective" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Objective.ObjectiveName" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Objective.Path" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Objective.Archived" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.Objective.Created" -->
+        <!-- Badly formed XML comment ignored for member "F:CommonObjectives.Objective.workTypes" -->
+        <member name="P:CommonObjectives.WeekReport.HTML">
+            <summary>
+            A string containing the HTML for the report.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:CommonObjectives.WorkItem" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Id" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Version" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.ObjectiveName" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Start" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Finish" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.FilePath" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Name" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Description" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Notes" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.WorkType" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Application" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.Minutes" -->
+        <member name="P:CommonObjectives.WorkItem.Cost">
+            <summary>
+            The calculated cost of the work item.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Invoiced">
+            <summary>
+            A value indicating whether the item has been invoiced.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.StartSize" -->
+        <!-- Badly formed XML comment ignored for member "P:CommonObjectives.WorkItem.FinishSize" -->
+        <member name="M:CommonObjectives.WorkItem.#ctor">
+            <summary>
+            An empty constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:CommonObjectives.WorkItem.#ctor(System.String)">
+            <summary>
+            Constructor for the WorkItem.
+            </summary>
+            <param name="name">The name of the work item.</param>
+        </member>
+        <member name="T:CommonObjectives.WorkType">
+            <summary>
+            WorkType holds data for work types.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkType.Index">
+            <summary>
+            The index number for the work type.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkType.Name">
+            <summary>
+            The name of the work type.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkType.Description">
+            <summary>
+            The description of the work type.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkType.CostPerHour">
+            <summary>
+            The cost per hour for the work type.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkType.MinimumNoOfMinutes">
+            <summary>
+            The minimum number of minutes for the day.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkType.MaximNoOfMinutes">
+            <summary>
+            The maxim number of minutes for the day.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkType.Application">
+            <summary>
+            The application that is associated with this work type.
+            </summary>
+        </member>
+    </members>
+</doc>

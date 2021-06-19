@@ -117,8 +117,10 @@
         {
             if (ListObjectives.SelectedItems[0] is object)
             {
-                FormObjectiveRates ratesForm = new FormObjectiveRates();
-                ratesForm.Objective = InTouch.GetObjective(ListObjectives.SelectedItems[0].Tag.ToString());
+                FormObjectiveRates ratesForm = new FormObjectiveRates
+                {
+                    Objective = InTouch.GetObjective(ListObjectives.SelectedItems[0].Tag.ToString())
+                };
                 ratesForm.ShowDialog();
                 ratesForm.Dispose();
             }

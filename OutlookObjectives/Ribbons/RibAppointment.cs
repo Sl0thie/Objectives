@@ -54,11 +54,11 @@
                         break;
                 }
 
-                setupRegion();
+                SetupRegion();
             }
         }
 
-        private void setupRegion()
+        private void SetupRegion()
         {
 
         }

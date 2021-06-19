@@ -16,7 +16,7 @@
             }
         }
 
-        private Outlook.AppointmentItem appointment;
+        private readonly Outlook.AppointmentItem appointment;
         public Outlook.AppointmentItem Appointment
         {
             get { return appointment; }
