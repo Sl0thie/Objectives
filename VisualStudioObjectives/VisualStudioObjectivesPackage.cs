@@ -75,18 +75,7 @@ namespace VisualStudioObjectives
 
         /// <summary>
         /// Handles the MainTimer event.  
-        /// 
-        /// 
-        /// 
-        /// More summary missing comments.
         /// </summary>
-        /// <remarks>
-        /// As well as remarks?
-        /// 
-        /// <seealso href="https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids">Project GUID's</seealso>
-        /// 
-        /// Missing see also as well.
-        /// </remarks>
         /// <param name="sender">This parameter is unused.</param>
         /// <param name="e">This parameter is unused.</param>
         private async void MainTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -223,7 +212,7 @@ namespace VisualStudioObjectives
 
             bool rv = false;
 
-            Log.Info("ProjectItem: " + item.Name);
+            //Log.Info("ProjectItem: " + item.Name);
 
             switch (item.Kind)
             {

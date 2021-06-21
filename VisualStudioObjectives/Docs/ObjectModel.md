@@ -10,7 +10,9 @@
   - [GetRegistrySettings()](#M-VisualStudioObjectives-VisualStudioObectivesPackage-GetRegistrySettings 'VisualStudioObjectives.VisualStudioObectivesPackage.GetRegistrySettings')
   - [GetStartValues()](#M-VisualStudioObjectives-VisualStudioObectivesPackage-GetStartValues 'VisualStudioObjectives.VisualStudioObectivesPackage.GetStartValues')
   - [InitializeAsync(cancellationToken,progress)](#M-VisualStudioObjectives-VisualStudioObectivesPackage-InitializeAsync-System-Threading-CancellationToken,System-IProgress{Microsoft-VisualStudio-Shell-ServiceProgressData}- 'VisualStudioObjectives.VisualStudioObectivesPackage.InitializeAsync(System.Threading.CancellationToken,System.IProgress{Microsoft.VisualStudio.Shell.ServiceProgressData})')
+  - [IsProjectItemsUnsavedAsync(item,save)](#M-VisualStudioObjectives-VisualStudioObectivesPackage-IsProjectItemsUnsavedAsync-EnvDTE-ProjectItem,System-Boolean- 'VisualStudioObjectives.VisualStudioObectivesPackage.IsProjectItemsUnsavedAsync(EnvDTE.ProjectItem,System.Boolean)')
   - [IsSolutionLoadedAsync()](#M-VisualStudioObjectives-VisualStudioObectivesPackage-IsSolutionLoadedAsync 'VisualStudioObjectives.VisualStudioObectivesPackage.IsSolutionLoadedAsync')
+  - [IsSolutionUnsavedAsync(solution,save)](#M-VisualStudioObjectives-VisualStudioObectivesPackage-IsSolutionUnsavedAsync-EnvDTE-Solution,System-Boolean- 'VisualStudioObjectives.VisualStudioObectivesPackage.IsSolutionUnsavedAsync(EnvDTE.Solution,System.Boolean)')
   - [MainTimer_Elapsed(sender,e)](#M-VisualStudioObjectives-VisualStudioObectivesPackage-MainTimer_Elapsed-System-Object,System-Timers-ElapsedEventArgs- 'VisualStudioObjectives.VisualStudioObectivesPackage.MainTimer_Elapsed(System.Object,System.Timers.ElapsedEventArgs)')
   - [SaveDataAsync()](#M-VisualStudioObjectives-VisualStudioObectivesPackage-SaveDataAsync 'VisualStudioObjectives.VisualStudioObectivesPackage.SaveDataAsync')
   - [SolutionEvents_OnAfterBackgroundSolutionLoadComplete(sender,e)](#M-VisualStudioObjectives-VisualStudioObectivesPackage-SolutionEvents_OnAfterBackgroundSolutionLoadComplete-System-Object,System-EventArgs- 'VisualStudioObjectives.VisualStudioObectivesPackage.SolutionEvents_OnAfterBackgroundSolutionLoadComplete(System.Object,System.EventArgs)')
@@ -96,6 +98,24 @@ Initializes the VisualStudioObectivesPackage.
 | cancellationToken | [System.Threading.CancellationToken](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Threading.CancellationToken 'System.Threading.CancellationToken') |  |
 | progress | [System.IProgress{Microsoft.VisualStudio.Shell.ServiceProgressData}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.IProgress 'System.IProgress{Microsoft.VisualStudio.Shell.ServiceProgressData}') |  |
 
+<a name='M-VisualStudioObjectives-VisualStudioObectivesPackage-IsProjectItemsUnsavedAsync-EnvDTE-ProjectItem,System-Boolean-'></a>
+### IsProjectItemsUnsavedAsync(item,save) `method`
+
+##### Summary
+
+Searches project items for unsaved changes.
+
+##### Returns
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| item | [EnvDTE.ProjectItem](#T-EnvDTE-ProjectItem 'EnvDTE.ProjectItem') | The project item to search.  Includes sub items if the item is a folder. |
+| save | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | If true, will save the item if unsaved changes are found. |
+
 <a name='M-VisualStudioObjectives-VisualStudioObectivesPackage-IsSolutionLoadedAsync'></a>
 ### IsSolutionLoadedAsync() `method`
 
@@ -111,16 +131,34 @@ True if the solution is loaded.
 
 This method has no parameters.
 
+<a name='M-VisualStudioObjectives-VisualStudioObectivesPackage-IsSolutionUnsavedAsync-EnvDTE-Solution,System-Boolean-'></a>
+### IsSolutionUnsavedAsync(solution,save) `method`
+
+##### Summary
+
+Searches projects and project items for unsaved changes.
+
+##### Returns
+
+True is unsaved changes are found.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| solution | [EnvDTE.Solution](#T-EnvDTE-Solution 'EnvDTE.Solution') | The solution to search for unsaved changes. |
+| save | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | If true, save the items if they are unsaved. |
+
+##### Remarks
+
+List of [Project GUID's](https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids")
+
 <a name='M-VisualStudioObjectives-VisualStudioObectivesPackage-MainTimer_Elapsed-System-Object,System-Timers-ElapsedEventArgs-'></a>
 ### MainTimer_Elapsed(sender,e) `method`
 
 ##### Summary
 
-Handles the MainTimer event.  
-
-[Project GUID's](https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids")
-
-More summary missing comments.
+Handles the MainTimer event.
 
 ##### Parameters
 
@@ -128,12 +166,6 @@ More summary missing comments.
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | This parameter is unused. |
 | e | [System.Timers.ElapsedEventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Timers.ElapsedEventArgs 'System.Timers.ElapsedEventArgs') | This parameter is unused. |
-
-##### Remarks
-
-As well as remarks?
-
-Missing see also as well.
 
 <a name='M-VisualStudioObjectives-VisualStudioObectivesPackage-SaveDataAsync'></a>
 ### SaveDataAsync() `method`
