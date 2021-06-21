@@ -116,7 +116,11 @@ This method has no parameters.
 
 ##### Summary
 
-Handles the MainTimer event.
+Handles the MainTimer event.  
+
+[Project GUID's](https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids")
+
+More summary missing comments.
 
 ##### Parameters
 
@@ -127,7 +131,9 @@ Handles the MainTimer event.
 
 ##### Remarks
 
+As well as remarks?
 
+Missing see also as well.
 
 <a name='M-VisualStudioObjectives-VisualStudioObectivesPackage-SaveDataAsync'></a>
 ### SaveDataAsync() `method`

@@ -74,10 +74,18 @@ namespace VisualStudioObjectives
         }
 
         /// <summary>
-        /// Handles the MainTimer event.
+        /// Handles the MainTimer event.  
+        /// 
+        /// [Project GUID's](https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids")
+        /// 
+        /// More summary missing comments.
         /// </summary>
         /// <remarks>
-        /// <see href="https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids">Project GUID's</see>
+        /// As well as remarks?
+        /// 
+        /// <seealso href="https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids">Project GUID's</seealso>
+        /// 
+        /// Missing see also as well.
         /// </remarks>
         /// <param name="sender">This parameter is unused.</param>
         /// <param name="e">This parameter is unused.</param>
