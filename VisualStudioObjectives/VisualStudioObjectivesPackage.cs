@@ -29,6 +29,10 @@ namespace VisualStudioObjectives
         private string StorageFolder;
         private WorkItem workItem;
 
+        //9:11
+        //10:09
+        //10:27
+
         /// <summary>
         /// GUID for the Package.
         /// </summary>
@@ -52,7 +56,7 @@ namespace VisualStudioObjectives
             {
                 AutoReset = true
             };
-            mainTimer.Elapsed += MainTimer_ElapsedAsync;
+            mainTimer.Elapsed += MainTimer_Elapsed;
             mainTimer.Enabled = true;
 
             // Since this package might not be initialized until after a solution has finished loading,
@@ -72,52 +76,32 @@ namespace VisualStudioObjectives
         /// <summary>
         /// Handles the MainTimer event.
         /// </summary>
+        /// <remarks>
+        /// <see href="https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids">Project GUID's</see>
+        /// </remarks>
         /// <param name="sender">This parameter is unused.</param>
         /// <param name="e">This parameter is unused.</param>
-        private async void MainTimer_ElapsedAsync(object sender, System.Timers.ElapsedEventArgs e)
+        private async void MainTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            //ThreadHelper.ThrowIfNotOnUIThread();
             await JoinableTaskFactory.SwitchToMainThreadAsync();
-
-            Log.Info("Tick");
 
             try
             {
                 if (workItem is object)
                 {
-                    if (dte.Solution is object)
-                    {
-                        if (!dte.Solution.Saved)
-                        {
-                            workItem.IsActive = true;
-                        }
-
-                        foreach (Project pjt in dte.Solution.Projects)
-                        {
-                            if (!pjt.Saved)
-                            {
-                                workItem.IsActive = true;
-                            }
-
-                            foreach (ProjectItem itm in pjt.ProjectItems)
-                            {
-                                if (!itm.Saved)
-                                {
-                                    workItem.IsActive = true;
-                                }
-                            }
-                        }
-                    }
+                    workItem.IsActive = await IsSolutionUnsavedAsync(dte.Solution, false);
 
                     if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
                     {
                         GetCurrentValues();
-                        SaveDataAsync();
+                        await SaveDataAsync();
                         GetStartValues();
                         GetCurrentValues();
                     }
 
                     GetCurrentValues();
+
+                    Log.Info("Tick: " + workItem.IsActive);
                 }
                 else
                 {
@@ -132,6 +116,155 @@ namespace VisualStudioObjectives
             {
                 Log.Error(ex);
             }
+        }
+
+        private async Task<bool> IsProjectItemsUnsavedAsync(ProjectItem item,bool save)
+        {
+            await JoinableTaskFactory.SwitchToMainThreadAsync();
+
+            bool rv = false;
+
+            Log.Info("ProjectItem: " + item.Name);
+
+            switch (item.Kind)
+            {
+                case EnvDTE.Constants.vsProjectItemKindMisc:
+                    //Log.Info("Project Kind: vsProjectItemKindMisc");
+                    break;
+
+                case EnvDTE.Constants.vsProjectItemKindPhysicalFile:
+                    //Log.Info("Project Kind: vsProjectItemKindPhysicalFile");
+                    break;
+
+                case EnvDTE.Constants.vsProjectItemKindPhysicalFolder:
+                    //Log.Info("Project Kind: vsProjectItemKindPhysicalFolder");
+
+                    for (int j = 1; j <= item.ProjectItems.Count; j++)
+                    {
+                        var subitem = item.ProjectItems.Item(j);
+
+                        if (await IsProjectItemsUnsavedAsync(subitem, save))
+                        {
+                            rv = true;
+                        }
+                    }
+
+                    break;
+
+                case EnvDTE.Constants.vsProjectItemKindSolutionItems:
+                    //Log.Info("Project Kind: vsProjectItemKindSolutionItems");
+                    break;
+
+                case EnvDTE.Constants.vsProjectItemKindSubProject:
+                    //Log.Info("Project Kind: vsProjectItemKindSubProject");
+                    break;
+
+                case EnvDTE.Constants.vsProjectItemKindVirtualFolder:
+                    //Log.Info("Project Kind: vsProjectItemKindVirtualFolder");
+                    break;
+
+                case EnvDTE.Constants.vsProjectItemsKindMisc:
+                    //Log.Info("Project Kind: vsProjectItemsKindMisc");
+                    break;
+
+                case EnvDTE.Constants.vsProjectItemsKindSolutionItems:
+                    //Log.Info("Project Kind: vsProjectItemsKindSolutionItems");
+                    break;
+
+                default:
+                    //Log.Info("Project Kind: " + item.Kind);
+                    break;
+            }
+
+            if (!item.Saved)
+            {
+                //Log.Info("Not Saved");
+                if (save)
+                {
+                    item.Save();
+                }
+                rv = true;
+            }
+            else
+            {
+                //Log.Info("Saved");
+            }
+
+            return rv;
+        }
+
+        private async Task<bool> IsSolutionUnsavedAsync(Solution solution, bool save)
+        {
+            await JoinableTaskFactory.SwitchToMainThreadAsync();
+
+            bool rv = false;
+
+            if (!solution.Saved)
+            {
+                rv = true;
+                if (save)
+                {
+                    solution.SaveAs(solution.FileName);
+                }
+            }
+
+            for (int i = 1; i <= solution.Projects.Count; i++)
+            {
+                var project = solution.Projects.Item(i);
+
+                //Log.Info("Project: " + project.Name);
+
+                switch (project.Kind)
+                {
+                    case EnvDTE.Constants.vsProjectKindMisc:
+                        //Log.Info("Project Kind: vsProjectKindMisc");
+                        break;
+
+                    case EnvDTE.Constants.vsProjectKindSolutionItems:
+                        //Log.Info("Project Kind: vsProjectKindSolutionItems");
+                        continue;
+                        break;
+
+                    case EnvDTE.Constants.vsProjectKindUnmodeled:
+                        //Log.Info("Project Kind: vsProjectKindUnmodeled");
+                        break;
+
+                    case "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}": // C#
+                        //Log.Info("Project Kind: vsProjectKindUnmodeled");
+                        break;
+
+
+                    default:
+                        //Log.Info("Unknown Project Kind: " + project.Kind);
+                        break;
+
+                }
+
+                if (!project.Saved)
+                {
+                    //Log.Info("Not Saved");
+                    if (save)
+                    {
+                        project.Save();
+                    }
+                    rv = true;
+                }
+                else
+                {
+                    //Log.Info("Saved");
+                }
+
+                for (int j = 1; j <= project.ProjectItems.Count; j++)
+                {
+                    var item = project.ProjectItems.Item(j);
+                    if (await IsProjectItemsUnsavedAsync(item, save))
+                    {
+                        rv = true;
+                    }
+                }
+            }
+
+            return rv;
         }
 
         /// <summary>
@@ -386,35 +519,11 @@ namespace VisualStudioObjectives
                 {
                     GetHEADItems();
 
+                    workItem.IsActive = await IsSolutionUnsavedAsync(dte.Solution, true);
+
                     if ((workItem.IsActive) ||(workItem.StartSize != workItem.FinishSize))
                     {
                         workItem.Application = ApplicationType.VisualStudioWrite;
-
-                        if (File.Exists(workItem.FilePath))
-                        {
-                            dte.Solution.SaveAs(workItem.FilePath);
-                        }
-
-                        if (!dte.Solution.Saved)
-                        {
-                            workItem.IsActive = true;
-                        }
-
-                        foreach (Project pjt in dte.Solution.Projects)
-                        {
-                            if (!pjt.Saved)
-                            {
-                                pjt.Save();
-                            }
-
-                            foreach (ProjectItem itm in pjt.ProjectItems)
-                            {
-                                if (!itm.Saved)
-                                {
-                                    itm.Save();
-                                }
-                            }
-                        }
                     }
                     else
                     {

@@ -15,6 +15,10 @@
     {
         readonly Action CallBack;
 
+        //9:16
+        //9:29
+        //8:58
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskImportData"/> class.
         /// </summary>
@@ -68,9 +72,18 @@
 
                 switch (id)
                 {
-                    case "1":
+                    case "1": // Visual Studio.
                     case "2":
                     case "3":
+                    case "7": // Word.
+                    case "8":
+                    case "9":
+                    case "10": // Excel.
+                    case "11":
+                    case "12":
+                    case "13": // AutoCAD.
+                    case "14":
+                    case "15":
                         if (ImportWorkItem(json))
                         {
                             File.Delete(nextFile.FullName);

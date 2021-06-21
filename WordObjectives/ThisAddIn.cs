@@ -198,6 +198,7 @@
                     FilePath = doc.FullName,
                     Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"))
                 };
+                workItem.Id = Guid.NewGuid();
 
                 if (workItem.FilePath.LastIndexOf("\\") > 0)
                 {
@@ -289,6 +290,18 @@
 
             try
             {
+                foreach (Word.Document document in Application.Documents)
+                {
+                    if (workItem.FilePath == document.FullName)
+                    {
+                        if (!document.Saved)
+                        {
+                            document.Save();
+                        }
+                        break;
+                    }
+                }
+
                 if (workItem.Start != workItem.Finish)
                 {
                     if ((workItem.IsActive) || (workItem.StartSize != workItem.FinishSize))
@@ -301,8 +314,9 @@
                     }
 
                     string json = JsonConvert.SerializeObject(workItem, Formatting.Indented);
-                    File.WriteAllText(StorageFolder + @"\" + (int)ApplicationType.Word + "-" + Guid.NewGuid().ToString() + ".json", json);
+                    File.WriteAllText(StorageFolder + @"\" + (int)workItem.Application + "-" + Guid.NewGuid().ToString() + ".json", json);
                     workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
+                    workItem.IsActive = false;
                     workItem.StartSize = workItem.FinishSize;
                 }
             }

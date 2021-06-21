@@ -11,7 +11,7 @@
   - [GetStartValues()](#M-VisualStudioObjectives-VisualStudioObectivesPackage-GetStartValues 'VisualStudioObjectives.VisualStudioObectivesPackage.GetStartValues')
   - [InitializeAsync(cancellationToken,progress)](#M-VisualStudioObjectives-VisualStudioObectivesPackage-InitializeAsync-System-Threading-CancellationToken,System-IProgress{Microsoft-VisualStudio-Shell-ServiceProgressData}- 'VisualStudioObjectives.VisualStudioObectivesPackage.InitializeAsync(System.Threading.CancellationToken,System.IProgress{Microsoft.VisualStudio.Shell.ServiceProgressData})')
   - [IsSolutionLoadedAsync()](#M-VisualStudioObjectives-VisualStudioObectivesPackage-IsSolutionLoadedAsync 'VisualStudioObjectives.VisualStudioObectivesPackage.IsSolutionLoadedAsync')
-  - [MainTimer_ElapsedAsync(sender,e)](#M-VisualStudioObjectives-VisualStudioObectivesPackage-MainTimer_ElapsedAsync-System-Object,System-Timers-ElapsedEventArgs- 'VisualStudioObjectives.VisualStudioObectivesPackage.MainTimer_ElapsedAsync(System.Object,System.Timers.ElapsedEventArgs)')
+  - [MainTimer_Elapsed(sender,e)](#M-VisualStudioObjectives-VisualStudioObectivesPackage-MainTimer_Elapsed-System-Object,System-Timers-ElapsedEventArgs- 'VisualStudioObjectives.VisualStudioObectivesPackage.MainTimer_Elapsed(System.Object,System.Timers.ElapsedEventArgs)')
   - [SaveDataAsync()](#M-VisualStudioObjectives-VisualStudioObectivesPackage-SaveDataAsync 'VisualStudioObjectives.VisualStudioObectivesPackage.SaveDataAsync')
   - [SolutionEvents_OnAfterBackgroundSolutionLoadComplete(sender,e)](#M-VisualStudioObjectives-VisualStudioObectivesPackage-SolutionEvents_OnAfterBackgroundSolutionLoadComplete-System-Object,System-EventArgs- 'VisualStudioObjectives.VisualStudioObectivesPackage.SolutionEvents_OnAfterBackgroundSolutionLoadComplete(System.Object,System.EventArgs)')
   - [SolutionEvents_OnBeforeCloseSolution(sender,e)](#M-VisualStudioObjectives-VisualStudioObectivesPackage-SolutionEvents_OnBeforeCloseSolution-System-Object,System-EventArgs- 'VisualStudioObjectives.VisualStudioObectivesPackage.SolutionEvents_OnBeforeCloseSolution(System.Object,System.EventArgs)')
@@ -111,8 +111,8 @@ True if the solution is loaded.
 
 This method has no parameters.
 
-<a name='M-VisualStudioObjectives-VisualStudioObectivesPackage-MainTimer_ElapsedAsync-System-Object,System-Timers-ElapsedEventArgs-'></a>
-### MainTimer_ElapsedAsync(sender,e) `method`
+<a name='M-VisualStudioObjectives-VisualStudioObectivesPackage-MainTimer_Elapsed-System-Object,System-Timers-ElapsedEventArgs-'></a>
+### MainTimer_Elapsed(sender,e) `method`
 
 ##### Summary
 
@@ -124,6 +124,10 @@ Handles the MainTimer event.
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | This parameter is unused. |
 | e | [System.Timers.ElapsedEventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Timers.ElapsedEventArgs 'System.Timers.ElapsedEventArgs') | This parameter is unused. |
+
+##### Remarks
+
+
 
 <a name='M-VisualStudioObjectives-VisualStudioObectivesPackage-SaveDataAsync'></a>
 ### SaveDataAsync() `method`
