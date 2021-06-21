@@ -52,7 +52,7 @@ namespace AutoCADObjectives
         }
 
         /// <summary>
-        /// Method AutoCAD calls to start the extension.
+        /// Method AutoCAD calls to initialize the extension.
         /// </summary>
         public void Initialize()
         {
@@ -279,6 +279,8 @@ namespace AutoCADObjectives
         /// <param name="e">parameter is unused.</param>
         private void Callback_DocumentToBeDeactivated(Object sender, DocumentCollectionEventArgs e)
         {
+            
+
             if (e.Document is object)
             {
                 if (e.Document.Name is object)
