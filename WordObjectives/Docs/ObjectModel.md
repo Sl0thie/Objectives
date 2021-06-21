@@ -1,157 +1,142 @@
 <a name='assembly'></a>
-# AutoCADObjectives
+# WordObjectives
 
 ## Contents
 
-- [ExtApp](#T-AutoCADObjectives-ExtApp 'AutoCADObjectives.ExtApp')
-  - [#ctor()](#M-AutoCADObjectives-ExtApp-#ctor 'AutoCADObjectives.ExtApp.#ctor')
-  - [Callback_DocumentActivated(sender,e)](#M-AutoCADObjectives-ExtApp-Callback_DocumentActivated-System-Object,Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs- 'AutoCADObjectives.ExtApp.Callback_DocumentActivated(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)')
-  - [Callback_DocumentCreated(sender,e)](#M-AutoCADObjectives-ExtApp-Callback_DocumentCreated-System-Object,Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs- 'AutoCADObjectives.ExtApp.Callback_DocumentCreated(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)')
-  - [Callback_DocumentToBeActivated(sender,e)](#M-AutoCADObjectives-ExtApp-Callback_DocumentToBeActivated-System-Object,Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs- 'AutoCADObjectives.ExtApp.Callback_DocumentToBeActivated(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)')
-  - [Callback_DocumentToBeDeactivated(sender,e)](#M-AutoCADObjectives-ExtApp-Callback_DocumentToBeDeactivated-System-Object,Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs- 'AutoCADObjectives.ExtApp.Callback_DocumentToBeDeactivated(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)')
-  - [Callback_DocumentToBeDestroyed(sender,e)](#M-AutoCADObjectives-ExtApp-Callback_DocumentToBeDestroyed-System-Object,Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs- 'AutoCADObjectives.ExtApp.Callback_DocumentToBeDestroyed(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)')
-  - [Initialize()](#M-AutoCADObjectives-ExtApp-Initialize 'AutoCADObjectives.ExtApp.Initialize')
-  - [SaveData(drawing)](#M-AutoCADObjectives-ExtApp-SaveData-CommonObjectives-WorkItem- 'AutoCADObjectives.ExtApp.SaveData(CommonObjectives.WorkItem)')
-  - [Terminate()](#M-AutoCADObjectives-ExtApp-Terminate 'AutoCADObjectives.ExtApp.Terminate')
-  - [TimerUpdate_Elapsed(sender,e)](#M-AutoCADObjectives-ExtApp-TimerUpdate_Elapsed-System-Object,System-Timers-ElapsedEventArgs- 'AutoCADObjectives.ExtApp.TimerUpdate_Elapsed(System.Object,System.Timers.ElapsedEventArgs)')
+- [Globals](#T-WordObjectives-Globals 'WordObjectives.Globals')
+  - [#ctor()](#M-WordObjectives-Globals-#ctor 'WordObjectives.Globals.#ctor')
+- [Resources](#T-WordObjectives-Properties-Resources 'WordObjectives.Properties.Resources')
+  - [Culture](#P-WordObjectives-Properties-Resources-Culture 'WordObjectives.Properties.Resources.Culture')
+  - [ResourceManager](#P-WordObjectives-Properties-Resources-ResourceManager 'WordObjectives.Properties.Resources.ResourceManager')
+- [ThisAddIn](#T-WordObjectives-ThisAddIn 'WordObjectives.ThisAddIn')
+  - [#ctor()](#M-WordObjectives-ThisAddIn-#ctor-Microsoft-Office-Tools-Word-ApplicationFactory,System-IServiceProvider- 'WordObjectives.ThisAddIn.#ctor(Microsoft.Office.Tools.Word.ApplicationFactory,System.IServiceProvider)')
+  - [AddDocument(doc)](#M-WordObjectives-ThisAddIn-AddDocument-Microsoft-Office-Interop-Word-Document- 'WordObjectives.ThisAddIn.AddDocument(Microsoft.Office.Interop.Word.Document)')
+  - [Application_DocumentBeforeClose(Doc,Cancel)](#M-WordObjectives-ThisAddIn-Application_DocumentBeforeClose-Microsoft-Office-Interop-Word-Document,System-Boolean@- 'WordObjectives.ThisAddIn.Application_DocumentBeforeClose(Microsoft.Office.Interop.Word.Document,System.Boolean@)')
+  - [Application_DocumentChange()](#M-WordObjectives-ThisAddIn-Application_DocumentChange 'WordObjectives.ThisAddIn.Application_DocumentChange')
+  - [Application_DocumentOpen(Doc)](#M-WordObjectives-ThisAddIn-Application_DocumentOpen-Microsoft-Office-Interop-Word-Document- 'WordObjectives.ThisAddIn.Application_DocumentOpen(Microsoft.Office.Interop.Word.Document)')
+  - [BeginInitialization()](#M-WordObjectives-ThisAddIn-BeginInitialization 'WordObjectives.ThisAddIn.BeginInitialization')
+  - [BindToData()](#M-WordObjectives-ThisAddIn-BindToData 'WordObjectives.ThisAddIn.BindToData')
+  - [CheckDocuments()](#M-WordObjectives-ThisAddIn-CheckDocuments 'WordObjectives.ThisAddIn.CheckDocuments')
+  - [EndInitialization()](#M-WordObjectives-ThisAddIn-EndInitialization 'WordObjectives.ThisAddIn.EndInitialization')
+  - [FinishInitialization()](#M-WordObjectives-ThisAddIn-FinishInitialization 'WordObjectives.ThisAddIn.FinishInitialization')
+  - [Initialize()](#M-WordObjectives-ThisAddIn-Initialize 'WordObjectives.ThisAddIn.Initialize')
+  - [InitializeCachedData()](#M-WordObjectives-ThisAddIn-InitializeCachedData 'WordObjectives.ThisAddIn.InitializeCachedData')
+  - [InitializeComponents()](#M-WordObjectives-ThisAddIn-InitializeComponents 'WordObjectives.ThisAddIn.InitializeComponents')
+  - [InitializeControls()](#M-WordObjectives-ThisAddIn-InitializeControls 'WordObjectives.ThisAddIn.InitializeControls')
+  - [InitializeData()](#M-WordObjectives-ThisAddIn-InitializeData 'WordObjectives.ThisAddIn.InitializeData')
+  - [InitializeDataBindings()](#M-WordObjectives-ThisAddIn-InitializeDataBindings 'WordObjectives.ThisAddIn.InitializeDataBindings')
+  - [InternalStartup()](#M-WordObjectives-ThisAddIn-InternalStartup 'WordObjectives.ThisAddIn.InternalStartup')
+  - [IsCached()](#M-WordObjectives-ThisAddIn-IsCached-System-String- 'WordObjectives.ThisAddIn.IsCached(System.String)')
+  - [NeedsFill()](#M-WordObjectives-ThisAddIn-NeedsFill-System-String- 'WordObjectives.ThisAddIn.NeedsFill(System.String)')
+  - [OnShutdown()](#M-WordObjectives-ThisAddIn-OnShutdown 'WordObjectives.ThisAddIn.OnShutdown')
+  - [RefreshTimer_Tick(stateInfo)](#M-WordObjectives-ThisAddIn-RefreshTimer_Tick-System-Object- 'WordObjectives.ThisAddIn.RefreshTimer_Tick(System.Object)')
+  - [RemoveDocument(path)](#M-WordObjectives-ThisAddIn-RemoveDocument-System-String- 'WordObjectives.ThisAddIn.RemoveDocument(System.String)')
+  - [SaveData(workItem)](#M-WordObjectives-ThisAddIn-SaveData-CommonObjectives-WorkItem- 'WordObjectives.ThisAddIn.SaveData(CommonObjectives.WorkItem)')
+  - [StartCaching()](#M-WordObjectives-ThisAddIn-StartCaching-System-String- 'WordObjectives.ThisAddIn.StartCaching(System.String)')
+  - [StopCaching()](#M-WordObjectives-ThisAddIn-StopCaching-System-String- 'WordObjectives.ThisAddIn.StopCaching(System.String)')
+  - [ThisAddIn_Startup(sender,e)](#M-WordObjectives-ThisAddIn-ThisAddIn_Startup-System-Object,System-EventArgs- 'WordObjectives.ThisAddIn.ThisAddIn_Startup(System.Object,System.EventArgs)')
+- [ThisRibbonCollection](#T-WordObjectives-ThisRibbonCollection 'WordObjectives.ThisRibbonCollection')
+  - [#ctor()](#M-WordObjectives-ThisRibbonCollection-#ctor-Microsoft-Office-Tools-Ribbon-RibbonFactory- 'WordObjectives.ThisRibbonCollection.#ctor(Microsoft.Office.Tools.Ribbon.RibbonFactory)')
 
-<a name='T-AutoCADObjectives-ExtApp'></a>
-## ExtApp `type`
+<a name='T-WordObjectives-Globals'></a>
+## Globals `type`
 
 ##### Namespace
 
-AutoCADObjectives
+WordObjectives
 
-##### Summary
-
-AutoCAD extension to track time spent on drawings.
-
-##### Remarks
-
-Output project directly to AutoCAD's Support directory.
-
-C:\Program Files\Autodesk\AutoCAD 2018\Support
-
-This directory is considered secure by AutoCAD so there is no need to add the normal project output directory to AutoCAD's security.
-Use the command `NETLOAD` to load the DLL into AutoCAD manually.
-Or copy the file acad.lsp to the support directory to load the DLL automatically on startup.
-
-<a name='M-AutoCADObjectives-ExtApp-#ctor'></a>
+<a name='M-WordObjectives-Globals-#ctor'></a>
 ### #ctor() `constructor`
-
-##### Summary
-
-Initializes a new instance of the [ExtApp](#T-AutoCADObjectives-ExtApp 'AutoCADObjectives.ExtApp') class.
 
 ##### Parameters
 
 This constructor has no parameters.
 
-<a name='M-AutoCADObjectives-ExtApp-Callback_DocumentActivated-System-Object,Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs-'></a>
-### Callback_DocumentActivated(sender,e) `method`
+<a name='T-WordObjectives-Properties-Resources'></a>
+## Resources `type`
+
+##### Namespace
+
+WordObjectives.Properties
 
 ##### Summary
 
-Event for activated documents.
-WARNING: When AutoCAD starts this event fires but the document is null.
+A strongly-typed resource class, for looking up localized strings, etc.
+
+<a name='P-WordObjectives-Properties-Resources-Culture'></a>
+### Culture `property`
+
+##### Summary
+
+Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+
+<a name='P-WordObjectives-Properties-Resources-ResourceManager'></a>
+### ResourceManager `property`
+
+##### Summary
+
+Returns the cached ResourceManager instance used by this class.
+
+<a name='T-WordObjectives-ThisAddIn'></a>
+## ThisAddIn `type`
+
+##### Namespace
+
+WordObjectives
+
+##### Summary
+
+Microsoft Word VSTO AddIn to track Objectives.
+
+<a name='M-WordObjectives-ThisAddIn-#ctor-Microsoft-Office-Tools-Word-ApplicationFactory,System-IServiceProvider-'></a>
+### #ctor() `constructor`
+
+##### Parameters
+
+This constructor has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-AddDocument-Microsoft-Office-Interop-Word-Document-'></a>
+### AddDocument(doc) `method`
+
+##### Summary
+
+Method to manage the addition of documents.
+Documents are checked to see if they already exist. The reason for this is some office events fire more than once.
+The document's detail are then collected and added to the dictionary of document details.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | parameter is unused. |
-| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') | parameter is unused. |
+| doc | [Microsoft.Office.Interop.Word.Document](#T-Microsoft-Office-Interop-Word-Document 'Microsoft.Office.Interop.Word.Document') | The document to add to the dictionary. |
 
-<a name='M-AutoCADObjectives-ExtApp-Callback_DocumentCreated-System-Object,Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs-'></a>
-### Callback_DocumentCreated(sender,e) `method`
+<a name='M-WordObjectives-ThisAddIn-Application_DocumentBeforeClose-Microsoft-Office-Interop-Word-Document,System-Boolean@-'></a>
+### Application_DocumentBeforeClose(Doc,Cancel) `method`
 
 ##### Summary
 
-Event for when documents are created.
+Event handler to manage when documents are closed.
+Occurs immediately before any open document closes.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | parameter is unused. |
-| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') | parameter is unused. |
+| Doc | [Microsoft.Office.Interop.Word.Document](#T-Microsoft-Office-Interop-Word-Document 'Microsoft.Office.Interop.Word.Document') | The document that is closing. |
+| Cancel | [System.Boolean@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean@ 'System.Boolean@') | Bool value to cancel the closing of the document. |
 
-<a name='M-AutoCADObjectives-ExtApp-Callback_DocumentToBeActivated-System-Object,Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs-'></a>
-### Callback_DocumentToBeActivated(sender,e) `method`
+##### Remarks
 
-##### Summary
+[Application.DocumentBeforeClose Event (Word)](Https://docs.microsoft.com/en-us/office/vba/api/word.application.documentbeforeclose)
 
-Event for when a document is activated.
-Currently not used as this level of detail is not implemented yet.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | parameter is unused. |
-| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') | parameter is unused. |
-
-<a name='M-AutoCADObjectives-ExtApp-Callback_DocumentToBeDeactivated-System-Object,Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs-'></a>
-### Callback_DocumentToBeDeactivated(sender,e) `method`
+<a name='M-WordObjectives-ThisAddIn-Application_DocumentChange'></a>
+### Application_DocumentChange() `method`
 
 ##### Summary
 
-Event for when a document is deactivated.
-As with Callback_DocumentToBeActivated this is not implemented yet.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | parameter is unused. |
-| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') | parameter is unused. |
-
-<a name='M-AutoCADObjectives-ExtApp-Callback_DocumentToBeDestroyed-System-Object,Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs-'></a>
-### Callback_DocumentToBeDestroyed(sender,e) `method`
-
-##### Summary
-
-Event for when documents are destroyed.
-WARNING: When AutoCAD starts this event is fired for "Drawing1.dwg" as the very first event.
-even though there is not drawing of that name. There is also no previous create event either.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | parameter is unused. |
-| e | [Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs](#T-Autodesk-AutoCAD-ApplicationServices-DocumentCollectionEventArgs 'Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs') | parameter is unused. |
-
-<a name='M-AutoCADObjectives-ExtApp-Initialize'></a>
-### Initialize() `method`
-
-##### Summary
-
-Main entry point from AutoCAD.
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-AutoCADObjectives-ExtApp-SaveData-CommonObjectives-WorkItem-'></a>
-### SaveData(drawing) `method`
-
-##### Summary
-
-Saves the Data to the storage folder.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| drawing | [CommonObjectives.WorkItem](#T-CommonObjectives-WorkItem 'CommonObjectives.WorkItem') | parameter is unused. |
-
-<a name='M-AutoCADObjectives-ExtApp-Terminate'></a>
-### Terminate() `method`
-
-##### Summary
-
-Terminate method.
+Event handler for when documents change.
+Occurs when a new document is created, when an existing document is opened, or when another document is made the active document.
 
 ##### Parameters
 
@@ -159,18 +144,217 @@ This method has no parameters.
 
 ##### Remarks
 
-Not 100% sure this is called by AutoCAD yet.
 
-<a name='M-AutoCADObjectives-ExtApp-TimerUpdate_Elapsed-System-Object,System-Timers-ElapsedEventArgs-'></a>
-### TimerUpdate_Elapsed(sender,e) `method`
+
+<a name='M-WordObjectives-ThisAddIn-Application_DocumentOpen-Microsoft-Office-Interop-Word-Document-'></a>
+### Application_DocumentOpen(Doc) `method`
 
 ##### Summary
 
-Event for the main timer tick.
+Event handler for when a document is opened.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | parameter is unused. |
-| e | [System.Timers.ElapsedEventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Timers.ElapsedEventArgs 'System.Timers.ElapsedEventArgs') | parameter is unused. |
+| Doc | [Microsoft.Office.Interop.Word.Document](#T-Microsoft-Office-Interop-Word-Document 'Microsoft.Office.Interop.Word.Document') | The document that was opened. |
+
+<a name='M-WordObjectives-ThisAddIn-BeginInitialization'></a>
+### BeginInitialization() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-BindToData'></a>
+### BindToData() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-CheckDocuments'></a>
+### CheckDocuments() `method`
+
+##### Summary
+
+Check to see if documents are in the dictionary.
+
+##### Parameters
+
+This method has no parameters.
+
+##### Remarks
+
+First add all documents to the dictionary.
+Then remove all key-pairs that are not in the document collection.
+
+<a name='M-WordObjectives-ThisAddIn-EndInitialization'></a>
+### EndInitialization() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-FinishInitialization'></a>
+### FinishInitialization() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-Initialize'></a>
+### Initialize() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-InitializeCachedData'></a>
+### InitializeCachedData() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-InitializeComponents'></a>
+### InitializeComponents() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-InitializeControls'></a>
+### InitializeControls() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-InitializeData'></a>
+### InitializeData() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-InitializeDataBindings'></a>
+### InitializeDataBindings() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-InternalStartup'></a>
+### InternalStartup() `method`
+
+##### Summary
+
+Required method for Designer support - do not modify
+the contents of this method with the code editor.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-IsCached-System-String-'></a>
+### IsCached() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-NeedsFill-System-String-'></a>
+### NeedsFill() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-OnShutdown'></a>
+### OnShutdown() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-RefreshTimer_Tick-System-Object-'></a>
+### RefreshTimer_Tick(stateInfo) `method`
+
+##### Summary
+
+The main timer event.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| stateInfo | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | parameter is unused. |
+
+<a name='M-WordObjectives-ThisAddIn-RemoveDocument-System-String-'></a>
+### RemoveDocument(path) `method`
+
+##### Summary
+
+Method to remove documents from the collection.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| path | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The path to the document to remove from the dictionary. |
+
+<a name='M-WordObjectives-ThisAddIn-SaveData-CommonObjectives-WorkItem-'></a>
+### SaveData(workItem) `method`
+
+##### Summary
+
+Method to save the data to a json file in the storage folder.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| workItem | [CommonObjectives.WorkItem](#T-CommonObjectives-WorkItem 'CommonObjectives.WorkItem') | A WordSession object to save to file. |
+
+<a name='M-WordObjectives-ThisAddIn-StartCaching-System-String-'></a>
+### StartCaching() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-StopCaching-System-String-'></a>
+### StopCaching() `method`
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WordObjectives-ThisAddIn-ThisAddIn_Startup-System-Object,System-EventArgs-'></a>
+### ThisAddIn_Startup(sender,e) `method`
+
+##### Summary
+
+
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') |  |
+
+<a name='T-WordObjectives-ThisRibbonCollection'></a>
+## ThisRibbonCollection `type`
+
+##### Namespace
+
+WordObjectives
+
+<a name='M-WordObjectives-ThisRibbonCollection-#ctor-Microsoft-Office-Tools-Ribbon-RibbonFactory-'></a>
+### #ctor() `constructor`
+
+##### Parameters
+
+This constructor has no parameters.

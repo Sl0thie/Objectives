@@ -29,6 +29,11 @@
         TimeSpan refreshIntervalTime;
         Timer refreshTimer;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
@@ -55,7 +60,9 @@
         /// Event handler to manage when documents are closed.
         /// Occurs immediately before any open document closes.
         /// </summary>
-        /// <seealso href="Https://docs.microsoft.com/en-us/office/vba/api/word.application.documentbeforeclose">Application.DocumentBeforeClose event (Word)</seealso>
+        /// <remarks>
+        /// [Application.DocumentBeforeClose Event (Word)](Https://docs.microsoft.com/en-us/office/vba/api/word.application.documentbeforeclose)
+        /// </remarks>
         /// <param name="Doc">The document that is closing.</param>
         /// <param name="Cancel">Bool value to cancel the closing of the document.</param>
         private void Application_DocumentBeforeClose(Word.Document Doc, ref bool Cancel)
@@ -67,7 +74,9 @@
         /// Event handler for when documents change.
         /// Occurs when a new document is created, when an existing document is opened, or when another document is made the active document.
         /// </summary>
+        /// <remarks>
         /// <seealso href="https://docs.microsoft.com/en-us/office/vba/api/word.application.documentchange">Application.DocumentChange event (Word)</seealso>
+        /// </remarks>
         private void Application_DocumentChange()
         {
             // Event does not fire when existing file is saved as a new file.
@@ -231,26 +240,26 @@
             }
         }
 
-        /// <summary>
-        /// Method to remove documents from the collection.
-        /// </summary>
-        /// <param name="doc">The document to remove from the dictionary.</param>
-        [Obsolete]
-        private void RemoveDocumentOld(Word.Document doc)
-        {
-            Log.Info(doc.FullName);
+        ///// <summary>
+        ///// Method to remove documents from the collection.
+        ///// </summary>
+        ///// <param name="doc">The document to remove from the dictionary.</param>
+        //[Obsolete]
+        //private void RemoveDocumentOld(Word.Document doc)
+        //{
+        //    Log.Info(doc.FullName);
 
-            if (Documents.ContainsKey(doc.FullName))
-            {
-                SaveData(Documents[doc.FullName]);
-                Documents.Remove(doc.FullName);
-                Log.Info("Removed document " + doc.FullName);
-            }
-            else
-            {
-                Log.Info("Documents does not contains key " + doc.FullName);
-            }
-        }
+        //    if (Documents.ContainsKey(doc.FullName))
+        //    {
+        //        SaveData(Documents[doc.FullName]);
+        //        Documents.Remove(doc.FullName);
+        //        Log.Info("Removed document " + doc.FullName);
+        //    }
+        //    else
+        //    {
+        //        Log.Info("Documents does not contains key " + doc.FullName);
+        //    }
+        //}
 
         /// <summary>
         /// Method to remove documents from the collection.

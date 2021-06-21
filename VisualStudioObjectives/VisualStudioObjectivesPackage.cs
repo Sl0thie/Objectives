@@ -76,7 +76,7 @@ namespace VisualStudioObjectives
         /// <summary>
         /// Handles the MainTimer event.  
         /// 
-        /// [Project GUID's](https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids")
+        /// 
         /// 
         /// More summary missing comments.
         /// </summary>
@@ -126,81 +126,17 @@ namespace VisualStudioObjectives
             }
         }
 
-        private async Task<bool> IsProjectItemsUnsavedAsync(ProjectItem item,bool save)
-        {
-            await JoinableTaskFactory.SwitchToMainThreadAsync();
+        
 
-            bool rv = false;
-
-            Log.Info("ProjectItem: " + item.Name);
-
-            switch (item.Kind)
-            {
-                case EnvDTE.Constants.vsProjectItemKindMisc:
-                    //Log.Info("Project Kind: vsProjectItemKindMisc");
-                    break;
-
-                case EnvDTE.Constants.vsProjectItemKindPhysicalFile:
-                    //Log.Info("Project Kind: vsProjectItemKindPhysicalFile");
-                    break;
-
-                case EnvDTE.Constants.vsProjectItemKindPhysicalFolder:
-                    //Log.Info("Project Kind: vsProjectItemKindPhysicalFolder");
-
-                    for (int j = 1; j <= item.ProjectItems.Count; j++)
-                    {
-                        var subitem = item.ProjectItems.Item(j);
-
-                        if (await IsProjectItemsUnsavedAsync(subitem, save))
-                        {
-                            rv = true;
-                        }
-                    }
-
-                    break;
-
-                case EnvDTE.Constants.vsProjectItemKindSolutionItems:
-                    //Log.Info("Project Kind: vsProjectItemKindSolutionItems");
-                    break;
-
-                case EnvDTE.Constants.vsProjectItemKindSubProject:
-                    //Log.Info("Project Kind: vsProjectItemKindSubProject");
-                    break;
-
-                case EnvDTE.Constants.vsProjectItemKindVirtualFolder:
-                    //Log.Info("Project Kind: vsProjectItemKindVirtualFolder");
-                    break;
-
-                case EnvDTE.Constants.vsProjectItemsKindMisc:
-                    //Log.Info("Project Kind: vsProjectItemsKindMisc");
-                    break;
-
-                case EnvDTE.Constants.vsProjectItemsKindSolutionItems:
-                    //Log.Info("Project Kind: vsProjectItemsKindSolutionItems");
-                    break;
-
-                default:
-                    //Log.Info("Project Kind: " + item.Kind);
-                    break;
-            }
-
-            if (!item.Saved)
-            {
-                //Log.Info("Not Saved");
-                if (save)
-                {
-                    item.Save();
-                }
-                rv = true;
-            }
-            else
-            {
-                //Log.Info("Saved");
-            }
-
-            return rv;
-        }
-
+        /// <summary>
+        /// Searches projects and project items for unsaved changes.
+        /// </summary>
+        /// <remarks>
+        /// List of [Project GUID's](https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids")
+        /// </remarks>
+        /// <param name="solution">The solution to search for unsaved changes.</param>
+        /// <param name="save">If true, save the items if they are unsaved.</param>
+        /// <returns>True is unsaved changes are found.</returns>
         private async Task<bool> IsSolutionUnsavedAsync(Solution solution, bool save)
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync();
@@ -270,6 +206,87 @@ namespace VisualStudioObjectives
                         rv = true;
                     }
                 }
+            }
+
+            return rv;
+        }
+
+        /// <summary>
+        /// Searches project items for unsaved changes.  
+        /// </summary>
+        /// <param name="item">The project item to search.  Includes sub items if the item is a folder.</param>
+        /// <param name="save">If true, will save the item if unsaved changes are found.</param>
+        /// <returns></returns>
+        private async Task<bool> IsProjectItemsUnsavedAsync(ProjectItem item, bool save)
+        {
+            await JoinableTaskFactory.SwitchToMainThreadAsync();
+
+            bool rv = false;
+
+            Log.Info("ProjectItem: " + item.Name);
+
+            switch (item.Kind)
+            {
+                case EnvDTE.Constants.vsProjectItemKindMisc:
+                    //Log.Info("Project Kind: vsProjectItemKindMisc");
+                    break;
+
+                case EnvDTE.Constants.vsProjectItemKindPhysicalFile:
+                    //Log.Info("Project Kind: vsProjectItemKindPhysicalFile");
+                    break;
+
+                case EnvDTE.Constants.vsProjectItemKindPhysicalFolder:
+                    //Log.Info("Project Kind: vsProjectItemKindPhysicalFolder");
+
+                    for (int j = 1; j <= item.ProjectItems.Count; j++)
+                    {
+                        var subitem = item.ProjectItems.Item(j);
+
+                        if (await IsProjectItemsUnsavedAsync(subitem, save))
+                        {
+                            rv = true;
+                        }
+                    }
+
+                    break;
+
+                case EnvDTE.Constants.vsProjectItemKindSolutionItems:
+                    //Log.Info("Project Kind: vsProjectItemKindSolutionItems");
+                    break;
+
+                case EnvDTE.Constants.vsProjectItemKindSubProject:
+                    //Log.Info("Project Kind: vsProjectItemKindSubProject");
+                    break;
+
+                case EnvDTE.Constants.vsProjectItemKindVirtualFolder:
+                    //Log.Info("Project Kind: vsProjectItemKindVirtualFolder");
+                    break;
+
+                case EnvDTE.Constants.vsProjectItemsKindMisc:
+                    //Log.Info("Project Kind: vsProjectItemsKindMisc");
+                    break;
+
+                case EnvDTE.Constants.vsProjectItemsKindSolutionItems:
+                    //Log.Info("Project Kind: vsProjectItemsKindSolutionItems");
+                    break;
+
+                default:
+                    //Log.Info("Project Kind: " + item.Kind);
+                    break;
+            }
+
+            if (!item.Saved)
+            {
+                //Log.Info("Not Saved");
+                if (save)
+                {
+                    item.Save();
+                }
+                rv = true;
+            }
+            else
+            {
+                //Log.Info("Saved");
             }
 
             return rv;
