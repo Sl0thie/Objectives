@@ -32,6 +32,7 @@ namespace VisualStudioObjectives
         //9:11
         //10:09
         //10:27
+        //12:31
 
         /// <summary>
         /// GUID for the Package.
