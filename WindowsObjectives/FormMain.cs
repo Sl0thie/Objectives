@@ -215,7 +215,8 @@
                     app.Title = stringBuilder.ToString();
                 }
 
-                GetWindowThreadProcessId(handle, out uint procId);
+                uint procId = 0;
+                GetWindowThreadProcessId(handle, out procId);
                 var proc = Process.GetProcessById((int)procId);
                 app.Application = proc.MainModule.ToString();
             }
@@ -244,19 +245,19 @@
             return ((idleTime > 0) ? (idleTime / 1000) : idleTime);
         }
 
-        //private string GetCaptionOfActiveWindow()
-        //{
-        //    var strTitle = string.Empty;
-        //    var handle = GetForegroundWindow();
-        //    // Obtain the length of the text   
-        //    var intLength = GetWindowTextLength(handle) + 1;
-        //    var stringBuilder = new StringBuilder(intLength);
-        //    if (GetWindowText(handle, stringBuilder, intLength) > 0)
-        //    {
-        //        strTitle = stringBuilder.ToString();
-        //    }
-        //    return strTitle;
-        //}
+        private string GetCaptionOfActiveWindow()
+        {
+            var strTitle = string.Empty;
+            var handle = GetForegroundWindow();
+            // Obtain the length of the text   
+            var intLength = GetWindowTextLength(handle) + 1;
+            var stringBuilder = new StringBuilder(intLength);
+            if (GetWindowText(handle, stringBuilder, intLength) > 0)
+            {
+                strTitle = stringBuilder.ToString();
+            }
+            return strTitle;
+        }
 
     }
 }

@@ -108,6 +108,9 @@ namespace AutoCADObjectives
         {
             if(e.Document is object)
             {
+                
+
+
                 if(e.Document.Name is object)
                 {
                     Log.Info(e.Document.Name);
