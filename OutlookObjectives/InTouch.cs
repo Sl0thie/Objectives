@@ -275,6 +275,19 @@
                 CSS += "color: #AAAAAA;" + "\n";
                 CSS += "}" + "\n";
 
+                CSS += "td {" + "\n";
+                CSS += "font-family: Calibri;" + "\n";
+                CSS += "font-size: 14px;" + "\n";
+                CSS += "color: #AAAAAA;" + "\n";
+                CSS += "vertical-align: top;" + "\n";
+                CSS += "}" + "\n";
+
+                CSS += ".tdHeader {" + "\n";
+                CSS += "font-family: Verdana;" + "\n";
+                CSS += "font-size: 14px;" + "\n";
+                CSS += "color: #FFFFFF;" + "\n";
+                CSS += "}" + "\n";
+
                 File.WriteAllText(System.IO.Path.GetTempPath() + "page.css", CSS);
             }
         }

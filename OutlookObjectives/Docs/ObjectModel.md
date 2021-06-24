@@ -111,6 +111,7 @@
 - [TaskDayReport](#T-OutlookObjectives-TaskDayReport 'OutlookObjectives.TaskDayReport')
   - [#ctor(callBack)](#M-OutlookObjectives-TaskDayReport-#ctor-System-Action- 'OutlookObjectives.TaskDayReport.#ctor(System.Action)')
   - [BackgroundProcess()](#M-OutlookObjectives-TaskDayReport-BackgroundProcess 'OutlookObjectives.TaskDayReport.BackgroundProcess')
+  - [CalculateMinutes()](#M-OutlookObjectives-TaskDayReport-CalculateMinutes 'OutlookObjectives.TaskDayReport.CalculateMinutes')
   - [CreateHTML()](#M-OutlookObjectives-TaskDayReport-CreateHTML 'OutlookObjectives.TaskDayReport.CreateHTML')
   - [DrawApplicationsImage()](#M-OutlookObjectives-TaskDayReport-DrawApplicationsImage 'OutlookObjectives.TaskDayReport.DrawApplicationsImage')
   - [DrawDayBarImage()](#M-OutlookObjectives-TaskDayReport-DrawDayBarImage 'OutlookObjectives.TaskDayReport.DrawDayBarImage')
@@ -123,6 +124,7 @@
   - [ProcessSystemIdle(json)](#M-OutlookObjectives-TaskDayReport-ProcessSystemIdle-System-String- 'OutlookObjectives.TaskDayReport.ProcessSystemIdle(System.String)')
   - [ProcessSystemUptime(json)](#M-OutlookObjectives-TaskDayReport-ProcessSystemUptime-System-String- 'OutlookObjectives.TaskDayReport.ProcessSystemUptime(System.String)')
   - [ProcessVisualStudio(json)](#M-OutlookObjectives-TaskDayReport-ProcessVisualStudio-System-String- 'OutlookObjectives.TaskDayReport.ProcessVisualStudio(System.String)')
+  - [ProcessWorkItem(json)](#M-OutlookObjectives-TaskDayReport-ProcessWorkItem-System-String- 'OutlookObjectives.TaskDayReport.ProcessWorkItem(System.String)')
   - [RunTask()](#M-OutlookObjectives-TaskDayReport-RunTask 'OutlookObjectives.TaskDayReport.RunTask')
 - [TaskImportData](#T-OutlookObjectives-TaskImportData 'OutlookObjectives.TaskImportData')
   - [#ctor(callBack)](#M-OutlookObjectives-TaskImportData-#ctor-System-Action- 'OutlookObjectives.TaskImportData.#ctor(System.Action)')
@@ -142,6 +144,7 @@
   - [EnqueueDayReportTask()](#M-OutlookObjectives-TaskManager-EnqueueDayReportTask 'OutlookObjectives.TaskManager.EnqueueDayReportTask')
   - [EnqueueImportDataTask()](#M-OutlookObjectives-TaskManager-EnqueueImportDataTask 'OutlookObjectives.TaskManager.EnqueueImportDataTask')
   - [EnqueueMonthReportTask()](#M-OutlookObjectives-TaskManager-EnqueueMonthReportTask 'OutlookObjectives.TaskManager.EnqueueMonthReportTask')
+  - [EnqueueWebSyncTask()](#M-OutlookObjectives-TaskManager-EnqueueWebSyncTask 'OutlookObjectives.TaskManager.EnqueueWebSyncTask')
   - [EnqueueWeekReportTask()](#M-OutlookObjectives-TaskManager-EnqueueWeekReportTask 'OutlookObjectives.TaskManager.EnqueueWeekReportTask')
   - [TaskFinished()](#M-OutlookObjectives-TaskManager-TaskFinished 'OutlookObjectives.TaskManager.TaskFinished')
 - [TaskMonthReport](#T-OutlookObjectives-TaskMonthReport 'OutlookObjectives.TaskMonthReport')
@@ -151,6 +154,11 @@
   - [GetAppointmentsInRange(folder,startTime,endTime)](#M-OutlookObjectives-TaskMonthReport-GetAppointmentsInRange-Microsoft-Office-Interop-Outlook-Folder,System-DateTime,System-DateTime- 'OutlookObjectives.TaskMonthReport.GetAppointmentsInRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)')
   - [GetAppointmentsWithinRange(folder,startTime,endTime)](#M-OutlookObjectives-TaskMonthReport-GetAppointmentsWithinRange-Microsoft-Office-Interop-Outlook-Folder,System-DateTime,System-DateTime- 'OutlookObjectives.TaskMonthReport.GetAppointmentsWithinRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)')
   - [RunTask()](#M-OutlookObjectives-TaskMonthReport-RunTask 'OutlookObjectives.TaskMonthReport.RunTask')
+- [TaskWebSync](#T-OutlookObjectives-TaskWebSync 'OutlookObjectives.TaskWebSync')
+  - [#ctor()](#M-OutlookObjectives-TaskWebSync-#ctor-System-Action- 'OutlookObjectives.TaskWebSync.#ctor(System.Action)')
+  - [BackgroundProcess()](#M-OutlookObjectives-TaskWebSync-BackgroundProcess 'OutlookObjectives.TaskWebSync.BackgroundProcess')
+  - [RunTask()](#M-OutlookObjectives-TaskWebSync-RunTask 'OutlookObjectives.TaskWebSync.RunTask')
+  - [SyncClients()](#M-OutlookObjectives-TaskWebSync-SyncClients 'OutlookObjectives.TaskWebSync.SyncClients')
 - [TaskWeekReport](#T-OutlookObjectives-TaskWeekReport 'OutlookObjectives.TaskWeekReport')
   - [#ctor(callBack)](#M-OutlookObjectives-TaskWeekReport-#ctor-System-Action- 'OutlookObjectives.TaskWeekReport.#ctor(System.Action)')
   - [BackgroundProcess()](#M-OutlookObjectives-TaskWeekReport-BackgroundProcess 'OutlookObjectives.TaskWeekReport.BackgroundProcess')
@@ -1384,6 +1392,17 @@ The starting point for the new process.
 
 This method has no parameters.
 
+<a name='M-OutlookObjectives-TaskDayReport-CalculateMinutes'></a>
+### CalculateMinutes() `method`
+
+##### Summary
+
+
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='M-OutlookObjectives-TaskDayReport-CreateHTML'></a>
 ### CreateHTML() `method`
 
@@ -1539,6 +1558,19 @@ Process the system time data.
 ##### Summary
 
 Process the Visual Studio data.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| json | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+
+<a name='M-OutlookObjectives-TaskDayReport-ProcessWorkItem-System-String-'></a>
+### ProcessWorkItem(json) `method`
+
+##### Summary
+
+Process the Work Item data.
 
 ##### Parameters
 
@@ -1779,6 +1811,17 @@ Enqueues a Month Report Task.
 
 This method has no parameters.
 
+<a name='M-OutlookObjectives-TaskManager-EnqueueWebSyncTask'></a>
+### EnqueueWebSyncTask() `method`
+
+##### Summary
+
+Enqueues a Month Report Task.
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='M-OutlookObjectives-TaskManager-EnqueueWeekReportTask'></a>
 ### EnqueueWeekReportTask() `method`
 
@@ -1895,6 +1938,61 @@ Get the appointments within the timespan.
 ##### Summary
 
 Method to start the task.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-OutlookObjectives-TaskWebSync'></a>
+## TaskWebSync `type`
+
+##### Namespace
+
+OutlookObjectives
+
+##### Summary
+
+
+
+<a name='M-OutlookObjectives-TaskWebSync-#ctor-System-Action-'></a>
+### #ctor() `constructor`
+
+##### Summary
+
+
+
+##### Parameters
+
+This constructor has no parameters.
+
+<a name='M-OutlookObjectives-TaskWebSync-BackgroundProcess'></a>
+### BackgroundProcess() `method`
+
+##### Summary
+
+The starting point for the new process.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-OutlookObjectives-TaskWebSync-RunTask'></a>
+### RunTask() `method`
+
+##### Summary
+
+Creates a thread to run the Task.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-OutlookObjectives-TaskWebSync-SyncClients'></a>
+### SyncClients() `method`
+
+##### Summary
+
+
 
 ##### Parameters
 

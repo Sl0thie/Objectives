@@ -220,10 +220,10 @@
                 var proc = Process.GetProcessById((int)procId);
                 app.Application = proc.MainModule.ToString();
             }
-            catch
+            catch (Exception ex)
             {
-                app.Application = "Unknown";
-                app.Title = "Unknown";
+                app.Application = "Unknown: ";
+                app.Title = "Unknown" + ex.Message;
             }
 
             systemUptime.ActiveApplications.Add(app);

@@ -4,6 +4,7 @@
     using System;
     using System.IO;
     using System.Windows.Forms;
+    using LogNET;
 
     /// <summary>
     /// A User Control to be used as the UI for the Objectives Pane.
@@ -95,7 +96,11 @@
         /// <param name="e"></param>
         private void MenuArchive_Click(object sender, EventArgs e)
         {
+            string pathto = InTouch.ObjectivesArchiveFolder + "\\" + ListObjectives.SelectedItems[0].Text;
+            string pathfrom = InTouch.ObjectivesRootFolder + "\\" + ListObjectives.SelectedItems[0].Text;
 
+            Log.Info("To  : " + pathto);
+            Log.Info("From: " + pathfrom);
         }
 
         /// <summary>
@@ -105,7 +110,11 @@
         /// <param name="e"></param>
         private void MenuActivate_Click(object sender, EventArgs e)
         {
+            string pathfrom = InTouch.ObjectivesArchiveFolder + "\\" + ListObjectives.SelectedItems[0].Text;
+            string pathto = InTouch.ObjectivesRootFolder + "\\" + ListObjectives.SelectedItems[0].Text;
 
+            Log.Info("To  : " + pathto);
+            Log.Info("From: " + pathfrom);
         }
 
         /// <summary>

@@ -21,6 +21,7 @@
         private readonly TaskWeekReport taskWeekReport;
         private readonly TaskMonthReport taskMonthReport;
         private readonly TaskConvertVersion taskConvertVersion;
+        private readonly TaskWebSync taskWebSync;
 
         /// <summary>
         /// A queue of Task to be performed.
@@ -43,6 +44,7 @@
             taskWeekReport = new TaskWeekReport(TaskFinished);
             taskMonthReport = new TaskMonthReport(TaskFinished);
             taskConvertVersion = new TaskConvertVersion(TaskFinished);
+            taskWebSync = new TaskWebSync(TaskFinished);
 
             //Configure and start a background thread.
             Thread backgroundThread = new Thread(new ThreadStart(BackgroundProcess))
@@ -129,6 +131,14 @@
         public void EnqueueConvertVersionTask()
         {
             backgroundTasks.Enqueue(taskConvertVersion.RunTask);
+        }
+
+        /// <summary>
+        /// Enqueues a Month Report Task.
+        /// </summary>
+        public void EnqueueWebSyncTask()
+        {
+            backgroundTasks.Enqueue(taskWebSync.RunTask);
         }
     }
 }

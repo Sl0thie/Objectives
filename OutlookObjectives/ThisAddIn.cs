@@ -47,6 +47,7 @@
             //InTouch.TaskManager.EnqueueWeekReportTask();
             //InTouch.TaskManager.EnqueueMonthReportTask();
             //InTouch.TaskManager.EnqueueConvertVersionTask();
+            InTouch.TaskManager.EnqueueWebSyncTask();
 
             // Setup the main timer.
             System.Timers.Timer mainTimer = new System.Timers.Timer(50000)
@@ -202,7 +203,7 @@
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\4", true);
                     SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\4", true);
-                    SubKey.SetValue("Name", "Visual Studio", RegistryValueKind.String);
+                    SubKey.SetValue("Name", "Software Development", RegistryValueKind.String);
                     SubKey.SetValue("Description", "Developing Visual Studio solution.", RegistryValueKind.String);
                     SubKey.SetValue("CostPerHour", "50.00", RegistryValueKind.String);
                     SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
@@ -211,7 +212,7 @@
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\5", true);
                     SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\5", true);
-                    SubKey.SetValue("Name", "Visual Studio - Review", RegistryValueKind.String);
+                    SubKey.SetValue("Name", "Code review", RegistryValueKind.String);
                     SubKey.SetValue("Description", "Reviewing Visual Studio solution.", RegistryValueKind.String);
                     SubKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
                     SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
@@ -224,7 +225,7 @@
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\10", true);
                     SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\10", true);
-                    SubKey.SetValue("Name", "Word", RegistryValueKind.String);
+                    SubKey.SetValue("Name", "Documentation", RegistryValueKind.String);
                     SubKey.SetValue("Description", "Producing Word document.", RegistryValueKind.String);
                     SubKey.SetValue("CostPerHour", "25.00", RegistryValueKind.String);
                     SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
@@ -233,7 +234,7 @@
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\11", true);
                     SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\11", true);
-                    SubKey.SetValue("Name", "Word - Review", RegistryValueKind.String);
+                    SubKey.SetValue("Name", "Documentation review", RegistryValueKind.String);
                     SubKey.SetValue("Description", "Reviewing Word document.", RegistryValueKind.String);
                     SubKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
                     SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);

@@ -30,6 +30,7 @@
     <DocumentationFile>ObjectModel.xml</DocumentationFile>
     <DocumentationMarkdown>$(MSBuildProjectDirectory)\Docs\ObjectModel.md</DocumentationMarkdown>
     <VsxmdAutoDeleteXml>True</VsxmdAutoDeleteXml>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>

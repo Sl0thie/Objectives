@@ -73,17 +73,13 @@
 
                 ProcessAppointments();
                 CalculateMinutes();
-
                 CalculateBillableItems();
-
-
                 DrawSystemTimeImage();
                 DrawObjectiveImage();
                 DrawApplicationsImage();
                 DrawDayBarImage();
                 CreateHTML();
                 CreateAppointment();
-
             }
             else
             {
@@ -138,7 +134,6 @@
             DateTime finsh = day.AddHours(24);
             dayReport.Day = day;
 
-
             // Find all the appointment items within the start and finish times from the System Calendar.
             Outlook.Items appointments = GetAppointmentsWithinRange(system, start, finsh);
 
@@ -146,7 +141,6 @@
             foreach (var appointment in appointments)
             {
                 Outlook.AppointmentItem next = (Outlook.AppointmentItem)appointment;
-
                 switch (next.Categories)
                 {
                     case "System - Uptime":
@@ -170,13 +164,10 @@
             foreach (var appointment in appointments)
             {
                 Outlook.AppointmentItem next = (Outlook.AppointmentItem)appointment;
-
-
                 Outlook.UserProperty CustomProperty = next.UserProperties.Find("Application");
                 if (CustomProperty is null)
                 {
                     Log.Info("No Application Type " + next.Subject + " " + next.Start.ToString());
-
                 }
                 else
                 {
@@ -186,12 +177,48 @@
                             //TODO Process based on work type? Or replace this whole switch with work type in the future?
                             break;
 
-                        case ApplicationType.VisualStudioRead:
-                            ProcessVisualStudio(next.Body);
+                        case ApplicationType.VisualStudioWrite:
+                            ProcessWorkItem(next.Body);
                             break;
 
-                        case ApplicationType.VisualStudioWrite:
-                            ProcessVisualStudio(next.Body);
+                        case ApplicationType.VisualStudioRead:
+                            if (CheckNotIdle(next.Body))
+                            {
+                                ProcessWorkItem(next.Body);
+                            }
+                            break;
+
+                        case ApplicationType.WordWrite:
+                            ProcessWorkItem(next.Body);
+                            break;
+
+                        case ApplicationType.WordRead:
+                            if (CheckNotIdle(next.Body))
+                            {
+                                ProcessWorkItem(next.Body);
+                            }
+                            break;
+
+                        case ApplicationType.ExcelWrite:
+                            ProcessWorkItem(next.Body);
+                            break;
+
+                        case ApplicationType.ExcelRead:
+                            if (CheckNotIdle(next.Body))
+                            {
+                                ProcessWorkItem(next.Body);
+                            }
+                            break;
+
+                        case ApplicationType.AutocadWrite:
+                            ProcessWorkItem(next.Body);
+                            break;
+
+                        case ApplicationType.AutocadRead:
+                            if (CheckNotIdle(next.Body))
+                            {
+                                ProcessWorkItem(next.Body);
+                            }
                             break;
 
                         default:
@@ -201,11 +228,12 @@
                 }
 
                 if (CustomProperty != null) Marshal.ReleaseComObject(CustomProperty);
-
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         private void CalculateMinutes()
         {
             for (int i = 0; i < 1440; i++)
@@ -305,11 +333,11 @@
             rv += "<table width=\"100%\">" + "\n";
 
             rv += "<tr>" + "\n";
-            rv += "<td><b>Objective</b></td>\n";
-            rv += "<td><b>Project</b></td>\n";
-            rv += "<td><b>Work Type</b></td>\n";
-            rv += "<td style=\"text-align:right;\"><b>Time</b></td>\n";
-            rv += "<td style=\"text-align:right;\"><b>Cost</b></td>\n";
+            rv += "<td class=\"tdHeader\">Objective</td>\n";
+            rv += "<td class=\"tdHeader\">Project</td>\n";
+            rv += "<td class=\"tdHeader\">Work Type</td>\n";
+            rv += "<td class=\"tdHeader\" style=\"text-align:right;\">Time</td>\n";
+            rv += "<td class=\"tdHeader\" style=\"text-align:right;\">Cost</td>\n";
             rv += "</tr>" + "\n";
 
             int totaltime = 0;
@@ -347,23 +375,70 @@
             rv += "<table width=\"100%\">" + "\n";
 
             rv += "<tr>" + "\n";
-            rv += "<td><b>Objective</b></td>\n";
-            rv += "<td><b>Project</b></td>\n";
-            rv += "<td rowspan=\"12\" style=\"text-align:right;\"><img src=\"[[[TEMPDIRECTORY]]]ObjectivesChart.png\" alt=\"Objectives Chart\"></td>\n";
+            rv += "<td class=\"tdHeader\">Objective</td>\n";
+            rv += "<td class=\"tdHeader\">Project</td>\n";
+            rv += "<td class=\"tdHeader\">Work Type</td>\n";
+            rv += "<td class=\"tdHeader\" style=\"text-align:right;\">Time</td>\n";
+            rv += "<td rowspan=\"14\" style=\"text-align:right;\"><img src=\"[[[TEMPDIRECTORY]]]ObjectivesChart.png\" alt=\"Objectives Chart\"></td>\n";
             rv += "</tr>" + "\n";
 
             int i = 0;
+            string lastObjectiveName = "";
+            int objectiveTime = 0;
+            int totalTime = 0;
 
             foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
             {
+                if (lastObjectiveName == "")
+                {
+                    lastObjectiveName = next.Value.ObjectiveName;
+                }
+                else if (lastObjectiveName != next.Value.ObjectiveName)
+                {
+                    rv += "<tr>" + "\n";
+                    rv += "<td>&nbsp;</td>\n";
+                    rv += "<td>&nbsp;</td>\n";
+                    rv += "<td>&nbsp;</td>\n";
+                    rv += "<td style=\"text-align:right;\"><b>" + InTouch.GetTimeStringFromMinutes(objectiveTime) + "</b></td>\n";
+                    rv += "</tr>" + "\n";
+                    i++;
+
+                    lastObjectiveName = next.Value.ObjectiveName;
+                    objectiveTime = 0;
+                }
+                
                 rv += "<tr>" + "\n";
                 rv += "<td>" + next.Value.ObjectiveName + "</td>\n";
                 rv += "<td>" + next.Value.Name + "</td>\n";
+                rv += "<td>" + next.Value.WorkType.Name + "</td>\n";
+                rv += "<td style=\"text-align:right;\">" + InTouch.GetTimeStringFromMinutes(next.Value.Minutes) + "</td>\n";
+                rv += "</tr>" + "\n";
+
+                objectiveTime += next.Value.Minutes;
+                totalTime += next.Value.Minutes;
+                i++;
+            }
+
+            if (dayReport.WorkItems.Count > 0)
+            {
+                rv += "<tr>" + "\n";
+                rv += "<td>&nbsp;</td>\n";
+                rv += "<td>&nbsp;</td>\n";
+                rv += "<td>&nbsp;</td>\n";
+                rv += "<td style=\"text-align:right;\"><b>" + InTouch.GetTimeStringFromMinutes(objectiveTime) + "</b></td>\n";
                 rv += "</tr>" + "\n";
                 i++;
             }
 
-            while (i < 12)
+            rv += "<tr>" + "\n";
+            rv += "<td>&nbsp;</td>\n";
+            rv += "<td>&nbsp;</td>\n";
+            rv += "<td>&nbsp;</td>\n";
+            rv += "<td style=\"text-align:right;\"><b>" + InTouch.GetTimeStringFromMinutes(totalTime) + "</b></td>\n";
+            rv += "</tr>" + "\n";
+            i++;
+
+            while (i < 14)
             {
                 rv += "<tr>" + "\n";
                 rv += "<td>&nbsp;</td>\n";
@@ -383,10 +458,10 @@
             rv += "<table width=\"100%\">" + "\n";
 
             rv += "<tr>" + "\n";
-            rv += "<td><b>Time Type</b></td>\n";
-            rv += "<td style=\"text-align:right;\"><b>Total</b></td>\n";
-            rv += "<td style=\"text-align:right;\"><b>Percentage of the day</b></td>\n";
-            rv += "<td rowspan=\"7\" style=\"text-align:right;\"><img class=\"imageRight\" src=\"[[[TEMPDIRECTORY]]]SystemTime.png\" alt=\"System Time Chart\"></td>\n";
+            rv += "<td class=\"tdHeader\" >Activity</td>\n";
+            rv += "<td class=\"tdHeader\" style=\"text-align:right;\">Total</td>\n";
+            rv += "<td class=\"tdHeader\" style=\"text-align:right;\">Percentage of the day</td>\n";
+            rv += "<td class=\"tdHeader\" rowspan=\"8\" style=\"text-align:right;\"><img class=\"imageRight\" src=\"[[[TEMPDIRECTORY]]]SystemTime.png\" alt=\"System Time Chart\"></td>\n";
             rv += "</tr>" + "\n";
 
             rv += "<tr>" + "\n";
@@ -405,6 +480,12 @@
             rv += "<td>Other Time" + "</td>\n";
             rv += "<td style=\"text-align:right;\">" + InTouch.GetTimeStringFromMinutes(dayReport.TotalUptime - dayReport.TotalWork - dayReport.TotalIdle) + "</td>\n";
             rv += "<td style=\"text-align:right;\">" + (((double)(dayReport.TotalUptime - dayReport.TotalWork - dayReport.TotalIdle)) / 1440 * 100).ToString("#.00") + "%</td>\n";
+            rv += "</tr>" + "\n";
+
+            rv += "<tr>" + "\n";
+            rv += "<td>Active Time" + "</td>\n";
+            rv += "<td style=\"text-align:right;\">" + InTouch.GetTimeStringFromMinutes(dayReport.TotalUptime - dayReport.TotalIdle) + "</td>\n";
+            rv += "<td style=\"text-align:right;\">" + (((double)(dayReport.TotalUptime - dayReport.TotalIdle)) / 1440 * 100).ToString("#.00") + "%</td>\n";
             rv += "</tr>" + "\n";
 
             rv += "<tr>" + "\n";
@@ -433,7 +514,6 @@
             rv += "</div>" + "\n";
             rv += "</body>" + "\n";
             rv += "</html>" + "\n";
-
 
             dayReport.HTML = rv;
         }
@@ -733,12 +813,42 @@
                                 int rv2 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
                                 chart.Series[Series1].Points[rv2].Color = Color.FromArgb(72,72,72);
                                 break;
+
+                            case ApplicationType.WordWrite:
+                                int rv3 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[Series1].Points[rv3].Color = Color.FromArgb(128,128, 255);
+                                break;
+
+                            case ApplicationType.WordRead:
+                                int rv4 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[Series1].Points[rv4].Color = Color.FromArgb(72, 72, 72);
+                                break;
+
+                            case ApplicationType.ExcelWrite:
+                                int rv5 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[Series1].Points[rv5].Color = Color.FromArgb(128, 255, 128);
+                                break;
+
+                            case ApplicationType.ExcelRead:
+                                int rv6 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[Series1].Points[rv6].Color = Color.FromArgb(72, 72, 72);
+                                break;
+
+                            case ApplicationType.AutocadWrite:
+                                int rv7 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[Series1].Points[rv7].Color = Color.FromArgb(255, 64, 64);
+                                break;
+
+                            case ApplicationType.AutocadRead:
+                                int rv8 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[Series1].Points[rv8].Color = Color.FromArgb(72, 72, 72);
+                                break;
                         }
                     }
                 }
 
-                int rv3 = chart.Series[Series2].Points.AddXY(outer, totalminutes);
-                chart.Series[Series2].Points[rv3].LabelForeColor = Color.FromArgb(255, 255, 255);
+                int rvt = chart.Series[Series2].Points.AddXY(outer, totalminutes);
+                chart.Series[Series2].Points[rvt].LabelForeColor = Color.FromArgb(255, 255, 255);
             }
 
             // Save the image to file.
@@ -779,7 +889,7 @@
                     }
                     else
                     {
-                        if (next.Application.Substring(0, 34) == "System.Diagnostics.ProcessModule (")
+                        if((next.Application.Length >= 34) && (next.Application.Substring(0, 34) == "System.Diagnostics.ProcessModule ("))
                         {
                             dayReport.Minutes[minute].ActiveApplication = next.Application.Substring(34);
                             dayReport.Minutes[minute].ActiveApplication = dayReport.Minutes[minute].ActiveApplication.Substring(0, dayReport.Minutes[minute].ActiveApplication.Length - 1);
@@ -854,6 +964,91 @@
             }
         }
 
+
+        private bool CheckNotIdle(string json)
+        {
+            WorkItem workItem = JsonConvert.DeserializeObject<WorkItem>(json);
+            int start = (workItem.Start.Hour * 60) + workItem.Start.Minute;
+            int finish = (workItem.Finish.Hour * 60) + workItem.Finish.Minute;
+
+            // Check if item is all idle.
+            for (int i = start; i < finish; i++)
+            {
+                if (dayReport.Minutes[i].Idle == false)
+                {
+                    
+                    return true;
+                }
+            }
+
+            Log.Info("Found All Idle: " + workItem.Start);
+            return false;
+        }
+
+        /// <summary>
+        /// Process the Work Item data.
+        /// </summary>
+        /// <param name="json"></param>
+        private void ProcessWorkItem(string json)
+        {
+            WorkItem workItem = JsonConvert.DeserializeObject<WorkItem>(json);
+            int start = (workItem.Start.Hour * 60) + workItem.Start.Minute;
+            int finish = (workItem.Finish.Hour * 60) + workItem.Finish.Minute;
+
+            for (int i = start; i < finish; i++)
+            {
+                switch (workItem.Application)
+                {
+                    case ApplicationType.VisualStudioRead:
+                        dayReport.Minutes[i].Billable = true;
+                        break;
+
+                    case ApplicationType.VisualStudioWrite:
+                        dayReport.Minutes[i].Billable = true;
+                        break;
+
+                    case ApplicationType.WordWrite:
+                        dayReport.Minutes[i].Billable = true;
+                        break;
+
+                    case ApplicationType.WordRead:
+                        dayReport.Minutes[i].Billable = true;
+                        break;
+
+                    case ApplicationType.ExcelWrite:
+                        dayReport.Minutes[i].Billable = true;
+                        break;
+
+                    case ApplicationType.ExcelRead:
+                        dayReport.Minutes[i].Billable = true;
+                        break;
+
+                    case ApplicationType.AutocadWrite:
+                        dayReport.Minutes[i].Billable = true;
+                        break;
+
+                    case ApplicationType.AutocadRead:
+                        dayReport.Minutes[i].Billable = true;
+                        break;
+                }
+
+                if (dayReport.Minutes[i].PrimaryWorkItem is object)
+                {
+                    if (workItem.WorkType.Index != 0)
+                    {
+                        if (workItem.WorkType.Index <= dayReport.Minutes[i].PrimaryWorkItem.WorkType.Index)
+                        {
+                            dayReport.Minutes[i].PrimaryWorkItem = workItem;
+                        }
+                    }
+                }
+                else
+                {
+                    dayReport.Minutes[i].PrimaryWorkItem = workItem;
+                }
+            }
+        }
+
         /// <summary>
         /// Process the Visual Studio data.
         /// </summary>
@@ -888,94 +1083,6 @@
                 }
             }
         }
-
-        ///// <summary>
-        ///// Process the Microsoft Word data.
-        ///// </summary>
-        ///// <param name="json"></param>
-        ///// <param name="isWork"></param>
-        //private void ProcessWord(string json, bool isWork)
-        //{
-        //    //WordSession item = JsonConvert.DeserializeObject<WordSession>(json);
-        //    //if (!dayReport.UniqueSessions.ContainsKey(item.Path))
-        //    //{
-        //    //    dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
-        //    //}
-
-        //    //int start = (item.Start.Hour * 60) + item.Start.Minute;
-        //    //int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
-
-        //    //for (int i = start; i < finish; i++)
-        //    //{
-        //    //    if (isWork)
-        //    //    {
-        //    //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(7, item.Path, item.ObjectiveName, item.Name));
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(16, item.Path, item.ObjectiveName, item.Name));
-        //    //    }
-        //    //}
-        //}
-
-        ///// <summary>
-        ///// Process the Microsoft Excel data.
-        ///// </summary>
-        ///// <param name="json"></param>
-        ///// <param name="isWork"></param>
-        //private void ProcessExcel(string json,bool isWork)
-        //{
-        //    //ExcelSession item = JsonConvert.DeserializeObject<ExcelSession>(json);
-        //    //if (!dayReport.UniqueSessions.ContainsKey(item.Path))
-        //    //{
-        //    //    dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
-        //    //}
-
-        //    //int start = (item.Start.Hour * 60) + item.Start.Minute;
-        //    //int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
-
-        //    //for (int i = start; i < finish; i++)
-        //    //{
-        //    //    if (isWork)
-        //    //    {
-        //    //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(6, item.Path, item.ObjectiveName, item.Name));
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(15, item.Path, item.ObjectiveName, item.Name));
-        //    //    }
-
-        //    //}
-        //}
-
-        ///// <summary>
-        ///// Process the AutoCAD data.
-        ///// </summary>
-        ///// <param name="json"></param>
-        ///// <param name="isWork"></param>
-        //private void ProcessAutoCAD(string json, bool isWork)
-        //{
-        //    //DrawingSession item = JsonConvert.DeserializeObject<DrawingSession>(json);
-        //    //if (!dayReport.UniqueSessions.ContainsKey(item.Path))
-        //    //{
-        //    //    dayReport.UniqueSessions.Add(item.Path, new Tuple<string, string>(item.ObjectiveName, item.Name));
-        //    //}
-
-        //    //int start = (item.Start.Hour * 60) + item.Start.Minute;
-        //    //int finish = (item.Finish.Hour * 60) + item.Finish.Minute;
-
-        //    //for (int i = start; i < finish; i++)
-        //    //{
-        //    //    if (isWork)
-        //    //    {
-        //    //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(8, item.Path, item.ObjectiveName, item.Name));
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        dayReport.Minutes[i].Projects.Add(new Tuple<int, string, string, string>(17, item.Path, item.ObjectiveName, item.Name));
-        //    //    }
-        //    //}
-        //}
 
         /// <summary>
         /// Get the appointments within the timespan.
