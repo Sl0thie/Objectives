@@ -335,7 +335,7 @@
             rv += "<tr>" + "\n";
             rv += "<td class=\"tdHeader\">Objective</td>\n";
             rv += "<td class=\"tdHeader\">Project</td>\n";
-            rv += "<td class=\"tdHeader\">Work Type</td>\n";
+            rv += "<td class=\"tdHeader\">Task</td>\n";
             rv += "<td class=\"tdHeader\" style=\"text-align:right;\">Time</td>\n";
             rv += "<td class=\"tdHeader\" style=\"text-align:right;\">Cost</td>\n";
             rv += "</tr>" + "\n";
@@ -377,7 +377,7 @@
             rv += "<tr>" + "\n";
             rv += "<td class=\"tdHeader\">Objective</td>\n";
             rv += "<td class=\"tdHeader\">Project</td>\n";
-            rv += "<td class=\"tdHeader\">Work Type</td>\n";
+            rv += "<td class=\"tdHeader\">Task</td>\n";
             rv += "<td class=\"tdHeader\" style=\"text-align:right;\">Time</td>\n";
             rv += "<td rowspan=\"14\" style=\"text-align:right;\"><img src=\"[[[TEMPDIRECTORY]]]ObjectivesChart.png\" alt=\"Objectives Chart\"></td>\n";
             rv += "</tr>" + "\n";

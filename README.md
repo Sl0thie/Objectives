@@ -43,3 +43,17 @@ A Microsoft Word VSTO AddIn that is used to track time spent creating or reviewi
 # Reports
 
 ### Daily Report
+The daily report is generated once outlook starts the next day. This report has several sections.
+
+#### Invoice Items
+Is a table of items that have tasks that can be invoiced. It also contains a total of the time of these items as well as a total cost of the items.
+
+#### Objectives
+This section has a table of tasks group by their Objective and Project. This includes no cost items. To the right is a chart showing a visualization of these tasks.
+
+#### Day Outline
+This graphic shows a simple breakdown of the day showing the billable time, idle time and other time.
+
+#### Time Spans
+This table show time span totals as well as the percentage amount of the day the time span includes. These are also shown in a chart as well.
+

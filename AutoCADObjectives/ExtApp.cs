@@ -37,7 +37,7 @@ namespace AutoCADObjectives
         /// </summary>
         public ExtApp()
         {
-
+            Log.MethodEntry();
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace AutoCADObjectives
         /// </remarks>
         public void Terminate()
         {
-
+            Log.MethodEntry();
         }
 
         /// <summary>

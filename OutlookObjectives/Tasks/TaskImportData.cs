@@ -15,10 +15,6 @@
     {
         readonly Action CallBack;
 
-        //9:16
-        //9:29
-        //8:58
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskImportData"/> class.
         /// </summary>

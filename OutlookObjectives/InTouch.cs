@@ -224,7 +224,6 @@
             if (!File.Exists(System.IO.Path.GetTempPath() + "page2.css"))
             {
                 string CSS = "html, body {" + "\n";
-                //CSS += "height: 100%;" + "\n";
                 CSS += "background-color: #242424;" + "\n";
                 CSS += "color: #FFFFFF;" + "\n";
                 CSS += "margin: 0px;" + "\n";
@@ -235,7 +234,6 @@
                 CSS += "}" + "\n";
 
                 CSS += ".divWholePage {" + "\n";
-                //CSS += "height: 100%;" + "\n";
                 CSS += "background-color: #383838;" + "\n";
                 CSS += "min-width: 800px;" + "\n";
                 CSS += "max-width: 800px;" + "\n";
