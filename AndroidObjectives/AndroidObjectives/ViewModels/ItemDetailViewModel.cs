@@ -6,26 +6,42 @@ using Xamarin.Forms;
 
 namespace AndroidObjectives.ViewModels
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class ItemDetailViewModel : BaseViewModel
     {
         private string itemId;
         private string text;
         private string description;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string Id { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Text
         {
             get => text;
             set => SetProperty(ref text, value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Description
         {
             get => description;
             set => SetProperty(ref description, value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string ItemId
         {
             get
@@ -39,6 +55,10 @@ namespace AndroidObjectives.ViewModels
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="itemId"></param>
         public async void LoadItemId(string itemId)
         {
             try

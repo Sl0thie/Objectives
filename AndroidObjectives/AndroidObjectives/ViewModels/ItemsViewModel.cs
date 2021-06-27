@@ -8,15 +8,36 @@ using Xamarin.Forms;
 
 namespace AndroidObjectives.ViewModels
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ItemsViewModel : BaseViewModel
     {
         private Item _selectedItem;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ObservableCollection<Item> Items { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Command LoadItemsCommand { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Command AddItemCommand { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public Command<Item> ItemTapped { get; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ItemsViewModel()
         {
             Title = "Browse";
@@ -28,6 +49,10 @@ namespace AndroidObjectives.ViewModels
             AddItemCommand = new Command(OnAddItem);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
@@ -51,12 +76,18 @@ namespace AndroidObjectives.ViewModels
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void OnAppearing()
         {
             IsBusy = true;
             SelectedItem = null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Item SelectedItem
         {
             get => _selectedItem;
@@ -67,11 +98,19 @@ namespace AndroidObjectives.ViewModels
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
         private async void OnAddItem(object obj)
         {
             await Shell.Current.GoToAsync(nameof(NewItemPage));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
         async void OnItemSelected(Item item)
         {
             if (item == null)

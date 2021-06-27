@@ -1,0 +1,429 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AndroidObjectives</name>
+    </assembly>
+    <members>
+        <member name="T:AndroidObjectives.App">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.App.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.App.OnStart">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.App.OnSleep">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.App.OnResume">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AndroidObjectives.AppShell">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.AppShell.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.AppShell.OnMenuItemClicked(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:AndroidObjectives.Models.Item">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.Models.Item.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.Models.Item.Text">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.Models.Item.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AndroidObjectives.Services.IDataStore`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:AndroidObjectives.Services.IDataStore`1.AddItemAsync(`0)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Services.IDataStore`1.UpdateItemAsync(`0)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Services.IDataStore`1.DeleteItemAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Services.IDataStore`1.GetItemAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Services.IDataStore`1.GetItemsAsync(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="forceRefresh"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AndroidObjectives.Services.MockDataStore">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Services.MockDataStore.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Services.MockDataStore.AddItemAsync(AndroidObjectives.Models.Item)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Services.MockDataStore.UpdateItemAsync(AndroidObjectives.Models.Item)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Services.MockDataStore.DeleteItemAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Services.MockDataStore.GetItemAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Services.MockDataStore.GetItemsAsync(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="forceRefresh"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AndroidObjectives.ViewModels.AboutViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.AboutViewModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.AboutViewModel.OpenWebCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AndroidObjectives.ViewModels.BaseViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.BaseViewModel.DataStore">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.BaseViewModel.IsBusy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.BaseViewModel.Title">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.BaseViewModel.SetProperty``1(``0@,``0,System.String,System.Action)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="backingStore"></param>
+            <param name="value"></param>
+            <param name="propertyName"></param>
+            <param name="onChanged"></param>
+            <returns></returns>
+        </member>
+        <member name="E:AndroidObjectives.ViewModels.BaseViewModel.PropertyChanged">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.BaseViewModel.OnPropertyChanged(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="propertyName"></param>
+        </member>
+        <member name="T:AndroidObjectives.ViewModels.ItemDetailViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.ItemDetailViewModel.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.ItemDetailViewModel.Text">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.ItemDetailViewModel.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.ItemDetailViewModel.ItemId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.ItemDetailViewModel.LoadItemId(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="itemId"></param>
+        </member>
+        <member name="T:AndroidObjectives.ViewModels.ItemsViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.ItemsViewModel.Items">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.ItemsViewModel.LoadItemsCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.ItemsViewModel.AddItemCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.ItemsViewModel.ItemTapped">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.ItemsViewModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.ItemsViewModel.ExecuteLoadItemsCommand">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.ItemsViewModel.OnAppearing">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.ItemsViewModel.SelectedItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.ItemsViewModel.OnAddItem(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.ItemsViewModel.OnItemSelected(AndroidObjectives.Models.Item)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="T:AndroidObjectives.ViewModels.LoginViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.LoginViewModel.LoginCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.LoginViewModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.LoginViewModel.OnLoginClicked(System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="T:AndroidObjectives.ViewModels.NewItemViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.NewItemViewModel.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.NewItemViewModel.ValidateSave">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.NewItemViewModel.Text">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.NewItemViewModel.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.NewItemViewModel.SaveCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.ViewModels.NewItemViewModel.CancelCommand">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.NewItemViewModel.OnCancel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.ViewModels.NewItemViewModel.OnSave">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AndroidObjectives.Views.AboutPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Views.AboutPage.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AndroidObjectives.Views.ItemDetailPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Views.ItemDetailPage.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AndroidObjectives.Views.ItemsPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Views.ItemsPage.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Views.ItemsPage.OnAppearing">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AndroidObjectives.Views.LoginPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Views.LoginPage.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AndroidObjectives.Views.NewItemPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.Views.NewItemPage.Item">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Views.NewItemPage.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -48,8 +48,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidObjectives.Android", "AndroidObjectives\AndroidObjectives.Android\AndroidObjectives.Android.csproj", "{EAA096B8-F424-4841-AB58-00B2A08DE555}"
+	ProjectSection(ProjectDependencies) = postProject
+		{810F481E-81B5-4001-B81F-A86445928D5E} = {810F481E-81B5-4001-B81F-A86445928D5E}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidObjectives", "AndroidObjectives\AndroidObjectives\AndroidObjectives.csproj", "{F8F652CF-774D-4B15-A2F4-F69465308FDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndroidObjectives", "AndroidObjectives\AndroidObjectives\AndroidObjectives.csproj", "{F8F652CF-774D-4B15-A2F4-F69465308FDF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{810F481E-81B5-4001-B81F-A86445928D5E} = {810F481E-81B5-4001-B81F-A86445928D5E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

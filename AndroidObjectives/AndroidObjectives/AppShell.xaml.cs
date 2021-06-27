@@ -6,8 +6,14 @@ using Xamarin.Forms;
 
 namespace AndroidObjectives
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class AppShell : Xamarin.Forms.Shell
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public AppShell()
         {
             InitializeComponent();
@@ -15,6 +21,11 @@ namespace AndroidObjectives
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("//LoginPage");

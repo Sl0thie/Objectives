@@ -400,6 +400,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Docs\DayReport.png" />
     <Content Include="Docs\ObjectivesCalendar.png" />
   </ItemGroup>
   <ItemGroup>

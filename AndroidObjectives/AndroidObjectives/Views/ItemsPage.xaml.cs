@@ -12,10 +12,16 @@ using Xamarin.Forms.Xaml;
 
 namespace AndroidObjectives.Views
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class ItemsPage : ContentPage
     {
         ItemsViewModel _viewModel;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ItemsPage()
         {
             InitializeComponent();
@@ -23,6 +29,9 @@ namespace AndroidObjectives.Views
             BindingContext = _viewModel = new ItemsViewModel();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void OnAppearing()
         {
             base.OnAppearing();

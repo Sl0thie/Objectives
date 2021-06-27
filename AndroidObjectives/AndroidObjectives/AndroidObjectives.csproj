@@ -5,6 +5,12 @@
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>ObjectModel.xml</DocumentationFile>
+    <DocumentationMarkdown>$(MSBuildProjectDirectory)\Docs\ObjectModel.md</DocumentationMarkdown>
+    <VsxmdAutoDeleteXml>True</VsxmdAutoDeleteXml>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />

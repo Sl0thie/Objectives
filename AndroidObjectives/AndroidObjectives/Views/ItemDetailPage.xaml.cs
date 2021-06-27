@@ -4,8 +4,14 @@ using Xamarin.Forms;
 
 namespace AndroidObjectives.Views
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class ItemDetailPage : ContentPage
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public ItemDetailPage()
         {
             InitializeComponent();

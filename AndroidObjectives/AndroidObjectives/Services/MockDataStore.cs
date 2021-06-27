@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace AndroidObjectives.Services
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class MockDataStore : IDataStore<Item>
     {
         readonly List<Item> items;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public MockDataStore()
         {
             items = new List<Item>()
@@ -23,6 +29,11 @@ namespace AndroidObjectives.Services
             };
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public async Task<bool> AddItemAsync(Item item)
         {
             items.Add(item);
@@ -30,6 +41,11 @@ namespace AndroidObjectives.Services
             return await Task.FromResult(true);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public async Task<bool> UpdateItemAsync(Item item)
         {
             var oldItem = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
@@ -39,6 +55,11 @@ namespace AndroidObjectives.Services
             return await Task.FromResult(true);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> DeleteItemAsync(string id)
         {
             var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
@@ -47,11 +68,21 @@ namespace AndroidObjectives.Services
             return await Task.FromResult(true);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Item> GetItemAsync(string id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="forceRefresh"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(items);

@@ -1,0 +1,1028 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CommonObjectives</name>
+    </assembly>
+    <members>
+        <member name="T:CommonObjectives.ActiveApplication">
+            <summary>
+            ActiveApplication class contains related to the application that was in focus at the time..
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.ActiveApplication.Time">
+            <summary>
+            The time is was measured.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.ActiveApplication.Title">
+            <summary>
+            The title of the focused application.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.ActiveApplication.Application">
+            <summary>
+            The application name that is focused.
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.DrawingSession">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DrawingSession.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DrawingSession.ObjectiveName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DrawingSession.Path">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DrawingSession.Application">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DrawingSession.Version">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DrawingSession.Processed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DrawingSession.Start">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DrawingSession.Finish">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DrawingSession.LastActive">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DrawingSession.ActiveTime">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DrawingSession.Active">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DrawingSession.StartSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DrawingSession.FinishSize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CommonObjectives.DrawingSession.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.DayReport">
+            <summary>
+            DayReport class manages data for the daily report.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.Day">
+            <summary>
+            The Date value of the report.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.TotalUptime">
+            <summary>
+            An int value returning the total number of minutes the system was up that day.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.TotalIdle">
+            <summary>
+            An int value returning the total number of minutes the system was idle during up time.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.TotalWork">
+            <summary>
+            An int value returning how many minutes of work time was determined.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.WorkItems">
+            <summary>
+            A dictionary for the Objective's Totals.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.UniqueApplications">
+            <summary>
+            A dictionary of the unique applications from the system monitor.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.Minutes">
+            <summary>
+            An array of the minute objects for the day.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.DayReport.HTML">
+            <summary>
+            A string containing the HTML for the report.
+            </summary>
+        </member>
+        <member name="M:CommonObjectives.DayReport.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:CommonObjectives.DayReport"/> class.
+            </summary>
+            <remarks>
+            Empty constructor for serialization.
+            </remarks>
+        </member>
+        <member name="T:CommonObjectives.ApplicationType">
+            <summary>
+            Enumeration of applications and their state of use.
+            Write denotes the application was used to produce.
+            Read denotes the application was used to review.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.None">
+            <summary>
+            No application.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.VisualStudio">
+            <summary>
+            Visual Studio.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.VisualStudioWrite">
+            <summary>
+            Writing with Visual Studio.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.VisualStudioRead">
+            <summary>
+            Reviewing with Visual Studio.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.Ssms">
+            <summary>
+            SQL Server Management Studio.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.SsmsWrite">
+            <summary>
+            Writing with SQL Server Management Studio.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.SsmsRead">
+            <summary>
+            Reviewing with SQL Server Management Studio.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.Word">
+            <summary>
+            Microsoft Word.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.WordWrite">
+            <summary>
+            Writing with Microsoft Word.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.WordRead">
+            <summary>
+            Reviewing with Microsoft Word.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.Excel">
+            <summary>
+            Microsoft Excel.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.ExcelWrite">
+            <summary>
+            Writing with Microsoft Excel.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.ExcelRead">
+            <summary>
+            Reviewing with Microsoft Excel.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.Autocad">
+            <summary>
+            Autodesk AutoCAD.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.AutocadWrite">
+            <summary>
+            Writing with AutoCAD.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.AutocadRead">
+            <summary>
+            Reviewing with AutoCAD.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.Project">
+            <summary>
+            Microsoft Project.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.ProjectWrite">
+            <summary>
+            Writing with Microsoft Project.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.ProjectRead">
+            <summary>
+            Reviewing with Microsoft Project.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.Visio">
+            <summary>
+            Microsoft Visio.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.VisioWrite">
+            <summary>
+            Writing with Microsoft Visio.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.ApplicationType.VisioRead">
+            <summary>
+            Reviewing with Microsoft Visio.
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.SystemType">
+            <summary>
+            Enumeration of System event types.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.SystemType.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.SystemType.Uptime">
+            <summary>
+            Uptime event.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.SystemType.Idle">
+            <summary>
+            Idle event.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.SystemType.Sleep">
+            <summary>
+            Sleep event.
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.AppointmentType">
+            <summary>
+            Enumeration of Outlook Appointment types.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.AppointmentType.None">
+            <summary>
+            None.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.AppointmentType.Standard">
+            <summary>
+            Generic Appointment.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.AppointmentType.ObjectivesDayReport">
+            <summary>
+            Daily Report Appointment.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.AppointmentType.ObjectivesWeekReport">
+            <summary>
+            Weekly Report Appointment.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.AppointmentType.ObjectivesMonthReport">
+            <summary>
+            Monthly Report Appointment.
+            </summary>
+        </member>
+        <member name="F:CommonObjectives.AppointmentType.ObjectivesQuarterReport">
+            <summary>
+            Quarterly Report Appointment.
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.IWorkItem">
+            <summary>
+            Interface to handle multiple work item types.
+            Currently not implemented.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.IWorkItem.Id">
+            <summary>
+            Index for the item.
+            GUID is used to make the item database friendly.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.IWorkItem.ObjectiveName">
+            <summary>
+            Objective Name related to the work item.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.IWorkItem.Start">
+            <summary>
+            The start of the work item.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.IWorkItem.Finish">
+            <summary>
+            The finish of the work item.
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.Minute">
+            <summary>
+            Minute holds data related to the minute of the day.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Minute.Index">
+            <summary>
+            Index is the minute of the day. (hour * 60 + minute)
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Minute.ActiveApplication">
+            <summary>
+            The active application from the system monitor.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Minute.ActiveApplicationTitle">
+            <summary>
+            The title from the application from the system monitor.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Minute.Up">
+            <summary>
+            True is the system is on.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Minute.Idle">
+            <summary>
+            True if the system in an idle state.
+            True is the screen save would be on if enabled.
+            WARNING: The value is false when the system is off-line.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Minute.Billable">
+            <summary>
+            True if the minute contains any Objective work.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Minute.PrimaryWorkItem">
+            <summary>
+            WorkItem that was deemed as the primary work item for that minute.
+            This is currently decided by the lowest workType index.
+            </summary>
+        </member>
+        <member name="M:CommonObjectives.Minute.#ctor">
+            <summary>
+            Empty constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:CommonObjectives.Minute.#ctor(System.Int32)">
+            <summary>
+            Constructor to assign the minute on creation.
+            </summary>
+            <param name="index">The minute to use as an index.</param>
+        </member>
+        <member name="T:CommonObjectives.MonthReport">
+            <summary>
+            Monthly Report class.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.MonthReport.Day">
+            <summary>
+            The Day the report start on.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.MonthReport.WorkItems">
+            <summary>
+            The WorkItems within the month of the report.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.MonthReport.HTML">
+            <summary>
+            A string containing the HTML for the report.
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.Note">
+            <summary>
+            Note holds data for notes created for other objects.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Note.Id">
+            <summary>
+            Id for the note.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Note.Created">
+            <summary>
+            The time the note is first created.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Note.Modified">
+            <summary>
+            The time the note is modified.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Note.Title">
+            <summary>
+            The title for the note.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Note.Content">
+            <summary>
+            The content of the note.
+            </summary>
+        </member>
+        <member name="M:CommonObjectives.Note.#ctor">
+            <summary>
+            Empty constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:CommonObjectives.Note.#ctor(System.String,System.String)">
+            <summary>
+            Constructor to fill data on creation.
+            </summary>
+            <param name="title"></param>
+            <param name="content"></param>
+        </member>
+        <member name="T:CommonObjectives.Objective">
+            <summary>
+            Objective holds data related to an Objective.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Objective.ObjectiveName">
+            <summary>
+            The name of the Objective.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Objective.Path">
+            <summary>
+            The path to the folder that holds the Objective.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Objective.Archived">
+            <summary>
+            Value indicates whether the Objective is currently archived.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Objective.Created">
+            <summary>
+            The time the Objective is created.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Objective.WorkTypes">
+            <summary>
+            The current WorkType values for the Objective.
+            </summary>
+            <remarks>
+            If they are not found here then the default values are used.
+            </remarks>
+        </member>
+        <member name="M:CommonObjectives.Objective.#ctor">
+            <summary>
+            Implements a new Objective object.
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.SolutionSession">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.ObjectiveName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.Application">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.Version">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.Processed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.Path">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.Start">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.Finish">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.SolutionCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.SolutionFileName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.SolutionFullName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.SolutionProjects">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.SolutionProperties">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.BuildCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.StartFileCountTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.StartFileCountCompiling">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.StartFileCountLinking">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.StartFileCountProject">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.StartFileCountResource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.StartFileCountSource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.StartFileCountSolution">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.StartFileSizeTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.StartFileSizeCompiling">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.StartFileSizeLinking">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.StartFileSizeProject">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.StartFileSizeResource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.StartFileSizeSource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.StartFileSizeSolution">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.FinishFileCountTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.FinishFileCountCompiling">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.FinishFileCountLinking">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.FinishFileCountProject">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.FinishFileCountResource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.FinishFileCountSource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.FinishFileCountSolution">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.FinishFileSizeTotal">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.FinishFileSizeCompiling">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.FinishFileSizeLinking">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.FinishFileSizeProject">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.FinishFileSizeResource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.FinishFileSizeSource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.FinishFileSizeSolution">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionSession.HeadItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CommonObjectives.SolutionSession.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.SolutionProject">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionProject.FileName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionProject.FullName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionProject.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionProject.UniqueName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.SolutionProperty">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionProperty.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SolutionProperty.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.SystemIdle">
+            <summary>
+            SystemIdle class to hold idle event data.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SystemIdle.ComputerName">
+            <summary>
+            The network name of the computer.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SystemIdle.UserName">
+            <summary>
+            The logged in user of the computer.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SystemIdle.Start">
+            <summary>
+            The time the event started.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SystemIdle.Finish">
+            <summary>
+            The time the event finished.
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.SystemSleep">
+            <summary>
+            SystemSleep class to hold data for system sleep events.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SystemSleep.ComputerName">
+            <summary>
+            The network name of the computer the event is from.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SystemSleep.UserName">
+            <summary>
+            The logged on user of the computer.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SystemSleep.Start">
+            <summary>
+            The time the event started.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SystemSleep.Finish">
+            <summary>
+            The time the event finished.
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.SystemUptime">
+            <summary>
+            SystemUptime class hold data related to the system's uptime.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SystemUptime.ComputerName">
+            <summary>
+            The network name of the computer.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SystemUptime.UserName">
+            <summary>
+            The logged on user of the computer.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SystemUptime.Start">
+            <summary>
+            The time the event started.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SystemUptime.Finish">
+            <summary>
+            The time the event finished.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.SystemUptime.ActiveApplications">
+            <summary>
+            A collection of ActiveApplication objects.
+            </summary>
+            <remarks>
+            This is data of the focused applications during the event.
+            </remarks>
+        </member>
+        <member name="T:CommonObjectives.WeekReport">
+            <summary>
+            WeekReport class to manage the weekly report data.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WeekReport.Day">
+            <summary>
+            The day of the beginning of the report period.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WeekReport.WorkItems">
+            <summary>
+            A dictionary of WorkItems from the report period.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WeekReport.HTML">
+            <summary>
+            A string containing the HTML for the report.
+            </summary>
+        </member>
+        <member name="T:CommonObjectives.WorkItem">
+            <summary>
+            WorkItem holds data related to work items.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Id">
+            <summary>
+            GUID Index.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Version">
+            <summary>
+            The version of the WorkItem.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.ObjectiveName">
+            <summary>
+            Objective name.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Start">
+            <summary>
+            The start time of the work item.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Finish">
+            <summary>
+            The finish time of the work item.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.FilePath">
+            <summary>
+            File path to the project item's location.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Name">
+            <summary>
+            Project name.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Description">
+            <summary>
+            General description of the work item.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Notes">
+            <summary>
+            Collection of notes related to the work item.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.WorkType">
+            <summary>
+            The WorkType related to the work item.
+            This is stored here at the time of creation of the object as the WorkType can be changed.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Application">
+            <summary>
+            The application type of the work item.
+            Some work items are not computer related so have no Application type.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Minutes">
+            <summary>
+            The calculated number of minutes for the work item.
+            Some items have minimum and maximum values for this set contractually so may not be the number of minutes between the start and finish DateTimes.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Cost">
+            <summary>
+            The calculated cost of the work item.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.Invoiced">
+            <summary>
+            A value indicating whether the item has been invoiced.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.StartSize">
+            <summary>
+            A value of the size of the work item at the start.
+            This is irreverent for non commuter based items.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.FinishSize">
+            <summary>
+            A value of the size of the work item at the finish.
+            This is irreverent for non commuter based items.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkItem.IsActive">
+            <summary>
+            True if the work item was active.
+            </summary>
+        </member>
+        <member name="M:CommonObjectives.WorkItem.#ctor">
+            <summary>
+            An empty constructor for serialization.
+            </summary>
+        </member>
+        <member name="M:CommonObjectives.WorkItem.#ctor(System.String)">
+            <summary>
+            Constructor for the WorkItem.
+            </summary>
+            <param name="name">The name of the work item.</param>
+        </member>
+        <member name="T:CommonObjectives.WorkType">
+            <summary>
+            WorkType holds data for work types.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkType.Index">
+            <summary>
+            The index number for the work type.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkType.Name">
+            <summary>
+            The name of the work type.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkType.Description">
+            <summary>
+            The description of the work type.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkType.CostPerHour">
+            <summary>
+            The cost per hour for the work type.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkType.MinimumNoOfMinutes">
+            <summary>
+            The minimum number of minutes for the day.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkType.MaximNoOfMinutes">
+            <summary>
+            The maxim number of minutes for the day.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.WorkType.Application">
+            <summary>
+            The application that is associated with this work type.
+            </summary>
+        </member>
+    </members>
+</doc>

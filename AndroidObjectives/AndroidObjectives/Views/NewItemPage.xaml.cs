@@ -8,10 +8,19 @@ using Xamarin.Forms.Xaml;
 
 namespace AndroidObjectives.Views
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class NewItemPage : ContentPage
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public Item Item { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public NewItemPage()
         {
             InitializeComponent();
