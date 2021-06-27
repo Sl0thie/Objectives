@@ -231,9 +231,6 @@
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         private void CalculateMinutes()
         {
             for (int i = 0; i < 1440; i++)
@@ -670,8 +667,8 @@
         /// </summary>
         private void DrawSystemTimeImage()
         {
-            float ChartWidth = 200;
-            float ChartHeight = 200;
+            float ChartWidth = 300;
+            float ChartHeight = 300;
             Chart chart = new Chart
             {
                 Width = (int)ChartWidth,
@@ -748,8 +745,8 @@
         /// </summary>
         private void DrawObjectiveImage()
         {
-            float ChartWidth = 300;
-            float ChartHeight = 300;
+            float ChartWidth = 360;
+            float ChartHeight = 360;
             Chart chart = new Chart
             {
                 Width = (int)ChartWidth,

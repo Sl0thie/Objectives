@@ -111,7 +111,6 @@
 - [TaskDayReport](#T-OutlookObjectives-TaskDayReport 'OutlookObjectives.TaskDayReport')
   - [#ctor(callBack)](#M-OutlookObjectives-TaskDayReport-#ctor-System-Action- 'OutlookObjectives.TaskDayReport.#ctor(System.Action)')
   - [BackgroundProcess()](#M-OutlookObjectives-TaskDayReport-BackgroundProcess 'OutlookObjectives.TaskDayReport.BackgroundProcess')
-  - [CalculateMinutes()](#M-OutlookObjectives-TaskDayReport-CalculateMinutes 'OutlookObjectives.TaskDayReport.CalculateMinutes')
   - [CreateHTML()](#M-OutlookObjectives-TaskDayReport-CreateHTML 'OutlookObjectives.TaskDayReport.CreateHTML')
   - [DrawApplicationsImage()](#M-OutlookObjectives-TaskDayReport-DrawApplicationsImage 'OutlookObjectives.TaskDayReport.DrawApplicationsImage')
   - [DrawDayBarImage()](#M-OutlookObjectives-TaskDayReport-DrawDayBarImage 'OutlookObjectives.TaskDayReport.DrawDayBarImage')
@@ -1387,17 +1386,6 @@ Returns control back to the TaskManager.
 ##### Summary
 
 The starting point for the new process.
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-OutlookObjectives-TaskDayReport-CalculateMinutes'></a>
-### CalculateMinutes() `method`
-
-##### Summary
-
-
 
 ##### Parameters
 

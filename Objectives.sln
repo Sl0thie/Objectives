@@ -47,6 +47,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidObjectives.Android", "AndroidObjectives\AndroidObjectives.Android\AndroidObjectives.Android.csproj", "{EAA096B8-F424-4841-AB58-00B2A08DE555}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndroidObjectives", "AndroidObjectives\AndroidObjectives\AndroidObjectives.csproj", "{F8F652CF-774D-4B15-A2F4-F69465308FDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +93,16 @@ Global
 		{F3E0B2CF-ADC2-4DC0-8865-5E9BBE2F1B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3E0B2CF-ADC2-4DC0-8865-5E9BBE2F1B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3E0B2CF-ADC2-4DC0-8865-5E9BBE2F1B51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAA096B8-F424-4841-AB58-00B2A08DE555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAA096B8-F424-4841-AB58-00B2A08DE555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAA096B8-F424-4841-AB58-00B2A08DE555}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EAA096B8-F424-4841-AB58-00B2A08DE555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAA096B8-F424-4841-AB58-00B2A08DE555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAA096B8-F424-4841-AB58-00B2A08DE555}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F8F652CF-774D-4B15-A2F4-F69465308FDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F652CF-774D-4B15-A2F4-F69465308FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F652CF-774D-4B15-A2F4-F69465308FDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F652CF-774D-4B15-A2F4-F69465308FDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
