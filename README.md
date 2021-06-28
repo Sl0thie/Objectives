@@ -45,9 +45,8 @@ A .Net Framework Application that monitors windows for events.
 A Microsoft Word VSTO AddIn that is used to track time spent creating or reviewing Microsoft Word documents. Just as with the Microsoft Excel AddIn, non standard file opened in Microsoft Word are also tracked.  
 
 # Reports
-
 ### Daily Report
-The daily report is generated once outlook starts the next day. This report has several sections.
+The daily report is generated after outlook starts the next day. It is stored in the Objectives calendar as an all day appointment. Opening this appointment shows the report. This report has several sections:
 
 ![Day Report](./OutlookObjectives/Docs/DayReport.png "Day Report")
 

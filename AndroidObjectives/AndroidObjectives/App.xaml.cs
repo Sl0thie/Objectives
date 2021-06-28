@@ -1,4 +1,4 @@
-﻿using AndroidObjectives.Services;
+﻿//using AndroidObjectives.Services;
 using AndroidObjectives.Views;
 using System;
 using Xamarin.Forms;
@@ -18,7 +18,7 @@ namespace AndroidObjectives
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            //DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 

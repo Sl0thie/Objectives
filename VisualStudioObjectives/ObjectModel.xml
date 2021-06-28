@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VisualStudioObjectives</name>
+    </assembly>
+    <members>
+        <member name="T:VisualStudioObjectives.VisualStudioObectivesPackage">
+            <summary>
+            VisualStudioObectivesPackage class.
+            </summary>
+        </member>
+        <member name="F:VisualStudioObjectives.VisualStudioObectivesPackage.PackageGuidString">
+            <summary>
+            GUID for the Package.
+            </summary>
+        </member>
+        <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.InitializeAsync(System.Threading.CancellationToken,System.IProgress{Microsoft.VisualStudio.Shell.ServiceProgressData})">
+            <summary>
+            Initializes the VisualStudioObectivesPackage.
+            </summary>
+            <param name="cancellationToken"></param>
+            <param name="progress"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.MainTimer_Elapsed(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+            Handles the MainTimer event.  
+            </summary>
+            <param name="sender">This parameter is unused.</param>
+            <param name="e">This parameter is unused.</param>
+        </member>
+        <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.IsSolutionUnsavedAsync(EnvDTE.Solution,System.Boolean)">
+            <summary>
+            Searches projects and project items for unsaved changes.
+            </summary>
+            <remarks>
+            List of [Project GUID's](https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids")
+            </remarks>
+            <param name="solution">The solution to search for unsaved changes.</param>
+            <param name="save">If true, save the items if they are unsaved.</param>
+            <returns>True is unsaved changes are found.</returns>
+        </member>
+        <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.IsProjectItemsUnsavedAsync(EnvDTE.ProjectItem,System.Boolean)">
+            <summary>
+            Searches project items for unsaved changes.  
+            Also checks the sub items. (recursive)
+            </summary>
+            <param name="item">The project item to search.  Includes sub items if the item is a folder.</param>
+            <param name="save">If true, will save the item if unsaved changes are found.</param>
+            <returns>Returns true is the item is unsaved.</returns>
+        </member>
+        <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.GetRegistrySettings">
+            <summary>
+            Gets the settings from the Registry.
+            </summary>
+        </member>
+        <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.SolutionEvents_OnAfterBackgroundSolutionLoadComplete(System.Object,System.EventArgs)">
+            <summary>
+            Handles the Solution load event.
+            </summary>
+            <param name="sender">This parameter is unused.</param>
+            <param name="e">This parameter is unused.</param>
+        </member>
+        <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.SolutionEvents_OnBeforeCloseSolution(System.Object,System.EventArgs)">
+            <summary>
+            Handles the Solution close event.
+            </summary>
+            <param name="sender">This parameter is unused.</param>
+            <param name="e">This parameter is unused.</param>
+        </member>
+        <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.IsSolutionLoadedAsync">
+            <summary>
+            Check if the solution is loaded.
+            </summary>
+            <returns>True if the solution is loaded.</returns>
+        </member>
+        <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.GetStartValues">
+            <summary>
+            Gets the starting values for the WorkItem.
+            </summary>
+        </member>
+        <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.GetCurrentValues">
+            <summary>
+            Gets the current values for the WorkItem.
+            </summary>
+        </member>
+        <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.GetHEADItems">
+            <summary>
+            Gets the HEAD items from the git logs if they are available.
+            </summary>
+        </member>
+        <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.SaveDataAsync">
+            <summary>
+            Saves the WorkItem data to file.
+            </summary>
+        </member>
+    </members>
+</doc>
