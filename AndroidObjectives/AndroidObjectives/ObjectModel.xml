@@ -46,5 +46,138 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
+        <member name="T:AndroidObjectives.Data.LocalDatabase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Data.LocalDatabase.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Data.LocalDatabase.GetItemsAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Data.LocalDatabase.GetItemsNotDoneAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Data.LocalDatabase.GetItemAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Data.LocalDatabase.SaveItemAsync(AndroidObjectives.Models.Objective)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Data.LocalDatabase.DeleteItemAsync(AndroidObjectives.Models.Objective)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AndroidObjectives.Globals">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AndroidObjectives.Models.Objective">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.Models.Objective.ObjectiveName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.Models.Objective.Created">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.Models.Objective.Path">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AndroidObjectives.IDataStore`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:AndroidObjectives.IDataStore`1.AddItemAsync(`0)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.IDataStore`1.UpdateItemAsync(`0)">
+            <summary>
+            
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.IDataStore`1.DeleteItemAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.IDataStore`1.GetItemAsync(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.IDataStore`1.GetItemsAsync(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="forceRefresh"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Views.ObjectivesPage.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Views.ObjectivesPage.OnAppearing">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Views.ObjectivesPage.OnItemAdded(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AndroidObjectives.Views.ObjectivesPage.OnListItemSelected(System.Object,Xamarin.Forms.SelectedItemChangedEventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
     </members>
 </doc>

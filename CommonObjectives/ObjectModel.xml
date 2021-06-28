@@ -24,6 +24,35 @@
             The application name that is focused.
             </summary>
         </member>
+        <member name="T:CommonObjectives.Client">
+            <summary>
+            Client class extends the outlook ContactItem 
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Client.EntryId">
+            <summary>
+            Get or sets the EntryID. 
+            This is the Outlook ContactItem EntryID for the contact that is a client.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Client.Title">
+            <summary>
+            Gets or sets the Title of the client.
+            This is the prefix for the persons full name.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Client.FirstName">
+            <summary>
+            Gets or sets the FirstName.
+            This is the client's first name.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Client.LastName">
+            <summary>
+            Gets or sets the LastName.
+            This is the last name of the client.
+            </summary>
+        </member>
         <member name="T:CommonObjectives.DrawingSession">
             <summary>
             

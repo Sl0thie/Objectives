@@ -2,11 +2,32 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AndroidObjectives.Views.ObjectivesPage" BackgroundColor="#000000">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" TextColor="#FFFFFF" />
-        </StackLayout>
-    </ContentPage.Content>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Clicked="OnItemAdded">
+            <ToolbarItem.IconImageSource>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="Android, UWP"
+                        Value="plus.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ListView x:Name="listView"
+              Margin="20"
+              ItemSelected="OnListItemSelected">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Margin="20,0,0,0"
+                                 Orientation="Horizontal"
+                                 HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding ObjectiveName}"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="StartAndExpand" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>
