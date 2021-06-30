@@ -23,6 +23,7 @@ namespace AndroidObjectives.Droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
         }
     }
 }

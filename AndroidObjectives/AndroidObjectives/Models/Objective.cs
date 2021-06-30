@@ -1,8 +1,7 @@
 ﻿namespace AndroidObjectives.Models
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
+    using SQLite;
 
     /// <summary>
     /// 
@@ -12,6 +11,7 @@
         /// <summary>
         /// 
         /// </summary>
+        [PrimaryKey, Unique]
         public string ObjectiveName { get; set; }
 
         /// <summary>

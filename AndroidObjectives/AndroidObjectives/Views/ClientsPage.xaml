@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AndroidObjectives.Views.ClientsPage" BackgroundColor="#000000">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Clients"></ToolbarItem>
+        <ToolbarItem Text="+" Clicked="OnItemAdded">
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <ListView x:Name="listView"
+              Margin="20">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Margin="20,0,0,0"
+                                 Orientation="Horizontal">
+                        <Label Text="{Binding FirstName}" TextColor="#FFFFFF" />
+                        <Label Text="{Binding LastName}" TextColor="#FFFFFF" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

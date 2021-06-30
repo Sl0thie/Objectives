@@ -2,11 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AndroidObjectives.Views.ObjectivePage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding ObjectiveName}"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout Margin="20"
+                 VerticalOptions="StartAndExpand">
+        <Label Text="Name" />
+        <Entry Text="{Binding ObjectiveName}" />
+        <Label Text="Created" />
+        <Entry Text="{Binding Created}" />
+        <Label Text="Path" />
+        <Entry Text="{Binding Path}" />
+
+        <Button Text="Save"
+                Clicked="OnSaveClicked" />
+        <Button Text="Delete"
+                Clicked="OnDeleteClicked" />
+        <Button Text="Cancel"
+                Clicked="OnCancelClicked" />
+    </StackLayout>
 </ContentPage>

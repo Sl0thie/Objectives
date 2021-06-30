@@ -97,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\drawable\objectives.png" />
+    <AndroidResource Include="Resources\drawable\plus.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -46,7 +46,32 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
+        <member name="T:AndroidObjectives.Constants">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AndroidObjectives.Constants.DatabaseFilename">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AndroidObjectives.Constants.Flags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.Constants.DatabasePath">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:AndroidObjectives.Data.LocalDatabase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:AndroidObjectives.Data.LocalDatabase.Instance">
             <summary>
             
             </summary>
@@ -56,7 +81,25 @@
             
             </summary>
         </member>
-        <member name="M:AndroidObjectives.Data.LocalDatabase.GetItemsAsync">
+        <member name="M:AndroidObjectives.Data.LocalDatabase.SaveClientAsync(AndroidObjectives.Data.Client)">
+            <summary>
+            
+            </summary>
+            <param name="client"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Data.LocalDatabase.CallForClients">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Data.LocalDatabase.GetClientsAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Data.LocalDatabase.GetObjectivesAsync">
             <summary>
             
             </summary>
@@ -72,26 +115,49 @@
             <summary>
             
             </summary>
-            <param name="id"></param>
+            <param name="objectiveName"></param>
             <returns></returns>
         </member>
-        <member name="M:AndroidObjectives.Data.LocalDatabase.SaveItemAsync(AndroidObjectives.Models.Objective)">
+        <member name="M:AndroidObjectives.Data.LocalDatabase.SaveObjectiveAsync(AndroidObjectives.Models.Objective)">
+            <summary>
+            
+            </summary>
+            <param name="objective"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AndroidObjectives.Data.LocalDatabase.DeleteObjectiveAsync(AndroidObjectives.Models.Objective)">
             <summary>
             
             </summary>
             <param name="item"></param>
             <returns></returns>
         </member>
-        <member name="M:AndroidObjectives.Data.LocalDatabase.DeleteItemAsync(AndroidObjectives.Models.Objective)">
+        <member name="T:AndroidObjectives.Data.Client">
             <summary>
             
             </summary>
-            <param name="item"></param>
-            <returns></returns>
         </member>
-        <member name="T:AndroidObjectives.Globals">
+        <member name="P:AndroidObjectives.Data.Client.EntryID">
             <summary>
             
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.Data.Client.Title">
+            <summary>
+            Gets or sets the Title of the client.
+            This is the prefix for the persons full name.
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.Data.Client.FirstName">
+            <summary>
+            Gets or sets the FirstName.
+            This is the client's first name.
+            </summary>
+        </member>
+        <member name="P:AndroidObjectives.Data.Client.LastName">
+            <summary>
+            Gets or sets the LastName.
+            This is the last name of the client.
             </summary>
         </member>
         <member name="T:AndroidObjectives.Models.Objective">
@@ -114,46 +180,56 @@
             
             </summary>
         </member>
-        <member name="T:AndroidObjectives.IDataStore`1">
+        <member name="T:AndroidObjectives.Views.ClientsPage">
             <summary>
             
             </summary>
-            <typeparam name="T"></typeparam>
         </member>
-        <member name="M:AndroidObjectives.IDataStore`1.AddItemAsync(`0)">
+        <member name="M:AndroidObjectives.Views.ClientsPage.#ctor">
             <summary>
             
             </summary>
-            <param name="item"></param>
-            <returns></returns>
         </member>
-        <member name="M:AndroidObjectives.IDataStore`1.UpdateItemAsync(`0)">
+        <member name="M:AndroidObjectives.Views.ClientsPage.OnAppearing">
             <summary>
             
             </summary>
-            <param name="item"></param>
-            <returns></returns>
         </member>
-        <member name="M:AndroidObjectives.IDataStore`1.DeleteItemAsync(System.String)">
+        <member name="T:AndroidObjectives.Views.ObjectivePage">
             <summary>
             
             </summary>
-            <param name="id"></param>
-            <returns></returns>
         </member>
-        <member name="M:AndroidObjectives.IDataStore`1.GetItemAsync(System.String)">
+        <member name="M:AndroidObjectives.Views.ObjectivePage.#ctor">
             <summary>
             
             </summary>
-            <param name="id"></param>
-            <returns></returns>
         </member>
-        <member name="M:AndroidObjectives.IDataStore`1.GetItemsAsync(System.Boolean)">
+        <member name="M:AndroidObjectives.Views.ObjectivePage.OnSaveClicked(System.Object,System.EventArgs)">
             <summary>
             
             </summary>
-            <param name="forceRefresh"></param>
-            <returns></returns>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AndroidObjectives.Views.ObjectivePage.OnDeleteClicked(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AndroidObjectives.Views.ObjectivePage.OnCancelClicked(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:AndroidObjectives.Views.ObjectivesPage">
+            <summary>
+            
+            </summary>
         </member>
         <member name="M:AndroidObjectives.Views.ObjectivesPage.#ctor">
             <summary>
@@ -164,20 +240,6 @@
             <summary>
             
             </summary>
-        </member>
-        <member name="M:AndroidObjectives.Views.ObjectivesPage.OnItemAdded(System.Object,System.EventArgs)">
-            <summary>
-            
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
-        </member>
-        <member name="M:AndroidObjectives.Views.ObjectivesPage.OnListItemSelected(System.Object,Xamarin.Forms.SelectedItemChangedEventArgs)">
-            <summary>
-            
-            </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
         </member>
     </members>
 </doc>

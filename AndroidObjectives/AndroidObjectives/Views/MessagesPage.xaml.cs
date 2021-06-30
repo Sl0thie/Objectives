@@ -10,9 +10,9 @@
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DatabasePage : ContentPage
+    public partial class MessagesPage : ContentPage
     {
-        public DatabasePage()
+        public MessagesPage()
         {
             InitializeComponent();
         }

@@ -2,26 +2,25 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
     using AndroidObjectives.Data;
     using AndroidObjectives.Models;
+
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
-    using SQLite;
 
     /// <summary>
     /// 
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ObjectivesPage : ContentPage
+    public partial class ClientsPage : ContentPage
     {
         /// <summary>
         /// 
         /// </summary>
-        public ObjectivesPage()
+        public ClientsPage()
         {
             InitializeComponent();
         }
@@ -33,29 +32,18 @@
         {
             base.OnAppearing();
             LocalDatabase database = await LocalDatabase.Instance;
-            listView.ItemsSource = await database.GetObjectivesAsync();
-
-
-            
+            listView.ItemsSource = await database.GetClientsAsync();
         }
 
         async void OnItemAdded(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ObjectivePage
-            {
-                BindingContext = new Objective()
-            });
+            //await Navigation.PushAsync(new ObjectivePage
+            //{
+            //    BindingContext = new Objective()
+            //});
         }
 
-        async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            if (e.SelectedItem != null)
-            {
-                await Navigation.PushAsync(new ObjectivePage
-                {
-                    BindingContext = e.SelectedItem as Objective
-                });
-            }
-        }
+
+
     }
 }

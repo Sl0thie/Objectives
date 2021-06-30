@@ -3,7 +3,7 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:AndroidObjectives.Views"
        Title="AndroidObjectives"
-       x:Class="AndroidObjectives.AppShell" FlyoutBackgroundColor="#303030">
+       x:Class="AndroidObjectives.AppShell" FlyoutBackgroundColor="#121212">
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -16,13 +16,13 @@
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="Shell.ForegroundColor" Value="White" />
-                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="#FFFFFF" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
-                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#FFFFFF" />
                 <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarForegroundColor" Value="#444444"/>
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="#444444"/>
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
@@ -34,6 +34,7 @@
             <Style Class="FlyoutItemLabelStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="White"></Setter>
             </Style>
+            
             <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
@@ -41,7 +42,7 @@
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
                                     <Setter Property="BackgroundColor" Value="{x:OnPlatform UWP=Transparent, iOS=White}" />
-                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="#FFFFFF" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Selected">
@@ -73,14 +74,26 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <FlyoutItem Title="Objectives" Icon="objectives.png">
-        <ShellContent Route="ObjectivesPage" ContentTemplate="{DataTemplate local:ObjectivesPage}" />
-    </FlyoutItem>
     
-    <FlyoutItem Title="Database Test" Icon="icon_feed.png">
-        <ShellContent Route="DatabasePage" ContentTemplate="{DataTemplate local:DatabasePage}" />
+
+    <FlyoutItem Title="Clients" StyleClass="FlyoutItemLayoutStyle">
+        <ShellContent Route="ClientsPage" ContentTemplate="{DataTemplate local:ClientsPage}" />
     </FlyoutItem>
 
-    
+    <FlyoutItem Title="Objectives">
+        <ShellContent Route="ObjectivesPage" ContentTemplate="{DataTemplate local:ObjectivesPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Tasks">
+        <ShellContent Route="TasksPage" ContentTemplate="{DataTemplate local:TasksPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Location">
+        <ShellContent Route="LocationPage" ContentTemplate="{DataTemplate local:LocationPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Messages">
+        <ShellContent Route="MessagesPage" ContentTemplate="{DataTemplate local:MessagesPage}" />
+    </FlyoutItem>
 
 </Shell>

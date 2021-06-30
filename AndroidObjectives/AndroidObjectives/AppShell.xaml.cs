@@ -1,4 +1,4 @@
-﻿using AndroidObjectives.ViewModels;
+﻿//using AndroidObjectives.ViewModels;
 using AndroidObjectives.Views;
 using System;
 using System.Collections.Generic;
@@ -17,8 +17,8 @@ namespace AndroidObjectives
         public AppShell()
         {
             InitializeComponent();
-            //Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            //Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+            Routing.RegisterRoute(nameof(ObjectivePage), typeof(ObjectivePage));
+            Routing.RegisterRoute(nameof(ObjectivesPage), typeof(ObjectivesPage));
         }
 
         /// <summary>
