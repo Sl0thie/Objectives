@@ -15,6 +15,81 @@ namespace OutlookObjectives.ServiceReference1 {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Objective", Namespace="http://www.intacomputers.com/Services/Objectives/")]
+    [System.SerializableAttribute()]
+    public partial class Objective : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ObjectiveNameField;
+        
+        private System.DateTime CreatedField;
+        
+        private bool ArchivedField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string ObjectiveName {
+            get {
+                return this.ObjectiveNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ObjectiveNameField, value) != true)) {
+                    this.ObjectiveNameField = value;
+                    this.RaisePropertyChanged("ObjectiveName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
+        public System.DateTime Created {
+            get {
+                return this.CreatedField;
+            }
+            set {
+                if ((this.CreatedField.Equals(value) != true)) {
+                    this.CreatedField = value;
+                    this.RaisePropertyChanged("Created");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public bool Archived {
+            get {
+                return this.ArchivedField;
+            }
+            set {
+                if ((this.ArchivedField.Equals(value) != true)) {
+                    this.ArchivedField = value;
+                    this.RaisePropertyChanged("Archived");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ClientList", Namespace="http://www.intacomputers.com/Services/Objectives/")]
     [System.SerializableAttribute()]
     public partial class ClientList : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -170,6 +245,13 @@ namespace OutlookObjectives.ServiceReference1 {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.intacomputers.com/Services/Objectives/", ConfigurationName="ServiceReference1.ObjectivesSoap")]
     public interface ObjectivesSoap {
         
+        // CODEGEN: Generating message contract since element name objective from namespace http://www.intacomputers.com/Services/Objectives/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.intacomputers.com/Services/Objectives/SaveObjective", ReplyAction="*")]
+        OutlookObjectives.ServiceReference1.SaveObjectiveResponse SaveObjective(OutlookObjectives.ServiceReference1.SaveObjectiveRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.intacomputers.com/Services/Objectives/SaveObjective", ReplyAction="*")]
+        System.Threading.Tasks.Task<OutlookObjectives.ServiceReference1.SaveObjectiveResponse> SaveObjectiveAsync(OutlookObjectives.ServiceReference1.SaveObjectiveRequest request);
+        
         // CODEGEN: Generating message contract since element name GetClientListResult from namespace http://www.intacomputers.com/Services/Objectives/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://www.intacomputers.com/Services/Objectives/GetClientList", ReplyAction="*")]
         OutlookObjectives.ServiceReference1.GetClientListResponse GetClientList(OutlookObjectives.ServiceReference1.GetClientListRequest request);
@@ -183,6 +265,67 @@ namespace OutlookObjectives.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://www.intacomputers.com/Services/Objectives/SetClientList", ReplyAction="*")]
         System.Threading.Tasks.Task<OutlookObjectives.ServiceReference1.SetClientListResponse> SetClientListAsync(OutlookObjectives.ServiceReference1.SetClientListRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SaveObjectiveRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SaveObjective", Namespace="http://www.intacomputers.com/Services/Objectives/", Order=0)]
+        public OutlookObjectives.ServiceReference1.SaveObjectiveRequestBody Body;
+        
+        public SaveObjectiveRequest() {
+        }
+        
+        public SaveObjectiveRequest(OutlookObjectives.ServiceReference1.SaveObjectiveRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.intacomputers.com/Services/Objectives/")]
+    public partial class SaveObjectiveRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public OutlookObjectives.ServiceReference1.Objective objective;
+        
+        public SaveObjectiveRequestBody() {
+        }
+        
+        public SaveObjectiveRequestBody(OutlookObjectives.ServiceReference1.Objective objective) {
+            this.objective = objective;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SaveObjectiveResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SaveObjectiveResponse", Namespace="http://www.intacomputers.com/Services/Objectives/", Order=0)]
+        public OutlookObjectives.ServiceReference1.SaveObjectiveResponseBody Body;
+        
+        public SaveObjectiveResponse() {
+        }
+        
+        public SaveObjectiveResponse(OutlookObjectives.ServiceReference1.SaveObjectiveResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class SaveObjectiveResponseBody {
+        
+        public SaveObjectiveResponseBody() {
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -332,6 +475,30 @@ namespace OutlookObjectives.ServiceReference1 {
         
         public ObjectivesSoapClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        OutlookObjectives.ServiceReference1.SaveObjectiveResponse OutlookObjectives.ServiceReference1.ObjectivesSoap.SaveObjective(OutlookObjectives.ServiceReference1.SaveObjectiveRequest request) {
+            return base.Channel.SaveObjective(request);
+        }
+        
+        public void SaveObjective(OutlookObjectives.ServiceReference1.Objective objective) {
+            OutlookObjectives.ServiceReference1.SaveObjectiveRequest inValue = new OutlookObjectives.ServiceReference1.SaveObjectiveRequest();
+            inValue.Body = new OutlookObjectives.ServiceReference1.SaveObjectiveRequestBody();
+            inValue.Body.objective = objective;
+            OutlookObjectives.ServiceReference1.SaveObjectiveResponse retVal = ((OutlookObjectives.ServiceReference1.ObjectivesSoap)(this)).SaveObjective(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<OutlookObjectives.ServiceReference1.SaveObjectiveResponse> OutlookObjectives.ServiceReference1.ObjectivesSoap.SaveObjectiveAsync(OutlookObjectives.ServiceReference1.SaveObjectiveRequest request) {
+            return base.Channel.SaveObjectiveAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<OutlookObjectives.ServiceReference1.SaveObjectiveResponse> SaveObjectiveAsync(OutlookObjectives.ServiceReference1.Objective objective) {
+            OutlookObjectives.ServiceReference1.SaveObjectiveRequest inValue = new OutlookObjectives.ServiceReference1.SaveObjectiveRequest();
+            inValue.Body = new OutlookObjectives.ServiceReference1.SaveObjectiveRequestBody();
+            inValue.Body.objective = objective;
+            return ((OutlookObjectives.ServiceReference1.ObjectivesSoap)(this)).SaveObjectiveAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

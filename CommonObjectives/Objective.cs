@@ -8,6 +8,8 @@
     /// </summary>
     public class Objective
     {
+        private Dictionary<int, WorkType> workTypes = new Dictionary<int, WorkType>();
+
         /// <summary>
         /// The name of the Objective.
         /// </summary>
@@ -28,9 +30,6 @@
         /// </summary>
         public DateTime Created { get; set; }
 
-        
-        private Dictionary<int, WorkType> workTypes = new Dictionary<int, WorkType>();
-
         /// <summary>
         /// The current WorkType values for the Objective.
         /// </summary>
@@ -42,6 +41,18 @@
             get { return workTypes; }
             set { workTypes = value; }
         }
+
+        /// <summary>
+        /// Gets or sets the ClientEntryID.
+        /// This is the Outlook EntryID for the contact that has been designated as the client.
+        /// </summary>
+        public string ClientEntryID { get; set; }
+
+        /// <summary>
+        /// Gets or sets the ClientStoreID.
+        /// This is the outlook StoreID of the contacts folder the client's entry is stored in.
+        /// </summary>
+        public string ClientStoreID { get; set; }
 
         /// <summary>
         /// Implements a new Objective object.

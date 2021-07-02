@@ -25,8 +25,8 @@
         public static readonly AsyncLazy<LocalDatabase> Instance = new AsyncLazy<LocalDatabase>(async () =>
         {
             var instance = new LocalDatabase();
-            // await Database.DropTableAsync<Objective>();
-            // await Database.DropTableAsync<Client>();
+             await Database.DropTableAsync<Objective>();
+             await Database.DropTableAsync<Client>();
             CreateTableResult result = await Database.CreateTableAsync<Objective>();
             result = await Database.CreateTableAsync<Client>();
 
@@ -52,12 +52,25 @@
             {
                 dataHubConnection = new HubConnection("http://www.intacomputers.com/");
                 dataHubProxy = dataHubConnection.CreateHubProxy("DataHub");
-                dataHubProxy.On<string>("ClientRecord", (json) =>
+                
+                dataHubProxy.On<string>("SaveClient", (json) =>
+                {
+                    Client newClient = JsonConvert.DeserializeObject<Client>(json);
+                    SaveClientAsync(newClient);
+                });
+
+                dataHubProxy.On("DropCreateClient", () =>
+                {
+                    DropCreateClientsAsync();
+                });
+
+                dataHubProxy.On<string>("SaveObjective", (json) =>
                 {
                     Debug.WriteLine("ClientRecord");
                     Client newClient = JsonConvert.DeserializeObject<Client>(json);
                     SaveClientAsync(newClient);
                 });
+
 
                 //chatHubProxy.On<string, string>("recieveMessage", (n, m) => {
                 //    Messages.Add(string.Format("{0} says: {1}", n, m));
@@ -75,6 +88,15 @@
         #endregion
 
         #region Clients
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public async void DropCreateClientsAsync()
+        {
+            await Database.DropTableAsync<Client>();
+            CreateTableResult result = await Database.CreateTableAsync<Client>();
+        }
 
         /// <summary>
         /// 

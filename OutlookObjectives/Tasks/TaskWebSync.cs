@@ -7,6 +7,7 @@
     using System.Collections.Generic;
     using System.Drawing;
     using System.Drawing.Drawing2D;
+    using System.IO;
     using System.Linq;
     using System.Runtime.InteropServices;
     using System.Threading;
@@ -21,12 +22,6 @@
         private readonly Action CallBack;
 
         ServiceReference1.ObjectivesSoapClient soap;
-
-
-
-
-
-
 
         /// <summary>
         /// 
@@ -57,7 +52,7 @@
         private void BackgroundProcess()
         {
             SyncClients();
-
+            SyncObjectives();
             CallBack?.Invoke();
         }
 
@@ -68,7 +63,7 @@
         {
             ServiceReference1.SetClientListRequest request = new ServiceReference1.SetClientListRequest();
             ServiceReference1.SetClientListResponse response = new ServiceReference1.SetClientListResponse();
-            
+
             soap = new ServiceReference1.ObjectivesSoapClient();
             ServiceReference1.ClientList clientList = new ServiceReference1.ClientList();
 
@@ -103,10 +98,46 @@
             {
                 soap.SetClientList(clientList);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Error(ex);
             }
         }
+
+        private void SyncObjectives()
+        {
+            soap = new ServiceReference1.ObjectivesSoapClient();
+
+            foreach (var path in Directory.EnumerateDirectories(InTouch.ObjectivesRootFolder, "*", SearchOption.TopDirectoryOnly))
+            {
+                Objective objective = InTouch.GetObjective(path);
+                objective.Archived = false;
+                ServiceReference1.Objective obj = new ServiceReference1.Objective();
+                obj.Archived = objective.Archived;
+                obj.Created = objective.Created;
+                obj.ObjectiveName = objective.ObjectiveName;
+
+                Log.Info("ObjectiveName: " + obj.ObjectiveName);
+                Log.Info("DateTime: " + obj.Created);
+
+                soap.SaveObjective(obj);
+            }
+
+            foreach (var path in Directory.EnumerateDirectories(InTouch.ObjectivesArchiveFolder, "*", SearchOption.TopDirectoryOnly))
+            {
+                Objective objective = InTouch.GetObjective(path);
+                objective.Archived = true;
+                ServiceReference1.Objective obj = new ServiceReference1.Objective();
+                obj.Archived = objective.Archived;
+                obj.Created = objective.Created;
+                obj.ObjectiveName = objective.ObjectiveName;
+
+                Log.Info("ObjectiveName: " + obj.ObjectiveName);
+                Log.Info("DateTime: " + obj.Created);
+
+                soap.SaveObjective(obj);
+            }
+        }
+
     }
 }

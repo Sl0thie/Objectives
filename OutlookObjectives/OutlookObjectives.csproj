@@ -325,6 +325,9 @@
     <None Include="Connected Services\ServiceReference1\OutlookObjectives.ServiceReference1.GetClientListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Connected Services\ServiceReference1\OutlookObjectives.ServiceReference1.SaveObjectiveResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\ServiceReference1\OutlookObjectives.ServiceReference1.SetClientListResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

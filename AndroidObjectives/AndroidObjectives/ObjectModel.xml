@@ -81,6 +81,11 @@
             
             </summary>
         </member>
+        <member name="M:AndroidObjectives.Data.LocalDatabase.DropCreateClientsAsync">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:AndroidObjectives.Data.LocalDatabase.SaveClientAsync(AndroidObjectives.Data.Client)">
             <summary>
             
@@ -194,6 +199,28 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="T:AndroidObjectives.Views.LocationPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Views.LocationPage.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Views.LocationPage.OnAppearing">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Views.LocationPage.btnLocation_Clicked(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
         </member>
         <member name="T:AndroidObjectives.Views.ObjectivePage">
             <summary>

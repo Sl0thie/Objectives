@@ -534,6 +534,18 @@
             If they are not found here then the default values are used.
             </remarks>
         </member>
+        <member name="P:CommonObjectives.Objective.ClientEntryID">
+            <summary>
+            Gets or sets the ClientEntryID.
+            This is the Outlook EntryID for the contact that has been designated as the client.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Objective.ClientStoreID">
+            <summary>
+            Gets or sets the ClientStoreID.
+            This is the outlook StoreID of the contacts folder the client's entry is stored in.
+            </summary>
+        </member>
         <member name="M:CommonObjectives.Objective.#ctor">
             <summary>
             Implements a new Objective object.

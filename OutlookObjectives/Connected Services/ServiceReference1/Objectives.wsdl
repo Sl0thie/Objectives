@@ -2,6 +2,23 @@
 <wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.intacomputers.com/Services/Objectives/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.intacomputers.com/Services/Objectives/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://www.intacomputers.com/Services/Objectives/">
+      <s:element name="SaveObjective">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="objective" type="tns:Objective" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Objective">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ObjectiveName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Created" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Archived" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SaveObjectiveResponse">
+        <s:complexType />
+      </s:element>
       <s:element name="GetClientList">
         <s:complexType />
       </s:element>
@@ -43,6 +60,12 @@
       </s:element>
     </s:schema>
   </wsdl:types>
+  <wsdl:message name="SaveObjectiveSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveObjective" />
+  </wsdl:message>
+  <wsdl:message name="SaveObjectiveSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveObjectiveResponse" />
+  </wsdl:message>
   <wsdl:message name="GetClientListSoapIn">
     <wsdl:part name="parameters" element="tns:GetClientList" />
   </wsdl:message>
@@ -56,6 +79,10 @@
     <wsdl:part name="parameters" element="tns:SetClientListResponse" />
   </wsdl:message>
   <wsdl:portType name="ObjectivesSoap">
+    <wsdl:operation name="SaveObjective">
+      <wsdl:input message="tns:SaveObjectiveSoapIn" />
+      <wsdl:output message="tns:SaveObjectiveSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="GetClientList">
       <wsdl:input message="tns:GetClientListSoapIn" />
       <wsdl:output message="tns:GetClientListSoapOut" />
@@ -67,6 +94,15 @@
   </wsdl:portType>
   <wsdl:binding name="ObjectivesSoap" type="tns:ObjectivesSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveObjective">
+      <soap:operation soapAction="http://www.intacomputers.com/Services/Objectives/SaveObjective" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetClientList">
       <soap:operation soapAction="http://www.intacomputers.com/Services/Objectives/GetClientList" style="document" />
       <wsdl:input>
@@ -88,6 +124,15 @@
   </wsdl:binding>
   <wsdl:binding name="ObjectivesSoap12" type="tns:ObjectivesSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SaveObjective">
+      <soap12:operation soapAction="http://www.intacomputers.com/Services/Objectives/SaveObjective" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetClientList">
       <soap12:operation soapAction="http://www.intacomputers.com/Services/Objectives/GetClientList" style="document" />
       <wsdl:input>

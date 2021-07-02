@@ -83,6 +83,7 @@
             if (path == InTouch.ObjectivesRootFolder + "\\None")
             {
                 item.ObjectiveName = "None";
+                item.Created = DateTime.Parse("2000-01-01");
                 return item;
             }
 
@@ -142,8 +143,15 @@
                     }
                 }
 
+                
+
                 string json = JsonConvert.SerializeObject(item, Formatting.Indented);
                 File.WriteAllText(path + @"\System\Objective.json", json);
+            }
+
+            if (item.Created < DateTime.Parse("2000-01-01"))
+            {
+                item.Created = DateTime.Parse("2000-01-01");
             }
 
             return item;
