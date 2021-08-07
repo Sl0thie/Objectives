@@ -35,7 +35,7 @@
 
             Debug.WriteLine("On saved");
 
-            var todoItem = (Objective)BindingContext;
+            var todoItem = (CommonObjectives.Serial.Objective)BindingContext;
             LocalDatabase database = await LocalDatabase.Instance;
 
             await database.SaveObjectiveAsync(todoItem);
@@ -51,7 +51,7 @@
         /// <param name="e"></param>
         async void OnDeleteClicked(object sender, EventArgs e)
         {
-            var todoItem = (Objective)BindingContext;
+            var todoItem = (CommonObjectives.Serial.Objective)BindingContext;
             LocalDatabase database = await LocalDatabase.Instance;
             await database.DeleteObjectiveAsync(todoItem);
             await Navigation.PopAsync();

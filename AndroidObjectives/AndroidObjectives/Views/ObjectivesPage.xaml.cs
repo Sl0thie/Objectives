@@ -11,6 +11,7 @@
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
     using SQLite;
+    using CommonObjectives;
 
     /// <summary>
     /// 
@@ -43,7 +44,7 @@
         {
             await Navigation.PushAsync(new ObjectivePage
             {
-                BindingContext = new Objective()
+                BindingContext = new CommonObjectives.Serial.Objective()
             });
         }
 
@@ -53,7 +54,7 @@
             {
                 await Navigation.PushAsync(new ObjectivePage
                 {
-                    BindingContext = e.SelectedItem as Objective
+                    BindingContext = e.SelectedItem as CommonObjectives.Serial.Objective
                 });
             }
         }

@@ -104,6 +104,11 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:AndroidObjectives.Data.LocalDatabase.CallForObjectives">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:AndroidObjectives.Data.LocalDatabase.GetObjectivesAsync">
             <summary>
             
@@ -123,14 +128,14 @@
             <param name="objectiveName"></param>
             <returns></returns>
         </member>
-        <member name="M:AndroidObjectives.Data.LocalDatabase.SaveObjectiveAsync(AndroidObjectives.Models.Objective)">
+        <member name="M:AndroidObjectives.Data.LocalDatabase.SaveObjectiveAsync(CommonObjectives.Serial.Objective)">
             <summary>
             
             </summary>
             <param name="objective"></param>
             <returns></returns>
         </member>
-        <member name="M:AndroidObjectives.Data.LocalDatabase.DeleteObjectiveAsync(AndroidObjectives.Models.Objective)">
+        <member name="M:AndroidObjectives.Data.LocalDatabase.DeleteObjectiveAsync(CommonObjectives.Serial.Objective)">
             <summary>
             
             </summary>
@@ -163,26 +168,6 @@
             <summary>
             Gets or sets the LastName.
             This is the last name of the client.
-            </summary>
-        </member>
-        <member name="T:AndroidObjectives.Models.Objective">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:AndroidObjectives.Models.Objective.ObjectiveName">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:AndroidObjectives.Models.Objective.Created">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:AndroidObjectives.Models.Objective.Path">
-            <summary>
-            
             </summary>
         </member>
         <member name="T:AndroidObjectives.Views.ClientsPage">

@@ -44,4 +44,8 @@
     <Folder Include="Services\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CommonObjectives\CommonObjectives.csproj" />
+  </ItemGroup>
 </Project>

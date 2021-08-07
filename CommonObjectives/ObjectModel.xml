@@ -816,6 +816,26 @@
             
             </summary>
         </member>
+        <member name="T:CommonObjectives.Serial.Objective">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Serial.Objective.ObjectiveName">
+            <summary>
+            The name of the Objective.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Serial.Objective.Archived">
+            <summary>
+            Value indicates whether the Objective is currently archived.
+            </summary>
+        </member>
+        <member name="P:CommonObjectives.Serial.Objective.Created">
+            <summary>
+            The time the Objective is created.
+            </summary>
+        </member>
         <member name="T:CommonObjectives.SystemIdle">
             <summary>
             SystemIdle class to hold idle event data.

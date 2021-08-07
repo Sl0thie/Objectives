@@ -6,7 +6,7 @@ This solution is a collection of projects that are used to track time and costs 
 # Projects
 ### Android Objectives  
 ###### [Overview](./AndroidObjectives/Docs/README.md) \- [Object Model](./AndroidObjectives/Docs/ObjectModel.md) \- Work in Progress
-Is an Xaramin Android application used to track items such as consultations, meetings and other tasks.
+Is an Xamarin Android application used to track items such as consultations, meetings and other tasks.
 
 ### AutoCAD Objectives  
 ###### [Overview](./AutoCADObjectives/Docs/README.md) \- [Object Model](./AutoCADObjectives/Docs/ObjectModel.md) \- Testing

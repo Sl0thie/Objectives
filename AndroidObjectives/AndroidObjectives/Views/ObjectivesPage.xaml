@@ -20,12 +20,22 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout Margin="20,0,0,0"
-                                 Orientation="Horizontal">
-                        <Label Text="{Binding ObjectiveName}" TextColor="#FFFFFF" />
-                        <Label Text="{Binding Created}" TextColor="#FFFFFF" />
-                        <Label Text="{Binding Path}" TextColor="#FFFFFF" />
-                    </StackLayout>
+                    <Grid Margin="0,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="24"/>
+                            <RowDefinition Height="18"/>
+                            <RowDefinition Height="18"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="24"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="greendot.png" HorizontalOptions="Start" IsVisible="{Binding Archived}" Margin="0,2,0,0" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalOptions="Start" />
+                        <Label Text="{Binding ObjectiveName}" TextColor="#FFFFFF" FontSize="18" Grid.Column="1" Grid.Row="0" BackgroundColor="#00000000"/>
+                        <Label Text="{Binding Created}" TextColor="#777777" FontSize="12" Grid.Column="1" Grid.Row="1" Padding="0,-4,0,0" BackgroundColor="#00000000"/>
+                    </Grid>
+                    
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
