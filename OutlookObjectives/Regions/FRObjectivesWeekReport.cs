@@ -6,7 +6,7 @@
 
     partial class FRObjectivesWeekReport
     {
-        #region Form Region Factory 
+        #region Form Region Factory
 
         [Microsoft.Office.Tools.Outlook.FormRegionMessageClass(Microsoft.Office.Tools.Outlook.FormRegionMessageClassAttribute.Appointment)]
         [Microsoft.Office.Tools.Outlook.FormRegionName("InTouch-Objectives.FRObjectivesWeekReport")]
@@ -22,9 +22,9 @@
 
         #endregion
 
-        Outlook.Inspector inspector;
+        private Outlook.Inspector inspector;
         private Outlook.AppointmentItem appointment;
-        WeekReport weekReport;
+        private WeekReport weekReport;
 
         // Occurs before the form region is displayed.
         // Use this.OutlookItem to get a reference to the current Outlook item.

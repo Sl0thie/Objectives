@@ -457,11 +457,11 @@
             </summary>
         </member>
         <member name="M:OutlookObjectives.FRObjectivesDayReport.FRObjectivesDayReport_FormRegionShowing(System.Object,System.EventArgs)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="sender">Unused.</param>
-            <param name="e">Unused.</param>
+             </summary>
+             <param name="sender">Unused.</param>
+             <param name="e">Unused.</param>
         </member>
         <member name="F:OutlookObjectives.FRObjectivesDayReport.components">
             <summary> 
@@ -672,9 +672,10 @@
         </member>
         <member name="M:OutlookObjectives.TaskDayReport.#ctor(System.Action)">
             <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.TaskDayReport"/> class.
             Returns control back to the TaskManager.
             </summary>
-            <param name="callBack"></param>
+            <param name="callBack">Callback for when the task has finished.</param>
         </member>
         <member name="M:OutlookObjectives.TaskDayReport.RunTask">
             <summary>
@@ -823,7 +824,7 @@
             <summary>
             TaskManager manages the background tasks.
             </summary>
-            <remarks>The TaskManager is used to manage the background tasks that perform 
+            <remarks>The TaskManager is used to manage the background tasks that perform
             operations such as moving emails from the Inbox. It provides a queue to store tasks
             and executes them one at a time.</remarks>
         </member>
@@ -928,14 +929,14 @@
             <returns></returns>
         </member>
         <member name="T:OutlookObjectives.TaskWebSync">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="M:OutlookObjectives.TaskWebSync.#ctor(System.Action)">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="M:OutlookObjectives.TaskWebSync.RunTask">
             <summary>
@@ -948,9 +949,9 @@
             </summary>
         </member>
         <member name="M:OutlookObjectives.TaskWebSync.SyncClients">
-            <summary>
+             <summary>
             
-            </summary>
+             </summary>
         </member>
         <member name="T:OutlookObjectives.TaskWeekReport">
             <summary>
@@ -1012,15 +1013,15 @@
         </member>
         <member name="P:OutlookObjectives.ThisAddIn.IAppointments">
             <summary>
-            Dictionary to hold the wrappers for Appointments.
+            Gets the Dictionary to hold the wrappers for Appointment objects..
             </summary>
         </member>
         <member name="M:OutlookObjectives.ThisAddIn.ThisAddIn_Startup(System.Object,System.EventArgs)">
             <summary>
             Primary entry for the AddIn.
             </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
         </member>
         <member name="M:OutlookObjectives.ThisAddIn.Inspectors_NewInspector(Microsoft.Office.Interop.Outlook.Inspector)">
             <summary>

@@ -4,17 +4,17 @@ using System.IO;
 namespace AndroidObjectives
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public static class Constants
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public const string DatabaseFilename = "TodoSQLite.db3";
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public const SQLite.SQLiteOpenFlags Flags =
             // open the database in read/write mode
@@ -25,7 +25,7 @@ namespace AndroidObjectives
             SQLite.SQLiteOpenFlags.SharedCache;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static string DatabasePath
         {

@@ -10,7 +10,7 @@
     public partial class RibAppointment
     {
         private Outlook.Inspector inspector;
-        IAppointment iAppointment;
+        private IAppointment iAppointment;
 
         /// <summary>
         /// Create the Appointment ribbon.

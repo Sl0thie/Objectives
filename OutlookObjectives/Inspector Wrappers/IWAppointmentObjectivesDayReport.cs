@@ -1,8 +1,8 @@
 ﻿namespace OutlookObjectives
 {
+    using System.Runtime.InteropServices;
     using CommonObjectives;
     using LogNET;
-    using System.Runtime.InteropServices;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
@@ -72,7 +72,7 @@
         /// <summary>
         /// Method to remove the event handlers and remove this from the collection of inspectors.
         /// </summary>
-        void InspectorWrapper_Close()
+        private void InspectorWrapper_Close()
         {
             Log.MethodEntry();
 
@@ -101,7 +101,10 @@
             }
 
             Log.MethodEntry();
-            if (appointment != null) Marshal.ReleaseComObject(appointment);
+            if (appointment != null)
+            {
+                Marshal.ReleaseComObject(appointment);
+            }
 
             Log.MethodExit();
         }

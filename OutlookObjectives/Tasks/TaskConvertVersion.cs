@@ -1,11 +1,11 @@
 ﻿namespace OutlookObjectives
 {
-    using CommonObjectives;
-    using LogNET;
-    using Newtonsoft.Json;
     using System;
     using System.Runtime.InteropServices;
     using System.Threading;
+    using CommonObjectives;
+    using LogNET;
+    using Newtonsoft.Json;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
@@ -19,10 +19,9 @@
         private readonly DateTime startDay = new DateTime(2021, 6, 17);
         private DateTime day;
 
-        // Get references to the Outlook Calendars. 
-        readonly Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-        readonly Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
-
+        // Get references to the Outlook Calendars.
+        private readonly Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
+        private readonly Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
 
         /// <summary>
         /// Returns control back to the TaskManager.
@@ -42,7 +41,7 @@
             {
                 Name = "Objectives.TaskDayReport",
                 IsBackground = true,
-                Priority = ThreadPriority.Normal
+                Priority = ThreadPriority.Normal,
             };
             BackgroundThread.SetApartmentState(ApartmentState.STA);
             BackgroundThread.Start();
@@ -86,7 +85,6 @@
             // Find all the appointment items within the start and finish times from the Objectives Calendar.
             Outlook.Items appointments = GetAppointmentsWithinRange(calendar, start, finsh);
 
-
             foreach (var appointment in appointments)
             {
                 Outlook.AppointmentItem next = (Outlook.AppointmentItem)appointment;
@@ -114,7 +112,10 @@
                             }
                         }
 
-                        if (CustomProperty != null) Marshal.ReleaseComObject(CustomProperty);
+                        if (CustomProperty != null)
+                        {
+                            Marshal.ReleaseComObject(CustomProperty);
+                        }
 
                         break;
 
@@ -142,7 +143,11 @@
                             }
                         }
 
-                        if (CustomProperty2 != null) Marshal.ReleaseComObject(CustomProperty2);
+                        if (CustomProperty2 != null)
+                        {
+                            Marshal.ReleaseComObject(CustomProperty2);
+                        }
+
                         break;
 
                     default:
@@ -174,7 +179,7 @@
                     ObjectiveName = item.ObjectiveName,
                     Start = item.Start,
                     Finish = item.Finish,
-                    FilePath = item.SolutionFileName
+                    FilePath = item.SolutionFileName,
                 };
 
                 if ((item.StartFileCountTotal != item.FinishFileCountTotal) || (item.StartFileSizeTotal != item.FinishFileSizeTotal))
@@ -256,7 +261,10 @@
                     return null;
                 }
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -288,7 +296,10 @@
                     return null;
                 }
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

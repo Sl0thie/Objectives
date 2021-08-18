@@ -14,13 +14,13 @@
     using CommonObjectives;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ObjectivesPage : ContentPage
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ObjectivesPage()
         {
@@ -28,7 +28,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         protected override async void OnAppearing()
         {
@@ -36,25 +36,23 @@
             LocalDatabase database = await LocalDatabase.Instance;
             listView.ItemsSource = await database.GetObjectivesAsync();
 
-
-            
         }
 
-        async void OnItemAdded(object sender, EventArgs e)
+        private async void OnItemAdded(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ObjectivePage
             {
-                BindingContext = new CommonObjectives.Serial.Objective()
+                BindingContext = new CommonObjectives.Serial.Objective(),
             });
         }
 
-        async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
             {
                 await Navigation.PushAsync(new ObjectivePage
                 {
-                    BindingContext = e.SelectedItem as CommonObjectives.Serial.Objective
+                    BindingContext = e.SelectedItem as CommonObjectives.Serial.Objective,
                 });
             }
         }

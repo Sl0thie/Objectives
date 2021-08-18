@@ -1,11 +1,11 @@
 ﻿namespace OutlookObjectives
 {
-    using CommonObjectives;
-    using LogNET;
-    using Microsoft.Win32;
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using CommonObjectives;
+    using LogNET;
+    using Microsoft.Win32;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
@@ -13,12 +13,8 @@
     /// </summary>
     public partial class ThisAddIn
     {
-        private Outlook.Inspectors inspectors;
-        private static Outlook.AppointmentItem CurrentAppointment;
-        private readonly Dictionary<Outlook.Inspector, IAppointment> iAppointments = new Dictionary<Outlook.Inspector, IAppointment>();
-
         /// <summary>
-        /// Dictionary to hold the wrappers for Appointments.
+        /// Gets the Dictionary to hold the wrappers for Appointment objects..
         /// </summary>
         public Dictionary<Outlook.Inspector, IAppointment> IAppointments
         {
@@ -28,11 +24,15 @@
             }
         }
 
+        private static Outlook.AppointmentItem currentAppointment;
+        private readonly Dictionary<Outlook.Inspector, IAppointment> iAppointments = new Dictionary<Outlook.Inspector, IAppointment>();
+        private Outlook.Inspectors inspectors;
+
         /// <summary>
         /// Primary entry for the AddIn.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Also unused.</param>
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             // Start the logging.
@@ -44,15 +44,16 @@
             // Enqueue the starting Tasks.
             InTouch.TaskManager.EnqueueImportDataTask();
             InTouch.TaskManager.EnqueueDayReportTask();
-            //InTouch.TaskManager.EnqueueWeekReportTask();
-            //InTouch.TaskManager.EnqueueMonthReportTask();
-            //InTouch.TaskManager.EnqueueConvertVersionTask();
+
+            // InTouch.TaskManager.EnqueueWeekReportTask();
+            // InTouch.TaskManager.EnqueueMonthReportTask();
+            // InTouch.TaskManager.EnqueueConvertVersionTask();
             InTouch.TaskManager.EnqueueWebSyncTask();
 
             // Setup the main timer.
             System.Timers.Timer mainTimer = new System.Timers.Timer(50000)
             {
-                AutoReset = true
+                AutoReset = true,
             };
             mainTimer.Elapsed += OnMainTimerEvent;
             mainTimer.Enabled = true;
@@ -70,51 +71,57 @@
         /// Event when new inspectors are opened.
         /// </summary>
         /// <param name="inspector">The inspector to manage.</param>
-        void Inspectors_NewInspector(Outlook.Inspector inspector)
+        private void Inspectors_NewInspector(Outlook.Inspector inspector)
         {
             Log.MethodEntry();
 
             if (inspector.CurrentItem is Outlook.AppointmentItem)
             {
-                CurrentAppointment = null;
+                currentAppointment = null;
                 object itemAppointment = inspector.CurrentItem;
                 if (itemAppointment == null)
+                {
                     return;
+                }
+
                 if (!(itemAppointment is Outlook.AppointmentItem))
+                {
                     return;
-                CurrentAppointment = inspector.CurrentItem as Outlook.AppointmentItem;
+                }
 
-                Outlook.MAPIFolder parentFolder = CurrentAppointment.Parent as Outlook.MAPIFolder;
-                string FolderLocation = parentFolder.FolderPath.Substring(2);
-                FolderLocation = FolderLocation.Substring(FolderLocation.IndexOf("\\") + 1);
+                currentAppointment = inspector.CurrentItem as Outlook.AppointmentItem;
 
-                switch (FolderLocation)
+                Outlook.MAPIFolder parentFolder = currentAppointment.Parent as Outlook.MAPIFolder;
+                string folderLocation = parentFolder.FolderPath.Substring(2);
+                folderLocation = folderLocation.Substring(folderLocation.IndexOf("\\") + 1);
+
+                switch (folderLocation)
                 {
                     case "Calendar\\Objectives":
-                        switch (CurrentAppointment.Categories)
+                        switch (currentAppointment.Categories)
                         {
                             case "Objectives - Day Report":
-                                iAppointments.Add(inspector, new IWAppointmentObjectivesDayReport(inspector, FolderLocation, AppointmentType.ObjectivesDayReport));
+                                iAppointments.Add(inspector, new IWAppointmentObjectivesDayReport(inspector, folderLocation, AppointmentType.ObjectivesDayReport));
                                 break;
 
                             case "Objectives - Week Report":
-                                iAppointments.Add(inspector, new IWAppointment(inspector, FolderLocation, AppointmentType.ObjectivesWeekReport));
+                                iAppointments.Add(inspector, new IWAppointment(inspector, folderLocation, AppointmentType.ObjectivesWeekReport));
                                 break;
 
                             case "Objectives - Month Report":
-                                iAppointments.Add(inspector, new IWAppointment(inspector, FolderLocation, AppointmentType.ObjectivesMonthReport));
+                                iAppointments.Add(inspector, new IWAppointment(inspector, folderLocation, AppointmentType.ObjectivesMonthReport));
                                 break;
 
                             default:
-                                iAppointments.Add(inspector, new IWAppointment(inspector, FolderLocation, AppointmentType.Standard));
+                                iAppointments.Add(inspector, new IWAppointment(inspector, folderLocation, AppointmentType.Standard));
                                 break;
                         }
 
                         break;
 
                     default:
-                        Log.Info("Unknown Folder Path " + FolderLocation);
-                        iAppointments.Add(inspector, new IWAppointment(inspector, FolderLocation, AppointmentType.Standard));
+                        Log.Info("Unknown Folder Path " + folderLocation);
+                        iAppointments.Add(inspector, new IWAppointment(inspector, folderLocation, AppointmentType.Standard));
 
                         break;
                 }
@@ -139,7 +146,9 @@
                     InTouch.TaskManager.EnqueueImportDataTask();
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         /// <summary>
@@ -152,130 +161,126 @@
         /// </summary>
         private void CheckSystemRequirements()
         {
-            //TODO Overhaul.
-            RegistryKey ObjectiveKey;
-            RegistryKey WorkTypesKey;
-            RegistryKey SubKey;
+            //  Overhaul.
+            RegistryKey objectiveKey;
+            RegistryKey workTypesKey;
+            RegistryKey subKey;
 
             // Check if the registry keys exist.
             try
             {
-                WorkTypesKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes");
-                if (WorkTypesKey == null)
+                workTypesKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes");
+                if (workTypesKey == null)
                 {
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes", true);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\0", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\0", true);
-                    SubKey.SetValue("Name", "None", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Unknown or work type of no value.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "0", RegistryValueKind.String);
+                    subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\0", true);
+                    subKey.SetValue("Name", "None", RegistryValueKind.String);
+                    subKey.SetValue("Description", "Unknown or work type of no value.", RegistryValueKind.String);
+                    subKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
+                    subKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
+                    subKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
+                    subKey.SetValue("Application", "0", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\1", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\1", true);
-                    SubKey.SetValue("Name", "Management", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Cost of management.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "100.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "0", RegistryValueKind.String);
+                    subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\1", true);
+                    subKey.SetValue("Name", "Management", RegistryValueKind.String);
+                    subKey.SetValue("Description", "Cost of management.", RegistryValueKind.String);
+                    subKey.SetValue("CostPerHour", "100.00", RegistryValueKind.String);
+                    subKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
+                    subKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
+                    subKey.SetValue("Application", "0", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\2", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\2", true);
-                    SubKey.SetValue("Name", "Consultation", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Cost of consultation.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "110.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "0", RegistryValueKind.String);
+                    subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\2", true);
+                    subKey.SetValue("Name", "Consultation", RegistryValueKind.String);
+                    subKey.SetValue("Description", "Cost of consultation.", RegistryValueKind.String);
+                    subKey.SetValue("CostPerHour", "110.00", RegistryValueKind.String);
+                    subKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
+                    subKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
+                    subKey.SetValue("Application", "0", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\3", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\3", true);
-                    SubKey.SetValue("Name", "Administration", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Administration Duties.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "25.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "0", RegistryValueKind.String);
+                    subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\3", true);
+                    subKey.SetValue("Name", "Administration", RegistryValueKind.String);
+                    subKey.SetValue("Description", "Administration Duties.", RegistryValueKind.String);
+                    subKey.SetValue("CostPerHour", "25.00", RegistryValueKind.String);
+                    subKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
+                    subKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
+                    subKey.SetValue("Application", "0", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\4", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\4", true);
-                    SubKey.SetValue("Name", "Software Development", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Developing Visual Studio solution.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "50.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "2", RegistryValueKind.String);
+                    subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\4", true);
+                    subKey.SetValue("Name", "Software Development", RegistryValueKind.String);
+                    subKey.SetValue("Description", "Developing Visual Studio solution.", RegistryValueKind.String);
+                    subKey.SetValue("CostPerHour", "50.00", RegistryValueKind.String);
+                    subKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
+                    subKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
+                    subKey.SetValue("Application", "2", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\5", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\5", true);
-                    SubKey.SetValue("Name", "Code review", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Reviewing Visual Studio solution.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "3", RegistryValueKind.String);
-
-
-
-
+                    subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\5", true);
+                    subKey.SetValue("Name", "Code review", RegistryValueKind.String);
+                    subKey.SetValue("Description", "Reviewing Visual Studio solution.", RegistryValueKind.String);
+                    subKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
+                    subKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
+                    subKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
+                    subKey.SetValue("Application", "3", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\10", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\10", true);
-                    SubKey.SetValue("Name", "Documentation", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Producing Word document.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "25.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "8", RegistryValueKind.String);
+                    subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\10", true);
+                    subKey.SetValue("Name", "Documentation", RegistryValueKind.String);
+                    subKey.SetValue("Description", "Producing Word document.", RegistryValueKind.String);
+                    subKey.SetValue("CostPerHour", "25.00", RegistryValueKind.String);
+                    subKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
+                    subKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
+                    subKey.SetValue("Application", "8", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\11", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\11", true);
-                    SubKey.SetValue("Name", "Documentation review", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Reviewing Word document.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "9", RegistryValueKind.String);
+                    subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\11", true);
+                    subKey.SetValue("Name", "Documentation review", RegistryValueKind.String);
+                    subKey.SetValue("Description", "Reviewing Word document.", RegistryValueKind.String);
+                    subKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
+                    subKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
+                    subKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
+                    subKey.SetValue("Application", "9", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\13", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\13", true);
-                    SubKey.SetValue("Name", "Excel", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Producing Excel Workbook.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "25.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "11", RegistryValueKind.String);
+                    subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\13", true);
+                    subKey.SetValue("Name", "Excel", RegistryValueKind.String);
+                    subKey.SetValue("Description", "Producing Excel Workbook.", RegistryValueKind.String);
+                    subKey.SetValue("CostPerHour", "25.00", RegistryValueKind.String);
+                    subKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
+                    subKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
+                    subKey.SetValue("Application", "11", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\14", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\14", true);
-                    SubKey.SetValue("Name", "Excel - Review", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Reviewing Excel Workbook.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "12", RegistryValueKind.String);
+                    subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\14", true);
+                    subKey.SetValue("Name", "Excel - Review", RegistryValueKind.String);
+                    subKey.SetValue("Description", "Reviewing Excel Workbook.", RegistryValueKind.String);
+                    subKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
+                    subKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
+                    subKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
+                    subKey.SetValue("Application", "12", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\16", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\16", true);
-                    SubKey.SetValue("Name", "AutoCAD", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Producing AutoCAD drawing.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "25.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "14", RegistryValueKind.String);
+                    subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\16", true);
+                    subKey.SetValue("Name", "AutoCAD", RegistryValueKind.String);
+                    subKey.SetValue("Description", "Producing AutoCAD drawing.", RegistryValueKind.String);
+                    subKey.SetValue("CostPerHour", "25.00", RegistryValueKind.String);
+                    subKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
+                    subKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
+                    subKey.SetValue("Application", "14", RegistryValueKind.String);
 
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\17", true);
-                    SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\17", true);
-                    SubKey.SetValue("Name", "AutoCAD - Review", RegistryValueKind.String);
-                    SubKey.SetValue("Description", "Reviewing AutoCAD drawing.", RegistryValueKind.String);
-                    SubKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
-                    SubKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
-                    SubKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
-                    SubKey.SetValue("Application", "15", RegistryValueKind.String);
+                    subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\17", true);
+                    subKey.SetValue("Name", "AutoCAD - Review", RegistryValueKind.String);
+                    subKey.SetValue("Description", "Reviewing AutoCAD drawing.", RegistryValueKind.String);
+                    subKey.SetValue("CostPerHour", "0.00", RegistryValueKind.String);
+                    subKey.SetValue("MiniumNoOfMinutes", "0", RegistryValueKind.String);
+                    subKey.SetValue("MaximNoOfMinutes", "1440", RegistryValueKind.String);
+                    subKey.SetValue("Application", "15", RegistryValueKind.String);
 
                 }
             }
@@ -287,20 +292,20 @@
             // Load the work types from the registry.
             try
             {
-                WorkTypesKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes");
-                if (WorkTypesKey is object)
+                workTypesKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes");
+                if (workTypesKey is object)
                 {
-                    var subkeys = WorkTypesKey.GetSubKeyNames();
+                    var subkeys = workTypesKey.GetSubKeyNames();
 
                     foreach (var subkey in subkeys)
                     {
                         WorkType nextType = new WorkType();
-                        SubKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\" + subkey);
+                        subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\" + subkey);
                         nextType.Index = Convert.ToInt32(subkey);
 
-                        foreach (var valueName in SubKey.GetValueNames())
+                        foreach (var valueName in subKey.GetValueNames())
                         {
-                            var val = SubKey.GetValue(valueName);
+                            var val = subKey.GetValue(valueName);
                             switch (valueName)
                             {
                                 case "Name":
@@ -341,8 +346,8 @@
             // Check if the Objectives registry key exist.
             try
             {
-                ObjectiveKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives");
-                if (ObjectiveKey == null)
+                objectiveKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives");
+                if (objectiveKey == null)
                 {
                     Registry.CurrentUser.CreateSubKey(@"SOFTWARE\InTouch\Objectives");
                     ShowSettings();
@@ -359,7 +364,7 @@
             // Check if the registry Objectives path value exist.
             try
             {
-                InTouch.ObjectivesRootFolder = (string)ObjectiveKey.GetValue("RootFolder");
+                InTouch.ObjectivesRootFolder = (string)objectiveKey.GetValue("RootFolder");
                 if (InTouch.ObjectivesRootFolder is null)
                 {
                     ShowSettings();
@@ -391,7 +396,7 @@
             // Check if the registry Objectives archives path value exist.
             try
             {
-                InTouch.ObjectivesArchiveFolder = (string)ObjectiveKey.GetValue("ArchiveFolder");
+                InTouch.ObjectivesArchiveFolder = (string)objectiveKey.GetValue("ArchiveFolder");
 
                 if (InTouch.ObjectivesArchiveFolder is null)
                 {
@@ -409,7 +414,7 @@
             // Check if the registry Objectives archives path value exist.
             try
             {
-                InTouch.ObjectivesStorageFolder = (string)ObjectiveKey.GetValue("StorageFolder");
+                InTouch.ObjectivesStorageFolder = (string)objectiveKey.GetValue("StorageFolder");
 
                 if (InTouch.ObjectivesStorageFolder is null)
                 {

@@ -1,11 +1,11 @@
 ﻿namespace OutlookObjectives
 {
-    using CommonObjectives;
-    using LogNET;
-    using Newtonsoft.Json;
     using System;
     using System.Linq;
     using System.Threading;
+    using CommonObjectives;
+    using LogNET;
+    using Newtonsoft.Json;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
@@ -18,8 +18,8 @@
         private readonly DateTime firstDay = new DateTime(2021, 5, 25);
         private DateTime day;
 
-        // Get references to the Outlook Calendars. 
-        readonly Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
+        // Get references to the Outlook Calendars.
+        private readonly Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
         //readonly Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
 
         private readonly DayReport[] dayReports = new DayReport[7];
@@ -42,7 +42,7 @@
             {
                 Name = "Objectives.TaskWeekReport",
                 IsBackground = true,
-                Priority = ThreadPriority.Normal
+                Priority = ThreadPriority.Normal,
             };
             BackgroundThread.SetApartmentState(ApartmentState.STA);
             BackgroundThread.Start();
@@ -241,7 +241,10 @@
                     return null;
                 }
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

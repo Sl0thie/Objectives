@@ -1,27 +1,27 @@
 ﻿namespace AndroidObjectives.Data
 {
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using SQLite;
-    using AndroidObjectives.Models;
-    using System.Diagnostics;
     using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using AndroidObjectives.Models;
+    using CommonObjectives;
     using Microsoft.AspNet.SignalR.Client;
     using Newtonsoft.Json;
-    using CommonObjectives;
-    using System.Linq;
+    using SQLite;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class LocalDatabase
     {
-        static SQLiteAsyncConnection Database;
+        private static SQLiteAsyncConnection Database;
         private HubConnection dataHubConnection;
         private IHubProxy dataHubProxy;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public static readonly AsyncLazy<LocalDatabase> Instance = new AsyncLazy<LocalDatabase>(async () =>
         {
@@ -45,7 +45,7 @@
         });
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public LocalDatabase()
         {
@@ -63,7 +63,7 @@
             {
                 dataHubConnection = new HubConnection("http://www.intacomputers.com/");
                 dataHubProxy = dataHubConnection.CreateHubProxy("DataHub");
-                
+
                 dataHubProxy.On<string>("SaveClient", (json) =>
                 {
                     Client newClient = JsonConvert.DeserializeObject<Client>(json);
@@ -91,7 +91,7 @@
                 CallForObjectives();
                 CallForClients();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine("Error: " + ex.Message);
             }
@@ -109,7 +109,7 @@
         #region Clients
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public async void DropCreateClientsAsync()
         {
@@ -118,7 +118,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="client"></param>
         /// <returns></returns>
@@ -142,7 +142,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void CallForClients()
         {
@@ -155,11 +155,11 @@
             catch (Exception ex)
             {
                 Debug.WriteLine("Error: " + ex.Message);
-            }        
+            }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public Task<List<Client>> GetClientsAsync()
@@ -182,7 +182,7 @@
         #region Objectives
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public void CallForObjectives()
         {
@@ -199,7 +199,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public Task<List<CommonObjectives.Serial.Objective>> GetObjectivesAsync()
@@ -218,7 +218,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         public Task<List<CommonObjectives.Serial.Objective>> GetItemsNotDoneAsync()
@@ -227,7 +227,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="objectiveName"></param>
         /// <returns></returns>
@@ -237,13 +237,12 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="objective"></param>
         /// <returns></returns>
         public Task<int> SaveObjectiveAsync(CommonObjectives.Serial.Objective objective)
         {
-
             Debug.WriteLine("LocalDatabase.SaveObjectiveAsync");
 
             try
@@ -268,7 +267,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
@@ -279,6 +278,5 @@
 
         #endregion
 
-        
     }
 }

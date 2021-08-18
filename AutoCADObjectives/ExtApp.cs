@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Autodesk.AutoCAD.Runtime;
-using Autodesk.AutoCAD.ApplicationServices;
-using Newtonsoft.Json;
-using System.Timers;
 using System.IO;
+using System.Timers;
+using Autodesk.AutoCAD.ApplicationServices;
+using Autodesk.AutoCAD.Runtime;
 using CommonObjectives;
 using LogNET;
+using Newtonsoft.Json;
 
 [assembly: ExtensionApplication(typeof(AutoCADObjectives.ExtApp))]
 [assembly: CommandClass(null)]
@@ -61,8 +61,8 @@ namespace AutoCADObjectives
             try
             {
                 // Get folder locations from the registry.
-                RootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", "");
-                StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", "");
+                RootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", string.Empty);
+                StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
 
                 // Setup the timer.
                 timerUpdate.Elapsed += TimerUpdate_Elapsed;
@@ -106,12 +106,9 @@ namespace AutoCADObjectives
         /// <param name="e">parameter is unused.</param>
         private void Callback_DocumentCreated(Object sender, DocumentCollectionEventArgs e)
         {
-            if(e.Document is object)
+            if (e.Document is object)
             {
-                
-
-
-                if(e.Document.Name is object)
+                if (e.Document.Name is object)
                 {
                     Log.Info(e.Document.Name);
                 }
@@ -135,16 +132,16 @@ namespace AutoCADObjectives
                     {
                         Id = Guid.NewGuid(),
                         FilePath = doc.Name,
-                        Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"))
+                        Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm")),
                     };
 
                     if (newDrawing.FilePath.LastIndexOf("\\") > 0)
                     {
                         newDrawing.Name = newDrawing.FilePath.Substring(newDrawing.FilePath.LastIndexOf("\\") + 1);
-                        newDrawing.Name = newDrawing.Name.Substring(0,newDrawing.Name.Length - 4);
+                        newDrawing.Name = newDrawing.Name.Substring(0, newDrawing.Name.Length - 4);
                     }
 
-                    if(newDrawing.FilePath.Substring(0,RootFolder.Length) == RootFolder)
+                    if (newDrawing.FilePath.Substring(0, RootFolder.Length) == RootFolder)
                     {
                         newDrawing.ObjectiveName = newDrawing.FilePath.Substring(RootFolder.Length + 1);
                         newDrawing.ObjectiveName = newDrawing.ObjectiveName.Substring(0, newDrawing.ObjectiveName.IndexOf(@"\"));
@@ -161,7 +158,7 @@ namespace AutoCADObjectives
                     }
 
                     WorkItems.Add(newDrawing.FilePath, newDrawing);
-                }              
+                }
             }
             catch (System.Exception ex)
             {
@@ -245,7 +242,7 @@ namespace AutoCADObjectives
             try
             {
                 Document doc = e.Document;
-                if(doc is object)
+                if (doc is object)
                 {
                     if (doc.IsNamedDrawing)
                     {
@@ -271,7 +268,6 @@ namespace AutoCADObjectives
         /// <param name="e">parameter is unused.</param>
         private void Callback_DocumentToBeActivated(Object sender, DocumentCollectionEventArgs e)
         {
-
         }
 
         /// <summary>
@@ -282,8 +278,6 @@ namespace AutoCADObjectives
         /// <param name="e">parameter is unused.</param>
         private void Callback_DocumentToBeDeactivated(Object sender, DocumentCollectionEventArgs e)
         {
-            
-
             if (e.Document is object)
             {
                 if (e.Document.Name is object)
@@ -324,7 +318,7 @@ namespace AutoCADObjectives
         /// <param name="workItem">The WorkItem object to save to file.</param>
         private void SaveData(WorkItem workItem)
         {
-            if(workItem is object)
+            if (workItem is object)
             {
                 if (workItem.FilePath is object)
                 {

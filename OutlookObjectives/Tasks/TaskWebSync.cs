@@ -1,8 +1,5 @@
 ﻿namespace OutlookObjectives
 {
-    using CommonObjectives;
-    using LogNET;
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Drawing;
@@ -12,19 +9,22 @@
     using System.Runtime.InteropServices;
     using System.Threading;
     using System.Windows.Forms.DataVisualization.Charting;
+    using CommonObjectives;
+    using LogNET;
+    using Newtonsoft.Json;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class TaskWebSync
     {
         private readonly Action CallBack;
 
-        ServiceReference1.ObjectivesSoapClient soap;
+        private ServiceReference1.ObjectivesSoapClient soap;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public TaskWebSync(Action callBack)
         {
@@ -40,7 +40,7 @@
             {
                 Name = "Objectives.TaskWebSync",
                 IsBackground = true,
-                Priority = ThreadPriority.Normal
+                Priority = ThreadPriority.Normal,
             };
             BackgroundThread.SetApartmentState(ApartmentState.STA);
             BackgroundThread.Start();
@@ -57,7 +57,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         private void SyncClients()
         {

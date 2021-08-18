@@ -1,9 +1,9 @@
 ﻿namespace OutlookObjectives
 {
+    using System;
     using LogNET;
     using Microsoft.Office.Tools;
     using Microsoft.Office.Tools.Ribbon;
-    using System;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
@@ -50,7 +50,10 @@
                     {
                         taskPaneObjectives.Visible = true;
                     }
-                    catch (Exception ex) { Log.Error(ex); }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex);
+                    }
                     break;
 
                 case "Calendar\\Objectives":
@@ -58,7 +61,10 @@
                     {
                         taskPaneObjectives.Visible = true;
                     }
-                    catch (Exception ex) { Log.Error(ex); }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex);
+                    }
                     break;
 
                 case "Calendar\\System":
@@ -66,7 +72,10 @@
                     {
                         taskPaneObjectives.Visible = true;
                     }
-                    catch (Exception ex) { Log.Error(ex); }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex);
+                    }
                     break;
 
                 default:
@@ -75,7 +84,10 @@
                         Log.Info("FolderLocation: " + FolderLocation);
                         taskPaneObjectives.Visible = false;
                     }
-                    catch (Exception ex) { Log.Error(ex); }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex);
+                    }
                     break;
             }
         }

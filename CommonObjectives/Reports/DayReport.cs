@@ -77,7 +77,6 @@
         /// </remarks>
         public DayReport()
         {
-
         }
     }
 }

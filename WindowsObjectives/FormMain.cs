@@ -1,22 +1,22 @@
 ﻿namespace WindowsObjectives
 {
-    using CommonObjectives;
-    using Microsoft.Win32;
-    using Newtonsoft.Json;
     using System;
     using System.Diagnostics;
     using System.IO;
     using System.Runtime.InteropServices;
     using System.Text;
     using System.Windows.Forms;
+    using CommonObjectives;
+    using Microsoft.Win32;
+    using Newtonsoft.Json;
 
     public partial class FormMain : Form
     {
         [DllImport("user32.dll")]
-        static extern bool GetLastInputInfo(ref LASTINPUTINFO plii);
+        private static extern bool GetLastInputInfo(ref LASTINPUTINFO plii);
 
         [StructLayout(LayoutKind.Sequential)]
-        struct LASTINPUTINFO
+        private struct LASTINPUTINFO
         {
             public static readonly int SizeOf = Marshal.SizeOf(typeof(LASTINPUTINFO));
             [MarshalAs(UnmanagedType.U4)]
@@ -26,13 +26,13 @@
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        static extern IntPtr GetForegroundWindow();
+        private static extern IntPtr GetForegroundWindow();
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        static extern int GetWindowTextLength(IntPtr hWnd);
+        private static extern int GetWindowTextLength(IntPtr hWnd);
 
         [DllImport("user32.dll", SetLastError = true)]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
@@ -57,7 +57,7 @@
             this.Visible = false;
             SystemEvents.PowerModeChanged += OnPowerChange;
 
-            StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", "");
+            StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
 
             systemSleep.ComputerName = Environment.MachineName.ToString();
             systemSleep.UserName = Environment.UserName.ToString();
@@ -110,7 +110,6 @@
 
             if (systemIdle.Start != systemIdle.Finish)
             {
-
                 string json = JsonConvert.SerializeObject(systemIdle, Formatting.Indented);
                 File.WriteAllText(StorageFolder + @"\" + (int)SystemType.Idle + "-" + Guid.NewGuid().ToString() + ".json", json);
             }
@@ -168,7 +167,6 @@
                 }
                 else
                 {
-
                 }
             }
             else
@@ -180,6 +178,7 @@
                     systemIdle.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
                 }
             }
+
             lastValue = nextValue;
 
             Debug.WriteLine(nextValue + " " + lastValue);
@@ -202,7 +201,7 @@
 
             ActiveApplication app = new ActiveApplication
             {
-                Time = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"))
+                Time = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm")),
             };
 
             try
@@ -229,7 +228,7 @@
             systemUptime.ActiveApplications.Add(app);
         }
 
-        static int GetLastInputTime()
+        private static int GetLastInputTime()
         {
             int idleTime = 0;
             LASTINPUTINFO lastInputInfo = new LASTINPUTINFO();
@@ -242,6 +241,7 @@
 
                 idleTime = envTicks - lastInputTick;
             }
+
             return ((idleTime > 0) ? (idleTime / 1000) : idleTime);
         }
 
@@ -249,13 +249,14 @@
         {
             var strTitle = string.Empty;
             var handle = GetForegroundWindow();
-            // Obtain the length of the text   
+            // Obtain the length of the text
             var intLength = GetWindowTextLength(handle) + 1;
             var stringBuilder = new StringBuilder(intLength);
             if (GetWindowText(handle, stringBuilder, intLength) > 0)
             {
                 strTitle = stringBuilder.ToString();
             }
+
             return strTitle;
         }
 

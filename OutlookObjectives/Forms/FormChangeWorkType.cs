@@ -1,8 +1,8 @@
 ﻿namespace OutlookObjectives
 {
-    using CommonObjectives;
     using System;
     using System.Windows.Forms;
+    using CommonObjectives;
 
     /// <summary>
     /// UI to review or make changes to the WorkTypes.

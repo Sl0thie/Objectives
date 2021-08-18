@@ -1,11 +1,11 @@
 ﻿namespace OutlookObjectives
 {
-    using CommonObjectives;
-    using LogNET;
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using CommonObjectives;
+    using LogNET;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Class to hold the static objects and helper functions.
@@ -52,7 +52,6 @@
         /// Value to multiply the DPI Y scale.
         /// </summary>
         public static readonly double DpiY = 1;
-
 
         /// <summary>
         /// Dictionary of WorkTypes.
@@ -142,8 +141,6 @@
                         Log.Error(ex);
                     }
                 }
-
-                
 
                 string json = JsonConvert.SerializeObject(item, Formatting.Indented);
                 File.WriteAllText(path + @"\System\Objective.json", json);
@@ -256,7 +253,7 @@
                 CSS += "padding-right: 20px;" + "\n";
                 CSS += "z-index: 1;" + "\n";
                 CSS += "}" + "\n";
-                CSS += "" + "\n";
+                CSS += string.Empty + "\n";
 
                 CSS += "h1 {" + "\n";
                 CSS += "font-family: Calibri;" + "\n";

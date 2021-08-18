@@ -1,14 +1,14 @@
 ﻿namespace OutlookObjectives
 {
-    using LogNET;
     using System;
     using System.Collections.Concurrent;
     using System.Threading;
+    using LogNET;
 
     /// <summary>
     /// TaskManager manages the background tasks.
     /// </summary>
-    /// <remarks>The TaskManager is used to manage the background tasks that perform 
+    /// <remarks>The TaskManager is used to manage the background tasks that perform
     /// operations such as moving emails from the Inbox. It provides a queue to store tasks
     /// and executes them one at a time.</remarks>
     public class TaskManager
@@ -27,7 +27,7 @@
         /// A queue of Task to be performed.
         /// </summary>
         public ConcurrentQueue<Action> BackgroundTasks { get => backgroundTasks; }
-        
+
         /// <summary>
         /// The current action to be called when finished.
         /// </summary>
@@ -51,7 +51,7 @@
             {
                 Name = "Objectives.TaskManager",
                 IsBackground = true,
-                Priority = ThreadPriority.Normal
+                Priority = ThreadPriority.Normal,
             };
             backgroundThread.SetApartmentState(ApartmentState.STA);
             backgroundThread.Start();

@@ -1,11 +1,11 @@
 ﻿namespace OutlookObjectives
 {
-    using CommonObjectives;
-    using LogNET;
-    using Newtonsoft.Json;
     using System;
     using System.IO;
     using System.Threading;
+    using CommonObjectives;
+    using LogNET;
+    using Newtonsoft.Json;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
@@ -13,7 +13,7 @@
     /// </summary>
     public class TaskImportData
     {
-        readonly Action CallBack;
+        private readonly Action CallBack;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskImportData"/> class.
@@ -33,7 +33,7 @@
             {
                 Name = "Objectives.TaskImportData",
                 IsBackground = true,
-                Priority = ThreadPriority.Normal
+                Priority = ThreadPriority.Normal,
             };
             BackgroundThread.SetApartmentState(ApartmentState.STA);
             BackgroundThread.Start();
@@ -49,7 +49,10 @@
                 Log.Info("Starting import JSON data task.");
                 ReadFiles();
             }
-            catch (Exception ex) { Log.Error(ex); }
+            catch (Exception ex)
+            {
+                Log.Error(ex);
+            }
             CallBack?.Invoke();
         }
 
@@ -84,6 +87,7 @@
                         {
                             File.Delete(nextFile.FullName);
                         }
+
                         break;
 
                     case "101":
@@ -91,6 +95,7 @@
                         {
                             File.Delete(nextFile.FullName);
                         }
+
                         break;
 
                     case "102":
@@ -98,6 +103,7 @@
                         {
                             File.Delete(nextFile.FullName);
                         }
+
                         break;
 
                     case "103":
@@ -105,6 +111,7 @@
                         {
                             File.Delete(nextFile.FullName);
                         }
+
                         break;
 
                     default:

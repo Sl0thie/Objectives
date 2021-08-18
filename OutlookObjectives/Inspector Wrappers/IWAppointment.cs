@@ -3,8 +3,7 @@
     using CommonObjectives;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
-
-    class IWAppointment : IAppointment
+    internal class IWAppointment : IAppointment
     {
         private Outlook.Inspector inspector;
         public Outlook.Inspector Inspector
@@ -30,7 +29,6 @@
 
         public AppointmentType AppointmentType { get; set; }
 
-
         public IWAppointment(Outlook.Inspector Inspector, string folderPath, AppointmentType appointmentType)
         {
             this.inspector = Inspector;
@@ -42,7 +40,7 @@
             ((Outlook.InspectorEvents_Event)inspector).Close += new Outlook.InspectorEvents_CloseEventHandler(InspectorWrapper_Close);
         }
 
-        void InspectorWrapper_Close()
+        private void InspectorWrapper_Close()
         {
             //exAppointment.Close();
             //exAppointment = null;

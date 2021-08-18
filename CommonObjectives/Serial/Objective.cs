@@ -7,11 +7,10 @@
     using System.Threading.Tasks;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class Objective
     {
-
         /// <summary>
         /// The name of the Objective.
         /// </summary>

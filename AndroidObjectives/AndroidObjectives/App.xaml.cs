@@ -1,18 +1,18 @@
 ﻿//using AndroidObjectives.Services;
-using AndroidObjectives.Views;
 using System;
+using AndroidObjectives.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace AndroidObjectives
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public partial class App : Application
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public App()
         {
@@ -23,21 +23,21 @@ namespace AndroidObjectives
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         protected override void OnStart()
         {
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         protected override void OnSleep()
         {
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         protected override void OnResume()
         {

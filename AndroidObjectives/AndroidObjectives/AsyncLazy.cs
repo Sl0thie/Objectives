@@ -6,7 +6,7 @@ namespace AndroidObjectives
 {
     public class AsyncLazy<T>
     {
-        readonly Lazy<Task<T>> instance;
+        private readonly Lazy<Task<T>> instance;
 
         public AsyncLazy(Func<T> factory)
         {

@@ -59,7 +59,6 @@
         /// </summary>
         public Objective()
         {
-
         }
     }
 }

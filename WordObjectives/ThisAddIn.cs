@@ -1,13 +1,13 @@
 ﻿namespace WordObjectives
 {
-    using CommonObjectives;
-    using LogNET;
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading;
+    using CommonObjectives;
+    using LogNET;
+    using Newtonsoft.Json;
     using Word = Microsoft.Office.Interop.Word;
 
     /// <summary>
@@ -25,12 +25,12 @@
         private static string StorageFolder;
 
         // Fields to manage the main timer.
-        TimerCallback timerDelegate;
-        TimeSpan refreshIntervalTime;
-        Timer refreshTimer;
+        private TimerCallback timerDelegate;
+        private TimeSpan refreshIntervalTime;
+        private Timer refreshTimer;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -49,8 +49,8 @@
             refreshTimer = new Timer(timerDelegate, null, TimeSpan.Zero, refreshIntervalTime);
 
             // Get and check the ObjectiveRootFolder.
-            RootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", "");
-            StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", "");
+            RootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", string.Empty);
+            StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
 
             // This add-in starts after the first document is loaded so check for loaded documents.
             CheckDocuments();
@@ -106,7 +106,7 @@
             {
                 if (Application.Documents.Count > 0)
                 {
-                    // Check if documents are in dictionary. Add if not. 
+                    // Check if documents are in dictionary. Add if not.
                     foreach (Word.Document next in Application.Documents)
                     {
                         if (!Documents.ContainsKey(next.FullName))
@@ -169,7 +169,7 @@
             {
                 //if (Application.Documents.Count > 0)
                 //{
-                //    // Check if documents are in dictionary. Add if not. 
+                //    // Check if documents are in dictionary. Add if not.
                 //    foreach (Word.Document next in Application.Documents)
                 //    {
                 //        if (File.Exists(next.FullName))
@@ -205,7 +205,7 @@
                 WorkItem workItem = new WorkItem
                 {
                     FilePath = doc.FullName,
-                    Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"))
+                    Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm")),
                 };
                 workItem.Id = Guid.NewGuid();
 
@@ -307,6 +307,7 @@
                         {
                             document.Save();
                         }
+
                         break;
                     }
                 }

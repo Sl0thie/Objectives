@@ -1,18 +1,18 @@
 ﻿//using AndroidObjectives.ViewModels;
-using AndroidObjectives.Views;
 using System;
 using System.Collections.Generic;
+using AndroidObjectives.Views;
 using Xamarin.Forms;
 
 namespace AndroidObjectives
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public partial class AppShell : Xamarin.Forms.Shell
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public AppShell()
         {
@@ -22,7 +22,7 @@ namespace AndroidObjectives
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

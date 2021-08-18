@@ -1,9 +1,9 @@
 ﻿namespace OutlookObjectives
 {
-    using CommonObjectives;
-    using LogNET;
     using System;
     using System.Threading;
+    using CommonObjectives;
+    using LogNET;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
@@ -34,7 +34,7 @@
             {
                 Name = "Objectives.TaskMonthReport",
                 IsBackground = true,
-                Priority = ThreadPriority.Normal
+                Priority = ThreadPriority.Normal,
             };
             BackgroundThread.SetApartmentState(ApartmentState.STA);
             BackgroundThread.Start();
@@ -128,7 +128,10 @@
                     return null;
                 }
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -160,7 +163,10 @@
                     return null;
                 }
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

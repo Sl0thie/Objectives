@@ -1,8 +1,5 @@
 ﻿namespace OutlookObjectives
 {
-    using CommonObjectives;
-    using LogNET;
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Drawing;
@@ -11,6 +8,9 @@
     using System.Runtime.InteropServices;
     using System.Threading;
     using System.Windows.Forms.DataVisualization.Charting;
+    using CommonObjectives;
+    using LogNET;
+    using Newtonsoft.Json;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
@@ -18,26 +18,29 @@
     /// </summary>
     public class TaskDayReport
     {
-        private readonly Action CallBack;
+        // Get references to the Outlook Calendars.
+        private readonly Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
+        private readonly Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
+
+        // Standardize the colors.
+        private readonly Color colorUptime = Color.FromArgb(32, 32, 32);
+        private readonly Color colorBillable = Color.FromArgb(64, 64, 255);
+        private readonly Color colorIdle = Color.FromArgb(255, 64, 64);
+        private readonly Color colorOther = Color.FromArgb(255, 128, 64);
+
+        private readonly Action callBack;
         private readonly DayReport dayReport = new DayReport();
         private readonly DateTime firstDay = new DateTime(2021, 5, 25);
         private DateTime day;
 
-        // Get references to the Outlook Calendars. 
-        readonly Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-        readonly Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
-        readonly Color colorUptime = Color.FromArgb(32,32,32);
-        readonly Color colorBillable = Color.FromArgb(64, 64, 255);
-        readonly Color colorIdle = Color.FromArgb(255, 64, 64);
-        readonly Color colorOther = Color.FromArgb(255, 128, 64);
-
         /// <summary>
+        /// Initializes a new instance of the <see cref="TaskDayReport"/> class.
         /// Returns control back to the TaskManager.
         /// </summary>
-        /// <param name="callBack"></param>
+        /// <param name="callBack">Callback for when the task has finished.</param>
         public TaskDayReport(Action callBack)
         {
-            CallBack = callBack;
+            this.callBack = callBack;
         }
 
         /// <summary>
@@ -45,14 +48,14 @@
         /// </summary>
         public void RunTask()
         {
-            Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess))
+            Thread backgroundThread = new Thread(new ThreadStart(BackgroundProcess))
             {
                 Name = "Objectives.TaskDayReport",
                 IsBackground = true,
-                Priority = ThreadPriority.Normal
+                Priority = ThreadPriority.Normal,
             };
-            BackgroundThread.SetApartmentState(ApartmentState.STA);
-            BackgroundThread.Start();
+            backgroundThread.SetApartmentState(ApartmentState.STA);
+            backgroundThread.Start();
         }
 
         /// <summary>
@@ -86,7 +89,7 @@
                 Log.Info("No day found to process.");
             }
 
-            CallBack?.Invoke();
+            callBack?.Invoke();
         }
 
         /// <summary>
@@ -113,6 +116,7 @@
                         break;
                     }
                 }
+
                 totalDays++;
 
                 if (returnValue < firstDay)
@@ -174,7 +178,8 @@
                     switch ((ApplicationType)CustomProperty.Value)
                     {
                         case ApplicationType.None:
-                            //TODO Process based on work type? Or replace this whole switch with work type in the future?
+
+                            // TODO Process based on work type? Or replace this whole switch with work type in the future?
                             break;
 
                         case ApplicationType.VisualStudioWrite:
@@ -186,6 +191,7 @@
                             {
                                 ProcessWorkItem(next.Body);
                             }
+
                             break;
 
                         case ApplicationType.WordWrite:
@@ -197,6 +203,7 @@
                             {
                                 ProcessWorkItem(next.Body);
                             }
+
                             break;
 
                         case ApplicationType.ExcelWrite:
@@ -208,6 +215,7 @@
                             {
                                 ProcessWorkItem(next.Body);
                             }
+
                             break;
 
                         case ApplicationType.AutocadWrite:
@@ -219,6 +227,7 @@
                             {
                                 ProcessWorkItem(next.Body);
                             }
+
                             break;
 
                         default:
@@ -227,7 +236,10 @@
                     }
                 }
 
-                if (CustomProperty != null) Marshal.ReleaseComObject(CustomProperty);
+                if (CustomProperty != null)
+                {
+                    Marshal.ReleaseComObject(CustomProperty);
+                }
             }
         }
 
@@ -286,8 +298,9 @@
             foreach (var next in dayReport.WorkItems)
             {
                 // Calculate the cost of the total minutes for the day.
-                next.Value.Cost = (next.Value.WorkType.CostPerHour / (decimal)60) * (decimal)next.Value.Minutes;
-                // Parse to truncate the precision to suit dollars and cents. 
+                next.Value.Cost = (next.Value.WorkType.CostPerHour / 60) * next.Value.Minutes;
+
+                // Parse to truncate the precision to suit dollars and cents.
                 next.Value.Cost = decimal.Parse(next.Value.Cost.ToString("0.00"));
             }
         }
@@ -367,7 +380,6 @@
 
             rv += "</table>" + "\n";
 
-
             rv += "<h2>Objectives</h2>" + "\n";
             rv += "<table width=\"100%\">" + "\n";
 
@@ -380,13 +392,13 @@
             rv += "</tr>" + "\n";
 
             int i = 0;
-            string lastObjectiveName = "";
+            string lastObjectiveName = string.Empty;
             int objectiveTime = 0;
             int totalTime = 0;
 
             foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
             {
-                if (lastObjectiveName == "")
+                if (lastObjectiveName == string.Empty)
                 {
                     lastObjectiveName = next.Value.ObjectiveName;
                 }
@@ -403,7 +415,7 @@
                     lastObjectiveName = next.Value.ObjectiveName;
                     objectiveTime = 0;
                 }
-                
+
                 rv += "<tr>" + "\n";
                 rv += "<td>" + next.Value.ObjectiveName + "</td>\n";
                 rv += "<td>" + next.Value.Name + "</td>\n";
@@ -608,55 +620,55 @@
         /// </summary>
         private void DrawApplicationsImage()
         {
-            string Series1 = "Series1";
+            string series1 = "Series1";
 
-            float ChartWidth = 800;
-            float ChartHeight = dayReport.UniqueApplications.Count * 44;
+            float chartWidth = 800;
+            float chartHeight = dayReport.UniqueApplications.Count * 44;
 
             Chart chart = new Chart
             {
-                Width = (int)ChartWidth,
-                Height = (int)ChartHeight,
-                BackColor = Color.Transparent
+                Width = (int)chartWidth,
+                Height = (int)chartHeight,
+                BackColor = Color.Transparent,
             };
 
-            chart.ChartAreas.Add(Series1);
-            chart.Series.Add(Series1);
-            chart.Series[Series1].ChartArea = Series1;
-            chart.Series[Series1].ChartType = SeriesChartType.Bar;
+            chart.ChartAreas.Add(series1);
+            chart.Series.Add(series1);
+            chart.Series[series1].ChartArea = series1;
+            chart.Series[series1].ChartType = SeriesChartType.Bar;
 
-            chart.ChartAreas[Series1].BackColor = Color.Transparent;
-            chart.ChartAreas[Series1].Position.X = 0;
-            chart.ChartAreas[Series1].Position.Y = 0;
-            chart.ChartAreas[Series1].Position.Width = 100;
-            chart.ChartAreas[Series1].Position.Height = 100;
-            chart.ChartAreas[Series1].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
+            chart.ChartAreas[series1].BackColor = Color.Transparent;
+            chart.ChartAreas[series1].Position.X = 0;
+            chart.ChartAreas[series1].Position.Y = 0;
+            chart.ChartAreas[series1].Position.Width = 100;
+            chart.ChartAreas[series1].Position.Height = 100;
+            chart.ChartAreas[series1].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
 
-            chart.ChartAreas[Series1].AxisX.LabelStyle.Font = new Font("Verdana", 10F, FontStyle.Regular);
-            chart.ChartAreas[Series1].AxisX.LabelStyle.ForeColor = Color.FromArgb(180, 180, 180);
-            chart.ChartAreas[Series1].AxisX.Interval = 1;
-            chart.ChartAreas[Series1].AxisX.LineColor = Color.FromArgb(0, 0, 0, 0);
-            chart.ChartAreas[Series1].AxisX.MajorGrid.LineColor = Color.FromArgb(0, 0, 0, 0);
-            chart.ChartAreas[Series1].AxisX.MinorGrid.LineColor = Color.FromArgb(0, 0, 0, 0);
-            chart.ChartAreas[Series1].AxisX.MajorTickMark.LineColor = Color.FromArgb(0, 0, 0, 0);
-            chart.ChartAreas[Series1].AxisX.MinorTickMark.LineColor = Color.FromArgb(0, 0, 0, 0);
+            chart.ChartAreas[series1].AxisX.LabelStyle.Font = new Font("Verdana", 10F, FontStyle.Regular);
+            chart.ChartAreas[series1].AxisX.LabelStyle.ForeColor = Color.FromArgb(180, 180, 180);
+            chart.ChartAreas[series1].AxisX.Interval = 1;
+            chart.ChartAreas[series1].AxisX.LineColor = Color.FromArgb(0, 0, 0, 0);
+            chart.ChartAreas[series1].AxisX.MajorGrid.LineColor = Color.FromArgb(0, 0, 0, 0);
+            chart.ChartAreas[series1].AxisX.MinorGrid.LineColor = Color.FromArgb(0, 0, 0, 0);
+            chart.ChartAreas[series1].AxisX.MajorTickMark.LineColor = Color.FromArgb(0, 0, 0, 0);
+            chart.ChartAreas[series1].AxisX.MinorTickMark.LineColor = Color.FromArgb(0, 0, 0, 0);
 
-            chart.ChartAreas[Series1].AxisY.Enabled = AxisEnabled.False;
-            chart.ChartAreas[Series1].AxisY.LabelStyle.Font = new Font("Calibri", 11F, FontStyle.Regular);
-            chart.ChartAreas[Series1].AxisY.LabelStyle.ForeColor = Color.White;
-            chart.ChartAreas[Series1].AxisY.LineColor = Color.FromArgb(0, 0, 0, 0);
-            chart.ChartAreas[Series1].AxisY.MajorGrid.LineColor = Color.FromArgb(0, 0, 0, 0);
-            chart.ChartAreas[Series1].AxisY.MinorGrid.LineColor = Color.FromArgb(0, 0, 0, 0);
-            chart.ChartAreas[Series1].AxisY.MajorTickMark.LineColor = Color.FromArgb(0, 0, 0, 0);
-            chart.ChartAreas[Series1].AxisY.MinorTickMark.LineColor = Color.FromArgb(0, 0, 0, 0);
+            chart.ChartAreas[series1].AxisY.Enabled = AxisEnabled.False;
+            chart.ChartAreas[series1].AxisY.LabelStyle.Font = new Font("Calibri", 11F, FontStyle.Regular);
+            chart.ChartAreas[series1].AxisY.LabelStyle.ForeColor = Color.White;
+            chart.ChartAreas[series1].AxisY.LineColor = Color.FromArgb(0, 0, 0, 0);
+            chart.ChartAreas[series1].AxisY.MajorGrid.LineColor = Color.FromArgb(0, 0, 0, 0);
+            chart.ChartAreas[series1].AxisY.MinorGrid.LineColor = Color.FromArgb(0, 0, 0, 0);
+            chart.ChartAreas[series1].AxisY.MajorTickMark.LineColor = Color.FromArgb(0, 0, 0, 0);
+            chart.ChartAreas[series1].AxisY.MinorTickMark.LineColor = Color.FromArgb(0, 0, 0, 0);
 
-            chart.ChartAreas[Series1].Name = "Applications";
+            chart.ChartAreas[series1].Name = "Applications";
 
             foreach (var next in dayReport.UniqueApplications)
             {
-                int rv = chart.Series[Series1].Points.AddXY(next.Key, next.Value);
-                chart.Series[Series1].Points[rv].Label = "  " + InTouch.GetTimeStringFromMinutes(next.Value);
-                chart.Series[Series1].Points[rv].LabelForeColor = Color.White;
+                int rv = chart.Series[series1].Points.AddXY(next.Key, next.Value);
+                chart.Series[series1].Points[rv].Label = "  " + InTouch.GetTimeStringFromMinutes(next.Value);
+                chart.Series[series1].Points[rv].LabelForeColor = Color.White;
             }
 
             chart.SaveImage(System.IO.Path.GetTempPath() + "Applications.png", ChartImageFormat.Png);
@@ -667,29 +679,29 @@
         /// </summary>
         private void DrawSystemTimeImage()
         {
-            float ChartWidth = 300;
-            float ChartHeight = 300;
+            float chartWidth = 300;
+            float chartHeight = 300;
             Chart chart = new Chart
             {
-                Width = (int)ChartWidth,
-                Height = (int)ChartHeight,
-                BackColor = Color.Transparent
+                Width = (int)chartWidth,
+                Height = (int)chartHeight,
+                BackColor = Color.Transparent,
             };
 
             // Setup the first (outer) series.
-            string Series1 = "Series1";
-            chart.ChartAreas.Add(Series1);
-            chart.Series.Add(Series1);
-            chart.Series[Series1].ChartArea = Series1;
-            chart.Series[Series1].ChartType = SeriesChartType.Doughnut;
-            chart.Series[Series1]["PieStartAngle"] = "270";
-            chart.Series[Series1]["DoughnutRadius"] = "60";
-            chart.ChartAreas[Series1].BackColor = Color.Transparent;
-            chart.ChartAreas[Series1].Position.X = 0;
-            chart.ChartAreas[Series1].Position.Y = 0;
-            chart.ChartAreas[Series1].Position.Width = 100;
-            chart.ChartAreas[Series1].Position.Height = 100;
-            chart.ChartAreas[Series1].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
+            string series1 = "Series1";
+            chart.ChartAreas.Add(series1);
+            chart.Series.Add(series1);
+            chart.Series[series1].ChartArea = series1;
+            chart.Series[series1].ChartType = SeriesChartType.Doughnut;
+            chart.Series[series1]["PieStartAngle"] = "270";
+            chart.Series[series1]["DoughnutRadius"] = "60";
+            chart.ChartAreas[series1].BackColor = Color.Transparent;
+            chart.ChartAreas[series1].Position.X = 0;
+            chart.ChartAreas[series1].Position.Y = 0;
+            chart.ChartAreas[series1].Position.Width = 100;
+            chart.ChartAreas[series1].Position.Height = 100;
+            chart.ChartAreas[series1].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
 
             // Setup the second (internal) series.
             string Series2 = "Series2";
@@ -717,24 +729,24 @@
             chart.Series[Series2].Points[rv2].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
             // Draw the billable segment.
-            int rv3 = chart.Series[Series1].Points.AddXY("Billable Time", dayReport.TotalWork);
-            chart.Series[Series1].Points[rv3].Color = colorBillable;
-            chart.Series[Series1].Points[rv3].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            int rv3 = chart.Series[series1].Points.AddXY("Billable Time", dayReport.TotalWork);
+            chart.Series[series1].Points[rv3].Color = colorBillable;
+            chart.Series[series1].Points[rv3].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
             // Draw the other time segment.
-            int rv4 = chart.Series[Series1].Points.AddXY("Other Time", dayReport.TotalUptime - dayReport.TotalIdle - dayReport.TotalWork);
-            chart.Series[Series1].Points[rv4].Color = colorOther;
-            chart.Series[Series1].Points[rv4].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            int rv4 = chart.Series[series1].Points.AddXY("Other Time", dayReport.TotalUptime - dayReport.TotalIdle - dayReport.TotalWork);
+            chart.Series[series1].Points[rv4].Color = colorOther;
+            chart.Series[series1].Points[rv4].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
             // Draw the idle time segment.
-            int rv5 = chart.Series[Series1].Points.AddXY("Idle Time", dayReport.TotalIdle);
-            chart.Series[Series1].Points[rv5].Color = colorIdle;
-            chart.Series[Series1].Points[rv5].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            int rv5 = chart.Series[series1].Points.AddXY("Idle Time", dayReport.TotalIdle);
+            chart.Series[series1].Points[rv5].Color = colorIdle;
+            chart.Series[series1].Points[rv5].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
             // Draw the downtime segment as transparent.
-            int rv6 = chart.Series[Series1].Points.AddY(1440 - dayReport.TotalUptime);
-            chart.Series[Series1].Points[rv6].Color = System.Drawing.Color.FromArgb(0, 0, 0, 0);
-            chart.Series[Series1].Points[rv6].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            int rv6 = chart.Series[series1].Points.AddY(1440 - dayReport.TotalUptime);
+            chart.Series[series1].Points[rv6].Color = System.Drawing.Color.FromArgb(0, 0, 0, 0);
+            chart.Series[series1].Points[rv6].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
             // Save the image to file.
             chart.SaveImage(System.IO.Path.GetTempPath() + "SystemTime.png", ChartImageFormat.Png);
@@ -745,56 +757,54 @@
         /// </summary>
         private void DrawObjectiveImage()
         {
-            float ChartWidth = 360;
-            float ChartHeight = 360;
+            float chartWidth = 360;
+            float chartHeight = 360;
             Chart chart = new Chart
             {
-                Width = (int)ChartWidth,
-                Height = (int)ChartHeight,
-                BackColor = Color.Transparent
+                Width = (int)chartWidth,
+                Height = (int)chartHeight,
+                BackColor = Color.Transparent,
             };
 
             // Setup the first series.
-            string Series1 = "Series1";
-            chart.ChartAreas.Add(Series1);
-            chart.Series.Add(Series1);
-            chart.Series[Series1].ChartArea = Series1;
-            chart.Series[Series1].ChartType = SeriesChartType.Doughnut;
-            chart.ChartAreas[Series1].BackColor = Color.Transparent;
-            chart.ChartAreas[Series1].Position.X = 0;
-            chart.ChartAreas[Series1].Position.Y = 0;
-            chart.ChartAreas[Series1].Position.Width = 100;
-            chart.ChartAreas[Series1].Position.Height = 100;
-            chart.ChartAreas[Series1].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
+            string series1 = "Series1";
+            chart.ChartAreas.Add(series1);
+            chart.Series.Add(series1);
+            chart.Series[series1].ChartArea = series1;
+            chart.Series[series1].ChartType = SeriesChartType.Doughnut;
+            chart.ChartAreas[series1].BackColor = Color.Transparent;
+            chart.ChartAreas[series1].Position.X = 0;
+            chart.ChartAreas[series1].Position.Y = 0;
+            chart.ChartAreas[series1].Position.Width = 100;
+            chart.ChartAreas[series1].Position.Height = 100;
+            chart.ChartAreas[series1].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
 
             // Setup the second series.
-            string Series2 = "Series2";
-            chart.ChartAreas.Add(Series2);
-            chart.Series.Add(Series2);
-            chart.Series[Series2].ChartArea = Series2;
-            chart.Series[Series2].ChartType = SeriesChartType.Doughnut;
-            chart.ChartAreas[Series2].BackColor = Color.Transparent;
-            chart.ChartAreas[Series2].Position.X = 12.5F;
-            chart.ChartAreas[Series2].Position.Y = 12.5F;
-            chart.ChartAreas[Series2].Position.Width = 75F;
-            chart.ChartAreas[Series2].Position.Height = 75F;
-            chart.ChartAreas[Series2].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
+            string series2 = "Series2";
+            chart.ChartAreas.Add(series2);
+            chart.Series.Add(series2);
+            chart.Series[series2].ChartArea = series2;
+            chart.Series[series2].ChartType = SeriesChartType.Doughnut;
+            chart.ChartAreas[series2].BackColor = Color.Transparent;
+            chart.ChartAreas[series2].Position.X = 12.5F;
+            chart.ChartAreas[series2].Position.Y = 12.5F;
+            chart.ChartAreas[series2].Position.Width = 75F;
+            chart.ChartAreas[series2].Position.Height = 75F;
+            chart.ChartAreas[series2].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
 
-
-            HashSet<string> ObjectiveNames = new HashSet<string>();
+            HashSet<string> objectiveNames = new HashSet<string>();
 
             foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).OrderBy(x => x.Value.Name))
             {
-                ObjectiveNames.Add(next.Value.ObjectiveName);
+                objectiveNames.Add(next.Value.ObjectiveName);
             }
 
-            foreach (string outer in ObjectiveNames)
+            foreach (string outer in objectiveNames)
             {
                 int totalminutes = 0;
 
                 foreach (var inner in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.Application))
                 {
-
                     if (inner.Value.ObjectiveName == outer)
                     {
                         totalminutes += inner.Value.Minutes;
@@ -802,50 +812,50 @@
                         switch (inner.Value.Application)
                         {
                             case ApplicationType.VisualStudioWrite:
-                                int rv = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
-                                chart.Series[Series1].Points[rv].Color = Color.FromArgb(156, 64, 156);
+                                int rv = chart.Series[series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[series1].Points[rv].Color = Color.FromArgb(156, 64, 156);
                                 break;
 
                             case ApplicationType.VisualStudioRead:
-                                int rv2 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
-                                chart.Series[Series1].Points[rv2].Color = Color.FromArgb(72,72,72);
+                                int rv2 = chart.Series[series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[series1].Points[rv2].Color = Color.FromArgb(72, 72, 72);
                                 break;
 
                             case ApplicationType.WordWrite:
-                                int rv3 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
-                                chart.Series[Series1].Points[rv3].Color = Color.FromArgb(128,128, 255);
+                                int rv3 = chart.Series[series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[series1].Points[rv3].Color = Color.FromArgb(128, 128, 255);
                                 break;
 
                             case ApplicationType.WordRead:
-                                int rv4 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
-                                chart.Series[Series1].Points[rv4].Color = Color.FromArgb(72, 72, 72);
+                                int rv4 = chart.Series[series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[series1].Points[rv4].Color = Color.FromArgb(72, 72, 72);
                                 break;
 
                             case ApplicationType.ExcelWrite:
-                                int rv5 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
-                                chart.Series[Series1].Points[rv5].Color = Color.FromArgb(128, 255, 128);
+                                int rv5 = chart.Series[series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[series1].Points[rv5].Color = Color.FromArgb(128, 255, 128);
                                 break;
 
                             case ApplicationType.ExcelRead:
-                                int rv6 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
-                                chart.Series[Series1].Points[rv6].Color = Color.FromArgb(72, 72, 72);
+                                int rv6 = chart.Series[series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[series1].Points[rv6].Color = Color.FromArgb(72, 72, 72);
                                 break;
 
                             case ApplicationType.AutocadWrite:
-                                int rv7 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
-                                chart.Series[Series1].Points[rv7].Color = Color.FromArgb(255, 64, 64);
+                                int rv7 = chart.Series[series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[series1].Points[rv7].Color = Color.FromArgb(255, 64, 64);
                                 break;
 
                             case ApplicationType.AutocadRead:
-                                int rv8 = chart.Series[Series1].Points.AddY(inner.Value.Minutes);
-                                chart.Series[Series1].Points[rv8].Color = Color.FromArgb(72, 72, 72);
+                                int rv8 = chart.Series[series1].Points.AddY(inner.Value.Minutes);
+                                chart.Series[series1].Points[rv8].Color = Color.FromArgb(72, 72, 72);
                                 break;
                         }
                     }
                 }
 
-                int rvt = chart.Series[Series2].Points.AddXY(outer, totalminutes);
-                chart.Series[Series2].Points[rvt].LabelForeColor = Color.FromArgb(255, 255, 255);
+                int rvt = chart.Series[series2].Points.AddXY(outer, totalminutes);
+                chart.Series[series2].Points[rvt].LabelForeColor = Color.FromArgb(255, 255, 255);
             }
 
             // Save the image to file.
@@ -886,7 +896,7 @@
                     }
                     else
                     {
-                        if((next.Application.Length >= 34) && (next.Application.Substring(0, 34) == "System.Diagnostics.ProcessModule ("))
+                        if ((next.Application.Length >= 34) && (next.Application.Substring(0, 34) == "System.Diagnostics.ProcessModule ("))
                         {
                             dayReport.Minutes[minute].ActiveApplication = next.Application.Substring(34);
                             dayReport.Minutes[minute].ActiveApplication = dayReport.Minutes[minute].ActiveApplication.Substring(0, dayReport.Minutes[minute].ActiveApplication.Length - 1);
@@ -901,7 +911,6 @@
                 // Rename the more common programs and add to the minute.
                 switch (dayReport.Minutes[minute].ActiveApplication.ToLower())
                 {
-
                     case "cmd.exe":
                         dayReport.Minutes[minute].ActiveApplication = "Command Prompt";
                         break;
@@ -961,7 +970,6 @@
             }
         }
 
-
         private bool CheckNotIdle(string json)
         {
             WorkItem workItem = JsonConvert.DeserializeObject<WorkItem>(json);
@@ -973,7 +981,6 @@
             {
                 if (dayReport.Minutes[i].Idle == false)
                 {
-                    
                     return true;
                 }
             }
@@ -997,7 +1004,7 @@
                 switch (workItem.Application)
                 {
                     case ApplicationType.VisualStudioRead:
-                        dayReport.Minutes[i].Billable = true;
+                        dayReport.Minutes[i].Billable = false;
                         break;
 
                     case ApplicationType.VisualStudioWrite:
@@ -1009,7 +1016,7 @@
                         break;
 
                     case ApplicationType.WordRead:
-                        dayReport.Minutes[i].Billable = true;
+                        dayReport.Minutes[i].Billable = false;
                         break;
 
                     case ApplicationType.ExcelWrite:
@@ -1017,7 +1024,7 @@
                         break;
 
                     case ApplicationType.ExcelRead:
-                        dayReport.Minutes[i].Billable = true;
+                        dayReport.Minutes[i].Billable = false;
                         break;
 
                     case ApplicationType.AutocadWrite:
@@ -1110,7 +1117,10 @@
                     return null;
                 }
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
 
         /// <summary>
@@ -1142,7 +1152,10 @@
                     return null;
                 }
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

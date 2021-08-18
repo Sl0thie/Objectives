@@ -9,7 +9,7 @@
     /// </summary>
     partial class FRObjectivesDayReport
     {
-        #region Form Region Factory 
+        #region Form Region Factory
 
         [Microsoft.Office.Tools.Outlook.FormRegionMessageClass(Microsoft.Office.Tools.Outlook.FormRegionMessageClassAttribute.Appointment)]
         [Microsoft.Office.Tools.Outlook.FormRegionName("InTouch-Objectives.FRObjectivesDayReport")]
@@ -25,12 +25,12 @@
 
         #endregion
 
-        Outlook.Inspector inspector;
+        private Outlook.Inspector inspector;
         private Outlook.AppointmentItem appointment;
-        DayReport dayReport;
+        private DayReport dayReport;
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender">Unused.</param>
         /// <param name="e">Unused.</param>
@@ -64,7 +64,6 @@
 
         private void FRObjectivesDayReport_FormRegionClosed(object sender, System.EventArgs e)
         {
-
         }
     }
 }

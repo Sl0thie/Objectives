@@ -2,12 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
-    using Excel = Microsoft.Office.Interop.Excel;
-    using System.Threading;
     using System.IO;
-    using Newtonsoft.Json;
+    using System.Threading;
     using CommonObjectives;
     using LogNET;
+    using Newtonsoft.Json;
+    using Excel = Microsoft.Office.Interop.Excel;
 
     /// <summary>
     /// Excel VSTO AddIn to track document times.
@@ -50,8 +50,8 @@
             refreshTimer = new Timer(timerDelegate, null, TimeSpan.Zero, refreshIntervalTime);
 
             // Get and check the ObjectiveRootFolder.
-            RootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", "");
-            StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", "");
+            RootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", string.Empty);
+            StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
 
             // This add-in starts after the first document is loaded so check for loaded documents.
             CheckWorkbooks();
@@ -102,7 +102,7 @@
         /// Check the workbooks against the WorkItems.
         /// </summary>
         /// <remarks>
-        /// Testing the events seems to exposed some faults. 
+        /// Testing the events seems to exposed some faults.
         /// To accommodate this the method first checks all workbooks against the work items.
         /// Then it checks all the work items against the workbooks.
         /// A secondary function is that it checks if the workbooks have been active.
@@ -142,6 +142,7 @@
                         {
                             workItem.IsActive = true;
                         }
+
                         break;
                     }
                 }
@@ -184,7 +185,7 @@
                 {
                     Id = Guid.NewGuid(),
                     FilePath = workbook.FullName,
-                    Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"))
+                    Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm")),
                 };
 
                 if (workItem.FilePath.LastIndexOf("\\") > 0)
@@ -229,7 +230,6 @@
             }
         }
 
-        
         //private void RemoveWorkbook(Excel.Workbook workbook)
         //{
         //    Log.Info("RemoveWorkbook " + workbook.FullName);
@@ -251,7 +251,7 @@
         /// </summary>
         /// <param name="path">The path to the workbook.</param>
         private void RemoveWorkbook(string path)
-        { 
+        {
             Log.Info("RemoveWorkbook " + path);
 
             if (WorkItems.ContainsKey(path))
@@ -292,6 +292,7 @@
                             {
                                 workbook.Save();
                             }
+
                             break;
                         }
                     }

@@ -12,13 +12,13 @@
     using Xamarin.Forms.Xaml;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ObjectivePage : ContentPage
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ObjectivePage()
         {
@@ -26,13 +26,12 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        async void OnSaveClicked(object sender, EventArgs e)
+        private async void OnSaveClicked(object sender, EventArgs e)
         {
-
             Debug.WriteLine("On saved");
 
             var todoItem = (CommonObjectives.Serial.Objective)BindingContext;
@@ -41,15 +40,14 @@
             await database.SaveObjectiveAsync(todoItem);
             await Navigation.PopAsync();
 
-
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        async void OnDeleteClicked(object sender, EventArgs e)
+        private async void OnDeleteClicked(object sender, EventArgs e)
         {
             var todoItem = (CommonObjectives.Serial.Objective)BindingContext;
             LocalDatabase database = await LocalDatabase.Instance;
@@ -58,11 +56,11 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        async void OnCancelClicked(object sender, EventArgs e)
+        private async void OnCancelClicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
         }

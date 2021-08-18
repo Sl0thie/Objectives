@@ -10,13 +10,13 @@
     using Xamarin.Forms.Xaml;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LocationPage : ContentPage
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public LocationPage()
         {
@@ -24,7 +24,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         protected override void OnAppearing()
         {
@@ -32,11 +32,11 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        async void btnLocation_Clicked(object sender, System.EventArgs e)
+        private async void btnLocation_Clicked(object sender, System.EventArgs e)
         {
             try
             {

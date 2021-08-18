@@ -1,9 +1,9 @@
 ﻿namespace OutlookObjectives
 {
-    using CommonObjectives;
     using System;
     using System.IO;
     using System.Windows.Forms;
+    using CommonObjectives;
     using LogNET;
 
     /// <summary>
@@ -26,14 +26,13 @@
         /// <param name="e"></param>
         private void UCObjectives_Load(object sender, EventArgs e)
         {
-
             foreach (var path in Directory.EnumerateDirectories(InTouch.ObjectivesRootFolder, "*", SearchOption.TopDirectoryOnly))
             {
                 Objective objective = InTouch.GetObjective(path);
                 ListViewItem nextItem = new ListViewItem(objective.ObjectiveName)
                 {
                     ImageIndex = 0,
-                    Tag = objective.Path
+                    Tag = objective.Path,
                 };
                 ListObjectives.Items.Add(nextItem);
             }
@@ -44,7 +43,7 @@
                 ListViewItem nextItem = new ListViewItem(objective.ObjectiveName)
                 {
                     ImageIndex = 1,
-                    Tag = objective.Path
+                    Tag = objective.Path,
                 };
                 ListObjectives.Items.Add(nextItem);
             }
@@ -128,7 +127,7 @@
             {
                 FormObjectiveRates ratesForm = new FormObjectiveRates
                 {
-                    Objective = InTouch.GetObjective(ListObjectives.SelectedItems[0].Tag.ToString())
+                    Objective = InTouch.GetObjective(ListObjectives.SelectedItems[0].Tag.ToString()),
                 };
                 ratesForm.ShowDialog();
                 ratesForm.Dispose();

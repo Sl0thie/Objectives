@@ -1,10 +1,10 @@
 ﻿namespace OutlookObjectives
 {
-    using LogNET;
-    using Microsoft.Win32;
     using System;
     using System.IO;
     using System.Windows.Forms;
+    using LogNET;
+    using Microsoft.Win32;
 
     /// <summary>
     /// Form to manage Objectives Settings.
@@ -130,7 +130,6 @@
                 Log.Error(ex);
             }
         }
-
 
         private void TextBoxAddinStorageFolder_TextChanged(object sender, EventArgs e)
         {

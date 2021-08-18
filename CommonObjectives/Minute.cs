@@ -50,7 +50,6 @@
         /// </summary>
         public Minute()
         {
-
         }
 
         /// <summary>

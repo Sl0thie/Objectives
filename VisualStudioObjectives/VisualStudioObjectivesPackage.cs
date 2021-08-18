@@ -1,21 +1,21 @@
 ﻿// TODO Test "New Projects". Missed a few work items. Could be related to this.
 namespace VisualStudioObjectives
 {
+    using System;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using CommonObjectives;
+    using EnvDTE;
+    using LogNET;
     using Microsoft.VisualStudio;
     using Microsoft.VisualStudio.Shell;
-    using System;
-    using System.Runtime.InteropServices;
-    using System.Threading;
-    using Task = System.Threading.Tasks.Task;
-    using System.Threading.Tasks;
     using Microsoft.VisualStudio.Shell.Events;
     using Microsoft.VisualStudio.Shell.Interop;
-    using LogNET;
-    using CommonObjectives;
-    using System.IO;
-    using EnvDTE;
-    using System.Text;
     using Newtonsoft.Json;
+    using Task = System.Threading.Tasks.Task;
 
     /// <summary>
     /// VisualStudioObectivesPackage class.
@@ -58,7 +58,7 @@ namespace VisualStudioObjectives
             // Setup the main timer.
             System.Timers.Timer mainTimer = new System.Timers.Timer(50000)
             {
-                AutoReset = true
+                AutoReset = true,
             };
             mainTimer.Elapsed += MainTimer_Elapsed;
             mainTimer.Enabled = true;
@@ -69,16 +69,16 @@ namespace VisualStudioObjectives
 
             if (isSolutionLoaded)
             {
-                SolutionEvents_OnAfterBackgroundSolutionLoadComplete(null,null);
+                SolutionEvents_OnAfterBackgroundSolutionLoadComplete(null, null);
             }
 
             // Subscribe to Listeners for subsequent solution events.
             Microsoft.VisualStudio.Shell.Events.SolutionEvents.OnAfterBackgroundSolutionLoadComplete += SolutionEvents_OnAfterBackgroundSolutionLoadComplete;
-            Microsoft.VisualStudio.Shell.Events.SolutionEvents.OnBeforeCloseSolution += SolutionEvents_OnBeforeCloseSolution;         
+            Microsoft.VisualStudio.Shell.Events.SolutionEvents.OnBeforeCloseSolution += SolutionEvents_OnBeforeCloseSolution;
         }
 
         /// <summary>
-        /// Handles the MainTimer event.  
+        /// Handles the MainTimer event.
         /// </summary>
         /// <param name="sender">This parameter is unused.</param>
         /// <param name="e">This parameter is unused.</param>
@@ -93,7 +93,6 @@ namespace VisualStudioObjectives
                 {
                     // Check for unsaved items. The project is active if there are unsaved items.
                     workItem.IsActive = await IsSolutionUnsavedAsync(dte.Solution, false);
-
 
                     if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
                     {
@@ -178,6 +177,7 @@ namespace VisualStudioObjectives
                     {
                         project.Save();
                     }
+
                     rv = true;
                 }
 
@@ -196,7 +196,7 @@ namespace VisualStudioObjectives
         }
 
         /// <summary>
-        /// Searches project items for unsaved changes.  
+        /// Searches project items for unsaved changes.
         /// Also checks the sub items. (recursive)
         /// </summary>
         /// <param name="item">The project item to search.  Includes sub items if the item is a folder.</param>
@@ -227,6 +227,7 @@ namespace VisualStudioObjectives
                             rv = true;
                         }
                     }
+
                     break;
 
                 case EnvDTE.Constants.vsProjectItemKindSolutionItems:
@@ -255,6 +256,7 @@ namespace VisualStudioObjectives
                 {
                     item.Save();
                 }
+
                 rv = true;
             }
 
@@ -268,8 +270,8 @@ namespace VisualStudioObjectives
         {
             try
             {
-                RootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", "");
-                StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", "");
+                RootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", string.Empty);
+                StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
             }
             catch (Exception ex)
             {
@@ -349,7 +351,6 @@ namespace VisualStudioObjectives
                 {
                     workItem.ObjectiveName = "None";
                 }
-
 
                 workItem.StartSize = 0;
                 DirectoryInfo basePath = new DirectoryInfo(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')));

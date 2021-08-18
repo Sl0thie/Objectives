@@ -1,9 +1,9 @@
 ﻿namespace OutlookObjectives
 {
-    using CommonObjectives;
-    using LogNET;
     using System;
     using System.Windows.Forms;
+    using CommonObjectives;
+    using LogNET;
 
     /// <summary>
     /// Form to manage the Objectives Rates and Costs.
@@ -47,7 +47,7 @@
             {
                 ListViewItem nextItem = new ListViewItem(next.Value.Index.ToString("000"))
                 {
-                    Tag = next.Value.Index
+                    Tag = next.Value.Index,
                 };
                 nextItem.SubItems.Add(next.Value.Name);
                 nextItem.SubItems.Add(next.Value.Description);
@@ -130,7 +130,7 @@
                     {
                         FormChangeWorkType newForm = new FormChangeWorkType
                         {
-                            WorkType = objective.WorkTypes[(int)ListWorkTypes.SelectedItems[0].Tag]
+                            WorkType = objective.WorkTypes[(int)ListWorkTypes.SelectedItems[0].Tag],
                         };
                         newForm.ShowDialog();
                         objective.WorkTypes[(int)ListWorkTypes.SelectedItems[0].Tag] = newForm.WorkType;
@@ -139,7 +139,7 @@
                     {
                         FormChangeWorkType newForm = new FormChangeWorkType
                         {
-                            WorkType = InTouch.WorkTypes[(int)ListWorkTypes.SelectedItems[0].Tag]
+                            WorkType = InTouch.WorkTypes[(int)ListWorkTypes.SelectedItems[0].Tag],
                         };
                         newForm.ShowDialog();
 

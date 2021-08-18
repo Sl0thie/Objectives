@@ -6,7 +6,7 @@
     /// Interface to handle multiple work item types.
     /// Currently not implemented.
     /// </summary>
-    interface IWorkItem
+    internal interface IWorkItem
     {
         /// <summary>
         /// Index for the item.

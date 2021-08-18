@@ -4,13 +4,12 @@
     using SQLite;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public class Client
     {
-
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [PrimaryKey, Unique]
         public string EntryID { get; set; }
