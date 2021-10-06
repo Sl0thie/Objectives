@@ -1,34 +1,27 @@
 ﻿namespace OutlookObjectives
 {
     using System;
-    using System.Collections.Generic;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
     using System.IO;
-    using System.Linq;
-    using System.Runtime.InteropServices;
     using System.Threading;
-    using System.Windows.Forms.DataVisualization.Charting;
     using CommonObjectives;
     using LogNET;
-    using Newtonsoft.Json;
-    using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
-    ///
+    /// TaskWebSync class syncs data to the SQL Server.
     /// </summary>
     public class TaskWebSync
     {
-        private readonly Action CallBack;
+        private readonly Action callBack;
 
         private ServiceReference1.ObjectivesSoapClient soap;
 
         /// <summary>
-        ///
+        /// Initializes a new instance of the <see cref="TaskWebSync"/> class.
         /// </summary>
+        /// <param name="callBack">The callback when the task is done.</param>
         public TaskWebSync(Action callBack)
         {
-            CallBack = callBack;
+            this.callBack = callBack;
         }
 
         /// <summary>
@@ -36,14 +29,14 @@
         /// </summary>
         public void RunTask()
         {
-            Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess))
+            Thread backgroundThread = new Thread(new ThreadStart(BackgroundProcess))
             {
                 Name = "Objectives.TaskWebSync",
                 IsBackground = true,
                 Priority = ThreadPriority.Normal,
             };
-            BackgroundThread.SetApartmentState(ApartmentState.STA);
-            BackgroundThread.Start();
+            backgroundThread.SetApartmentState(ApartmentState.STA);
+            backgroundThread.Start();
         }
 
         /// <summary>
@@ -53,11 +46,11 @@
         {
             SyncClients();
             SyncObjectives();
-            CallBack?.Invoke();
+            callBack?.Invoke();
         }
 
         /// <summary>
-        ///
+        /// Syncs client objects to the SQL Server.
         /// </summary>
         private void SyncClients()
         {
@@ -104,6 +97,9 @@
             }
         }
 
+        /// <summary>
+        /// Syncs the Objectives to the SQL Server.
+        /// </summary>
         private void SyncObjectives()
         {
             soap = new ServiceReference1.ObjectivesSoapClient();
@@ -112,10 +108,12 @@
             {
                 Objective objective = InTouch.GetObjective(path);
                 objective.Archived = false;
-                ServiceReference1.Objective obj = new ServiceReference1.Objective();
-                obj.Archived = objective.Archived;
-                obj.Created = objective.Created;
-                obj.ObjectiveName = objective.ObjectiveName;
+                ServiceReference1.Objective obj = new ServiceReference1.Objective
+                {
+                    Archived = objective.Archived,
+                    Created = objective.Created,
+                    ObjectiveName = objective.ObjectiveName,
+                };
 
                 Log.Info("ObjectiveName: " + obj.ObjectiveName);
                 Log.Info("DateTime: " + obj.Created);
@@ -127,10 +125,12 @@
             {
                 Objective objective = InTouch.GetObjective(path);
                 objective.Archived = true;
-                ServiceReference1.Objective obj = new ServiceReference1.Objective();
-                obj.Archived = objective.Archived;
-                obj.Created = objective.Created;
-                obj.ObjectiveName = objective.ObjectiveName;
+                ServiceReference1.Objective obj = new ServiceReference1.Objective
+                {
+                    Archived = objective.Archived,
+                    Created = objective.Created,
+                    ObjectiveName = objective.ObjectiveName,
+                };
 
                 Log.Info("ObjectiveName: " + obj.ObjectiveName);
                 Log.Info("DateTime: " + obj.Created);
@@ -138,6 +138,5 @@
                 soap.SaveObjective(obj);
             }
         }
-
     }
 }

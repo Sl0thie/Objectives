@@ -44,6 +44,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualStudioObjectives", "V
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{258D5E7C-D236-4C1C-81FD-403D0847E21C}"
 	ProjectSection(SolutionItems) = preProject
+		Drop and Create Clients.sql = Drop and Create Clients.sql
+		Drop and Create Errors.sql = Drop and Create Errors.sql
+		Drop and Create ObjClients.sql = Drop and Create ObjClients.sql
+		Drop and Create Objectives.sql = Drop and Create Objectives.sql
 		README.md = README.md
 	EndProjectSection
 EndProject

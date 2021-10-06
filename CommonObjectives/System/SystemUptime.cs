@@ -11,27 +11,27 @@
         private readonly Collection<ActiveApplication> activeApplications = new Collection<ActiveApplication>();
 
         /// <summary>
-        /// The network name of the computer.
+        /// Gets or sets the network name of the computer.
         /// </summary>
         public string ComputerName { get; set; }
 
         /// <summary>
-        /// The logged on user of the computer.
+        /// Gets or sets the logged on user of the computer.
         /// </summary>
         public string UserName { get; set; }
 
         /// <summary>
-        /// The time the event started.
+        /// Gets or sets the time the event started.
         /// </summary>
         public DateTime Start { get; set; }
 
         /// <summary>
-        /// The time the event finished.
+        /// Gets or sets the time the event finished.
         /// </summary>
         public DateTime Finish { get; set; }
 
         /// <summary>
-        /// A collection of ActiveApplication objects.
+        /// Gets a collection of ActiveApplication objects.
         /// </summary>
         /// <remarks>
         /// This is data of the focused applications during the event.

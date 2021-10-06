@@ -929,14 +929,15 @@
             <returns></returns>
         </member>
         <member name="T:OutlookObjectives.TaskWebSync">
-             <summary>
-            
-             </summary>
+            <summary>
+            TaskWebSync class syncs data to the SQL Server.
+            </summary>
         </member>
         <member name="M:OutlookObjectives.TaskWebSync.#ctor(System.Action)">
-             <summary>
-            
-             </summary>
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.TaskWebSync"/> class.
+            </summary>
+            <param name="callBack">The callback when the task is done.</param>
         </member>
         <member name="M:OutlookObjectives.TaskWebSync.RunTask">
             <summary>
@@ -949,9 +950,14 @@
             </summary>
         </member>
         <member name="M:OutlookObjectives.TaskWebSync.SyncClients">
-             <summary>
-            
-             </summary>
+            <summary>
+            Syncs client objects to the SQL Server.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskWebSync.SyncObjectives">
+            <summary>
+            Syncs the Objectives to the SQL Server.
+            </summary>
         </member>
         <member name="T:OutlookObjectives.TaskWeekReport">
             <summary>
@@ -1034,7 +1040,7 @@
              Primary timer event.
             </summary>
             <param name="source">Unused.</param>
-            <param name="e">Unused.</param>
+            <param name="e">Also unused.</param>
         </member>
         <member name="M:OutlookObjectives.ThisAddIn.CheckSystemRequirements">
             <summary>

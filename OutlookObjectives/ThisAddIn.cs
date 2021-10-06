@@ -43,12 +43,12 @@
 
             // Enqueue the starting Tasks.
             InTouch.TaskManager.EnqueueImportDataTask();
-            InTouch.TaskManager.EnqueueDayReportTask();
+            // InTouch.TaskManager.EnqueueDayReportTask();
 
             // InTouch.TaskManager.EnqueueWeekReportTask();
             // InTouch.TaskManager.EnqueueMonthReportTask();
             // InTouch.TaskManager.EnqueueConvertVersionTask();
-            InTouch.TaskManager.EnqueueWebSyncTask();
+            // InTouch.TaskManager.EnqueueWebSyncTask();
 
             // Setup the main timer.
             System.Timers.Timer mainTimer = new System.Timers.Timer(50000)
@@ -134,8 +134,8 @@
         ///  Primary timer event.
         /// </summary>
         /// <param name="source">Unused.</param>
-        /// <param name="e">Unused.</param>
-        private static void OnMainTimerEvent(Object source, System.Timers.ElapsedEventArgs e)
+        /// <param name="e">Also unused.</param>
+        private void OnMainTimerEvent(object source, System.Timers.ElapsedEventArgs e)
         {
             Log.Info("Timer Tick");
 
@@ -161,7 +161,7 @@
         /// </summary>
         private void CheckSystemRequirements()
         {
-            //  Overhaul.
+            // Overhaul.
             RegistryKey objectiveKey;
             RegistryKey workTypesKey;
             RegistryKey subKey;

@@ -7,22 +7,22 @@
     using System.Threading.Tasks;
 
     /// <summary>
-    ///
+    /// Objective class.
     /// </summary>
     public class Objective
     {
         /// <summary>
-        /// The name of the Objective.
+        /// Gets or sets the name of the Objective.
         /// </summary>
         public string ObjectiveName { get; set; }
 
         /// <summary>
-        /// Value indicates whether the Objective is currently archived.
+        /// Gets or sets a value indicating whether the Objective is currently archived.
         /// </summary>
         public bool Archived { get; set; }
 
         /// <summary>
-        /// The time the Objective is created.
+        /// Gets or sets the time the Objective is created.
         /// </summary>
         public DateTime Created { get; set; }
     }

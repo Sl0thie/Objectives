@@ -11,27 +11,27 @@
         private Dictionary<int, WorkType> workTypes = new Dictionary<int, WorkType>();
 
         /// <summary>
-        /// The name of the Objective.
+        /// Gets or sets the name of the Objective.
         /// </summary>
         public string ObjectiveName { get; set; }
 
         /// <summary>
-        /// The path to the folder that holds the Objective.
+        /// Gets or sets the path to the folder that holds the Objective.
         /// </summary>
         public string Path { get; set; }
 
         /// <summary>
-        /// Value indicates whether the Objective is currently archived.
+        /// Gets or sets a Value indicates whether the Objective is currently archived.
         /// </summary>
         public bool Archived { get; set; }
 
         /// <summary>
-        /// The time the Objective is created.
+        /// Gets or sets the time the Objective is created.
         /// </summary>
         public DateTime Created { get; set; }
 
         /// <summary>
-        /// The current WorkType values for the Objective.
+        /// Gets or sets the current WorkType values for the Objective.
         /// </summary>
         /// <remarks>
         /// If they are not found here then the default values are used.
@@ -55,7 +55,7 @@
         public string ClientStoreID { get; set; }
 
         /// <summary>
-        /// Implements a new Objective object.
+        /// Initializes a new instance of the <see cref="Objective"/> class.
         /// </summary>
         public Objective()
         {

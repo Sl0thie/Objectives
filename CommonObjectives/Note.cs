@@ -8,42 +8,42 @@
     public class Note
     {
         /// <summary>
-        /// Id for the note.
+        /// Gets or sets the Id for the note.
         /// </summary>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// The time the note is first created.
+        /// Gets or sets the time the note is first created.
         /// </summary>
         public DateTime Created { get; set; }
 
         /// <summary>
-        /// The time the note is modified.
+        /// Gets or sets the time the note is modified.
         /// </summary>
         public DateTime Modified { get; set; }
 
         /// <summary>
-        /// The title for the note.
+        /// Gets or sets the title for the note.
         /// </summary>
         public string Title { get; set; }
 
         /// <summary>
-        /// The content of the note.
+        /// Gets or sets the content of the note.
         /// </summary>
         public string Content { get; set; }
 
         /// <summary>
-        /// Empty constructor for serialization.
+        /// Initializes a new instance of the <see cref="Note"/> class.
         /// </summary>
         public Note()
         {
         }
 
         /// <summary>
-        /// Constructor to fill data on creation.
+        /// Initializes a new instance of the <see cref="Note"/> class.
         /// </summary>
-        /// <param name="title"></param>
-        /// <param name="content"></param>
+        /// <param name="title">The title of the note.</param>
+        /// <param name="content">The content of the note.</param>
         public Note(string title, string content)
         {
             Id = Guid.NewGuid();

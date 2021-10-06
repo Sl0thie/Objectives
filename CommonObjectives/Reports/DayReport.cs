@@ -18,27 +18,27 @@
         private string hTML;
 
         /// <summary>
-        /// The Date value of the report.
+        /// Gets or sets the Date value of the report.
         /// </summary>
         public DateTime Day { get => day; set => day = value; }
 
         /// <summary>
-        /// An int value returning the total number of minutes the system was up that day.
+        /// Gets or sets the int value returning the total number of minutes the system was up that day.
         /// </summary>
         public int TotalUptime { get => totalUptime; set => totalUptime = value; }
 
         /// <summary>
-        /// An int value returning the total number of minutes the system was idle during up time.
+        /// Gets or sets the int value returning the total number of minutes the system was idle during up time.
         /// </summary>
         public int TotalIdle { get => totalIdle; set => totalIdle = value; }
 
         /// <summary>
-        /// An int value returning how many minutes of work time was determined.
+        /// Gets or sets the int value returning how many minutes of work time was determined.
         /// </summary>
         public int TotalWork { get => totalWork; set => totalWork = value; }
 
         /// <summary>
-        /// A dictionary for the Objective's Totals.
+        /// Gets or sets a dictionary for the Objective's Totals.
         /// </summary>
         public Dictionary<string, WorkItem> WorkItems
         {
@@ -47,7 +47,7 @@
         }
 
         /// <summary>
-        /// A dictionary of the unique applications from the system monitor.
+        /// Gets or sets a dictionary of the unique applications from the system monitor.
         /// </summary>
         public Dictionary<string, int> UniqueApplications
         {
@@ -56,12 +56,12 @@
         }
 
         /// <summary>
-        /// An array of the minute objects for the day.
+        /// Gets or sets an array of the minute objects for the day.
         /// </summary>
         public Minute[] Minutes { get => minutes; set => minutes = value; }
 
         /// <summary>
-        /// A string containing the HTML for the report.
+        /// Gets or sets a string containing the HTML for the report.
         /// </summary>
         public string HTML
         {

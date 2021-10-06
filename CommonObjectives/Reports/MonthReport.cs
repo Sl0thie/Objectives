@@ -13,12 +13,12 @@
         private string hTML;
 
         /// <summary>
-        /// The Day the report start on.
+        /// Gets or sets the Day the report start on.
         /// </summary>
         public DateTime Day { get => day; set => day = value; }
 
         /// <summary>
-        /// The WorkItems within the month of the report.
+        /// Gets or sets the WorkItems within the month of the report.
         /// </summary>
         public Dictionary<string, WorkItem> WorkItems
         {
@@ -27,7 +27,7 @@
         }
 
         /// <summary>
-        /// A string containing the HTML for the report.
+        /// Gets or sets a string containing the HTML for the report.
         /// </summary>
         public string HTML
         {
