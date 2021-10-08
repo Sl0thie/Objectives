@@ -10,13 +10,13 @@
     using Xamarin.Forms.Xaml;
 
     /// <summary>
-    ///
+    /// LocationPage class.
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LocationPage : ContentPage
     {
         /// <summary>
-        ///
+        /// Initializes a new instance of the <see cref="LocationPage"/> class.
         /// </summary>
         public LocationPage()
         {
@@ -24,7 +24,7 @@
         }
 
         /// <summary>
-        ///
+        /// OnAppearing override.
         /// </summary>
         protected override void OnAppearing()
         {
@@ -32,15 +32,15 @@
         }
 
         /// <summary>
-        ///
+        /// btnLocation_Clicked method.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void btnLocation_Clicked(object sender, System.EventArgs e)
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Also unused.</param>
+        private async void BtnLocation_Clicked(object sender, System.EventArgs e)
         {
             try
             {
-                var location = await Geolocation.GetLastKnownLocationAsync();
+                Location location = await Geolocation.GetLastKnownLocationAsync();
 
                 if (location != null)
                 {
@@ -56,7 +56,6 @@
 
                     lblTimestamp.Text = "Timestamp:" + location.Timestamp.ToString();
                     lblVerticalAccuracy.Text = "VerticalAccuracy:" + location.VerticalAccuracy.ToString();
-
                 }
             }
             catch (FeatureNotSupportedException fnsEx)
@@ -71,8 +70,6 @@
             {
                 await DisplayAlert("Faild", ex.Message, "OK");
             }
-
         }
-
     }
 }

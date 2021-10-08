@@ -13,23 +13,23 @@
     /// and executes them one at a time.</remarks>
     public class TaskManager
     {
-        private bool taskRunning = false; //Is a task currently running.
-        private readonly ConcurrentQueue<Action> backgroundTasks = new ConcurrentQueue<Action>(); //Queue for the tasks.
-        private Action currentAction;
+        private readonly ConcurrentQueue<Action> backgroundTasks = new ConcurrentQueue<Action>(); // Queue for the tasks.
         private readonly TaskImportData taskImportData;
         private readonly TaskDayReport taskDayReport;
         private readonly TaskWeekReport taskWeekReport;
         private readonly TaskMonthReport taskMonthReport;
         private readonly TaskConvertVersion taskConvertVersion;
         private readonly TaskWebSync taskWebSync;
+        private bool taskRunning = false; // Is a task currently running.
+        private Action currentAction;
 
         /// <summary>
-        /// A queue of Task to be performed.
+        /// Gets a queue of Task to be performed.
         /// </summary>
         public ConcurrentQueue<Action> BackgroundTasks { get => backgroundTasks; }
 
         /// <summary>
-        /// The current action to be called when finished.
+        /// Gets or sets the current action to be called when finished.
         /// </summary>
         public Action CurrentAction { get => currentAction; set => currentAction = value; }
 
@@ -38,7 +38,7 @@
         /// </summary>
         public TaskManager()
         {
-            //Create task objects.
+            // Create task objects.
             taskImportData = new TaskImportData(TaskFinished);
             taskDayReport = new TaskDayReport(TaskFinished);
             taskWeekReport = new TaskWeekReport(TaskFinished);
@@ -46,7 +46,7 @@
             taskConvertVersion = new TaskConvertVersion(TaskFinished);
             taskWebSync = new TaskWebSync(TaskFinished);
 
-            //Configure and start a background thread.
+            // Configure and start a background thread.
             Thread backgroundThread = new Thread(new ThreadStart(BackgroundProcess))
             {
                 Name = "Objectives.TaskManager",
@@ -70,17 +70,16 @@
         /// </summary>
         private void BackgroundProcess()
         {
-            bool DoLoop = true; //Keeps the main loop running.
-            while (DoLoop)
+            bool doLoop = true; // Keeps the main loop running.
+            while (doLoop)
             {
                 Thread.Sleep(5000);
-                //Thread.Sleep(60000);
                 try
                 {
                     if ((!taskRunning) && (!BackgroundTasks.IsEmpty))
                     {
                         taskRunning = true;
-                        BackgroundTasks.TryDequeue(out currentAction);
+                        _ = BackgroundTasks.TryDequeue(out currentAction);
                         Log.Info("TaskManager Starting " + currentAction.Target + "." + currentAction.Method.Name.ToString());
                         currentAction.Invoke();
                     }

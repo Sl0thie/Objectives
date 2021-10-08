@@ -13,11 +13,15 @@
         private Objective objective;
 
         /// <summary>
-        /// The objective to manage.
+        /// Gets or sets the objective to manage.
         /// </summary>
         public Objective Objective
         {
-            get { return objective; }
+            get
+            {
+                return objective;
+            }
+
             set
             {
                 objective = value;
@@ -49,13 +53,13 @@
                 {
                     Tag = next.Value.Index,
                 };
-                nextItem.SubItems.Add(next.Value.Name);
-                nextItem.SubItems.Add(next.Value.Description);
-                nextItem.SubItems.Add(next.Value.CostPerHour.ToString());
-                nextItem.SubItems.Add(next.Value.MinimumNoOfMinutes.ToString());
-                nextItem.SubItems.Add(next.Value.MaximNoOfMinutes.ToString());
-                nextItem.SubItems.Add(next.Value.Application.ToString());
-                ListWorkTypes.Items.Add(nextItem);
+                _ = nextItem.SubItems.Add(next.Value.Name);
+                _ = nextItem.SubItems.Add(next.Value.Description);
+                _ = nextItem.SubItems.Add(next.Value.CostPerHour.ToString());
+                _ = nextItem.SubItems.Add(next.Value.MinimumNoOfMinutes.ToString());
+                _ = nextItem.SubItems.Add(next.Value.MaximNoOfMinutes.ToString());
+                _ = nextItem.SubItems.Add(next.Value.Application.ToString());
+                _ = ListWorkTypes.Items.Add(nextItem);
             }
 
             labelObjectiveName.Text = objective.ObjectiveName;
@@ -63,52 +67,52 @@
 
             foreach (var next in objective.WorkTypes)
             {
-                bool Same = true;
+                bool same = true;
                 ListViewItem nextItem = ListWorkTypes.Items[next.Key];
 
                 if (next.Value.Index.ToString("000") != nextItem.Text)
                 {
-                    Same = false;
+                    same = false;
                     nextItem.Text = next.Value.Index.ToString("000");
                 }
 
                 if (next.Value.Name != nextItem.SubItems[1].Text)
                 {
-                    Same = false;
+                    same = false;
                     nextItem.SubItems[1].Text = next.Value.Name;
                 }
 
                 if (next.Value.Description != nextItem.SubItems[2].Text)
                 {
-                    Same = false;
+                    same = false;
                     nextItem.SubItems[2].Text = next.Value.Description;
                 }
 
                 if (next.Value.CostPerHour.ToString() != nextItem.SubItems[3].Text)
                 {
-                    Same = false;
+                    same = false;
                     nextItem.SubItems[3].Text = next.Value.CostPerHour.ToString();
                 }
 
                 if (next.Value.MinimumNoOfMinutes.ToString() != nextItem.SubItems[4].Text)
                 {
-                    Same = false;
+                    same = false;
                     nextItem.SubItems[4].Text = next.Value.MinimumNoOfMinutes.ToString();
                 }
 
                 if (next.Value.MaximNoOfMinutes.ToString() != nextItem.SubItems[5].Text)
                 {
-                    Same = false;
+                    same = false;
                     nextItem.SubItems[5].Text = next.Value.MaximNoOfMinutes.ToString();
                 }
 
                 if (next.Value.Application.ToString() != nextItem.SubItems[6].Text)
                 {
-                    Same = false;
+                    same = false;
                     nextItem.SubItems[6].Text = next.Value.Application.ToString();
                 }
 
-                if (!Same)
+                if (!same)
                 {
                     Log.Info("Not the same");
                 }
@@ -119,7 +123,7 @@
         /// Show the Change WorkType form when an item is double clicked.
         /// </summary>
         /// <param name="sender">Unused.</param>
-        /// <param name="e">Unused.</param>
+        /// <param name="e">Also unused.</param>
         private void ListWorkTypes_DoubleClick(object sender, EventArgs e)
         {
             if (ListWorkTypes.SelectedItems.Count > 0)
@@ -132,7 +136,8 @@
                         {
                             WorkType = objective.WorkTypes[(int)ListWorkTypes.SelectedItems[0].Tag],
                         };
-                        newForm.ShowDialog();
+
+                        _ = newForm.ShowDialog();
                         objective.WorkTypes[(int)ListWorkTypes.SelectedItems[0].Tag] = newForm.WorkType;
                     }
                     else if (InTouch.WorkTypes.ContainsKey((int)ListWorkTypes.SelectedItems[0].Tag))
@@ -141,7 +146,8 @@
                         {
                             WorkType = InTouch.WorkTypes[(int)ListWorkTypes.SelectedItems[0].Tag],
                         };
-                        newForm.ShowDialog();
+
+                        _ = newForm.ShowDialog();
 
                         if (objective.WorkTypes.ContainsKey((int)ListWorkTypes.SelectedItems[0].Tag))
                         {
@@ -151,7 +157,6 @@
                         {
                             objective.WorkTypes.Add(newForm.WorkType.Index, newForm.WorkType);
                         }
-
                     }
 
                     SetupControl();
@@ -163,7 +168,7 @@
         /// Save the objective when the form closes.
         /// </summary>
         /// <param name="sender">Unused.</param>
-        /// <param name="e">Unused.</param>
+        /// <param name="e">Also unused.</param>
         private void FormObjectiveRates_FormClosing(object sender, FormClosingEventArgs e)
         {
             InTouch.SaveObjective(objective);

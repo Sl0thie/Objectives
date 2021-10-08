@@ -1,17 +1,17 @@
 ﻿namespace AndroidObjectives.Data
 {
-    using System;
     using SQLite;
 
     /// <summary>
-    ///
+    /// Client class.
     /// </summary>
     public class Client
     {
         /// <summary>
-        ///
+        /// Gets or sets the EntryID.
         /// </summary>
-        [PrimaryKey, Unique]
+        [PrimaryKey]
+        [Unique]
         public string EntryID { get; set; }
 
         /// <summary>
@@ -31,6 +31,5 @@
         /// This is the last name of the client.
         /// </summary>
         public string LastName { get; set; }
-
     }
 }

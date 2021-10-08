@@ -12,7 +12,7 @@
     public partial class UCObjectives : UserControl
     {
         /// <summary>
-        /// Constructor.
+        /// Initializes a new instance of the <see cref="UCObjectives"/> class.
         /// </summary>
         public UCObjectives()
         {
@@ -22,8 +22,8 @@
         /// <summary>
         /// Fills the UI with Objectives.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Also unused.</param>
         private void UCObjectives_Load(object sender, EventArgs e)
         {
             foreach (var path in Directory.EnumerateDirectories(InTouch.ObjectivesRootFolder, "*", SearchOption.TopDirectoryOnly))
@@ -34,7 +34,7 @@
                     ImageIndex = 0,
                     Tag = objective.Path,
                 };
-                ListObjectives.Items.Add(nextItem);
+                _ = ListObjectives.Items.Add(nextItem);
             }
 
             foreach (var path in Directory.EnumerateDirectories(InTouch.ObjectivesArchiveFolder, "*", SearchOption.TopDirectoryOnly))
@@ -45,29 +45,29 @@
                     ImageIndex = 1,
                     Tag = objective.Path,
                 };
-                ListObjectives.Items.Add(nextItem);
+                _ = ListObjectives.Items.Add(nextItem);
             }
         }
 
         /// <summary>
         /// Manage the control being resized.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Also unused.</param>
         private void UCObjectives_Resize(object sender, EventArgs e)
         {
-            panel1.Width = this.Width;
-            panel1.Height = this.Height;
+            panel1.Width = Width;
+            panel1.Height = Height;
 
-            ListObjectives.Width = this.Width + 100;
-            ListObjectives.Height = this.Height;
+            ListObjectives.Width = Width + 100;
+            ListObjectives.Height = Height;
         }
 
         /// <summary>
         /// Mange the change of selection.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Also unused.</param>
         private void ListObjectives_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (ListObjectives.SelectedItems.Count > 0)
@@ -91,8 +91,8 @@
         /// <summary>
         /// Archive the Objective.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Also unused.</param>
         private void MenuArchive_Click(object sender, EventArgs e)
         {
             string pathto = InTouch.ObjectivesArchiveFolder + "\\" + ListObjectives.SelectedItems[0].Text;
@@ -105,8 +105,8 @@
         /// <summary>
         /// Re-activate the Objective from archive.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Also unused.</param>
         private void MenuActivate_Click(object sender, EventArgs e)
         {
             string pathfrom = InTouch.ObjectivesArchiveFolder + "\\" + ListObjectives.SelectedItems[0].Text;
@@ -119,8 +119,8 @@
         /// <summary>
         /// Display the Rates and Costs for the Objective.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Also unused.</param>
         private void MenuRates_Click(object sender, EventArgs e)
         {
             if (ListObjectives.SelectedItems[0] is object)
@@ -129,7 +129,7 @@
                 {
                     Objective = InTouch.GetObjective(ListObjectives.SelectedItems[0].Tag.ToString()),
                 };
-                ratesForm.ShowDialog();
+                _ = ratesForm.ShowDialog();
                 ratesForm.Dispose();
             }
         }

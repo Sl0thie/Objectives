@@ -12,13 +12,13 @@
     using Xamarin.Forms.Xaml;
 
     /// <summary>
-    ///
+    /// ClientsPage class.
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ClientsPage : ContentPage
     {
         /// <summary>
-        ///
+        /// Initializes a new instance of the <see cref="ClientsPage"/> class.
         /// </summary>
         public ClientsPage()
         {
@@ -26,7 +26,7 @@
         }
 
         /// <summary>
-        ///
+        /// OnAppearing override.
         /// </summary>
         protected override async void OnAppearing()
         {
@@ -35,13 +35,17 @@
             listView.ItemsSource = await database.GetClientsAsync();
         }
 
-        private async void OnItemAdded(object sender, EventArgs e)
+        /// <summary>
+        /// OnItemAdded method.
+        /// </summary>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Also unused.</param>
+        private void OnItemAdded(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new ObjectivePage
-            //{
-            //    BindingContext = new Objective()
-            //});
+            // await Navigation.PushAsync(new ObjectivePage
+            // {
+            //     BindingContext = new Objective()
+            // });
         }
-
     }
 }

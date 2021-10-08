@@ -13,15 +13,15 @@
     /// </summary>
     public class TaskImportData
     {
-        private readonly Action CallBack;
+        private readonly Action callBack;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskImportData"/> class.
         /// </summary>
-        /// <param name="callBack"></param>
+        /// <param name="callBack">Callback.</param>
         public TaskImportData(Action callBack)
         {
-            CallBack = callBack;
+            this.callBack = callBack;
         }
 
         /// <summary>
@@ -29,14 +29,15 @@
         /// </summary>
         public void RunTask()
         {
-            Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess))
+            Thread backgroundThread = new Thread(new ThreadStart(BackgroundProcess))
             {
                 Name = "Objectives.TaskImportData",
                 IsBackground = true,
                 Priority = ThreadPriority.Normal,
             };
-            BackgroundThread.SetApartmentState(ApartmentState.STA);
-            BackgroundThread.Start();
+
+            backgroundThread.SetApartmentState(ApartmentState.STA);
+            backgroundThread.Start();
         }
 
         /// <summary>
@@ -53,7 +54,8 @@
             {
                 Log.Error(ex);
             }
-            CallBack?.Invoke();
+
+            callBack?.Invoke();
         }
 
         /// <summary>
@@ -61,9 +63,9 @@
         /// </summary>
         private void ReadFiles()
         {
-            DirectoryInfo ImportDataDirectory = new DirectoryInfo(InTouch.ObjectivesStorageFolder);
+            DirectoryInfo importDataDirectory = new DirectoryInfo(InTouch.ObjectivesStorageFolder);
 
-            foreach (FileInfo nextFile in ImportDataDirectory.EnumerateFiles())
+            foreach (FileInfo nextFile in importDataDirectory.EnumerateFiles())
             {
                 string json = File.ReadAllText(nextFile.FullName);
                 string filename = nextFile.Name;
@@ -125,7 +127,7 @@
         /// Converts the WorkItem and stores it in an appointment item.
         /// </summary>
         /// <param name="json">JSON Data containing a WorkItem.</param>
-        /// <returns></returns>
+        /// <returns>A value indicating the success.</returns>
         private bool ImportWorkItem(string json)
         {
             try
@@ -157,8 +159,8 @@
                 Log.Info(workItem.Name);
                 Log.Info(workItem.ObjectiveName);
 
-                Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-                Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
+                Outlook.Folder solutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
+                Outlook.AppointmentItem nextAppointment = solutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
 
                 nextAppointment.Start = workItem.Start;
                 nextAppointment.End = workItem.Finish;
@@ -166,11 +168,11 @@
                 nextAppointment.Body = JsonConvert.SerializeObject(workItem, Formatting.Indented);
                 nextAppointment.AllDayEvent = false;
                 nextAppointment.ReminderSet = false;
-                nextAppointment.UserProperties.Add("Application", Outlook.OlUserPropertyType.olInteger);
+                _ = nextAppointment.UserProperties.Add("Application", Outlook.OlUserPropertyType.olInteger);
                 nextAppointment.UserProperties["Application"].Value = (int)workItem.Application;
-                nextAppointment.UserProperties.Add("WorkTypeIndex", Outlook.OlUserPropertyType.olInteger);
+                _ = nextAppointment.UserProperties.Add("WorkTypeIndex", Outlook.OlUserPropertyType.olInteger);
                 nextAppointment.UserProperties["WorkTypeIndex"].Value = (int)workItem.WorkType.Index;
-                nextAppointment.UserProperties.Add("WorkItemVersion", Outlook.OlUserPropertyType.olInteger);
+                _ = nextAppointment.UserProperties.Add("WorkItemVersion", Outlook.OlUserPropertyType.olInteger);
                 nextAppointment.UserProperties["WorkItemVersion"].Value = InTouch.WorkItemVersion;
 
                 nextAppointment.Categories = workItem.WorkType.Name;
@@ -190,15 +192,15 @@
         /// Converts the Uptime event and stores it in an appointment item.
         /// </summary>
         /// <param name="json">JSON Data containing a Uptime event.</param>
-        /// <returns></returns>
+        /// <returns>A value indicating the success.</returns>
         private bool ImportSystemUptime(string json)
         {
             try
             {
                 SystemUptime systemUptime = JsonConvert.DeserializeObject<SystemUptime>(json);
 
-                Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
-                Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
+                Outlook.Folder solutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
+                Outlook.AppointmentItem nextAppointment = solutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
 
                 nextAppointment.Start = systemUptime.Start;
                 nextAppointment.End = systemUptime.Finish;
@@ -223,15 +225,15 @@
         /// Converts the Idle event and stores it in an appointment item.
         /// </summary>
         /// <param name="json">JSON Data containing a idle event.</param>
-        /// <returns></returns>
+        /// <returns>A value indicating the success.</returns>
         private bool ImportSystemIdle(string json)
         {
             try
             {
                 SystemIdle systemIdle = JsonConvert.DeserializeObject<SystemIdle>(json);
 
-                Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
-                Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
+                Outlook.Folder solutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
+                Outlook.AppointmentItem nextAppointment = solutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
 
                 nextAppointment.Start = systemIdle.Start;
                 nextAppointment.End = systemIdle.Finish;
@@ -256,15 +258,15 @@
         /// Converts the sleep event and stores it in an appointment item.
         /// </summary>
         /// <param name="json">JSON Data containing a sleep event.</param>
-        /// <returns></returns>
+        /// <returns>A value indicating the success.</returns>
         private bool ImportSystemSleep(string json)
         {
             try
             {
                 SystemSleep systemSleep = JsonConvert.DeserializeObject<SystemSleep>(json);
 
-                Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
-                Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
+                Outlook.Folder solutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
+                Outlook.AppointmentItem nextAppointment = solutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
 
                 nextAppointment.Start = systemSleep.Start;
                 nextAppointment.End = systemSleep.Finish;
@@ -284,176 +286,5 @@
 
             return true;
         }
-
-        //private bool ImportVisualStudioData(string json)
-        //{
-        //    //try
-        //    //{
-        //    //    SolutionSession solutionSession = JsonConvert.DeserializeObject<SolutionSession>(json);
-
-        //    //    Log.Info(solutionSession.Name);
-        //    //    Log.Info(solutionSession.ObjectiveName);
-
-        //    //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-        //    //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
-
-        //    //    nextAppointment.Start = solutionSession.Start;
-        //    //    nextAppointment.End = solutionSession.Finish;
-        //    //    nextAppointment.Subject = solutionSession.Name;
-        //    //    nextAppointment.Body = json;
-        //    //    nextAppointment.AllDayEvent = false;
-        //    //    nextAppointment.ReminderSet = false;
-
-        //    //    if (solutionSession.StartFileSizeTotal == solutionSession.FinishFileSizeTotal)
-        //    //    {
-        //    //        nextAppointment.Categories = "Visual Studio - Read Only";
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        nextAppointment.Categories = "Visual Studio";
-        //    //    }
-
-        //    //    nextAppointment.Save();
-        //    //}
-        //    //catch(Exception ex)
-        //    //{
-        //    //    Log.Error(ex);
-        //    //    return false;
-        //    //}
-
-        //    return true;
-        //}
-
-        //private bool ImportSSMSData(string json)
-        //{
-        //    try
-        //    {
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Log.Error(ex);
-        //        return false;
-        //    }
-
-        //    return true;
-        //}
-
-        //private bool ImportWordData(string json)
-        //{
-        //    //try
-        //    //{
-        //    //    WordSession wordSession = JsonConvert.DeserializeObject<WordSession>(json);
-
-        //    //    Log.Info(wordSession.Name);
-        //    //    Log.Info(wordSession.ObjectiveName);
-
-        //    //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-        //    //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
-
-        //    //    nextAppointment.Start = wordSession.Start;
-        //    //    nextAppointment.End = wordSession.Finish;
-        //    //    nextAppointment.Subject = wordSession.Name;
-        //    //    nextAppointment.Body = json;
-        //    //    nextAppointment.AllDayEvent = false;
-        //    //    nextAppointment.ReminderSet = false;
-
-        //    //    if (wordSession.StartSize == wordSession.FinishSize)
-        //    //    {
-        //    //        nextAppointment.Categories = "Word - Read Only";
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        nextAppointment.Categories = "Word";
-        //    //    }
-
-        //    //    nextAppointment.Save();
-        //    //}
-        //    //catch (Exception ex)
-        //    //{
-        //    //    Log.Error(ex);
-        //    //    return false;
-        //    //}
-
-        //    return true;
-        //}
-
-        //private bool ImportExceloData(string json)
-        //{
-        //    //try
-        //    //{
-        //    //    ExcelSession excelSession = JsonConvert.DeserializeObject<ExcelSession>(json);
-
-        //    //    Log.Info(excelSession.Name);
-        //    //    Log.Info(excelSession.ObjectiveName);
-
-        //    //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-        //    //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
-
-        //    //    nextAppointment.Start = excelSession.Start;
-        //    //    nextAppointment.End = excelSession.Finish;
-        //    //    nextAppointment.Subject = excelSession.Name;
-        //    //    nextAppointment.Body = json;
-        //    //    nextAppointment.AllDayEvent = false;
-        //    //    nextAppointment.ReminderSet = false;
-
-        //    //    if (excelSession.StartSize == excelSession.FinishSize)
-        //    //    {
-        //    //        nextAppointment.Categories = "Excel - Read Only";
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        nextAppointment.Categories = "Excel";
-        //    //    }
-
-        //    //    nextAppointment.Save();
-        //    //}
-        //    //catch (Exception ex)
-        //    //{
-        //    //    Log.Error(ex);
-        //    //    return false;
-        //    //}
-
-        //    return true;
-        //}
-
-        //private bool ImportAutoCADData(string json)
-        //{
-        //    //try
-        //    //{
-        //    //    DrawingSession drawingSession = JsonConvert.DeserializeObject<DrawingSession>(json);
-
-        //    //    Log.Info(drawingSession.Name);
-        //    //    Log.Info(drawingSession.ObjectiveName);
-
-        //    //    Outlook.Folder SolutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-        //    //    Outlook.AppointmentItem nextAppointment = SolutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
-
-        //    //    nextAppointment.Start = drawingSession.Start;
-        //    //    nextAppointment.End = drawingSession.Finish;
-        //    //    nextAppointment.Subject = drawingSession.Name;
-        //    //    nextAppointment.Body = json;
-        //    //    nextAppointment.AllDayEvent = false;
-        //    //    nextAppointment.ReminderSet = false;
-
-        //    //    if (drawingSession.StartSize == drawingSession.FinishSize)
-        //    //    {
-        //    //        nextAppointment.Categories = "AutoCAD - Read Only";
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        nextAppointment.Categories = "AutoCAD";
-        //    //    }
-
-        //    //    nextAppointment.Save();
-        //    //}
-        //    //catch (Exception ex)
-        //    //{
-        //    //    Log.Error(ex);
-        //    //    return false;
-        //    //}
-
-        //    return true;
-        //}
     }
 }

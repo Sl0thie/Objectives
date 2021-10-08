@@ -13,23 +13,24 @@
     /// </summary>
     public class TaskConvertVersion
     {
-        private readonly Action CallBack;
+        private readonly Action callBack;
         private readonly DayReport dayReport = new DayReport();
         private readonly DateTime finishDay = new DateTime(2021, 3, 15);
         private readonly DateTime startDay = new DateTime(2021, 6, 17);
-        private DateTime day;
 
         // Get references to the Outlook Calendars.
         private readonly Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
         private readonly Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
 
+        private DateTime day;
+
         /// <summary>
-        /// Returns control back to the TaskManager.
+        /// Initializes a new instance of the <see cref="TaskConvertVersion"/> class.
         /// </summary>
-        /// <param name="callBack"></param>
+        /// <param name="callBack">The callback to return.</param>
         public TaskConvertVersion(Action callBack)
         {
-            CallBack = callBack;
+            this.callBack = callBack;
         }
 
         /// <summary>
@@ -37,14 +38,14 @@
         /// </summary>
         public void RunTask()
         {
-            Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess))
+            Thread backgroundThread = new Thread(new ThreadStart(BackgroundProcess))
             {
                 Name = "Objectives.TaskDayReport",
                 IsBackground = true,
                 Priority = ThreadPriority.Normal,
             };
-            BackgroundThread.SetApartmentState(ApartmentState.STA);
-            BackgroundThread.Start();
+            backgroundThread.SetApartmentState(ApartmentState.STA);
+            backgroundThread.Start();
         }
 
         /// <summary>
@@ -69,7 +70,7 @@
                 Thread.Sleep(10000);
             }
 
-            CallBack?.Invoke();
+            callBack?.Invoke();
         }
 
         /// <summary>
@@ -85,7 +86,7 @@
             // Find all the appointment items within the start and finish times from the Objectives Calendar.
             Outlook.Items appointments = GetAppointmentsWithinRange(calendar, start, finsh);
 
-            foreach (var appointment in appointments)
+            foreach (object appointment in appointments)
             {
                 Outlook.AppointmentItem next = (Outlook.AppointmentItem)appointment;
 
@@ -93,28 +94,27 @@
                 {
                     case "Visual Studio":
 
-                        Outlook.UserProperty CustomProperty = next.UserProperties.Find("WorkItemVersion");
-                        if (CustomProperty is null)
+                        Outlook.UserProperty customProperty = next.UserProperties.Find("WorkItemVersion");
+                        if (customProperty is null)
                         {
                             Log.Info("No WorkItemVersion - Processing " + next.Subject + " " + next.Start.ToString());
                             ProcessVisualStudio(next);
                         }
                         else
                         {
-                            if (CustomProperty.Value == 5)
+                            if (customProperty.Value == 5)
                             {
                                 Log.Info("Found WorkItemVersion - Skipping " + next.Subject + " " + next.Start.ToString());
                             }
                             else
                             {
                                 Log.Info("Wrong WorkItemVersion - Error " + next.Subject + " " + next.Start.ToString());
-                                //ProcessVisualStudio(next);
                             }
                         }
 
-                        if (CustomProperty != null)
+                        if (customProperty != null)
                         {
-                            Marshal.ReleaseComObject(CustomProperty);
+                            _ = Marshal.ReleaseComObject(customProperty);
                         }
 
                         break;
@@ -124,28 +124,27 @@
                         break;
 
                     case "Visual Studio - Review":
-                        Outlook.UserProperty CustomProperty2 = next.UserProperties.Find("WorkItemVersion");
-                        if (CustomProperty2 is null)
+                        Outlook.UserProperty customProperty2 = next.UserProperties.Find("WorkItemVersion");
+                        if (customProperty2 is null)
                         {
                             Log.Info("No WorkItemVersion - Error " + next.Subject + " " + next.Start.ToString());
                             ProcessVisualStudio(next);
-
                         }
                         else
                         {
-                            if (CustomProperty2.Value == 5)
+                            if (customProperty2.Value == 5)
                             {
                                 Log.Info("Found WorkItemVersion - Ok " + next.Subject + " " + next.Start.ToString());
                             }
                             else
                             {
-                                Log.Info("Wrong WorkItemVersion - Error " + CustomProperty2.Value + " " + next.Subject + " " + next.Start.ToString());
+                                Log.Info("Wrong WorkItemVersion - Error " + customProperty2.Value + " " + next.Subject + " " + next.Start.ToString());
                             }
                         }
 
-                        if (CustomProperty2 != null)
+                        if (customProperty2 != null)
                         {
-                            Marshal.ReleaseComObject(CustomProperty2);
+                            _ = Marshal.ReleaseComObject(customProperty2);
                         }
 
                         break;
@@ -220,11 +219,11 @@
                 appointment.Body = JsonConvert.SerializeObject(workItem, Formatting.Indented);
                 appointment.AllDayEvent = false;
                 appointment.ReminderSet = false;
-                appointment.UserProperties.Add("Application", Outlook.OlUserPropertyType.olInteger);
+                _ = appointment.UserProperties.Add("Application", Outlook.OlUserPropertyType.olInteger);
                 appointment.UserProperties["Application"].Value = (int)workItem.Application;
-                appointment.UserProperties.Add("WorkTypeIndex", Outlook.OlUserPropertyType.olInteger);
+                _ = appointment.UserProperties.Add("WorkTypeIndex", Outlook.OlUserPropertyType.olInteger);
                 appointment.UserProperties["WorkTypeIndex"].Value = (int)workItem.WorkType.Index;
-                appointment.UserProperties.Add("WorkItemVersion", Outlook.OlUserPropertyType.olInteger);
+                _ = appointment.UserProperties.Add("WorkItemVersion", Outlook.OlUserPropertyType.olInteger);
                 appointment.UserProperties["WorkItemVersion"].Value = InTouch.WorkItemVersion;
                 appointment.Categories = workItem.WorkType.Name;
 
@@ -235,10 +234,10 @@
         /// <summary>
         /// Get the appointments within the timespan.
         /// </summary>
-        /// <param name="folder"></param>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
-        /// <returns></returns>
+        /// <param name="folder">The folder of the appointment.</param>
+        /// <param name="startTime">The start time of the appointment.</param>
+        /// <param name="endTime">The finish time of the appointment.</param>
+        /// <returns>A collection of outlook items that fit the filter.</returns>
         private Outlook.Items GetAppointmentsWithinRange(Outlook.Folder folder, DateTime startTime, DateTime endTime)
         {
             string filter = "[Start] >= '"
@@ -270,10 +269,10 @@
         /// <summary>
         /// Get the appointments that fall in the range of the timespan.
         /// </summary>
-        /// <param name="folder"></param>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
-        /// <returns></returns>
+        /// <param name="folder">The folder to search.</param>
+        /// <param name="startTime">The start time.</param>
+        /// <param name="endTime">The finish time.</param>
+        /// <returns>A collection of outlook items that match the filter.</returns>
         private Outlook.Items GetAppointmentsInRange(Outlook.Folder folder, DateTime startTime, DateTime endTime)
         {
             string filter = "[Start] <= '"

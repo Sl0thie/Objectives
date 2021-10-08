@@ -11,7 +11,7 @@
     /// </summary>
     public class TaskMonthReport
     {
-        private readonly Action CallBack;
+        private readonly Action callBack;
         private readonly MonthReport monthReport = new MonthReport();
         private readonly DateTime firstDay = new DateTime(2021, 5, 25);
         private DateTime day;
@@ -22,7 +22,7 @@
         /// <param name="callBack">The action to call when finished.</param>
         public TaskMonthReport(Action callBack)
         {
-            CallBack = callBack;
+            this.callBack = callBack;
         }
 
         /// <summary>
@@ -30,14 +30,14 @@
         /// </summary>
         public void RunTask()
         {
-            Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess))
+            Thread backgroundThread = new Thread(new ThreadStart(BackgroundProcess))
             {
                 Name = "Objectives.TaskMonthReport",
                 IsBackground = true,
                 Priority = ThreadPriority.Normal,
             };
-            BackgroundThread.SetApartmentState(ApartmentState.STA);
-            BackgroundThread.Start();
+            backgroundThread.SetApartmentState(ApartmentState.STA);
+            backgroundThread.Start();
         }
 
         /// <summary>
@@ -56,16 +56,16 @@
                 Log.Info("No Month found to process.");
             }
 
-            CallBack?.Invoke();
+            callBack?.Invoke();
         }
 
         /// <summary>
         /// Find the day that is suitable to create the report for.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The date that is found.</returns>
         private DateTime FindDay()
         {
-            Outlook.Folder ObjectivesCalendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
+            Outlook.Folder objectivesCalendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
             DateTime returnValue = DateTime.Parse(DateTime.Now.Subtract(new TimeSpan(1, 0, 0, 0, 0)).ToString(@"yyyy-MM-dd 00:00"));
             bool keepLooking = true;
 
@@ -77,7 +77,7 @@
                     Log.Info("Checking Day: " + returnValue.ToString());
                     keepLooking = false;
 
-                    Outlook.Items billingItems = GetAppointmentsInRange(ObjectivesCalendar, returnValue, returnValue.AddDays(1));
+                    Outlook.Items billingItems = GetAppointmentsInRange(objectivesCalendar, returnValue, returnValue.AddDays(1));
                     foreach (Outlook.AppointmentItem nextItem in billingItems)
                     {
                         if (nextItem.Categories == "Objectives - Month Report")
@@ -102,10 +102,10 @@
         /// <summary>
         /// Get the appointments within the timespan.
         /// </summary>
-        /// <param name="folder"></param>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
-        /// <returns></returns>
+        /// <param name="folder">The folder to search.</param>
+        /// <param name="startTime">The start time.</param>
+        /// <param name="endTime">The finish time.</param>
+        /// <returns>A collection of outlook items that match the filter.</returns>
         private Outlook.Items GetAppointmentsWithinRange(Outlook.Folder folder, DateTime startTime, DateTime endTime)
         {
             string filter = "[Start] >= '"
@@ -137,10 +137,10 @@
         /// <summary>
         /// Get the appointments that fall in the range of the timespan.
         /// </summary>
-        /// <param name="folder"></param>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
-        /// <returns></returns>
+        /// <param name="folder">The folder to search.</param>
+        /// <param name="startTime">The start time.</param>
+        /// <param name="endTime">The finish time.</param>
+        /// <returns>A collection of outlook items that match the filter.</returns>
         private Outlook.Items GetAppointmentsInRange(Outlook.Folder folder, DateTime startTime, DateTime endTime)
         {
             string filter = "[Start] <= '"

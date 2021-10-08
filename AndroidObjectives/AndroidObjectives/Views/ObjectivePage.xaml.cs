@@ -1,24 +1,21 @@
 ﻿namespace AndroidObjectives.Views
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+
     using AndroidObjectives.Data;
-    using AndroidObjectives.Models;
+
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
     /// <summary>
-    ///
+    /// ObjectivePage class.
     /// </summary>
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ObjectivePage : ContentPage
     {
         /// <summary>
-        ///
+        /// Initializes a new instance of the <see cref="ObjectivePage"/> class.
         /// </summary>
         public ObjectivePage()
         {
@@ -26,43 +23,42 @@
         }
 
         /// <summary>
-        ///
+        /// OnSaveClicked method.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Also unused.</param>
         private async void OnSaveClicked(object sender, EventArgs e)
         {
             Debug.WriteLine("On saved");
 
-            var todoItem = (CommonObjectives.Serial.Objective)BindingContext;
+            CommonObjectives.Serial.Objective todoItem = (CommonObjectives.Serial.Objective)BindingContext;
             LocalDatabase database = await LocalDatabase.Instance;
 
-            await database.SaveObjectiveAsync(todoItem);
-            await Navigation.PopAsync();
-
+            _ = await database.SaveObjectiveAsync(todoItem);
+            _ = await Navigation.PopAsync();
         }
 
         /// <summary>
-        ///
+        /// OnDeleteClicked method.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Also unused.</param>
         private async void OnDeleteClicked(object sender, EventArgs e)
         {
-            var todoItem = (CommonObjectives.Serial.Objective)BindingContext;
+            CommonObjectives.Serial.Objective todoItem = (CommonObjectives.Serial.Objective)BindingContext;
             LocalDatabase database = await LocalDatabase.Instance;
-            await database.DeleteObjectiveAsync(todoItem);
-            await Navigation.PopAsync();
+            _ = await database.DeleteObjectiveAsync(todoItem);
+            _ = await Navigation.PopAsync();
         }
 
         /// <summary>
-        ///
+        /// OnCancelClicked method.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Also unused.</param>
         private async void OnCancelClicked(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            _ = await Navigation.PopAsync();
         }
     }
 }

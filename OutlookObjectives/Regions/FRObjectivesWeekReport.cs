@@ -4,10 +4,16 @@
     using Newtonsoft.Json;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
-    partial class FRObjectivesWeekReport
+    /// <summary>
+    /// FRObjectivesWeekReport class.
+    /// </summary>
+    internal partial class FRObjectivesWeekReport
     {
         #region Form Region Factory
 
+        /// <summary>
+        /// FRObjectivesWeekReportFactory class.
+        /// </summary>
         [Microsoft.Office.Tools.Outlook.FormRegionMessageClass(Microsoft.Office.Tools.Outlook.FormRegionMessageClassAttribute.Appointment)]
         [Microsoft.Office.Tools.Outlook.FormRegionName("InTouch-Objectives.FRObjectivesWeekReport")]
         public partial class FRObjectivesWeekReportFactory
@@ -31,12 +37,12 @@
         // Use this.OutlookFormRegion to get a reference to the form region.
         private void FRObjectivesWeekReport_FormRegionShowing(object sender, System.EventArgs e)
         {
-            inspector = ((Outlook.AppointmentItem)this.OutlookItem).GetInspector;
+            inspector = ((Outlook.AppointmentItem)OutlookItem).GetInspector;
             if (inspector is object)
             {
                 if (Globals.ThisAddIn.IAppointments.TryGetValue(inspector, out IAppointment iAppointment))
                 {
-                    appointment = ((Outlook.AppointmentItem)this.OutlookItem);
+                    appointment = (Outlook.AppointmentItem)OutlookItem;
                     SetupRegion();
                 }
             }
@@ -45,16 +51,11 @@
         private void SetupRegion()
         {
             weekReport = JsonConvert.DeserializeObject<WeekReport>(appointment.Body);
-
-            //appointment.Attachments[1].SaveAsFile(System.IO.Path.GetTempPath() + "ObjectivesChart.png");
-            //appointment.Attachments[2].SaveAsFile(System.IO.Path.GetTempPath() + "SystemTime.png");
-            //appointment.Attachments[3].SaveAsFile(System.IO.Path.GetTempPath() + "Applicatoins.png");
-            //appointment.Attachments[4].SaveAsFile(System.IO.Path.GetTempPath() + "DayBar.png");
-            string HTML = weekReport.HTML;
+            string html = weekReport.HTML;
             string path = System.IO.Path.GetTempPath();
-            HTML = HTML.Replace("[[[TEMPDIRECTORY]]]", path);
+            html = html.Replace("[[[TEMPDIRECTORY]]]", path);
             InTouch.CreateCSS();
-            webBrowser.DocumentText = HTML;
+            webBrowser.DocumentText = html;
         }
 
         // Occurs when the form region is closed.

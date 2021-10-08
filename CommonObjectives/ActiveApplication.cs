@@ -8,17 +8,17 @@
     public class ActiveApplication
     {
         /// <summary>
-        /// The time is was measured.
+        /// Gets or sets the time is was measured.
         /// </summary>
         public DateTime Time { get; set; }
 
         /// <summary>
-        /// The title of the focused application.
+        /// Gets or sets the title of the focused application.
         /// </summary>
         public string Title { get; set; }
 
         /// <summary>
-        /// The application name that is focused.
+        /// Gets or sets the application name that is focused.
         /// </summary>
         public string Application { get; set; }
     }

@@ -12,34 +12,39 @@
     /// </summary>
     public static class InTouch
     {
-        private static Dictionary<int, WorkType> workTypes = new Dictionary<int, WorkType>();
-        private static readonly TaskManager taskManager = new TaskManager();
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TaskManager"/> class.
-        /// </summary>
-        public static TaskManager TaskManager
-        {
-            get { return taskManager; }
-        }
-
         /// <summary>
         /// The height of the ribbon in pixels.
         /// </summary>
         public const int RibbonHeight = 162;
 
         /// <summary>
-        /// The path to the Objectives root folder.
+        /// Version number for the WorkItem.
+        /// </summary>
+        public const int WorkItemVersion = 5;
+
+        private static readonly TaskManager TaskManagerValue = new TaskManager();
+        private static Dictionary<int, WorkType> workTypes = new Dictionary<int, WorkType>();
+
+        /// <summary>
+        /// Gets the task manager.
+        /// </summary>
+        public static TaskManager TaskManager
+        {
+            get { return TaskManagerValue; }
+        }
+
+        /// <summary>
+        /// Gets or sets the path to the Objectives root folder.
         /// </summary>
         public static string ObjectivesRootFolder { get; set; }
 
         /// <summary>
-        /// The path to the Objectives archive folder.
+        /// Gets or sets the path to the Objectives archive folder.
         /// </summary>
         public static string ObjectivesArchiveFolder { get; set; }
 
         /// <summary>
-        /// The path to the Objectives storage folder.
+        /// Gets or sets the path to the Objectives storage folder.
         /// </summary>
         public static string ObjectivesStorageFolder { get; set; }
 
@@ -54,7 +59,7 @@
         public static readonly double DpiY = 1;
 
         /// <summary>
-        /// Dictionary of WorkTypes.
+        /// Gets or sets the Dictionary of WorkTypes.
         /// </summary>
         /// <remarks>
         /// These are the default WorkTypes to use if the Objective does not contain a similar WorkType.
@@ -66,15 +71,10 @@
         }
 
         /// <summary>
-        /// Version number for the WorkItem.
-        /// </summary>
-        public const int WorkItemVersion = 5;
-
-        /// <summary>
         /// Get an Objective object from a path.
         /// </summary>
         /// <param name="path">The path to the objective.</param>
-        /// <returns></returns>
+        /// <returns>An objective.</returns>
         public static Objective GetObjective(string path)
         {
             Objective item = new Objective();
@@ -99,6 +99,7 @@
 
                 DirectoryInfo baseDir = new DirectoryInfo(item.Path);
                 item.Created = baseDir.CreationTime;
+
                 // Check for older source file as some projects will probably be backdated.
                 foreach (var file in Directory.EnumerateFiles(path + @"\Documents", "*.*", SearchOption.AllDirectories))
                 {
@@ -168,21 +169,21 @@
             }
             else
             {
-                Directory.CreateDirectory(path);
-                Directory.CreateDirectory(path + @"\Documents");
-                Directory.CreateDirectory(path + @"\Info");
-                Directory.CreateDirectory(path + @"\Media");
-                Directory.CreateDirectory(path + @"\Media\Images");
-                Directory.CreateDirectory(path + @"\Media\Videos");
-                Directory.CreateDirectory(path + @"\Projects");
-                Directory.CreateDirectory(path + @"\System");
+                _ = Directory.CreateDirectory(path);
+                _ = Directory.CreateDirectory(path + @"\Documents");
+                _ = Directory.CreateDirectory(path + @"\Info");
+                _ = Directory.CreateDirectory(path + @"\Media");
+                _ = Directory.CreateDirectory(path + @"\Media\Images");
+                _ = Directory.CreateDirectory(path + @"\Media\Videos");
+                _ = Directory.CreateDirectory(path + @"\Projects");
+                _ = Directory.CreateDirectory(path + @"\System");
             }
         }
 
         /// <summary>
         /// Saves and Objective object to file.
         /// </summary>
-        /// <param name="objective"></param>
+        /// <param name="objective">The objective to save.</param>
         public static void SaveObjective(Objective objective)
         {
             string json = JsonConvert.SerializeObject(objective, Formatting.Indented);
@@ -193,7 +194,7 @@
         /// Gets a formatted time string from an int of minutes.
         /// </summary>
         /// <param name="minutes">The number of minutes.</param>
-        /// <returns></returns>
+        /// <returns>A string of the time.</returns>
         public static string GetTimeStringFromMinutes(int minutes)
         {
             string rv;
@@ -225,73 +226,73 @@
         /// </summary>
         public static void CreateCSS()
         {
-            //TODO Remove 2 from path that is used to allow to updating.
+            // TODO Remove 2 from path that is used to allow to updating.
             if (!File.Exists(System.IO.Path.GetTempPath() + "page2.css"))
             {
-                string CSS = "html, body {" + "\n";
-                CSS += "background-color: #242424;" + "\n";
-                CSS += "color: #FFFFFF;" + "\n";
-                CSS += "margin: 0px;" + "\n";
-                CSS += "padding: 0px;" + "\n";
-                CSS += "font-family: Verdana;" + "\n";
-                CSS += "font-size: 14px;" + "\n";
-                CSS += "color: #AAAAAA;" + "\n";
-                CSS += "}" + "\n";
+                string css = "html, body {" + "\n";
+                css += "background-color: #242424;" + "\n";
+                css += "color: #FFFFFF;" + "\n";
+                css += "margin: 0px;" + "\n";
+                css += "padding: 0px;" + "\n";
+                css += "font-family: Verdana;" + "\n";
+                css += "font-size: 14px;" + "\n";
+                css += "color: #AAAAAA;" + "\n";
+                css += "}" + "\n";
 
-                CSS += ".divWholePage {" + "\n";
-                CSS += "background-color: #383838;" + "\n";
-                CSS += "min-width: 800px;" + "\n";
-                CSS += "max-width: 800px;" + "\n";
-                CSS += "width: 800px;" + "\n";
-                CSS += "margin-top: 0;" + "\n";
-                CSS += "margin-bottom: 0;" + "\n";
-                CSS += "margin-left: auto;" + "\n";
-                CSS += "margin-right: auto;" + "\n";
-                CSS += "padding-top: 0;" + "\n";
-                CSS += "padding-bottom: 0;" + "\n";
-                CSS += "padding-left: 20px;" + "\n";
-                CSS += "padding-right: 20px;" + "\n";
-                CSS += "z-index: 1;" + "\n";
-                CSS += "}" + "\n";
-                CSS += string.Empty + "\n";
+                css += ".divWholePage {" + "\n";
+                css += "background-color: #383838;" + "\n";
+                css += "min-width: 800px;" + "\n";
+                css += "max-width: 800px;" + "\n";
+                css += "width: 800px;" + "\n";
+                css += "margin-top: 0;" + "\n";
+                css += "margin-bottom: 0;" + "\n";
+                css += "margin-left: auto;" + "\n";
+                css += "margin-right: auto;" + "\n";
+                css += "padding-top: 0;" + "\n";
+                css += "padding-bottom: 0;" + "\n";
+                css += "padding-left: 20px;" + "\n";
+                css += "padding-right: 20px;" + "\n";
+                css += "z-index: 1;" + "\n";
+                css += "}" + "\n";
+                css += string.Empty + "\n";
 
-                CSS += "h1 {" + "\n";
-                CSS += "font-family: Calibri;" + "\n";
-                CSS += "font-size: 32px;" + "\n";
-                CSS += "font-weight: normal;" + "\n";
-                CSS += "color: #FFFFFF;" + "\n";
-                CSS += "text-align:center;" + "\n";
-                CSS += "}" + "\n";
+                css += "h1 {" + "\n";
+                css += "font-family: Calibri;" + "\n";
+                css += "font-size: 32px;" + "\n";
+                css += "font-weight: normal;" + "\n";
+                css += "color: #FFFFFF;" + "\n";
+                css += "text-align:center;" + "\n";
+                css += "}" + "\n";
 
-                CSS += "h2 {" + "\n";
-                CSS += "font-family: Calibri;" + "\n";
-                CSS += "font-size: 24px;" + "\n";
-                CSS += "font-weight: normal;" + "\n";
-                CSS += "color: #FFFFFF;" + "\n";
-                CSS += "text-align:left;" + "\n";
-                CSS += "margin-bottom: 5px;" + "\n";
-                CSS += "}" + "\n";
+                css += "h2 {" + "\n";
+                css += "font-family: Calibri;" + "\n";
+                css += "font-size: 24px;" + "\n";
+                css += "font-weight: normal;" + "\n";
+                css += "color: #FFFFFF;" + "\n";
+                css += "text-align:left;" + "\n";
+                css += "margin-bottom: 5px;" + "\n";
+                css += "}" + "\n";
 
-                CSS += "p {" + "\n";
-                CSS += "font-family: 'Segoe UI';" + "\n";
-                CSS += "font-size: 14px;" + "\n";
-                CSS += "color: #AAAAAA;" + "\n";
-                CSS += "}" + "\n";
+                css += "p {" + "\n";
+                css += "font-family: 'Segoe UI';" + "\n";
+                css += "font-size: 14px;" + "\n";
+                css += "color: #AAAAAA;" + "\n";
+                css += "}" + "\n";
 
-                CSS += "td {" + "\n";
-                CSS += "font-family: Calibri;" + "\n";
-                CSS += "font-size: 14px;" + "\n";
-                CSS += "color: #AAAAAA;" + "\n";
-                CSS += "vertical-align: top;" + "\n";
-                CSS += "}" + "\n";
+                css += "td {" + "\n";
+                css += "font-family: Calibri;" + "\n";
+                css += "font-size: 14px;" + "\n";
+                css += "color: #AAAAAA;" + "\n";
+                css += "vertical-align: top;" + "\n";
+                css += "}" + "\n";
 
-                CSS += ".tdHeader {" + "\n";
-                CSS += "font-family: Verdana;" + "\n";
-                CSS += "font-size: 14px;" + "\n";
-                CSS += "color: #FFFFFF;" + "\n";
-                CSS += "}" + "\n";
+                css += ".tdHeader {" + "\n";
+                css += "font-family: Verdana;" + "\n";
+                css += "font-size: 14px;" + "\n";
+                css += "color: #FFFFFF;" + "\n";
+                css += "}" + "\n";
 
-                File.WriteAllText(System.IO.Path.GetTempPath() + "page.css", CSS);
+                File.WriteAllText(System.IO.Path.GetTempPath() + "page.css", css);
             }
         }
     }

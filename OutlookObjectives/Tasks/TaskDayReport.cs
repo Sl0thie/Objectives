@@ -95,7 +95,7 @@
         /// <summary>
         /// Find the day that is suitable to create the report for.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A date time of the day found.</returns>
         private DateTime FindDay()
         {
             DateTime returnValue = DateTime.Parse(DateTime.Now.Subtract(new TimeSpan(1, 0, 0, 0, 0)).ToString(@"yyyy-MM-dd 00:00"));
@@ -168,14 +168,14 @@
             foreach (var appointment in appointments)
             {
                 Outlook.AppointmentItem next = (Outlook.AppointmentItem)appointment;
-                Outlook.UserProperty CustomProperty = next.UserProperties.Find("Application");
-                if (CustomProperty is null)
+                Outlook.UserProperty customProperty = next.UserProperties.Find("Application");
+                if (customProperty is null)
                 {
                     Log.Info("No Application Type " + next.Subject + " " + next.Start.ToString());
                 }
                 else
                 {
-                    switch ((ApplicationType)CustomProperty.Value)
+                    switch ((ApplicationType)customProperty.Value)
                     {
                         case ApplicationType.None:
 
@@ -231,14 +231,14 @@
                             break;
 
                         default:
-                            Log.Info("Unmanaged Application Type: " + (ApplicationType)CustomProperty.Value);
+                            Log.Info("Unmanaged Application Type: " + (ApplicationType)customProperty.Value);
                             break;
                     }
                 }
 
-                if (CustomProperty != null)
+                if (customProperty != null)
                 {
-                    Marshal.ReleaseComObject(CustomProperty);
+                    _ = Marshal.ReleaseComObject(customProperty);
                 }
             }
         }
@@ -308,24 +308,23 @@
         private void CreateAppointment()
         {
             // Create the DayReport appointment and add the images as attachments.
-            Outlook.AppointmentItem NewAppointmentItem = (Outlook.AppointmentItem)calendar.Items.Add(Outlook.OlItemType.olAppointmentItem);
-            NewAppointmentItem.Subject = "Day Report [" + InTouch.GetTimeStringFromMinutes(dayReport.TotalWork) + "]";
-            NewAppointmentItem.Categories = "Objectives - Day Report";
-            NewAppointmentItem.Start = day;
-            NewAppointmentItem.AllDayEvent = true;
-            NewAppointmentItem.ReminderSet = false;
-            NewAppointmentItem.Body = JsonConvert.SerializeObject(dayReport, Formatting.Indented);
-            NewAppointmentItem.Attachments.Add(System.IO.Path.GetTempPath() + "ObjectivesChart.png", Outlook.OlAttachmentType.olByValue, 1, "ObjectivesChart");
-            NewAppointmentItem.Attachments.Add(System.IO.Path.GetTempPath() + "SystemTime.png", Outlook.OlAttachmentType.olByValue, 2, "SystemTimeChart");
-            NewAppointmentItem.Attachments.Add(System.IO.Path.GetTempPath() + "Applications.png", Outlook.OlAttachmentType.olByValue, 3, "ApplicationsChart");
-            NewAppointmentItem.Attachments.Add(System.IO.Path.GetTempPath() + "DayBar.png", Outlook.OlAttachmentType.olByValue, 4, "DayBar");
-            NewAppointmentItem.Save();
+            Outlook.AppointmentItem newAppointmentItem = (Outlook.AppointmentItem)calendar.Items.Add(Outlook.OlItemType.olAppointmentItem);
+            newAppointmentItem.Subject = "Day Report [" + InTouch.GetTimeStringFromMinutes(dayReport.TotalWork) + "]";
+            newAppointmentItem.Categories = "Objectives - Day Report";
+            newAppointmentItem.Start = day;
+            newAppointmentItem.AllDayEvent = true;
+            newAppointmentItem.ReminderSet = false;
+            newAppointmentItem.Body = JsonConvert.SerializeObject(dayReport, Formatting.Indented);
+            _ = newAppointmentItem.Attachments.Add(System.IO.Path.GetTempPath() + "ObjectivesChart.png", Outlook.OlAttachmentType.olByValue, 1, "ObjectivesChart");
+            _ = newAppointmentItem.Attachments.Add(System.IO.Path.GetTempPath() + "SystemTime.png", Outlook.OlAttachmentType.olByValue, 2, "SystemTimeChart");
+            _ = newAppointmentItem.Attachments.Add(System.IO.Path.GetTempPath() + "Applications.png", Outlook.OlAttachmentType.olByValue, 3, "ApplicationsChart");
+            _ = newAppointmentItem.Attachments.Add(System.IO.Path.GetTempPath() + "DayBar.png", Outlook.OlAttachmentType.olByValue, 4, "DayBar");
+            newAppointmentItem.Save();
         }
 
         /// <summary>
         /// Creates the HTML for the report.
         /// </summary>
-        /// <returns></returns>
         private void CreateHTML()
         {
             string rv = "<!DOCTYPE HTML>" + "\n";
@@ -632,8 +631,8 @@
                 BackColor = Color.Transparent,
             };
 
-            chart.ChartAreas.Add(series1);
-            chart.Series.Add(series1);
+            _ = chart.ChartAreas.Add(series1);
+            _ = chart.Series.Add(series1);
             chart.Series[series1].ChartArea = series1;
             chart.Series[series1].ChartType = SeriesChartType.Bar;
 
@@ -664,7 +663,7 @@
 
             chart.ChartAreas[series1].Name = "Applications";
 
-            foreach (var next in dayReport.UniqueApplications)
+            foreach (KeyValuePair<string, int> next in dayReport.UniqueApplications)
             {
                 int rv = chart.Series[series1].Points.AddXY(next.Key, next.Value);
                 chart.Series[series1].Points[rv].Label = "  " + InTouch.GetTimeStringFromMinutes(next.Value);
@@ -690,8 +689,8 @@
 
             // Setup the first (outer) series.
             string series1 = "Series1";
-            chart.ChartAreas.Add(series1);
-            chart.Series.Add(series1);
+            _ = chart.ChartAreas.Add(series1);
+            _ = chart.Series.Add(series1);
             chart.Series[series1].ChartArea = series1;
             chart.Series[series1].ChartType = SeriesChartType.Doughnut;
             chart.Series[series1]["PieStartAngle"] = "270";
@@ -704,29 +703,29 @@
             chart.ChartAreas[series1].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
 
             // Setup the second (internal) series.
-            string Series2 = "Series2";
-            chart.ChartAreas.Add(Series2);
-            chart.Series.Add(Series2);
-            chart.Series[Series2].ChartArea = Series2;
-            chart.Series[Series2].ChartType = SeriesChartType.Doughnut;
-            chart.Series[Series2]["PieStartAngle"] = "270";
-            chart.Series[Series2]["DoughnutRadius"] = "80";
-            chart.ChartAreas[Series2].BackColor = Color.Transparent;
-            chart.ChartAreas[Series2].Position.X = 25F;
-            chart.ChartAreas[Series2].Position.Y = 25F;
-            chart.ChartAreas[Series2].Position.Width = 50F;
-            chart.ChartAreas[Series2].Position.Height = 50F;
-            chart.ChartAreas[Series2].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
+            string series2 = "Series2";
+            _ = chart.ChartAreas.Add(series2);
+            _ = chart.Series.Add(series2);
+            chart.Series[series2].ChartArea = series2;
+            chart.Series[series2].ChartType = SeriesChartType.Doughnut;
+            chart.Series[series2]["PieStartAngle"] = "270";
+            chart.Series[series2]["DoughnutRadius"] = "80";
+            chart.ChartAreas[series2].BackColor = Color.Transparent;
+            chart.ChartAreas[series2].Position.X = 25F;
+            chart.ChartAreas[series2].Position.Y = 25F;
+            chart.ChartAreas[series2].Position.Width = 50F;
+            chart.ChartAreas[series2].Position.Height = 50F;
+            chart.ChartAreas[series2].AlignmentOrientation = AreaAlignmentOrientations.Horizontal;
 
             // Draw the uptime segment.
-            int rv1 = chart.Series[Series2].Points.AddXY("Up Time", dayReport.TotalUptime);
-            chart.Series[Series2].Points[rv1].Color = colorUptime;
-            chart.Series[Series2].Points[rv1].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            int rv1 = chart.Series[series2].Points.AddXY("Up Time", dayReport.TotalUptime);
+            chart.Series[series2].Points[rv1].Color = colorUptime;
+            chart.Series[series2].Points[rv1].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
             // Draw the uptime segment.
-            int rv2 = chart.Series[Series2].Points.AddY(1440 - dayReport.TotalUptime);
-            chart.Series[Series2].Points[rv2].Color = System.Drawing.Color.FromArgb(0, 0, 0, 0);
-            chart.Series[Series2].Points[rv2].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            int rv2 = chart.Series[series2].Points.AddY(1440 - dayReport.TotalUptime);
+            chart.Series[series2].Points[rv2].Color = System.Drawing.Color.FromArgb(0, 0, 0, 0);
+            chart.Series[series2].Points[rv2].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
 
             // Draw the billable segment.
             int rv3 = chart.Series[series1].Points.AddXY("Billable Time", dayReport.TotalWork);
@@ -768,8 +767,8 @@
 
             // Setup the first series.
             string series1 = "Series1";
-            chart.ChartAreas.Add(series1);
-            chart.Series.Add(series1);
+            _ = chart.ChartAreas.Add(series1);
+            _ = chart.Series.Add(series1);
             chart.Series[series1].ChartArea = series1;
             chart.Series[series1].ChartType = SeriesChartType.Doughnut;
             chart.ChartAreas[series1].BackColor = Color.Transparent;
@@ -781,8 +780,8 @@
 
             // Setup the second series.
             string series2 = "Series2";
-            chart.ChartAreas.Add(series2);
-            chart.Series.Add(series2);
+            _ = chart.ChartAreas.Add(series2);
+            _ = chart.Series.Add(series2);
             chart.Series[series2].ChartArea = series2;
             chart.Series[series2].ChartType = SeriesChartType.Doughnut;
             chart.ChartAreas[series2].BackColor = Color.Transparent;
@@ -794,9 +793,9 @@
 
             HashSet<string> objectiveNames = new HashSet<string>();
 
-            foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).OrderBy(x => x.Value.Name))
+            foreach (KeyValuePair<string, WorkItem> next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).OrderBy(x => x.Value.Name))
             {
-                objectiveNames.Add(next.Value.ObjectiveName);
+                _ = objectiveNames.Add(next.Value.ObjectiveName);
             }
 
             foreach (string outer in objectiveNames)
@@ -865,7 +864,7 @@
         /// <summary>
         /// Process the system time data.
         /// </summary>
-        /// <param name="json"></param>
+        /// <param name="json">JSON to be parsed.</param>
         private void ProcessSystemUptime(string json)
         {
             // Create an object from the JSON data.
@@ -953,7 +952,7 @@
         /// <summary>
         /// Process the system idle data.
         /// </summary>
-        /// <param name="json"></param>
+        /// <param name="json">JSON to be parsed.</param>
         private void ProcessSystemIdle(string json)
         {
             // Get object from the JSON data.
@@ -992,7 +991,7 @@
         /// <summary>
         /// Process the Work Item data.
         /// </summary>
-        /// <param name="json"></param>
+        /// <param name="json">JSON to be parsed.</param>
         private void ProcessWorkItem(string json)
         {
             WorkItem workItem = JsonConvert.DeserializeObject<WorkItem>(json);
@@ -1056,7 +1055,7 @@
         /// <summary>
         /// Process the Visual Studio data.
         /// </summary>
-        /// <param name="json"></param>
+        /// <param name="json">JSON to be parsed.</param>
         private void ProcessVisualStudio(string json)
         {
             WorkItem workItem = JsonConvert.DeserializeObject<WorkItem>(json);
@@ -1091,10 +1090,10 @@
         /// <summary>
         /// Get the appointments within the timespan.
         /// </summary>
-        /// <param name="folder"></param>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
-        /// <returns></returns>
+        /// <param name="folder">The folder to search.</param>
+        /// <param name="startTime">The start time.</param>
+        /// <param name="endTime">The finish time.</param>
+        /// <returns>A collection of outlook items that match the filter.</returns>
         private Outlook.Items GetAppointmentsWithinRange(Outlook.Folder folder, DateTime startTime, DateTime endTime)
         {
             string filter = "[Start] >= '"
@@ -1126,10 +1125,10 @@
         /// <summary>
         /// Get the appointments that fall in the range of the timespan.
         /// </summary>
-        /// <param name="folder"></param>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
-        /// <returns></returns>
+        /// <param name="folder">The folder to search.</param>
+        /// <param name="startTime">The start time.</param>
+        /// <param name="endTime">The finish time.</param>
+        /// <returns>A collection of outlook items that match the filter.</returns>
         private Outlook.Items GetAppointmentsInRange(Outlook.Folder folder, DateTime startTime, DateTime endTime)
         {
             string filter = "[Start] <= '"

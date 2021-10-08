@@ -12,11 +12,15 @@
         private WorkType workType;
 
         /// <summary>
-        /// The WorkType to be review or modified.
+        /// Gets or sets the WorkType to be review or modified.
         /// </summary>
         public WorkType WorkType
         {
-            get { return workType; }
+            get
+            {
+                return workType;
+            }
+
             set
             {
                 workType = value;
@@ -36,7 +40,7 @@
         /// Setup the UI.
         /// </summary>
         /// <param name="sender">This parameter is unused.</param>
-        /// <param name="e">This parameter is unused.</param>
+        /// <param name="e">This parameter also is unused.</param>
         private void FormChangeWorkType_Load(object sender, EventArgs e)
         {
             ComboApplication.DataSource = Enum.GetValues(typeof(ApplicationType));
@@ -59,7 +63,7 @@
         /// Updates the WorkType Name.
         /// </summary>
         /// <param name="sender">This parameter is unused.</param>
-        /// <param name="e">This parameter is unused.</param>
+        /// <param name="e">This parameter also is unused.</param>
         private void TextName_TextChanged(object sender, EventArgs e)
         {
             workType.Name = TextName.Text;
@@ -69,7 +73,7 @@
         /// Updates the WorkType Description.
         /// </summary>
         /// <param name="sender">This parameter is unused.</param>
-        /// <param name="e">This parameter is unused.</param>
+        /// <param name="e">This parameter also is unused.</param>
         private void TextDescription_TextChanged(object sender, EventArgs e)
         {
             workType.Description = TextDescription.Text;
@@ -79,7 +83,7 @@
         /// Updates the WorkType Cost per Hour.
         /// </summary>
         /// <param name="sender">This parameter is unused.</param>
-        /// <param name="e">This parameter is unused.</param>
+        /// <param name="e">This parameter also is unused.</param>
         private void NumCostPerHour_ValueChanged(object sender, EventArgs e)
         {
             workType.CostPerHour = NumCostPerHour.Value;
@@ -89,7 +93,7 @@
         /// Updates the minimum number of minutes per day.
         /// </summary>
         /// <param name="sender">This parameter is unused.</param>
-        /// <param name="e">This parameter is unused.</param>
+        /// <param name="e">This parameter also is unused.</param>
         private void NumMinMinutes_ValueChanged(object sender, EventArgs e)
         {
             workType.MinimumNoOfMinutes = Convert.ToInt32(NumMinMinutes.Value);
@@ -99,7 +103,7 @@
         /// Updates the maximum number of minutes per day.
         /// </summary>
         /// <param name="sender">This parameter is unused.</param>
-        /// <param name="e">This parameter is unused.</param>
+        /// <param name="e">This parameter also is unused.</param>
         private void NumMaxMinutes_ValueChanged(object sender, EventArgs e)
         {
             workType.MaximNoOfMinutes = Convert.ToInt32(NumMaxMinutes.Value);
@@ -109,7 +113,7 @@
         /// Updates the application associated with the WorkType.
         /// </summary>
         /// <param name="sender">This parameter is unused.</param>
-        /// <param name="e">This parameter is unused.</param>
+        /// <param name="e">This parameter also is unused.</param>
         private void ComboApplication_SelectedIndexChanged(object sender, EventArgs e)
         {
             workType.Application = (ApplicationType)ComboApplication.SelectedValue;

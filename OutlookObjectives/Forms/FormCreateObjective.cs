@@ -10,7 +10,7 @@
     public partial class FormCreateObjective : Form
     {
         /// <summary>
-        /// Constructor.
+        /// Initializes a new instance of the <see cref="FormCreateObjective"/> class.
         /// </summary>
         public FormCreateObjective()
         {
@@ -20,8 +20,8 @@
         /// <summary>
         /// Checks is the Objective is correct and if so then creates a new Objective.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Also unused.</param>
         private void ButtonCreateObjective_Click(object sender, EventArgs e)
         {
             // Check if the new objective name is valid first.
@@ -33,22 +33,22 @@
                     {
                         // If valid then create objective and close the form.
                         InTouch.CreateObjective(TextBoxObjective.Text);
-                        this.Close();
+                        Close();
                         return;
                     }
                     else
                     {
-                        this.Text = "Objective already exists. (Archived)";
+                        Text = "Objective already exists. (Archived)";
                     }
                 }
                 else
                 {
-                    this.Text = "Objective already exists.";
+                    Text = "Objective already exists.";
                 }
             }
             else
             {
-                this.Text = "Enter a name for the Objective.";
+                Text = "Enter a name for the Objective.";
             }
         }
     }

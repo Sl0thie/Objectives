@@ -3,6 +3,9 @@ using System.Windows.Forms;
 
 namespace WindowsObjectives
 {
+    /// <summary>
+    /// Program class.
+    /// </summary>
     internal static class Program
     {
         /// <summary>

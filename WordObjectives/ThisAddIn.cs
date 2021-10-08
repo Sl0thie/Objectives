@@ -15,14 +15,14 @@
     /// </summary>
     public partial class ThisAddIn
     {
-        // Dictionary to hold the document data collected.
-        private readonly Dictionary<string, WorkItem> Documents = new Dictionary<string, WorkItem>();
-
         // Path to the root folder of where the Objectives are stored.
-        private static string RootFolder;
+        private static string rootFolder;
 
         // Path to where the output files should be stored.
-        private static string StorageFolder;
+        private static string storageFolder;
+
+        // Dictionary to hold the document data collected.
+        private readonly Dictionary<string, WorkItem> documents = new Dictionary<string, WorkItem>();
 
         // Fields to manage the main timer.
         private TimerCallback timerDelegate;
@@ -30,10 +30,10 @@
         private Timer refreshTimer;
 
         /// <summary>
-        ///
+        /// ThisAddIn_Startup manages startup of the class.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Unused.</param>
+        /// <param name="e">Also unused.</param>
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
@@ -49,8 +49,8 @@
             refreshTimer = new Timer(timerDelegate, null, TimeSpan.Zero, refreshIntervalTime);
 
             // Get and check the ObjectiveRootFolder.
-            RootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", string.Empty);
-            StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
+            rootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", string.Empty);
+            storageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
 
             // This add-in starts after the first document is loaded so check for loaded documents.
             CheckDocuments();
@@ -61,13 +61,13 @@
         /// Occurs immediately before any open document closes.
         /// </summary>
         /// <remarks>
-        /// [Application.DocumentBeforeClose Event (Word)](Https://docs.microsoft.com/en-us/office/vba/api/word.application.documentbeforeclose)
+        /// [Application.DocumentBeforeClose Event (Word)](Https://docs.microsoft.com/en-us/office/vba/api/word.application.documentbeforeclose).
         /// </remarks>
-        /// <param name="Doc">The document that is closing.</param>
-        /// <param name="Cancel">Bool value to cancel the closing of the document.</param>
-        private void Application_DocumentBeforeClose(Word.Document Doc, ref bool Cancel)
+        /// <param name="doc">The document that is closing.</param>
+        /// <param name="cancel">Bool value to cancel the closing of the document.</param>
+        private void Application_DocumentBeforeClose(Word.Document doc, ref bool cancel)
         {
-            RemoveDocument(Doc.FullName);
+            RemoveDocument(doc.FullName);
         }
 
         /// <summary>
@@ -87,10 +87,10 @@
         /// Event handler for when a document is opened.
         /// <seealso href="https://docs.microsoft.com/en-us/office/vba/api/word.application.documentopen">Application.DocumentOpen event (Word)</seealso>
         /// </summary>
-        /// <param name="Doc">The document that was opened.</param>
-        private void Application_DocumentOpen(Word.Document Doc)
+        /// <param name="doc">The document that was opened.</param>
+        private void Application_DocumentOpen(Word.Document doc)
         {
-            AddDocument(Doc);
+            AddDocument(doc);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@
                     // Check if documents are in dictionary. Add if not.
                     foreach (Word.Document next in Application.Documents)
                     {
-                        if (!Documents.ContainsKey(next.FullName))
+                        if (!documents.ContainsKey(next.FullName))
                         {
                             Log.Info("Adding " + next.FullName);
                             AddDocument(next);
@@ -118,7 +118,7 @@
                         {
                             if (!next.Saved)
                             {
-                                Documents[next.FullName].IsActive = true;
+                                documents[next.FullName].IsActive = true;
                             }
                         }
                     }
@@ -131,7 +131,7 @@
 
             try
             {
-                foreach (string path in Documents.Keys.ToList())
+                foreach (string path in documents.Keys.ToList())
                 {
                     bool found = false;
                     foreach (Word.Document doc in Application.Documents)
@@ -160,26 +160,14 @@
         /// The main timer event.
         /// </summary>
         /// <param name="stateInfo">parameter is unused.</param>
-        private void RefreshTimer_Tick(Object stateInfo)
+        private void RefreshTimer_Tick(object stateInfo)
         {
             // Documents renamed do not seem to have an event. Check every minute.
             CheckDocuments();
 
             if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
             {
-                //if (Application.Documents.Count > 0)
-                //{
-                //    // Check if documents are in dictionary. Add if not.
-                //    foreach (Word.Document next in Application.Documents)
-                //    {
-                //        if (File.Exists(next.FullName))
-                //        {
-                //            next.Save();
-                //        }
-                //    }
-                //}
-
-                foreach (WorkItem wordSession in Documents.Values)
+                foreach (WorkItem wordSession in documents.Values)
                 {
                     SaveData(wordSession);
                 }
@@ -196,7 +184,7 @@
         {
             Log.Info(doc.FullName);
 
-            if (Documents.ContainsKey(doc.FullName))
+            if (documents.ContainsKey(doc.FullName))
             {
                 Log.Info("Documents already contains key " + doc.FullName);
             }
@@ -215,13 +203,13 @@
 
                     if (workItem.Name.LastIndexOf(".") > 0)
                     {
-                        workItem.Name = workItem.Name.Substring(0, (workItem.Name.LastIndexOf(".")));
+                        workItem.Name = workItem.Name.Substring(0, workItem.Name.LastIndexOf("."));
                     }
                 }
 
-                if (workItem.FilePath.Substring(0, RootFolder.Length) == RootFolder)
+                if (workItem.FilePath.Substring(0, rootFolder.Length) == rootFolder)
                 {
-                    workItem.ObjectiveName = workItem.FilePath.Substring(RootFolder.Length + 1);
+                    workItem.ObjectiveName = workItem.FilePath.Substring(rootFolder.Length + 1);
                     workItem.ObjectiveName = workItem.ObjectiveName.Substring(0, workItem.ObjectiveName.IndexOf(@"\"));
                 }
                 else
@@ -235,31 +223,10 @@
                     workItem.StartSize = fileInf.Length;
                 }
 
-                Documents.Add(workItem.FilePath, workItem);
+                documents.Add(workItem.FilePath, workItem);
                 Log.Info("Added document " + doc.FullName);
             }
         }
-
-        ///// <summary>
-        ///// Method to remove documents from the collection.
-        ///// </summary>
-        ///// <param name="doc">The document to remove from the dictionary.</param>
-        //[Obsolete]
-        //private void RemoveDocumentOld(Word.Document doc)
-        //{
-        //    Log.Info(doc.FullName);
-
-        //    if (Documents.ContainsKey(doc.FullName))
-        //    {
-        //        SaveData(Documents[doc.FullName]);
-        //        Documents.Remove(doc.FullName);
-        //        Log.Info("Removed document " + doc.FullName);
-        //    }
-        //    else
-        //    {
-        //        Log.Info("Documents does not contains key " + doc.FullName);
-        //    }
-        //}
 
         /// <summary>
         /// Method to remove documents from the collection.
@@ -269,10 +236,10 @@
         {
             Log.Info(path);
 
-            if (Documents.ContainsKey(path))
+            if (documents.ContainsKey(path))
             {
-                SaveData(Documents[path]);
-                Documents.Remove(path);
+                SaveData(documents[path]);
+                _ = documents.Remove(path);
                 Log.Info("Removed document " + path);
             }
             else
@@ -314,7 +281,7 @@
 
                 if (workItem.Start != workItem.Finish)
                 {
-                    if ((workItem.IsActive) || (workItem.StartSize != workItem.FinishSize))
+                    if (workItem.IsActive || (workItem.StartSize != workItem.FinishSize))
                     {
                         workItem.Application = ApplicationType.WordWrite;
                     }
@@ -324,7 +291,7 @@
                     }
 
                     string json = JsonConvert.SerializeObject(workItem, Formatting.Indented);
-                    File.WriteAllText(StorageFolder + @"\" + (int)workItem.Application + "-" + Guid.NewGuid().ToString() + ".json", json);
+                    File.WriteAllText(storageFolder + @"\" + (int)workItem.Application + "-" + Guid.NewGuid().ToString() + ".json", json);
                     workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
                     workItem.IsActive = false;
                     workItem.StartSize = workItem.FinishSize;
@@ -344,7 +311,7 @@
         /// </summary>
         private void InternalStartup()
         {
-            this.Startup += new System.EventHandler(ThisAddIn_Startup);
+            Startup += new System.EventHandler(ThisAddIn_Startup);
         }
 
         #endregion

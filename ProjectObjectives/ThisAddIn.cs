@@ -1,5 +1,8 @@
 ﻿namespace ProjectObjectives
 {
+    /// <summary>
+    /// ThisAddIn class.
+    /// </summary>
     public partial class ThisAddIn
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
@@ -18,8 +21,8 @@
         /// </summary>
         private void InternalStartup()
         {
-            this.Startup += new System.EventHandler(ThisAddIn_Startup);
-            this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
+            Startup += new System.EventHandler(ThisAddIn_Startup);
+            Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
         }
 
         #endregion

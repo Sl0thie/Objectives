@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 
 [assembly: ExtensionApplication(typeof(AutoCADObjectives.ExtApp))]
 [assembly: CommandClass(null)]
+
 namespace AutoCADObjectives
 {
     /// <summary>
@@ -26,11 +27,12 @@ namespace AutoCADObjectives
     /// </remarks>
     public class ExtApp : IExtensionApplication
     {
-        // TODO Check that the file path is saving the correct path.
-        private string RootFolder;
-        private string StorageFolder;
-        private readonly Dictionary<string, WorkItem> WorkItems = new Dictionary<string, WorkItem>();
+        private readonly Dictionary<string, WorkItem> workItems = new Dictionary<string, WorkItem>();
         private readonly Timer timerUpdate = new Timer(50000);
+
+        // TODO Check that the file path is saving the correct path.
+        private string rootFolder;
+        private string storageFolder;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExtApp"/> class.
@@ -61,8 +63,8 @@ namespace AutoCADObjectives
             try
             {
                 // Get folder locations from the registry.
-                RootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", string.Empty);
-                StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
+                rootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", string.Empty);
+                storageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
 
                 // Setup the timer.
                 timerUpdate.Elapsed += TimerUpdate_Elapsed;
@@ -86,12 +88,12 @@ namespace AutoCADObjectives
         /// Handles the main timer tick event.
         /// </summary>
         /// <param name="sender">parameter is unused.</param>
-        /// <param name="e">parameter is unused.</param>
+        /// <param name="e">parameter is also unused.</param>
         private void TimerUpdate_Elapsed(object sender, ElapsedEventArgs e)
         {
             if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
             {
-                foreach (var next in WorkItems)
+                foreach (var next in workItems)
                 {
                     WorkItem drawing = (WorkItem)next.Value;
                     SaveData(drawing);
@@ -103,8 +105,8 @@ namespace AutoCADObjectives
         /// Event for when documents are created.
         /// </summary>
         /// <param name="sender">parameter is unused.</param>
-        /// <param name="e">parameter is unused.</param>
-        private void Callback_DocumentCreated(Object sender, DocumentCollectionEventArgs e)
+        /// <param name="e">parameter is also unused.</param>
+        private void Callback_DocumentCreated(object sender, DocumentCollectionEventArgs e)
         {
             if (e.Document is object)
             {
@@ -141,9 +143,9 @@ namespace AutoCADObjectives
                         newDrawing.Name = newDrawing.Name.Substring(0, newDrawing.Name.Length - 4);
                     }
 
-                    if (newDrawing.FilePath.Substring(0, RootFolder.Length) == RootFolder)
+                    if (newDrawing.FilePath.Substring(0, rootFolder.Length) == rootFolder)
                     {
-                        newDrawing.ObjectiveName = newDrawing.FilePath.Substring(RootFolder.Length + 1);
+                        newDrawing.ObjectiveName = newDrawing.FilePath.Substring(rootFolder.Length + 1);
                         newDrawing.ObjectiveName = newDrawing.ObjectiveName.Substring(0, newDrawing.ObjectiveName.IndexOf(@"\"));
                     }
                     else
@@ -157,7 +159,7 @@ namespace AutoCADObjectives
                         newDrawing.StartSize = drawingFile.Length;
                     }
 
-                    WorkItems.Add(newDrawing.FilePath, newDrawing);
+                    workItems.Add(newDrawing.FilePath, newDrawing);
                 }
             }
             catch (System.Exception ex)
@@ -174,8 +176,8 @@ namespace AutoCADObjectives
         /// even though there is no drawing of that name. There is also no previous matching create event either.
         /// </remarks>
         /// <param name="sender">parameter is unused.</param>
-        /// <param name="e">parameter is unused.</param>
-        private void Callback_DocumentToBeDestroyed(Object sender, DocumentCollectionEventArgs e)
+        /// <param name="e">parameter is also unused.</param>
+        private void Callback_DocumentToBeDestroyed(object sender, DocumentCollectionEventArgs e)
         {
             if (e.Document is object)
             {
@@ -200,10 +202,9 @@ namespace AutoCADObjectives
                 {
                     if (doc.IsNamedDrawing)
                     {
-                        WorkItem drawing = (WorkItem)WorkItems[doc.Name];
-                        //
+                        WorkItem drawing = (WorkItem)workItems[doc.Name];
                         SaveData(drawing);
-                        WorkItems.Remove(drawing.FilePath);
+                        _ = workItems.Remove(drawing.FilePath);
                     }
                 }
             }
@@ -220,8 +221,8 @@ namespace AutoCADObjectives
         /// WARNING: When AutoCAD starts this event fires but the document is null.
         /// </remarks>
         /// <param name="sender">parameter is unused.</param>
-        /// <param name="e">parameter is unused.</param>
-        private void Callback_DocumentActivated(Object sender, DocumentCollectionEventArgs e)
+        /// <param name="e">parameter also unused.</param>
+        private void Callback_DocumentActivated(object sender, DocumentCollectionEventArgs e)
         {
             if (e.Document is object)
             {
@@ -246,7 +247,7 @@ namespace AutoCADObjectives
                 {
                     if (doc.IsNamedDrawing)
                     {
-                        WorkItem drawing = (WorkItem)WorkItems[doc.Name];
+                        WorkItem drawing = (WorkItem)workItems[doc.Name];
                     }
                     else
                     {
@@ -265,8 +266,8 @@ namespace AutoCADObjectives
         /// Currently not used as this level of detail is not implemented yet.
         /// </summary>
         /// <param name="sender">parameter is unused.</param>
-        /// <param name="e">parameter is unused.</param>
-        private void Callback_DocumentToBeActivated(Object sender, DocumentCollectionEventArgs e)
+        /// <param name="e">parameter also is unused.</param>
+        private void Callback_DocumentToBeActivated(object sender, DocumentCollectionEventArgs e)
         {
         }
 
@@ -275,8 +276,8 @@ namespace AutoCADObjectives
         /// As with Callback_DocumentToBeActivated this is not implemented yet.
         /// </summary>
         /// <param name="sender">parameter is unused.</param>
-        /// <param name="e">parameter is unused.</param>
-        private void Callback_DocumentToBeDeactivated(Object sender, DocumentCollectionEventArgs e)
+        /// <param name="e">parameter is also unused.</param>
+        private void Callback_DocumentToBeDeactivated(object sender, DocumentCollectionEventArgs e)
         {
             if (e.Document is object)
             {
@@ -302,7 +303,7 @@ namespace AutoCADObjectives
                 {
                     if (doc.IsNamedDrawing)
                     {
-                        WorkItem drawing = (WorkItem)WorkItems[doc.Name];
+                        WorkItem drawing = (WorkItem)workItems[doc.Name];
                     }
                 }
             }
@@ -354,7 +355,7 @@ namespace AutoCADObjectives
 
                     workItem.Finish = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
                     string json = JsonConvert.SerializeObject(workItem, Formatting.Indented);
-                    File.WriteAllText(StorageFolder + @"\" + (int)workItem.Application + "-" + workItem.Id.ToString() + ".json", json);
+                    File.WriteAllText(storageFolder + @"\" + (int)workItem.Application + "-" + workItem.Id.ToString() + ".json", json);
                     workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
                 }
             }

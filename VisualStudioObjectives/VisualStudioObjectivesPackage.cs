@@ -21,13 +21,13 @@ namespace VisualStudioObjectives
     /// VisualStudioObectivesPackage class.
     /// </summary>
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-    [Guid(VisualStudioObectivesPackage.PackageGuidString)]
+    [Guid(PackageGuidString)]
     [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionOpening_string, PackageAutoLoadFlags.BackgroundLoad)]
     public sealed class VisualStudioObectivesPackage : AsyncPackage
     {
         private DTE dte;
-        private string RootFolder;
-        private string StorageFolder;
+        private string rootFolder;
+        private string storageFolder;
         private WorkItem workItem;
 
         /// <summary>
@@ -38,9 +38,9 @@ namespace VisualStudioObjectives
         /// <summary>
         /// Initializes the VisualStudioObectivesPackage.
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <param name="progress"></param>
-        /// <returns></returns>
+        /// <param name="cancellationToken">Token to manage cancellation.</param>
+        /// <param name="progress">Progress parameter.</param>
+        /// <returns>A task.</returns>
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             // Access to the DTE has to be done on the UI thread.
@@ -50,9 +50,9 @@ namespace VisualStudioObjectives
             Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
 
             // Get the DTE service.
-            dte = (DTE)Package.GetGlobalService(typeof(DTE));
+            dte = (DTE)GetGlobalService(typeof(DTE));
 
-            //Get the settings from the registry.
+            // Get the settings from the registry.
             GetRegistrySettings();
 
             // Setup the main timer.
@@ -60,6 +60,7 @@ namespace VisualStudioObjectives
             {
                 AutoReset = true,
             };
+
             mainTimer.Elapsed += MainTimer_Elapsed;
             mainTimer.Enabled = true;
 
@@ -81,7 +82,7 @@ namespace VisualStudioObjectives
         /// Handles the MainTimer event.
         /// </summary>
         /// <param name="sender">This parameter is unused.</param>
-        /// <param name="e">This parameter is unused.</param>
+        /// <param name="e">This parameter also is unused.</param>
         private async void MainTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             // Access to the solution should only be done on the UI thread.
@@ -103,7 +104,6 @@ namespace VisualStudioObjectives
                     }
 
                     // GetCurrentValues(); Not sure if this is necessary?
-
                     Log.Info("Tick: " + workItem.IsActive);
                 }
                 else
@@ -126,7 +126,7 @@ namespace VisualStudioObjectives
         /// Searches projects and project items for unsaved changes.
         /// </summary>
         /// <remarks>
-        /// List of [Project GUID's](https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids")
+        /// List of [Project GUID's](https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids").
         /// </remarks>
         /// <param name="solution">The solution to search for unsaved changes.</param>
         /// <param name="save">If true, save the items if they are unsaved.</param>
@@ -159,7 +159,6 @@ namespace VisualStudioObjectives
 
                     case EnvDTE.Constants.vsProjectKindSolutionItems:
                         continue;
-                        break;
 
                     case EnvDTE.Constants.vsProjectKindUnmodeled:
                         break;
@@ -197,7 +196,7 @@ namespace VisualStudioObjectives
 
         /// <summary>
         /// Searches project items for unsaved changes.
-        /// Also checks the sub items. (recursive)
+        /// Also checks the sub items. (recursive).
         /// </summary>
         /// <param name="item">The project item to search.  Includes sub items if the item is a folder.</param>
         /// <param name="save">If true, will save the item if unsaved changes are found.</param>
@@ -270,8 +269,8 @@ namespace VisualStudioObjectives
         {
             try
             {
-                RootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", string.Empty);
-                StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
+                rootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", string.Empty);
+                storageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
             }
             catch (Exception ex)
             {
@@ -283,7 +282,7 @@ namespace VisualStudioObjectives
         /// Handles the Solution load event.
         /// </summary>
         /// <param name="sender">This parameter is unused.</param>
-        /// <param name="e">This parameter is unused.</param>
+        /// <param name="e">This parameter also is unused.</param>
         private void SolutionEvents_OnAfterBackgroundSolutionLoadComplete(object sender, EventArgs e)
         {
             try
@@ -302,14 +301,14 @@ namespace VisualStudioObjectives
         /// Handles the Solution close event.
         /// </summary>
         /// <param name="sender">This parameter is unused.</param>
-        /// <param name="e">This parameter is unused.</param>
+        /// <param name="e">This parameter also is unused.</param>
         private void SolutionEvents_OnBeforeCloseSolution(object sender, EventArgs e)
         {
             try
             {
                 // Get the finished data and save to file.
                 GetCurrentValues();
-                SaveDataAsync();
+                _ = SaveDataAsync();
             }
             catch (Exception ex)
             {
@@ -324,8 +323,8 @@ namespace VisualStudioObjectives
         private async Task<bool> IsSolutionLoadedAsync()
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync();
-            var solService = await GetServiceAsync(typeof(SVsSolution)) as IVsSolution;
-            ErrorHandler.ThrowOnFailure(solService.GetProperty((int)__VSPROPID.VSPROPID_IsSolutionOpen, out object value));
+            IVsSolution solService = await GetServiceAsync(typeof(SVsSolution)) as IVsSolution;
+            _ = ErrorHandler.ThrowOnFailure(solService.GetProperty((int)__VSPROPID.VSPROPID_IsSolutionOpen, out object value));
             return value is bool isSolOpen && isSolOpen;
         }
 
@@ -335,16 +334,16 @@ namespace VisualStudioObjectives
         private void GetStartValues()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            //await JoinableTaskFactory.SwitchToMainThreadAsync();
 
+            // await JoinableTaskFactory.SwitchToMainThreadAsync();
             try
             {
                 workItem = new WorkItem(dte.Solution.FileName.Substring(dte.Solution.FileName.LastIndexOf('\\') + 1));
                 workItem.Name = workItem.Name.Substring(0, workItem.Name.Length - 4);
                 workItem.FilePath = dte.Solution.FileName;
-                if (workItem.FilePath.Substring(0, RootFolder.Length) == RootFolder)
+                if (workItem.FilePath.Substring(0, rootFolder.Length) == rootFolder)
                 {
-                    workItem.ObjectiveName = workItem.FilePath.Substring(RootFolder.Length + 1);
+                    workItem.ObjectiveName = workItem.FilePath.Substring(rootFolder.Length + 1);
                     workItem.ObjectiveName = workItem.ObjectiveName.Substring(0, workItem.ObjectiveName.IndexOf(@"\"));
                 }
                 else
@@ -355,9 +354,9 @@ namespace VisualStudioObjectives
                 workItem.StartSize = 0;
                 DirectoryInfo basePath = new DirectoryInfo(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')));
 
-                foreach (FileInfo NextFileInfo in basePath.EnumerateFiles("*.*", SearchOption.AllDirectories))
+                foreach (FileInfo nextFileInfo in basePath.EnumerateFiles("*.*", SearchOption.AllDirectories))
                 {
-                    switch (NextFileInfo.Extension.ToLower())
+                    switch (nextFileInfo.Extension.ToLower())
                     {
                         case ".ascx": // Source
                         case ".asmx":
@@ -384,7 +383,7 @@ namespace VisualStudioObjectives
                         case ".xaml":
                         case ".xml":
                         case ".xsp":
-                            workItem.StartSize += NextFileInfo.Length;
+                            workItem.StartSize += nextFileInfo.Length;
                             break;
 
                         default:
@@ -404,8 +403,8 @@ namespace VisualStudioObjectives
         private void GetCurrentValues()
         {
             ThreadHelper.ThrowIfNotOnUIThread();
-            //await JoinableTaskFactory.SwitchToMainThreadAsync();
 
+            // await JoinableTaskFactory.SwitchToMainThreadAsync();
             try
             {
                 if (File.Exists(dte.Solution.FullName))
@@ -420,9 +419,9 @@ namespace VisualStudioObjectives
 
                 DirectoryInfo basePath = new DirectoryInfo(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')));
 
-                foreach (FileInfo NextFileInfo in basePath.EnumerateFiles("*.*", SearchOption.AllDirectories))
+                foreach (FileInfo nextFileInfo in basePath.EnumerateFiles("*.*", SearchOption.AllDirectories))
                 {
-                    switch (NextFileInfo.Extension.ToLower())
+                    switch (nextFileInfo.Extension.ToLower())
                     {
                         case ".ascx": // Source
                         case ".asmx":
@@ -449,7 +448,7 @@ namespace VisualStudioObjectives
                         case ".xaml":
                         case ".xml":
                         case ".xsp":
-                            workItem.FinishSize += NextFileInfo.Length;
+                            workItem.FinishSize += nextFileInfo.Length;
                             break;
 
                         default:
@@ -521,7 +520,7 @@ namespace VisualStudioObjectives
                     workItem.IsActive = await IsSolutionUnsavedAsync(dte.Solution, true);
 
                     // If the work item is active then mark it as active.
-                    if ((workItem.IsActive) ||(workItem.StartSize != workItem.FinishSize))
+                    if (workItem.IsActive || (workItem.StartSize != workItem.FinishSize))
                     {
                         workItem.Application = ApplicationType.VisualStudioWrite;
                     }
@@ -532,7 +531,7 @@ namespace VisualStudioObjectives
 
                     // Save the data to file in the storage folder.
                     string json = JsonConvert.SerializeObject(workItem, Formatting.Indented);
-                    File.WriteAllText(StorageFolder + @"\" + (int)workItem.Application + "-" + workItem.Id.ToString() + ".json", json);
+                    File.WriteAllText(storageFolder + @"\" + (int)workItem.Application + "-" + workItem.Id.ToString() + ".json", json);
 
                     // Reset the work item. This reuses the work item after it is saved every thirty minutes. If the work item is closed then it does not matter if these values have been reset.
                     workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));

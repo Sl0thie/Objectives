@@ -58,7 +58,7 @@
         /// <param name="index">The minute to use as an index.</param>
         public Minute(int index)
         {
-            this.Index = index;
+            Index = index;
         }
     }
 }

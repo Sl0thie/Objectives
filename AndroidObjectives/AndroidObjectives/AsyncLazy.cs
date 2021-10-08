@@ -12,7 +12,6 @@ namespace AndroidObjectives
     {
         private readonly Lazy<Task<T>> instance;
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AsyncLazy{T}"/> class.
         /// </summary>
@@ -21,7 +20,6 @@ namespace AndroidObjectives
         {
             instance = new Lazy<Task<T>>(() => Task.Run(factory));
         }
-
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AsyncLazy{T}"/> class.

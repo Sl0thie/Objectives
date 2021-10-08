@@ -1,12 +1,12 @@
 ﻿namespace CommonObjectives
 {
     /// <summary>
-    /// Client class extends the outlook ContactItem
+    /// Client class extends the outlook ContactItem.
     /// </summary>
     public class Client
     {
         /// <summary>
-        /// Get or sets the EntryID.
+        /// Gets or sets the EntryID.
         /// This is the Outlook ContactItem EntryID for the contact that is a client.
         /// </summary>
         public string EntryId { get; set; }

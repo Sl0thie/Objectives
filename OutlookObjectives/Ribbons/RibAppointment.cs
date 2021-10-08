@@ -16,10 +16,10 @@
         /// Create the Appointment ribbon.
         /// </summary>
         /// <param name="sender">This parameter is unused.</param>
-        /// <param name="e">This parameter is unused.</param>
+        /// <param name="e">This parameter also is unused.</param>
         private void RibAppointment_Load(object sender, RibbonUIEventArgs e)
         {
-            inspector = this.Context as Outlook.Inspector;
+            inspector = Context as Outlook.Inspector;
 
             if (Globals.ThisAddIn.IAppointments.TryGetValue(inspector, out iAppointment))
             {
@@ -32,7 +32,6 @@
                         break;
 
                     case AppointmentType.ObjectivesDayReport:
-                        //inspector.HideFormPage("Appointment");
                         inspector.SetCurrentFormPage("InTouch-Objectives.FRObjectivesDayReport");
                         inspector.HideFormPage("InTouch-Objectives.FRObjectivesWeekReport");
                         inspector.HideFormPage("InTouch-Objectives.FRObjectivesMonthReport");
@@ -40,7 +39,6 @@
                         break;
 
                     case AppointmentType.ObjectivesWeekReport:
-                        //inspector.HideFormPage("Appointment");
                         inspector.HideFormPage("InTouch-Objectives.FRObjectivesDayReport");
                         inspector.SetCurrentFormPage("InTouch-Objectives.FRObjectivesWeekReport");
                         inspector.HideFormPage("InTouch-Objectives.FRObjectivesMonthReport");
@@ -48,7 +46,6 @@
                         break;
 
                     case AppointmentType.ObjectivesMonthReport:
-                        //inspector.HideFormPage("Appointment");
                         inspector.HideFormPage("InTouch-Objectives.FRObjectivesDayReport");
                         inspector.HideFormPage("InTouch-Objectives.FRObjectivesWeekReport");
                         inspector.SetCurrentFormPage("InTouch-Objectives.FRObjectivesMonthReport");

@@ -29,10 +29,9 @@
 
             try
             {
-                //await Database.DropTableAsync<AndroidObjectives.Models.Objective>();
-                //await Database.DropTableAsync<CommonObjectives.Serial.Objective>();
-                //await Database.DropTableAsync<Client>();
-
+                // await Database.DropTableAsync<AndroidObjectives.Models.Objective>();
+                // await Database.DropTableAsync<CommonObjectives.Serial.Objective>();
+                // await Database.DropTableAsync<Client>();
                 CreateTableResult result = await database.CreateTableAsync<CommonObjectives.Serial.Objective>();
                 result = await database.CreateTableAsync<Client>();
             }
@@ -64,27 +63,27 @@
                 dataHubConnection = new HubConnection("http://www.intacomputers.com/");
                 dataHubProxy = dataHubConnection.CreateHubProxy("DataHub");
 
-                dataHubProxy.On<string>("SaveClient", (json) =>
-                {
-                    Client newClient = JsonConvert.DeserializeObject<Client>(json);
-                    SaveClientAsync(newClient);
-                });
+                _ = dataHubProxy.On<string>("SaveClient", (json) =>
+                  {
+                      Client newClient = JsonConvert.DeserializeObject<Client>(json);
+                      _ = SaveClientAsync(newClient);
+                  });
 
-                dataHubProxy.On("DropCreateClient", () =>
-                {
-                    DropCreateClientsAsync();
-                });
+                _ = dataHubProxy.On("DropCreateClient", () =>
+                  {
+                      DropCreateClientsAsync();
+                  });
 
-                dataHubProxy.On<string>("SaveObjective", (json) =>
-                {
-                    CommonObjectives.Serial.Objective newObjective = JsonConvert.DeserializeObject<CommonObjectives.Serial.Objective>(json);
-                    SaveObjectiveAsync(newObjective);
-                });
+                _ = dataHubProxy.On<string>("SaveObjective", (json) =>
+                  {
+                      CommonObjectives.Serial.Objective newObjective = JsonConvert.DeserializeObject<CommonObjectives.Serial.Objective>(json);
+                      _ = SaveObjectiveAsync(newObjective);
+                  });
 
-                dataHubProxy.On<string>("ReceiveMessage", (message) =>
-                {
-                    ReceiveMessage(message);
-                });
+                _ = dataHubProxy.On<string>("ReceiveMessage", (message) =>
+                  {
+                      ReceiveMessage(message);
+                  });
 
                 await dataHubConnection.Start();
 
@@ -235,10 +234,10 @@
         }
 
         /// <summary>
-        ///
+        /// Save an objective to the database.
         /// </summary>
-        /// <param name="objective"></param>
-        /// <returns></returns>
+        /// <param name="objective">The objective to save.</param>
+        /// <returns>A value indicating whether the method is successful.</returns>
         public Task<int> SaveObjectiveAsync(CommonObjectives.Serial.Objective objective)
         {
             Debug.WriteLine("LocalDatabase.SaveObjectiveAsync");
@@ -265,10 +264,10 @@
         }
 
         /// <summary>
-        ///
+        /// Delete an objective.
         /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
+        /// <param name="item">The objective to delete.</param>
+        /// <returns>A value indicating the success.</returns>
         public Task<int> DeleteObjectiveAsync(CommonObjectives.Serial.Objective item)
         {
             return database.DeleteAsync(item);

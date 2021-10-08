@@ -8,7 +8,7 @@
     public interface IAppointment
     {
         /// <summary>
-        /// The outlook folder path.
+        /// Gets or sets the outlook folder path.
         /// </summary>
         string FolderPath
         {
@@ -17,7 +17,7 @@
         }
 
         /// <summary>
-        /// The type of appointment.
+        /// Gets or sets the type of appointment.
         /// </summary>
         AppointmentType AppointmentType
         {

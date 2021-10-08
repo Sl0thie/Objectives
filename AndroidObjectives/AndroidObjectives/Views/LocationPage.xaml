@@ -11,7 +11,7 @@
                 <Image Margin="0,50,0,0" x:Name="imgBanner" Source="banner.png" ></Image>
                 <Image Margin="0,0,0,10" x:Name="imgXamarinEssential" Source="xamarinessential.png" ></Image>
                 <Label Margin="0,0,0,10" Text="Geolocation" FontAttributes="Bold" FontSize="Large" TextColor="#CA6F1E" HorizontalTextAlignment="Center" ></Label>
-                <Button x:Name="btnLocation" Text="Get Location" Clicked="btnLocation_Clicked"/>
+                <Button x:Name="btnLocation" Text="Get Location" Clicked="BtnLocation_Clicked"/>
                 <Label HorizontalTextAlignment="Center" x:Name="lblLatitude" TextColor="#FFFFFF"></Label>
                 <Label HorizontalTextAlignment="Center" x:Name="lblLongitude" TextColor="#FFFFFF"></Label>
                 <Label HorizontalTextAlignment="Center" x:Name="lblAccuracy" TextColor="#FFFFFF"></Label>

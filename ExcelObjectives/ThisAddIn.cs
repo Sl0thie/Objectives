@@ -16,14 +16,14 @@
     {
         // TODO Handle workbooks being renamed.
 
-        // Dictionary to hold the document data collected.
-        private readonly Dictionary<string, WorkItem> WorkItems = new Dictionary<string, WorkItem>();
-
         // Path to the root folder of where the Objectives are stored.
-        private static string RootFolder;
+        private static string rootFolder;
 
         // Path to where the output files should be stored.
-        private static string StorageFolder;
+        private static string storageFolder;
+
+        // Dictionary to hold the document data collected.
+        private readonly Dictionary<string, WorkItem> workItems = new Dictionary<string, WorkItem>();
 
         // Fields to manage the main timer.
         private TimerCallback timerDelegate;
@@ -35,7 +35,7 @@
         /// WARNING: This may not start before documents are opened.
         /// </summary>
         /// <param name="sender">This parameter is unused.</param>
-        /// <param name="e">This parameter is unused.</param>
+        /// <param name="e">This parameter also is unused.</param>
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
@@ -50,8 +50,8 @@
             refreshTimer = new Timer(timerDelegate, null, TimeSpan.Zero, refreshIntervalTime);
 
             // Get and check the ObjectiveRootFolder.
-            RootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", string.Empty);
-            StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
+            rootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", string.Empty);
+            storageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
 
             // This add-in starts after the first document is loaded so check for loaded documents.
             CheckWorkbooks();
@@ -61,7 +61,7 @@
         /// Event handler for when the workbook is deactivated.
         /// Not currently implemented.
         /// </summary>
-        /// <param name="workbook"></param>
+        /// <param name="workbook">The workbook to  deactivate.</param>
         private void Application_WorkbookDeactivate(Excel.Workbook workbook)
         {
             Log.Info(workbook.FullName);
@@ -71,7 +71,7 @@
         /// Event handler for when the workbook is activated.
         /// Not currently implemented.
         /// </summary>
-        /// <param name="workbook"></param>
+        /// <param name="workbook">The workbook to activate.</param>
         private void Application_WorkbookActivate(Excel.Workbook workbook)
         {
             Log.Info(workbook.FullName);
@@ -80,9 +80,9 @@
         /// <summary>
         /// Event handler for when the workbook is closed.
         /// </summary>
-        /// <param name="workbook"></param>
-        /// <param name="Cancel"></param>
-        private void Application_WorkbookBeforeClose(Excel.Workbook workbook, ref bool Cancel)
+        /// <param name="workbook">The workbook that is closing.</param>
+        /// <param name="cancel">Set to true to cancel closing the workbook.</param>
+        private void Application_WorkbookBeforeClose(Excel.Workbook workbook, ref bool cancel)
         {
             Log.Info(workbook.FullName);
             RemoveWorkbook(workbook.FullName);
@@ -91,7 +91,7 @@
         /// <summary>
         /// Event handler for when the workbook is opened.
         /// </summary>
-        /// <param name="workbook"></param>
+        /// <param name="workbook">The workbook that is opening.</param>
         private void Application_WorkbookOpen(Excel.Workbook workbook)
         {
             Log.Info(workbook.FullName);
@@ -113,7 +113,7 @@
             foreach (Excel.Workbook workbook in Application.Workbooks)
             {
                 bool found = false;
-                foreach (WorkItem workItem in WorkItems.Values)
+                foreach (WorkItem workItem in workItems.Values)
                 {
                     if (workItem.FilePath == workbook.FullName)
                     {
@@ -129,7 +129,7 @@
             }
 
             // All workbooks have a work item. Now check if all work items have a workbook.
-            foreach (WorkItem workItem in WorkItems.Values)
+            foreach (WorkItem workItem in workItems.Values)
             {
                 bool found = false;
                 foreach (Excel.Workbook workbook in Application.Workbooks)
@@ -137,6 +137,7 @@
                     if (workItem.FilePath == workbook.FullName)
                     {
                         found = true;
+
                         // Also check if the workbook is saved.
                         if (!workbook.Saved)
                         {
@@ -154,13 +155,13 @@
             }
         }
 
-        private void RefreshTimer_Tick(Object stateInfo)
+        private void RefreshTimer_Tick(object stateInfo)
         {
             CheckWorkbooks();
 
             if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
             {
-                foreach (WorkItem workItem in WorkItems.Values)
+                foreach (WorkItem workItem in workItems.Values)
                 {
                     SaveData(workItem);
                 }
@@ -170,12 +171,12 @@
         /// <summary>
         /// Adds a workbook to the dictionary.
         /// </summary>
-        /// <param name="workbook"></param>
+        /// <param name="workbook">The workbook to add.</param>
         private void AddWorkbook(Excel.Workbook workbook)
         {
             Log.Info("AddWorkbook " + workbook.FullName);
 
-            if (WorkItems.ContainsKey(workbook.FullName))
+            if (workItems.ContainsKey(workbook.FullName))
             {
                 Log.Info("Workbooks already contains key " + workbook.FullName);
             }
@@ -194,7 +195,7 @@
 
                     if (workItem.Name.LastIndexOf(".") > 0)
                     {
-                        workItem.Name = workItem.Name.Substring(0, (workItem.Name.LastIndexOf(".")));
+                        workItem.Name = workItem.Name.Substring(0, workItem.Name.LastIndexOf("."));
                     }
                 }
                 else
@@ -202,11 +203,11 @@
                     workItem.Name = workbook.FullName;
                 }
 
-                if (workItem.FilePath.Length > RootFolder.Length)
+                if (workItem.FilePath.Length > rootFolder.Length)
                 {
-                    if (workItem.FilePath.Substring(0, RootFolder.Length) == RootFolder)
+                    if (workItem.FilePath.Substring(0, rootFolder.Length) == rootFolder)
                     {
-                        workItem.ObjectiveName = workItem.FilePath.Substring(RootFolder.Length + 1);
+                        workItem.ObjectiveName = workItem.FilePath.Substring(rootFolder.Length + 1);
                         workItem.ObjectiveName = workItem.ObjectiveName.Substring(0, workItem.ObjectiveName.IndexOf(@"\"));
                     }
                     else
@@ -225,26 +226,10 @@
                     workItem.StartSize = drawingFile.Length;
                 }
 
-                WorkItems.Add(workItem.FilePath, workItem);
+                workItems.Add(workItem.FilePath, workItem);
                 Log.Info("Added workbook " + workbook.FullName);
             }
         }
-
-        //private void RemoveWorkbook(Excel.Workbook workbook)
-        //{
-        //    Log.Info("RemoveWorkbook " + workbook.FullName);
-
-        //    if (WorkItems.ContainsKey(workbook.FullName))
-        //    {
-        //        SaveData(WorkItems[workbook.FullName]);
-        //        WorkItems.Remove(workbook.FullName);
-        //        Log.Info("Removed workbook " + workbook.FullName);
-        //    }
-        //    else
-        //    {
-        //        Log.Info("Workbooks does not contains key " + workbook.FullName);
-        //    }
-        //}
 
         /// <summary>
         /// Removes a workbook from the dictionary.
@@ -254,10 +239,10 @@
         {
             Log.Info("RemoveWorkbook " + path);
 
-            if (WorkItems.ContainsKey(path))
+            if (workItems.ContainsKey(path))
             {
-                SaveData(WorkItems[path]);
-                WorkItems.Remove(path);
+                SaveData(workItems[path]);
+                _ = workItems.Remove(path);
                 Log.Info("Removed workbook " + path);
             }
             else
@@ -269,7 +254,7 @@
         /// <summary>
         /// Save the data to the storage folder.
         /// </summary>
-        /// <param name="workItem"></param>
+        /// <param name="workItem">The work item to save.</param>
         private void SaveData(WorkItem workItem)
         {
             workItem.Finish = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
@@ -297,7 +282,7 @@
                         }
                     }
 
-                    if ((workItem.IsActive)||(workItem.StartSize != workItem.FinishSize))
+                    if (workItem.IsActive || (workItem.StartSize != workItem.FinishSize))
                     {
                         workItem.Application = ApplicationType.ExcelWrite;
                     }
@@ -307,7 +292,7 @@
                     }
 
                     string json = JsonConvert.SerializeObject(workItem, Formatting.Indented);
-                    File.WriteAllText(StorageFolder + @"\" + (int)workItem.Application + "-" + workItem.Id.ToString() + ".json", json);
+                    File.WriteAllText(storageFolder + @"\" + (int)workItem.Application + "-" + workItem.Id.ToString() + ".json", json);
                     workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
                     workItem.IsActive = false;
                     workItem.StartSize = workItem.FinishSize;
@@ -327,8 +312,8 @@
         /// </summary>
         private void InternalStartup()
         {
-            this.Startup += new System.EventHandler(ThisAddIn_Startup);
-            this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
+            Startup += new System.EventHandler(ThisAddIn_Startup);
+            Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)

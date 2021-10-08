@@ -13,16 +13,14 @@
     /// </summary>
     public class TaskWeekReport
     {
-        private readonly Action CallBack;
+        private readonly Action callBack;
         private readonly WeekReport weekReport = new WeekReport();
         private readonly DateTime firstDay = new DateTime(2021, 5, 25);
-        private DateTime day;
 
         // Get references to the Outlook Calendars.
         private readonly Outlook.Folder calendar = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
-        //readonly Outlook.Folder system = Globals.ThisAddIn.Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["System"] as Outlook.Folder;
-
         private readonly DayReport[] dayReports = new DayReport[7];
+        private DateTime day;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskWeekReport"/> class.
@@ -30,7 +28,7 @@
         /// <param name="callBack">The action to call when finished.</param>
         public TaskWeekReport(Action callBack)
         {
-            CallBack = callBack;
+            this.callBack = callBack;
         }
 
         /// <summary>
@@ -38,14 +36,14 @@
         /// </summary>
         public void RunTask()
         {
-            Thread BackgroundThread = new Thread(new ThreadStart(BackgroundProcess))
+            Thread backgroundThread = new Thread(new ThreadStart(BackgroundProcess))
             {
                 Name = "Objectives.TaskWeekReport",
                 IsBackground = true,
                 Priority = ThreadPriority.Normal,
             };
-            BackgroundThread.SetApartmentState(ApartmentState.STA);
-            BackgroundThread.Start();
+            backgroundThread.SetApartmentState(ApartmentState.STA);
+            backgroundThread.Start();
         }
 
         /// <summary>
@@ -75,13 +73,13 @@
                 Log.Info("No Week found to process.");
             }
 
-            CallBack?.Invoke();
+            callBack?.Invoke();
         }
 
         /// <summary>
         /// Find the day that is suitable to create the report for.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The date that is found.</returns>
         private DateTime FindDay()
         {
             DateTime returnValue = DateTime.Parse(DateTime.Now.Subtract(new TimeSpan(1, 0, 0, 0, 0)).ToString(@"yyyy-MM-dd 00:00"));
@@ -117,7 +115,7 @@
         /// <summary>
         /// Get the DayReports for the week.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A value indicating success.</returns>
         private bool GetDays()
         {
             bool rv = true;
@@ -157,7 +155,7 @@
                 // Loop though the work items.
                 foreach (var next in dayReports[i].WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
                 {
-                    weekReport.WorkItems.Add(dayReports[i].Day.ToString("yyyy-MM-dd") + next.Value.ObjectiveName + next.Value.Name + next.Value.WorkType.Index, next.Value); ;
+                    weekReport.WorkItems.Add(dayReports[i].Day.ToString("yyyy-MM-dd") + next.Value.ObjectiveName + next.Value.Name + next.Value.WorkType.Index, next.Value);
                 }
             }
         }
@@ -202,23 +200,23 @@
         private void CreateAppointment()
         {
             // Create the DayReport appointment and add the images as attachments.
-            Outlook.AppointmentItem NewAppointmentItem = (Outlook.AppointmentItem)calendar.Items.Add(Outlook.OlItemType.olAppointmentItem);
-            NewAppointmentItem.Subject = "Week Report";
-            NewAppointmentItem.Categories = "Objectives - Week Report";
-            NewAppointmentItem.Start = day;
-            NewAppointmentItem.AllDayEvent = true;
-            NewAppointmentItem.ReminderSet = false;
-            NewAppointmentItem.Body = JsonConvert.SerializeObject(weekReport, Formatting.Indented);
-            NewAppointmentItem.Save();
+            Outlook.AppointmentItem newAppointmentItem = (Outlook.AppointmentItem)calendar.Items.Add(Outlook.OlItemType.olAppointmentItem);
+            newAppointmentItem.Subject = "Week Report";
+            newAppointmentItem.Categories = "Objectives - Week Report";
+            newAppointmentItem.Start = day;
+            newAppointmentItem.AllDayEvent = true;
+            newAppointmentItem.ReminderSet = false;
+            newAppointmentItem.Body = JsonConvert.SerializeObject(weekReport, Formatting.Indented);
+            newAppointmentItem.Save();
         }
 
         /// <summary>
         /// Get the appointments that fall in the range of the timespan.
         /// </summary>
-        /// <param name="folder"></param>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
-        /// <returns></returns>
+        /// <param name="folder">The folder to search.</param>
+        /// <param name="startTime">The start time.</param>
+        /// <param name="endTime">The finish time.</param>
+        /// <returns>A collection of outlook items that match the filter.</returns>
         private Outlook.Items GetAppointmentsInRange(Outlook.Folder folder, DateTime startTime, DateTime endTime)
         {
             string filter = "[Start] <= '"

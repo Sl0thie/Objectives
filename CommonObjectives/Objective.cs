@@ -21,7 +21,7 @@
         public string Path { get; set; }
 
         /// <summary>
-        /// Gets or sets a Value indicates whether the Objective is currently archived.
+        /// Gets or sets a Value indicating whether the Objective is currently archived.
         /// </summary>
         public bool Archived { get; set; }
 

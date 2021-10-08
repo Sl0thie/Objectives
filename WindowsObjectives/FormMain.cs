@@ -10,8 +10,15 @@
     using Microsoft.Win32;
     using Newtonsoft.Json;
 
+    /// <summary>
+    /// FormMain Form.
+    /// </summary>
     public partial class FormMain : Form
     {
+        private readonly SystemSleep systemSleep = new SystemSleep();
+        private readonly SystemIdle systemIdle = new SystemIdle();
+        private readonly SystemUptime systemUptime = new SystemUptime();
+
         [DllImport("user32.dll")]
         private static extern bool GetLastInputInfo(ref LASTINPUTINFO plii);
 
@@ -20,9 +27,9 @@
         {
             public static readonly int SizeOf = Marshal.SizeOf(typeof(LASTINPUTINFO));
             [MarshalAs(UnmanagedType.U4)]
-            public int cbSize;
+            public int CbSize;
             [MarshalAs(UnmanagedType.U4)]
-            public UInt32 dwTime;
+            public uint DwTime;
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -37,16 +44,33 @@
         [DllImport("user32.dll", SetLastError = true)]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
-        private readonly int IdleMin = 300;
+        private readonly int idleMin = 300;
         private int lastValue;
         private bool armed = false;
-        private bool IsIdle = false;
-        private bool IsAsleep = false;
-        private readonly SystemSleep systemSleep = new SystemSleep();
-        private readonly SystemIdle systemIdle = new SystemIdle();
-        private readonly SystemUptime systemUptime = new SystemUptime();
-        private string StorageFolder;
+        private bool isIdle = false;
+        private bool isAsleep = false;
+        private string storageFolder;
 
+        private static int GetLastInputTime()
+        {
+            int idleTime = 0;
+            LASTINPUTINFO lastInputInfo = new LASTINPUTINFO();
+            lastInputInfo.CbSize = Marshal.SizeOf(lastInputInfo);
+            lastInputInfo.DwTime = 0;
+            int envTicks = Environment.TickCount;
+            if (GetLastInputInfo(ref lastInputInfo))
+            {
+                int lastInputTick = (int)lastInputInfo.DwTime;
+
+                idleTime = envTicks - lastInputTick;
+            }
+
+            return (idleTime > 0) ? (idleTime / 1000) : idleTime;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FormMain"/> class.
+        /// </summary>
         public FormMain()
         {
             InitializeComponent();
@@ -54,10 +78,10 @@
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            this.Visible = false;
+            Visible = false;
             SystemEvents.PowerModeChanged += OnPowerChange;
 
-            StorageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
+            storageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
 
             systemSleep.ComputerName = Environment.MachineName.ToString();
             systemSleep.UserName = Environment.UserName.ToString();
@@ -75,12 +99,12 @@
             switch (e.Mode)
             {
                 case PowerModes.Resume:
-                    IsAsleep = false;
+                    isAsleep = false;
                     ProcessSleep();
 
                     break;
                 case PowerModes.Suspend:
-                    IsAsleep = true;
+                    isAsleep = true;
                     systemSleep.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
                     break;
             }
@@ -93,10 +117,10 @@
             if (systemSleep.Start != systemSleep.Finish)
             {
                 string json = JsonConvert.SerializeObject(systemSleep, Formatting.Indented);
-                File.WriteAllText(StorageFolder + @"\" + (int)SystemType.Sleep + "-" + Guid.NewGuid().ToString() + ".json", json);
+                File.WriteAllText(storageFolder + @"\" + (int)SystemType.Sleep + "-" + Guid.NewGuid().ToString() + ".json", json);
             }
 
-            if (IsAsleep)
+            if (isAsleep)
             {
                 systemSleep.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
             }
@@ -104,17 +128,17 @@
 
         private void ProcessIdle()
         {
-            Debug.WriteLine("Process Idle " + StorageFolder);
+            Debug.WriteLine("Process Idle " + storageFolder);
 
             systemIdle.Finish = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
 
             if (systemIdle.Start != systemIdle.Finish)
             {
                 string json = JsonConvert.SerializeObject(systemIdle, Formatting.Indented);
-                File.WriteAllText(StorageFolder + @"\" + (int)SystemType.Idle + "-" + Guid.NewGuid().ToString() + ".json", json);
+                File.WriteAllText(storageFolder + @"\" + (int)SystemType.Idle + "-" + Guid.NewGuid().ToString() + ".json", json);
             }
 
-            if (IsIdle)
+            if (isIdle)
             {
                 systemIdle.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
             }
@@ -127,7 +151,7 @@
             if (systemUptime.Start != systemUptime.Finish)
             {
                 string json = JsonConvert.SerializeObject(systemUptime, Formatting.Indented);
-                File.WriteAllText(StorageFolder + @"\" + (int)SystemType.Uptime + "-" + Guid.NewGuid().ToString() + ".json", json);
+                File.WriteAllText(storageFolder + @"\" + (int)SystemType.Uptime + "-" + Guid.NewGuid().ToString() + ".json", json);
             }
 
             systemUptime.ActiveApplications.Clear();
@@ -136,12 +160,12 @@
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (IsAsleep)
+            if (isAsleep)
             {
                 ProcessSleep();
             }
 
-            if (IsIdle)
+            if (isIdle)
             {
                 ProcessIdle();
             }
@@ -151,7 +175,7 @@
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void TimerMain_Tick(object sender, EventArgs e)
@@ -159,10 +183,10 @@
             int nextValue = GetLastInputTime();
             if (armed)
             {
-                if (nextValue < IdleMin)
+                if (nextValue < idleMin)
                 {
                     armed = false;
-                    IsIdle = false;
+                    isIdle = false;
                     ProcessIdle();
                 }
                 else
@@ -171,10 +195,10 @@
             }
             else
             {
-                if (nextValue > IdleMin)
+                if (nextValue > idleMin)
                 {
                     armed = true;
-                    IsIdle = true;
+                    isIdle = true;
                     systemIdle.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
                 }
             }
@@ -182,16 +206,16 @@
             lastValue = nextValue;
 
             Debug.WriteLine(nextValue + " " + lastValue);
-            Debug.WriteLine("Idle : " + IsIdle + " Sleep : " + IsAsleep);
+            Debug.WriteLine("Idle : " + isIdle + " Sleep : " + isAsleep);
 
             if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
             {
-                if (IsAsleep)
+                if (isAsleep)
                 {
                     ProcessSleep();
                 }
 
-                if (IsIdle)
+                if (isIdle)
                 {
                     ProcessIdle();
                 }
@@ -207,16 +231,15 @@
             try
             {
                 IntPtr handle = GetForegroundWindow();
-                var intLength = GetWindowTextLength(handle) + 1;
-                var stringBuilder = new StringBuilder(intLength);
+                int intLength = GetWindowTextLength(handle) + 1;
+                StringBuilder stringBuilder = new StringBuilder(intLength);
                 if (GetWindowText(handle, stringBuilder, intLength) > 0)
                 {
                     app.Title = stringBuilder.ToString();
                 }
 
-                uint procId = 0;
-                GetWindowThreadProcessId(handle, out procId);
-                var proc = Process.GetProcessById((int)procId);
+                _ = GetWindowThreadProcessId(handle, out uint procId);
+                Process proc = Process.GetProcessById((int)procId);
                 app.Application = proc.MainModule.ToString();
             }
             catch (Exception ex)
@@ -228,30 +251,14 @@
             systemUptime.ActiveApplications.Add(app);
         }
 
-        private static int GetLastInputTime()
-        {
-            int idleTime = 0;
-            LASTINPUTINFO lastInputInfo = new LASTINPUTINFO();
-            lastInputInfo.cbSize = Marshal.SizeOf(lastInputInfo);
-            lastInputInfo.dwTime = 0;
-            int envTicks = Environment.TickCount;
-            if (GetLastInputInfo(ref lastInputInfo))
-            {
-                int lastInputTick = (int)lastInputInfo.dwTime;
-
-                idleTime = envTicks - lastInputTick;
-            }
-
-            return ((idleTime > 0) ? (idleTime / 1000) : idleTime);
-        }
-
         private string GetCaptionOfActiveWindow()
         {
-            var strTitle = string.Empty;
-            var handle = GetForegroundWindow();
+            string strTitle = string.Empty;
+            IntPtr handle = GetForegroundWindow();
+
             // Obtain the length of the text
-            var intLength = GetWindowTextLength(handle) + 1;
-            var stringBuilder = new StringBuilder(intLength);
+            int intLength = GetWindowTextLength(handle) + 1;
+            StringBuilder stringBuilder = new StringBuilder(intLength);
             if (GetWindowText(handle, stringBuilder, intLength) > 0)
             {
                 strTitle = stringBuilder.ToString();
@@ -259,6 +266,5 @@
 
             return strTitle;
         }
-
     }
 }
