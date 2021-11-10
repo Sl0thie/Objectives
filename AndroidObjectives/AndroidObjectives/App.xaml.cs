@@ -15,7 +15,7 @@ namespace AndroidObjectives
         /// </summary>
         public App()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             MainPage = new AppShell();
         }
 

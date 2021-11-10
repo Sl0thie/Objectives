@@ -21,6 +21,9 @@
             </summary>
         </member>
         <member name="T:VisioObjectives.ThisAddIn">
+            <summary>
+            ThisAddIn class.
+            </summary>
             
         </member>
         <member name="M:VisioObjectives.ThisAddIn.InternalStartup">

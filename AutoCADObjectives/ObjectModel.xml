@@ -41,14 +41,14 @@
             Handles the main timer tick event.
             </summary>
             <param name="sender">parameter is unused.</param>
-            <param name="e">parameter is unused.</param>
+            <param name="e">parameter is also unused.</param>
         </member>
         <member name="M:AutoCADObjectives.ExtApp.Callback_DocumentCreated(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)">
             <summary>
             Event for when documents are created.
             </summary>
             <param name="sender">parameter is unused.</param>
-            <param name="e">parameter is unused.</param>
+            <param name="e">parameter is also unused.</param>
         </member>
         <member name="M:AutoCADObjectives.ExtApp.Callback_DocumentToBeDestroyed(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)">
             <summary>
@@ -59,7 +59,7 @@
             even though there is no drawing of that name. There is also no previous matching create event either.
             </remarks>
             <param name="sender">parameter is unused.</param>
-            <param name="e">parameter is unused.</param>
+            <param name="e">parameter is also unused.</param>
         </member>
         <member name="M:AutoCADObjectives.ExtApp.Callback_DocumentActivated(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)">
             <summary>
@@ -69,7 +69,7 @@
             WARNING: When AutoCAD starts this event fires but the document is null.
             </remarks>
             <param name="sender">parameter is unused.</param>
-            <param name="e">parameter is unused.</param>
+            <param name="e">parameter also unused.</param>
         </member>
         <member name="M:AutoCADObjectives.ExtApp.Callback_DocumentToBeActivated(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)">
             <summary>
@@ -77,7 +77,7 @@
             Currently not used as this level of detail is not implemented yet.
             </summary>
             <param name="sender">parameter is unused.</param>
-            <param name="e">parameter is unused.</param>
+            <param name="e">parameter also is unused.</param>
         </member>
         <member name="M:AutoCADObjectives.ExtApp.Callback_DocumentToBeDeactivated(System.Object,Autodesk.AutoCAD.ApplicationServices.DocumentCollectionEventArgs)">
             <summary>
@@ -85,7 +85,7 @@
             As with Callback_DocumentToBeActivated this is not implemented yet.
             </summary>
             <param name="sender">parameter is unused.</param>
-            <param name="e">parameter is unused.</param>
+            <param name="e">parameter is also unused.</param>
         </member>
         <member name="M:AutoCADObjectives.ExtApp.SaveData(CommonObjectives.WorkItem)">
             <summary>

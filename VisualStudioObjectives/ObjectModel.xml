@@ -18,23 +18,23 @@
             <summary>
             Initializes the VisualStudioObectivesPackage.
             </summary>
-            <param name="cancellationToken"></param>
-            <param name="progress"></param>
-            <returns></returns>
+            <param name="cancellationToken">Token to manage cancellation.</param>
+            <param name="progress">Progress parameter.</param>
+            <returns>A task.</returns>
         </member>
         <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.MainTimer_Elapsed(System.Object,System.Timers.ElapsedEventArgs)">
             <summary>
-            Handles the MainTimer event.  
+            Handles the MainTimer event.
             </summary>
             <param name="sender">This parameter is unused.</param>
-            <param name="e">This parameter is unused.</param>
+            <param name="e">This parameter also is unused.</param>
         </member>
         <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.IsSolutionUnsavedAsync(EnvDTE.Solution,System.Boolean)">
             <summary>
             Searches projects and project items for unsaved changes.
             </summary>
             <remarks>
-            List of [Project GUID's](https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids")
+            List of [Project GUID's](https://www.codeproject.com/reference/720512/list-of-visual-studio-project-type-guids").
             </remarks>
             <param name="solution">The solution to search for unsaved changes.</param>
             <param name="save">If true, save the items if they are unsaved.</param>
@@ -42,8 +42,8 @@
         </member>
         <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.IsProjectItemsUnsavedAsync(EnvDTE.ProjectItem,System.Boolean)">
             <summary>
-            Searches project items for unsaved changes.  
-            Also checks the sub items. (recursive)
+            Searches project items for unsaved changes.
+            Also checks the sub items. (recursive).
             </summary>
             <param name="item">The project item to search.  Includes sub items if the item is a folder.</param>
             <param name="save">If true, will save the item if unsaved changes are found.</param>
@@ -59,14 +59,14 @@
             Handles the Solution load event.
             </summary>
             <param name="sender">This parameter is unused.</param>
-            <param name="e">This parameter is unused.</param>
+            <param name="e">This parameter also is unused.</param>
         </member>
         <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.SolutionEvents_OnBeforeCloseSolution(System.Object,System.EventArgs)">
             <summary>
             Handles the Solution close event.
             </summary>
             <param name="sender">This parameter is unused.</param>
-            <param name="e">This parameter is unused.</param>
+            <param name="e">This parameter also is unused.</param>
         </member>
         <member name="M:VisualStudioObjectives.VisualStudioObectivesPackage.IsSolutionLoadedAsync">
             <summary>

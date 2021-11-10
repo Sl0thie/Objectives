@@ -6,150 +6,179 @@
     <members>
         <member name="T:AndroidObjectives.App">
             <summary>
-            
+            App class.
             </summary>
         </member>
         <member name="M:AndroidObjectives.App.#ctor">
             <summary>
-            
+            Initializes a new instance of the <see cref="T:AndroidObjectives.App"/> class.
             </summary>
         </member>
         <member name="M:AndroidObjectives.App.OnStart">
             <summary>
-            
+            OnStart method.
             </summary>
         </member>
         <member name="M:AndroidObjectives.App.OnSleep">
             <summary>
-            
+            OnSleep method.
             </summary>
         </member>
         <member name="M:AndroidObjectives.App.OnResume">
             <summary>
-            
+            OnResume method.
             </summary>
         </member>
         <member name="T:AndroidObjectives.AppShell">
             <summary>
-            
+            AppShell class.
             </summary>
         </member>
         <member name="M:AndroidObjectives.AppShell.#ctor">
             <summary>
-            
+            Initializes a new instance of the <see cref="T:AndroidObjectives.AppShell"/> class.
             </summary>
         </member>
         <member name="M:AndroidObjectives.AppShell.OnMenuItemClicked(System.Object,System.EventArgs)">
             <summary>
-            
+            OnMenuItemClicked method.
             </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="T:AndroidObjectives.AsyncLazy`1">
+            <summary>
+            AsyncLazt class.
+            </summary>
+            <typeparam name="T">Generic.</typeparam>
+        </member>
+        <member name="M:AndroidObjectives.AsyncLazy`1.#ctor(System.Func{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:AndroidObjectives.AsyncLazy`1"/> class.
+            </summary>
+            <param name="factory">Factory parameter.</param>
+        </member>
+        <member name="M:AndroidObjectives.AsyncLazy`1.#ctor(System.Func{System.Threading.Tasks.Task{`0}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:AndroidObjectives.AsyncLazy`1"/> class.
+            </summary>
+            <param name="factory">Factory parameter.</param>
+        </member>
+        <member name="M:AndroidObjectives.AsyncLazy`1.GetAwaiter">
+            <summary>
+            GetAwaiter method.
+            </summary>
+            <returns>TaskAwaiter.</returns>
+        </member>
+        <member name="M:AndroidObjectives.AsyncLazy`1.Start">
+            <summary>
+            Start Method.
+            </summary>
         </member>
         <member name="T:AndroidObjectives.Constants">
             <summary>
-            
+            Constants class manages global constants.
             </summary>
         </member>
         <member name="F:AndroidObjectives.Constants.DatabaseFilename">
             <summary>
-            
+            Database file name.
             </summary>
         </member>
         <member name="F:AndroidObjectives.Constants.Flags">
             <summary>
-            
+            SQLite flags.
             </summary>
         </member>
         <member name="P:AndroidObjectives.Constants.DatabasePath">
             <summary>
-            
+            Gets the database path.
             </summary>
         </member>
         <member name="T:AndroidObjectives.Data.LocalDatabase">
             <summary>
-            
+            LocalDatabase class.
             </summary>
         </member>
         <member name="F:AndroidObjectives.Data.LocalDatabase.Instance">
             <summary>
-            
+            Singleton instance of the database.
             </summary>
         </member>
         <member name="M:AndroidObjectives.Data.LocalDatabase.#ctor">
             <summary>
-            
+            Initializes a new instance of the <see cref="T:AndroidObjectives.Data.LocalDatabase"/> class.
             </summary>
         </member>
         <member name="M:AndroidObjectives.Data.LocalDatabase.DropCreateClientsAsync">
             <summary>
-            
+            Drops ans creates the Clients table.
             </summary>
         </member>
         <member name="M:AndroidObjectives.Data.LocalDatabase.SaveClientAsync(AndroidObjectives.Data.Client)">
             <summary>
-            
+            Save client object to database.
             </summary>
-            <param name="client"></param>
-            <returns></returns>
+            <param name="client">The client object to save to the database.</param>
+            <returns>A value indicating the success.</returns>
         </member>
         <member name="M:AndroidObjectives.Data.LocalDatabase.CallForClients">
             <summary>
-            
+            Calls the server for the client objects.
             </summary>
         </member>
         <member name="M:AndroidObjectives.Data.LocalDatabase.GetClientsAsync">
             <summary>
-            
+            Gets the clients.
             </summary>
-            <returns></returns>
+            <returns>A table of client objects.</returns>
         </member>
         <member name="M:AndroidObjectives.Data.LocalDatabase.CallForObjectives">
             <summary>
-            
+            Calls the server for objectives.
             </summary>
         </member>
         <member name="M:AndroidObjectives.Data.LocalDatabase.GetObjectivesAsync">
             <summary>
-            
+            Get objectives.
             </summary>
-            <returns></returns>
+            <returns>A table of objectives.</returns>
         </member>
         <member name="M:AndroidObjectives.Data.LocalDatabase.GetItemsNotDoneAsync">
             <summary>
-            
+            Get items not done.
             </summary>
-            <returns></returns>
+            <returns>Returns a table of objects not done.</returns>
         </member>
         <member name="M:AndroidObjectives.Data.LocalDatabase.GetItemAsync(System.String)">
             <summary>
-            
+            Get item.
             </summary>
-            <param name="objectiveName"></param>
-            <returns></returns>
+            <param name="objectiveName">The objective name to get.</param>
+            <returns>The objective item.</returns>
         </member>
         <member name="M:AndroidObjectives.Data.LocalDatabase.SaveObjectiveAsync(CommonObjectives.Serial.Objective)">
             <summary>
-            
+            Save an objective to the database.
             </summary>
-            <param name="objective"></param>
-            <returns></returns>
+            <param name="objective">The objective to save.</param>
+            <returns>A value indicating whether the method is successful.</returns>
         </member>
         <member name="M:AndroidObjectives.Data.LocalDatabase.DeleteObjectiveAsync(CommonObjectives.Serial.Objective)">
             <summary>
-            
+            Delete an objective.
             </summary>
-            <param name="item"></param>
-            <returns></returns>
+            <param name="item">The objective to delete.</param>
+            <returns>A value indicating the success.</returns>
         </member>
         <member name="T:AndroidObjectives.Data.Client">
             <summary>
-            
+            Client class.
             </summary>
         </member>
         <member name="P:AndroidObjectives.Data.Client.EntryID">
             <summary>
-            
+            Gets or sets the EntryID.
             </summary>
         </member>
         <member name="P:AndroidObjectives.Data.Client.Title">
@@ -172,85 +201,112 @@
         </member>
         <member name="T:AndroidObjectives.Views.ClientsPage">
             <summary>
-            
+            ClientsPage class.
             </summary>
         </member>
         <member name="M:AndroidObjectives.Views.ClientsPage.#ctor">
             <summary>
-            
+            Initializes a new instance of the <see cref="T:AndroidObjectives.Views.ClientsPage"/> class.
             </summary>
         </member>
         <member name="M:AndroidObjectives.Views.ClientsPage.OnAppearing">
             <summary>
-            
+            OnAppearing override.
             </summary>
+        </member>
+        <member name="M:AndroidObjectives.Views.ClientsPage.OnItemAdded(System.Object,System.EventArgs)">
+            <summary>
+            OnItemAdded method.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
         </member>
         <member name="T:AndroidObjectives.Views.LocationPage">
             <summary>
-            
+            LocationPage class.
             </summary>
         </member>
         <member name="M:AndroidObjectives.Views.LocationPage.#ctor">
             <summary>
-            
+            Initializes a new instance of the <see cref="T:AndroidObjectives.Views.LocationPage"/> class.
             </summary>
         </member>
         <member name="M:AndroidObjectives.Views.LocationPage.OnAppearing">
             <summary>
-            
+            OnAppearing override.
             </summary>
         </member>
-        <member name="M:AndroidObjectives.Views.LocationPage.btnLocation_Clicked(System.Object,System.EventArgs)">
+        <member name="M:AndroidObjectives.Views.LocationPage.BtnLocation_Clicked(System.Object,System.EventArgs)">
             <summary>
-            
+            btnLocation_Clicked method.
             </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="T:AndroidObjectives.Views.MessagesPage">
+            <summary>
+            MessagesPage class.
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Views.MessagesPage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AndroidObjectives.Views.MessagesPage"/> class.
+            </summary>
         </member>
         <member name="T:AndroidObjectives.Views.ObjectivePage">
             <summary>
-            
+            ObjectivePage class.
             </summary>
         </member>
         <member name="M:AndroidObjectives.Views.ObjectivePage.#ctor">
             <summary>
-            
+            Initializes a new instance of the <see cref="T:AndroidObjectives.Views.ObjectivePage"/> class.
             </summary>
         </member>
         <member name="M:AndroidObjectives.Views.ObjectivePage.OnSaveClicked(System.Object,System.EventArgs)">
             <summary>
-            
+            OnSaveClicked method.
             </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
         </member>
         <member name="M:AndroidObjectives.Views.ObjectivePage.OnDeleteClicked(System.Object,System.EventArgs)">
             <summary>
-            
+            OnDeleteClicked method.
             </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
         </member>
         <member name="M:AndroidObjectives.Views.ObjectivePage.OnCancelClicked(System.Object,System.EventArgs)">
             <summary>
-            
+            OnCancelClicked method.
             </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
         </member>
         <member name="T:AndroidObjectives.Views.ObjectivesPage">
             <summary>
-            
+            ObjectivesPageObjectivesPage class.
             </summary>
         </member>
         <member name="M:AndroidObjectives.Views.ObjectivesPage.#ctor">
             <summary>
-            
+            Initializes a new instance of the <see cref="T:AndroidObjectives.Views.ObjectivesPage"/> class.
             </summary>
         </member>
         <member name="M:AndroidObjectives.Views.ObjectivesPage.OnAppearing">
             <summary>
-            
+            OnAppearing method.
+            </summary>
+        </member>
+        <member name="T:AndroidObjectives.Views.TasksPage">
+            <summary>
+            TasksPage class.
+            </summary>
+        </member>
+        <member name="M:AndroidObjectives.Views.TasksPage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:AndroidObjectives.Views.TasksPage"/> class.
             </summary>
         </member>
     </members>

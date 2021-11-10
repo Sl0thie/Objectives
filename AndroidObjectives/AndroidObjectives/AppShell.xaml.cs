@@ -16,10 +16,11 @@
         /// </summary>
         public AppShell()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             Routing.RegisterRoute(nameof(ObjectivePage), typeof(ObjectivePage));
             Routing.RegisterRoute(nameof(ObjectivesPage), typeof(ObjectivesPage));
         }
+
 
         /// <summary>
         /// OnMenuItemClicked method.

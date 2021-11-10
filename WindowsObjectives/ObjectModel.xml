@@ -4,6 +4,16 @@
         <name>WindowsObjectives</name>
     </assembly>
     <members>
+        <member name="T:WindowsObjectives.FormMain">
+            <summary>
+            FormMain Form.
+            </summary>
+        </member>
+        <member name="M:WindowsObjectives.FormMain.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:WindowsObjectives.FormMain"/> class.
+            </summary>
+        </member>
         <member name="F:WindowsObjectives.FormMain.components">
             <summary>
             Required designer variable.
@@ -19,6 +29,11 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:WindowsObjectives.Program">
+            <summary>
+            Program class.
             </summary>
         </member>
         <member name="M:WindowsObjectives.Program.Main">

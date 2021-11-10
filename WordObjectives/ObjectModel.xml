@@ -28,10 +28,10 @@
         </member>
         <member name="M:WordObjectives.ThisAddIn.ThisAddIn_Startup(System.Object,System.EventArgs)">
             <summary>
-            
+            ThisAddIn_Startup manages startup of the class.
             </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
         </member>
         <member name="M:WordObjectives.ThisAddIn.Application_DocumentBeforeClose(Microsoft.Office.Interop.Word.Document,System.Boolean@)">
             <summary>
@@ -39,10 +39,10 @@
             Occurs immediately before any open document closes.
             </summary>
             <remarks>
-            [Application.DocumentBeforeClose Event (Word)](Https://docs.microsoft.com/en-us/office/vba/api/word.application.documentbeforeclose)
+            [Application.DocumentBeforeClose Event (Word)](Https://docs.microsoft.com/en-us/office/vba/api/word.application.documentbeforeclose).
             </remarks>
-            <param name="Doc">The document that is closing.</param>
-            <param name="Cancel">Bool value to cancel the closing of the document.</param>
+            <param name="doc">The document that is closing.</param>
+            <param name="cancel">Bool value to cancel the closing of the document.</param>
         </member>
         <member name="M:WordObjectives.ThisAddIn.Application_DocumentChange">
             <summary>
@@ -58,7 +58,7 @@
             Event handler for when a document is opened.
             <seealso href="https://docs.microsoft.com/en-us/office/vba/api/word.application.documentopen">Application.DocumentOpen event (Word)</seealso>
             </summary>
-            <param name="Doc">The document that was opened.</param>
+            <param name="doc">The document that was opened.</param>
         </member>
         <member name="M:WordObjectives.ThisAddIn.CheckDocuments">
             <summary>

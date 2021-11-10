@@ -11,27 +11,27 @@
         </member>
         <member name="P:CommonObjectives.ActiveApplication.Time">
             <summary>
-            The time is was measured.
+            Gets or sets the time is was measured.
             </summary>
         </member>
         <member name="P:CommonObjectives.ActiveApplication.Title">
             <summary>
-            The title of the focused application.
+            Gets or sets the title of the focused application.
             </summary>
         </member>
         <member name="P:CommonObjectives.ActiveApplication.Application">
             <summary>
-            The application name that is focused.
+            Gets or sets the application name that is focused.
             </summary>
         </member>
         <member name="T:CommonObjectives.Client">
             <summary>
-            Client class extends the outlook ContactItem
+            Client class extends the outlook ContactItem.
             </summary>
         </member>
         <member name="P:CommonObjectives.Client.EntryId">
             <summary>
-            Get or sets the EntryID.
+            Gets or sets the EntryID.
             This is the Outlook ContactItem EntryID for the contact that is a client.
             </summary>
         </member>
@@ -54,79 +54,79 @@
             </summary>
         </member>
         <member name="T:CommonObjectives.DrawingSession">
-             <summary>
-            
-             </summary>
+            <summary>
+            DrawingSession class.
+            </summary>
         </member>
         <member name="P:CommonObjectives.DrawingSession.Name">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the Name of the drawing session.
+            </summary>
         </member>
         <member name="P:CommonObjectives.DrawingSession.ObjectiveName">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the ObjectiveName.
+            </summary>
         </member>
         <member name="P:CommonObjectives.DrawingSession.Path">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the path of the drawing session.
+            </summary>
         </member>
         <member name="P:CommonObjectives.DrawingSession.Application">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the application type.
+            </summary>
         </member>
         <member name="P:CommonObjectives.DrawingSession.Version">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the version number.
+            </summary>
         </member>
         <member name="P:CommonObjectives.DrawingSession.Processed">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets a value indicating whether this object has been processed.
+            </summary>
         </member>
         <member name="P:CommonObjectives.DrawingSession.Start">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start time.
+            </summary>
         </member>
         <member name="P:CommonObjectives.DrawingSession.Finish">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the finish time.
+            </summary>
         </member>
         <member name="P:CommonObjectives.DrawingSession.LastActive">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the last active time.
+            </summary>
         </member>
         <member name="P:CommonObjectives.DrawingSession.ActiveTime">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the active time.
+            </summary>
         </member>
         <member name="P:CommonObjectives.DrawingSession.Active">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets a value indicating whether the object is active.
+            </summary>
         </member>
         <member name="P:CommonObjectives.DrawingSession.StartSize">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start size.
+            </summary>
         </member>
         <member name="P:CommonObjectives.DrawingSession.FinishSize">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the finish time.
+            </summary>
         </member>
         <member name="M:CommonObjectives.DrawingSession.#ctor">
-             <summary>
-            
-             </summary>
+            <summary>
+            Initializes a new instance of the <see cref="T:CommonObjectives.DrawingSession"/> class.
+            </summary>
         </member>
         <member name="T:CommonObjectives.DayReport">
             <summary>
@@ -135,42 +135,42 @@
         </member>
         <member name="P:CommonObjectives.DayReport.Day">
             <summary>
-            The Date value of the report.
+            Gets or sets the Date value of the report.
             </summary>
         </member>
         <member name="P:CommonObjectives.DayReport.TotalUptime">
             <summary>
-            An int value returning the total number of minutes the system was up that day.
+            Gets or sets the int value returning the total number of minutes the system was up that day.
             </summary>
         </member>
         <member name="P:CommonObjectives.DayReport.TotalIdle">
             <summary>
-            An int value returning the total number of minutes the system was idle during up time.
+            Gets or sets the int value returning the total number of minutes the system was idle during up time.
             </summary>
         </member>
         <member name="P:CommonObjectives.DayReport.TotalWork">
             <summary>
-            An int value returning how many minutes of work time was determined.
+            Gets or sets the int value returning how many minutes of work time was determined.
             </summary>
         </member>
         <member name="P:CommonObjectives.DayReport.WorkItems">
             <summary>
-            A dictionary for the Objective's Totals.
+            Gets or sets a dictionary for the Objective's Totals.
             </summary>
         </member>
         <member name="P:CommonObjectives.DayReport.UniqueApplications">
             <summary>
-            A dictionary of the unique applications from the system monitor.
+            Gets or sets a dictionary of the unique applications from the system monitor.
             </summary>
         </member>
         <member name="P:CommonObjectives.DayReport.Minutes">
             <summary>
-            An array of the minute objects for the day.
+            Gets or sets an array of the minute objects for the day.
             </summary>
         </member>
         <member name="P:CommonObjectives.DayReport.HTML">
             <summary>
-            A string containing the HTML for the report.
+            Gets or sets a string containing the HTML for the report.
             </summary>
         </member>
         <member name="M:CommonObjectives.DayReport.#ctor">
@@ -366,23 +366,23 @@
         </member>
         <member name="P:CommonObjectives.IWorkItem.Id">
             <summary>
-            Index for the item.
+            Gets or sets the Index for the item.
             GUID is used to make the item database friendly.
             </summary>
         </member>
         <member name="P:CommonObjectives.IWorkItem.ObjectiveName">
             <summary>
-            Objective Name related to the work item.
+            Gets or sets the Objective Name related to the work item.
             </summary>
         </member>
         <member name="P:CommonObjectives.IWorkItem.Start">
             <summary>
-            The start of the work item.
+            Gets or sets the start of the work item.
             </summary>
         </member>
         <member name="P:CommonObjectives.IWorkItem.Finish">
             <summary>
-            The finish of the work item.
+            Gets or sets the finish of the work item.
             </summary>
         </member>
         <member name="T:CommonObjectives.Minute">
@@ -392,50 +392,50 @@
         </member>
         <member name="P:CommonObjectives.Minute.Index">
             <summary>
-            Index is the minute of the day. (hour * 60 + minute)
+            Gets or sets the Index is the minute of the day. (hour * 60 + minute).
             </summary>
         </member>
         <member name="P:CommonObjectives.Minute.ActiveApplication">
             <summary>
-            The active application from the system monitor.
+            Gets or sets the active application from the system monitor.
             </summary>
         </member>
         <member name="P:CommonObjectives.Minute.ActiveApplicationTitle">
             <summary>
-            The title from the application from the system monitor.
+            Gets or sets the title from the application from the system monitor.
             </summary>
         </member>
         <member name="P:CommonObjectives.Minute.Up">
             <summary>
-            True is the system is on.
+            Gets or sets a value indicating whether the system is on.
             </summary>
         </member>
         <member name="P:CommonObjectives.Minute.Idle">
             <summary>
-            True if the system in an idle state.
+            Gets or sets a value indicating whether the system in an idle state.
             True is the screen save would be on if enabled.
             WARNING: The value is false when the system is off-line.
             </summary>
         </member>
         <member name="P:CommonObjectives.Minute.Billable">
             <summary>
-            True if the minute contains any Objective work.
+            Gets or sets a value indicating whether the minute contains any Objective work.
             </summary>
         </member>
         <member name="P:CommonObjectives.Minute.PrimaryWorkItem">
             <summary>
-            WorkItem that was deemed as the primary work item for that minute.
+            Gets or sets the WorkItem that was deemed as the primary work item for that minute.
             This is currently decided by the lowest workType index.
             </summary>
         </member>
         <member name="M:CommonObjectives.Minute.#ctor">
             <summary>
-            Empty constructor for serialization.
+            Initializes a new instance of the <see cref="T:CommonObjectives.Minute"/> class.
             </summary>
         </member>
         <member name="M:CommonObjectives.Minute.#ctor(System.Int32)">
             <summary>
-            Constructor to assign the minute on creation.
+            Initializes a new instance of the <see cref="T:CommonObjectives.Minute"/> class.
             </summary>
             <param name="index">The minute to use as an index.</param>
         </member>
@@ -446,17 +446,17 @@
         </member>
         <member name="P:CommonObjectives.MonthReport.Day">
             <summary>
-            The Day the report start on.
+            Gets or sets the Day the report start on.
             </summary>
         </member>
         <member name="P:CommonObjectives.MonthReport.WorkItems">
             <summary>
-            The WorkItems within the month of the report.
+            Gets or sets the WorkItems within the month of the report.
             </summary>
         </member>
         <member name="P:CommonObjectives.MonthReport.HTML">
             <summary>
-            A string containing the HTML for the report.
+            Gets or sets a string containing the HTML for the report.
             </summary>
         </member>
         <member name="T:CommonObjectives.Note">
@@ -466,40 +466,40 @@
         </member>
         <member name="P:CommonObjectives.Note.Id">
             <summary>
-            Id for the note.
+            Gets or sets the Id for the note.
             </summary>
         </member>
         <member name="P:CommonObjectives.Note.Created">
             <summary>
-            The time the note is first created.
+            Gets or sets the time the note is first created.
             </summary>
         </member>
         <member name="P:CommonObjectives.Note.Modified">
             <summary>
-            The time the note is modified.
+            Gets or sets the time the note is modified.
             </summary>
         </member>
         <member name="P:CommonObjectives.Note.Title">
             <summary>
-            The title for the note.
+            Gets or sets the title for the note.
             </summary>
         </member>
         <member name="P:CommonObjectives.Note.Content">
             <summary>
-            The content of the note.
+            Gets or sets the content of the note.
             </summary>
         </member>
         <member name="M:CommonObjectives.Note.#ctor">
             <summary>
-            Empty constructor for serialization.
+            Initializes a new instance of the <see cref="T:CommonObjectives.Note"/> class.
             </summary>
         </member>
         <member name="M:CommonObjectives.Note.#ctor(System.String,System.String)">
             <summary>
-            Constructor to fill data on creation.
+            Initializes a new instance of the <see cref="T:CommonObjectives.Note"/> class.
             </summary>
-            <param name="title"></param>
-            <param name="content"></param>
+            <param name="title">The title of the note.</param>
+            <param name="content">The content of the note.</param>
         </member>
         <member name="T:CommonObjectives.Objective">
             <summary>
@@ -508,27 +508,27 @@
         </member>
         <member name="P:CommonObjectives.Objective.ObjectiveName">
             <summary>
-            The name of the Objective.
+            Gets or sets the name of the Objective.
             </summary>
         </member>
         <member name="P:CommonObjectives.Objective.Path">
             <summary>
-            The path to the folder that holds the Objective.
+            Gets or sets the path to the folder that holds the Objective.
             </summary>
         </member>
         <member name="P:CommonObjectives.Objective.Archived">
             <summary>
-            Value indicates whether the Objective is currently archived.
+            Gets or sets a Value indicating whether the Objective is currently archived.
             </summary>
         </member>
         <member name="P:CommonObjectives.Objective.Created">
             <summary>
-            The time the Objective is created.
+            Gets or sets the time the Objective is created.
             </summary>
         </member>
         <member name="P:CommonObjectives.Objective.WorkTypes">
             <summary>
-            The current WorkType values for the Objective.
+            Gets or sets the current WorkType values for the Objective.
             </summary>
             <remarks>
             If they are not found here then the default values are used.
@@ -548,292 +548,292 @@
         </member>
         <member name="M:CommonObjectives.Objective.#ctor">
             <summary>
-            Implements a new Objective object.
+            Initializes a new instance of the <see cref="T:CommonObjectives.Objective"/> class.
             </summary>
         </member>
         <member name="T:CommonObjectives.SolutionSession">
-             <summary>
-            
-             </summary>
+            <summary>
+            SolutionSession class.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.Name">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the name.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.ObjectiveName">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the objective name.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.Application">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the application type.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.Version">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the version number.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.Processed">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets a value indicating whether the object has been processed.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.Path">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the path.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.Start">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start time.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.Finish">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the finish time.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.SolutionCount">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the solution count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.SolutionFileName">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the solution file name.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.SolutionFullName">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the solution's full name.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.SolutionProjects">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the solution projects collection.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.SolutionProperties">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the solution properties collection.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.BuildCount">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the build count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.StartFileCountTotal">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.StartFileCountCompiling">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.StartFileCountLinking">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.StartFileCountProject">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.StartFileCountResource">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.StartFileCountSource">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.StartFileCountSolution">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.StartFileSizeTotal">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.StartFileSizeCompiling">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.StartFileSizeLinking">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.StartFileSizeProject">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.StartFileSizeResource">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.StartFileSizeSource">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.StartFileSizeSolution">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.FinishFileCountTotal">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.FinishFileCountCompiling">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.FinishFileCountLinking">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.FinishFileCountProject">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.FinishFileCountResource">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.FinishFileCountSource">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.FinishFileCountSolution">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.FinishFileSizeTotal">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.FinishFileSizeCompiling">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.FinishFileSizeLinking">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.FinishFileSizeProject">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.FinishFileSizeResource">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.FinishFileSizeSource">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.FinishFileSizeSolution">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionSession.HeadItems">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the start file count.
+            </summary>
         </member>
         <member name="M:CommonObjectives.SolutionSession.#ctor">
-             <summary>
-            
-             </summary>
+            <summary>
+            Initializes a new instance of the <see cref="T:CommonObjectives.SolutionSession"/> class.
+            </summary>
         </member>
         <member name="T:CommonObjectives.SolutionProject">
-             <summary>
-            
-             </summary>
+            <summary>
+            SolutionProject class.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionProject.FileName">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the file name.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionProject.FullName">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the full name.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionProject.Name">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the name.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionProject.UniqueName">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the unique name.
+            </summary>
         </member>
         <member name="T:CommonObjectives.SolutionProperty">
-             <summary>
-            
-             </summary>
+            <summary>
+            SolutionProperty class.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionProperty.Name">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the name.
+            </summary>
         </member>
         <member name="P:CommonObjectives.SolutionProperty.Value">
-             <summary>
-            
-             </summary>
+            <summary>
+            Gets or sets the value.
+            </summary>
         </member>
         <member name="T:CommonObjectives.Serial.Objective">
-             <summary>
-            
-             </summary>
+            <summary>
+            Objective class.
+            </summary>
         </member>
         <member name="P:CommonObjectives.Serial.Objective.ObjectiveName">
             <summary>
-            The name of the Objective.
+            Gets or sets the name of the Objective.
             </summary>
         </member>
         <member name="P:CommonObjectives.Serial.Objective.Archived">
             <summary>
-            Value indicates whether the Objective is currently archived.
+            Gets or sets a value indicating whether the Objective is currently archived.
             </summary>
         </member>
         <member name="P:CommonObjectives.Serial.Objective.Created">
             <summary>
-            The time the Objective is created.
+            Gets or sets the time the Objective is created.
             </summary>
         </member>
         <member name="T:CommonObjectives.SystemIdle">
@@ -843,22 +843,22 @@
         </member>
         <member name="P:CommonObjectives.SystemIdle.ComputerName">
             <summary>
-            The network name of the computer.
+            Gets or sets the network name of the computer.
             </summary>
         </member>
         <member name="P:CommonObjectives.SystemIdle.UserName">
             <summary>
-            The logged in user of the computer.
+            Gets or sets the logged in user of the computer.
             </summary>
         </member>
         <member name="P:CommonObjectives.SystemIdle.Start">
             <summary>
-            The time the event started.
+            Gets or sets the time the event started.
             </summary>
         </member>
         <member name="P:CommonObjectives.SystemIdle.Finish">
             <summary>
-            The time the event finished.
+            Gets or sets the time the event finished.
             </summary>
         </member>
         <member name="T:CommonObjectives.SystemSleep">
@@ -868,22 +868,22 @@
         </member>
         <member name="P:CommonObjectives.SystemSleep.ComputerName">
             <summary>
-            The network name of the computer the event is from.
+            Gets or sets the network name of the computer the event is from.
             </summary>
         </member>
         <member name="P:CommonObjectives.SystemSleep.UserName">
             <summary>
-            The logged on user of the computer.
+            Gets or sets the logged on user of the computer.
             </summary>
         </member>
         <member name="P:CommonObjectives.SystemSleep.Start">
             <summary>
-            The time the event started.
+            Gets or sets the time the event started.
             </summary>
         </member>
         <member name="P:CommonObjectives.SystemSleep.Finish">
             <summary>
-            The time the event finished.
+            Gets or sets the time the event finished.
             </summary>
         </member>
         <member name="T:CommonObjectives.SystemUptime">
@@ -893,27 +893,27 @@
         </member>
         <member name="P:CommonObjectives.SystemUptime.ComputerName">
             <summary>
-            The network name of the computer.
+            Gets or sets the network name of the computer.
             </summary>
         </member>
         <member name="P:CommonObjectives.SystemUptime.UserName">
             <summary>
-            The logged on user of the computer.
+            Gets or sets the logged on user of the computer.
             </summary>
         </member>
         <member name="P:CommonObjectives.SystemUptime.Start">
             <summary>
-            The time the event started.
+            Gets or sets the time the event started.
             </summary>
         </member>
         <member name="P:CommonObjectives.SystemUptime.Finish">
             <summary>
-            The time the event finished.
+            Gets or sets the time the event finished.
             </summary>
         </member>
         <member name="P:CommonObjectives.SystemUptime.ActiveApplications">
             <summary>
-            A collection of ActiveApplication objects.
+            Gets a collection of ActiveApplication objects.
             </summary>
             <remarks>
             This is data of the focused applications during the event.
@@ -926,17 +926,17 @@
         </member>
         <member name="P:CommonObjectives.WeekReport.Day">
             <summary>
-            The day of the beginning of the report period.
+            Gets or sets the day of the beginning of the report period.
             </summary>
         </member>
         <member name="P:CommonObjectives.WeekReport.WorkItems">
             <summary>
-            A dictionary of WorkItems from the report period.
+            Gets or sets a dictionary of WorkItems from the report period.
             </summary>
         </member>
         <member name="P:CommonObjectives.WeekReport.HTML">
             <summary>
-            A string containing the HTML for the report.
+            Gets or sets a string containing the HTML for the report.
             </summary>
         </member>
         <member name="T:CommonObjectives.WorkItem">
@@ -946,102 +946,102 @@
         </member>
         <member name="P:CommonObjectives.WorkItem.Id">
             <summary>
-            GUID Index.
+            Gets or sets the GUID Index.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.Version">
             <summary>
-            The version of the WorkItem.
+            Gets or sets the version of the WorkItem.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.ObjectiveName">
             <summary>
-            Objective name.
+            Gets or sets the Objective name.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.Start">
             <summary>
-            The start time of the work item.
+            Gets or sets the start time of the work item.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.Finish">
             <summary>
-            The finish time of the work item.
+            Gets or sets the finish time of the work item.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.FilePath">
             <summary>
-            File path to the project item's location.
+            Gets or sets the File path to the project item's location.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.Name">
             <summary>
-            Project name.
+            Gets or sets the Project name.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.Description">
             <summary>
-            General description of the work item.
+            Gets or sets the General description of the work item.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.Notes">
             <summary>
-            Collection of notes related to the work item.
+            Gets a collection of notes related to the work item.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.WorkType">
             <summary>
-            The WorkType related to the work item.
+            Gets or sets the WorkType related to the work item.
             This is stored here at the time of creation of the object as the WorkType can be changed.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.Application">
             <summary>
-            The application type of the work item.
+            Gets or sets the application type of the work item.
             Some work items are not computer related so have no Application type.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.Minutes">
             <summary>
-            The calculated number of minutes for the work item.
+            Gets or sets the calculated number of minutes for the work item.
             Some items have minimum and maximum values for this set contractually so may not be the number of minutes between the start and finish DateTimes.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.Cost">
             <summary>
-            The calculated cost of the work item.
+            Gets or sets the calculated cost of the work item.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.Invoiced">
             <summary>
-            A value indicating whether the item has been invoiced.
+            Gets or sets a value indicating whether the item has been invoiced.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.StartSize">
             <summary>
-            A value of the size of the work item at the start.
+            Gets or sets a value of the size of the work item at the start.
             This is irreverent for non commuter based items.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.FinishSize">
             <summary>
-            A value of the size of the work item at the finish.
+            Gets or sets the a value of the size of the work item at the finish.
             This is irreverent for non commuter based items.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkItem.IsActive">
             <summary>
-            True if the work item was active.
+            Gets or sets a value indicating whether the work item is active.
             </summary>
         </member>
         <member name="M:CommonObjectives.WorkItem.#ctor">
             <summary>
-            An empty constructor for serialization.
+            Initializes a new instance of the <see cref="T:CommonObjectives.WorkItem"/> class.
             </summary>
         </member>
         <member name="M:CommonObjectives.WorkItem.#ctor(System.String)">
             <summary>
-            Constructor for the WorkItem.
+            Initializes a new instance of the <see cref="T:CommonObjectives.WorkItem"/> class.
             </summary>
             <param name="name">The name of the work item.</param>
         </member>
@@ -1052,37 +1052,37 @@
         </member>
         <member name="P:CommonObjectives.WorkType.Index">
             <summary>
-            The index number for the work type.
+            Gets or sets the index number for the work type.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkType.Name">
             <summary>
-            The name of the work type.
+            Gets or sets the name of the work type.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkType.Description">
             <summary>
-            The description of the work type.
+            Gets or sets the description of the work type.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkType.CostPerHour">
             <summary>
-            The cost per hour for the work type.
+            Gets or sets the cost per hour for the work type.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkType.MinimumNoOfMinutes">
             <summary>
-            The minimum number of minutes for the day.
+            Gets or sets the minimum number of minutes for the day.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkType.MaximNoOfMinutes">
             <summary>
-            The maxim number of minutes for the day.
+            Gets or sets the maxim number of minutes for the day.
             </summary>
         </member>
         <member name="P:CommonObjectives.WorkType.Application">
             <summary>
-            The application that is associated with this work type.
+            Gets or sets the application that is associated with this work type.
             </summary>
         </member>
     </members>
