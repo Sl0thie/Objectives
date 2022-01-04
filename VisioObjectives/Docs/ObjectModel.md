@@ -75,6 +75,10 @@ Returns the cached ResourceManager instance used by this class.
 
 VisioObjectives
 
+##### Summary
+
+ThisAddIn class.
+
 <a name='M-VisioObjectives-ThisAddIn-#ctor-Microsoft-Office-Tools-Factory,System-IServiceProvider-'></a>
 ### #ctor() `constructor`
 

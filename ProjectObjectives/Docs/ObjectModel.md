@@ -75,6 +75,10 @@ Returns the cached ResourceManager instance used by this class.
 
 ProjectObjectives
 
+##### Summary
+
+ThisAddIn class.
+
 <a name='M-ProjectObjectives-ThisAddIn-#ctor-Microsoft-Office-Tools-Factory,System-IServiceProvider-'></a>
 ### #ctor() `constructor`
 

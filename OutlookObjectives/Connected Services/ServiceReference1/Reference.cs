@@ -12,7 +12,9 @@ namespace OutlookObjectives.ServiceReference1 {
     using System.Runtime.Serialization;
     using System;
     
-    
+    /// <summary>
+    /// Objective class.
+    /// </summary>
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Objective", Namespace="http://www.intacomputers.com/Services/Objectives/")]
@@ -28,7 +30,10 @@ namespace OutlookObjectives.ServiceReference1 {
         private System.DateTime CreatedField;
         
         private bool ArchivedField;
-        
+
+        /// <summary>
+        /// ExtensionData method.
+        /// </summary>
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -38,7 +43,10 @@ namespace OutlookObjectives.ServiceReference1 {
                 this.extensionDataField = value;
             }
         }
-        
+
+        /// <summary>
+        /// ObjectiveName method.
+        /// </summary>
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
         public string ObjectiveName {
             get {
@@ -52,6 +60,9 @@ namespace OutlookObjectives.ServiceReference1 {
             }
         }
         
+        /// <summary>
+        /// Created method.
+        /// </summary>
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
         public System.DateTime Created {
             get {
@@ -65,6 +76,9 @@ namespace OutlookObjectives.ServiceReference1 {
             }
         }
         
+        /// <summary>
+        /// Archived method.
+        /// </summary>
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
         public bool Archived {
             get {
@@ -77,9 +91,16 @@ namespace OutlookObjectives.ServiceReference1 {
                 }
             }
         }
-        
+
+        /// <summary>
+        /// PropertyChanged event handler.
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
+        /// <summary>
+        /// RaisePropertyChanged method.
+        /// </summary>
+        /// <param name="propertyName">The property that is changing.</param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -87,7 +108,10 @@ namespace OutlookObjectives.ServiceReference1 {
             }
         }
     }
-    
+
+    /// <summary>
+    /// ClientList class.
+    /// </summary>
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ClientList", Namespace="http://www.intacomputers.com/Services/Objectives/")]
@@ -112,6 +136,9 @@ namespace OutlookObjectives.ServiceReference1 {
             }
         }
         
+        /// <summary>
+        /// Count method.
+        /// </summary>
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
         public int Count {
             get {
@@ -125,6 +152,9 @@ namespace OutlookObjectives.ServiceReference1 {
             }
         }
         
+        /// <summary>
+        /// Clients method.
+        /// </summary>
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
         public OutlookObjectives.ServiceReference1.Client[] Clients {
             get {
@@ -137,9 +167,16 @@ namespace OutlookObjectives.ServiceReference1 {
                 }
             }
         }
-        
+
+        /// <summary>
+        /// PropertyChanged event handler.
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+
+        /// <summary>
+        /// RaisePropertyChanged method.
+        /// </summary>
+        /// <param name="propertyName">The property that is changing.</param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -148,6 +185,9 @@ namespace OutlookObjectives.ServiceReference1 {
         }
     }
     
+    /// <summary>
+    /// Client class.
+    /// </summary>
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Client", Namespace="http://www.intacomputers.com/Services/Objectives/")]
@@ -168,7 +208,10 @@ namespace OutlookObjectives.ServiceReference1 {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string LastNameField;
-        
+
+        /// <summary>
+        /// ExtensionData property.
+        /// </summary>
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -179,6 +222,9 @@ namespace OutlookObjectives.ServiceReference1 {
             }
         }
         
+        /// <summary>
+        /// EntryId property.
+        /// </summary>
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
         public string EntryId {
             get {
@@ -192,6 +238,9 @@ namespace OutlookObjectives.ServiceReference1 {
             }
         }
         
+        /// <summary>
+        /// Title property.
+        /// </summary>
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
         public string Title {
             get {

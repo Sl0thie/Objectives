@@ -3,22 +3,33 @@
 
 ## Contents
 
+- [Client](#T-OutlookObjectives-ServiceReference1-Client 'OutlookObjectives.ServiceReference1.Client')
+  - [EntryId](#P-OutlookObjectives-ServiceReference1-Client-EntryId 'OutlookObjectives.ServiceReference1.Client.EntryId')
+  - [ExtensionData](#P-OutlookObjectives-ServiceReference1-Client-ExtensionData 'OutlookObjectives.ServiceReference1.Client.ExtensionData')
+  - [Title](#P-OutlookObjectives-ServiceReference1-Client-Title 'OutlookObjectives.ServiceReference1.Client.Title')
+- [ClientList](#T-OutlookObjectives-ServiceReference1-ClientList 'OutlookObjectives.ServiceReference1.ClientList')
+  - [Clients](#P-OutlookObjectives-ServiceReference1-ClientList-Clients 'OutlookObjectives.ServiceReference1.ClientList.Clients')
+  - [Count](#P-OutlookObjectives-ServiceReference1-ClientList-Count 'OutlookObjectives.ServiceReference1.ClientList.Count')
+  - [RaisePropertyChanged(propertyName)](#M-OutlookObjectives-ServiceReference1-ClientList-RaisePropertyChanged-System-String- 'OutlookObjectives.ServiceReference1.ClientList.RaisePropertyChanged(System.String)')
 - [FRObjectivesDayReport](#T-OutlookObjectives-FRObjectivesDayReport 'OutlookObjectives.FRObjectivesDayReport')
   - [components](#F-OutlookObjectives-FRObjectivesDayReport-components 'OutlookObjectives.FRObjectivesDayReport.components')
   - [Dispose()](#M-OutlookObjectives-FRObjectivesDayReport-Dispose-System-Boolean- 'OutlookObjectives.FRObjectivesDayReport.Dispose(System.Boolean)')
   - [FRObjectivesDayReport_FormRegionShowing(sender,e)](#M-OutlookObjectives-FRObjectivesDayReport-FRObjectivesDayReport_FormRegionShowing-System-Object,System-EventArgs- 'OutlookObjectives.FRObjectivesDayReport.FRObjectivesDayReport_FormRegionShowing(System.Object,System.EventArgs)')
   - [InitializeComponent()](#M-OutlookObjectives-FRObjectivesDayReport-InitializeComponent 'OutlookObjectives.FRObjectivesDayReport.InitializeComponent')
   - [InitializeManifest()](#M-OutlookObjectives-FRObjectivesDayReport-InitializeManifest-Microsoft-Office-Tools-Outlook-FormRegionManifest,Microsoft-Office-Tools-Outlook-Factory- 'OutlookObjectives.FRObjectivesDayReport.InitializeManifest(Microsoft.Office.Tools.Outlook.FormRegionManifest,Microsoft.Office.Tools.Outlook.Factory)')
+- [FRObjectivesDayReportFactory](#T-OutlookObjectives-FRObjectivesDayReport-FRObjectivesDayReportFactory 'OutlookObjectives.FRObjectivesDayReport.FRObjectivesDayReportFactory')
 - [FRObjectivesMonthReport](#T-OutlookObjectives-FRObjectivesMonthReport 'OutlookObjectives.FRObjectivesMonthReport')
   - [components](#F-OutlookObjectives-FRObjectivesMonthReport-components 'OutlookObjectives.FRObjectivesMonthReport.components')
   - [Dispose()](#M-OutlookObjectives-FRObjectivesMonthReport-Dispose-System-Boolean- 'OutlookObjectives.FRObjectivesMonthReport.Dispose(System.Boolean)')
   - [InitializeComponent()](#M-OutlookObjectives-FRObjectivesMonthReport-InitializeComponent 'OutlookObjectives.FRObjectivesMonthReport.InitializeComponent')
   - [InitializeManifest()](#M-OutlookObjectives-FRObjectivesMonthReport-InitializeManifest-Microsoft-Office-Tools-Outlook-FormRegionManifest,Microsoft-Office-Tools-Outlook-Factory- 'OutlookObjectives.FRObjectivesMonthReport.InitializeManifest(Microsoft.Office.Tools.Outlook.FormRegionManifest,Microsoft.Office.Tools.Outlook.Factory)')
+- [FRObjectivesMonthReportFactory](#T-OutlookObjectives-FRObjectivesMonthReport-FRObjectivesMonthReportFactory 'OutlookObjectives.FRObjectivesMonthReport.FRObjectivesMonthReportFactory')
 - [FRObjectivesWeekReport](#T-OutlookObjectives-FRObjectivesWeekReport 'OutlookObjectives.FRObjectivesWeekReport')
   - [components](#F-OutlookObjectives-FRObjectivesWeekReport-components 'OutlookObjectives.FRObjectivesWeekReport.components')
   - [Dispose()](#M-OutlookObjectives-FRObjectivesWeekReport-Dispose-System-Boolean- 'OutlookObjectives.FRObjectivesWeekReport.Dispose(System.Boolean)')
   - [InitializeComponent()](#M-OutlookObjectives-FRObjectivesWeekReport-InitializeComponent 'OutlookObjectives.FRObjectivesWeekReport.InitializeComponent')
   - [InitializeManifest()](#M-OutlookObjectives-FRObjectivesWeekReport-InitializeManifest-Microsoft-Office-Tools-Outlook-FormRegionManifest,Microsoft-Office-Tools-Outlook-Factory- 'OutlookObjectives.FRObjectivesWeekReport.InitializeManifest(Microsoft.Office.Tools.Outlook.FormRegionManifest,Microsoft.Office.Tools.Outlook.Factory)')
+- [FRObjectivesWeekReportFactory](#T-OutlookObjectives-FRObjectivesWeekReport-FRObjectivesWeekReportFactory 'OutlookObjectives.FRObjectivesWeekReport.FRObjectivesWeekReportFactory')
 - [FormChangeWorkType](#T-OutlookObjectives-FormChangeWorkType 'OutlookObjectives.FormChangeWorkType')
   - [#ctor()](#M-OutlookObjectives-FormChangeWorkType-#ctor 'OutlookObjectives.FormChangeWorkType.#ctor')
   - [components](#F-OutlookObjectives-FormChangeWorkType-components 'OutlookObjectives.FormChangeWorkType.components')
@@ -61,8 +72,14 @@
 - [IAppointment](#T-OutlookObjectives-IAppointment 'OutlookObjectives.IAppointment')
   - [AppointmentType](#P-OutlookObjectives-IAppointment-AppointmentType 'OutlookObjectives.IAppointment.AppointmentType')
   - [FolderPath](#P-OutlookObjectives-IAppointment-FolderPath 'OutlookObjectives.IAppointment.FolderPath')
+- [IWAppointment](#T-OutlookObjectives-IWAppointment 'OutlookObjectives.IWAppointment')
+  - [#ctor(inspector,folderPath,appointmentType)](#M-OutlookObjectives-IWAppointment-#ctor-Microsoft-Office-Interop-Outlook-Inspector,System-String,CommonObjectives-AppointmentType- 'OutlookObjectives.IWAppointment.#ctor(Microsoft.Office.Interop.Outlook.Inspector,System.String,CommonObjectives.AppointmentType)')
+  - [Appointment](#P-OutlookObjectives-IWAppointment-Appointment 'OutlookObjectives.IWAppointment.Appointment')
+  - [AppointmentType](#P-OutlookObjectives-IWAppointment-AppointmentType 'OutlookObjectives.IWAppointment.AppointmentType')
+  - [FolderPath](#P-OutlookObjectives-IWAppointment-FolderPath 'OutlookObjectives.IWAppointment.FolderPath')
+  - [Inspector](#P-OutlookObjectives-IWAppointment-Inspector 'OutlookObjectives.IWAppointment.Inspector')
 - [IWAppointmentObjectivesDayReport](#T-OutlookObjectives-IWAppointmentObjectivesDayReport 'OutlookObjectives.IWAppointmentObjectivesDayReport')
-  - [#ctor(Inspector,folderPath,appointmentType)](#M-OutlookObjectives-IWAppointmentObjectivesDayReport-#ctor-Microsoft-Office-Interop-Outlook-Inspector,System-String,CommonObjectives-AppointmentType- 'OutlookObjectives.IWAppointmentObjectivesDayReport.#ctor(Microsoft.Office.Interop.Outlook.Inspector,System.String,CommonObjectives.AppointmentType)')
+  - [#ctor(inspector,folderPath,appointmentType)](#M-OutlookObjectives-IWAppointmentObjectivesDayReport-#ctor-Microsoft-Office-Interop-Outlook-Inspector,System-String,CommonObjectives-AppointmentType- 'OutlookObjectives.IWAppointmentObjectivesDayReport.#ctor(Microsoft.Office.Interop.Outlook.Inspector,System.String,CommonObjectives.AppointmentType)')
   - [Appointment](#P-OutlookObjectives-IWAppointmentObjectivesDayReport-Appointment 'OutlookObjectives.IWAppointmentObjectivesDayReport.Appointment')
   - [AppointmentType](#P-OutlookObjectives-IWAppointmentObjectivesDayReport-AppointmentType 'OutlookObjectives.IWAppointmentObjectivesDayReport.AppointmentType')
   - [FolderPath](#P-OutlookObjectives-IWAppointmentObjectivesDayReport-FolderPath 'OutlookObjectives.IWAppointmentObjectivesDayReport.FolderPath')
@@ -84,6 +101,12 @@
   - [GetObjective(path)](#M-OutlookObjectives-InTouch-GetObjective-System-String- 'OutlookObjectives.InTouch.GetObjective(System.String)')
   - [GetTimeStringFromMinutes(minutes)](#M-OutlookObjectives-InTouch-GetTimeStringFromMinutes-System-Int32- 'OutlookObjectives.InTouch.GetTimeStringFromMinutes(System.Int32)')
   - [SaveObjective(objective)](#M-OutlookObjectives-InTouch-SaveObjective-CommonObjectives-Objective- 'OutlookObjectives.InTouch.SaveObjective(CommonObjectives.Objective)')
+- [Objective](#T-OutlookObjectives-ServiceReference1-Objective 'OutlookObjectives.ServiceReference1.Objective')
+  - [Archived](#P-OutlookObjectives-ServiceReference1-Objective-Archived 'OutlookObjectives.ServiceReference1.Objective.Archived')
+  - [Created](#P-OutlookObjectives-ServiceReference1-Objective-Created 'OutlookObjectives.ServiceReference1.Objective.Created')
+  - [ExtensionData](#P-OutlookObjectives-ServiceReference1-Objective-ExtensionData 'OutlookObjectives.ServiceReference1.Objective.ExtensionData')
+  - [ObjectiveName](#P-OutlookObjectives-ServiceReference1-Objective-ObjectiveName 'OutlookObjectives.ServiceReference1.Objective.ObjectiveName')
+  - [RaisePropertyChanged(propertyName)](#M-OutlookObjectives-ServiceReference1-Objective-RaisePropertyChanged-System-String- 'OutlookObjectives.ServiceReference1.Objective.RaisePropertyChanged(System.String)')
 - [Resources](#T-OutlookObjectives-Properties-Resources 'OutlookObjectives.Properties.Resources')
   - [Culture](#P-OutlookObjectives-Properties-Resources-Culture 'OutlookObjectives.Properties.Resources.Culture')
   - [ResourceManager](#P-OutlookObjectives-Properties-Resources-ResourceManager 'OutlookObjectives.Properties.Resources.ResourceManager')
@@ -154,10 +177,11 @@
   - [GetAppointmentsWithinRange(folder,startTime,endTime)](#M-OutlookObjectives-TaskMonthReport-GetAppointmentsWithinRange-Microsoft-Office-Interop-Outlook-Folder,System-DateTime,System-DateTime- 'OutlookObjectives.TaskMonthReport.GetAppointmentsWithinRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)')
   - [RunTask()](#M-OutlookObjectives-TaskMonthReport-RunTask 'OutlookObjectives.TaskMonthReport.RunTask')
 - [TaskWebSync](#T-OutlookObjectives-TaskWebSync 'OutlookObjectives.TaskWebSync')
-  - [#ctor()](#M-OutlookObjectives-TaskWebSync-#ctor-System-Action- 'OutlookObjectives.TaskWebSync.#ctor(System.Action)')
+  - [#ctor(callBack)](#M-OutlookObjectives-TaskWebSync-#ctor-System-Action- 'OutlookObjectives.TaskWebSync.#ctor(System.Action)')
   - [BackgroundProcess()](#M-OutlookObjectives-TaskWebSync-BackgroundProcess 'OutlookObjectives.TaskWebSync.BackgroundProcess')
   - [RunTask()](#M-OutlookObjectives-TaskWebSync-RunTask 'OutlookObjectives.TaskWebSync.RunTask')
   - [SyncClients()](#M-OutlookObjectives-TaskWebSync-SyncClients 'OutlookObjectives.TaskWebSync.SyncClients')
+  - [SyncObjectives()](#M-OutlookObjectives-TaskWebSync-SyncObjectives 'OutlookObjectives.TaskWebSync.SyncObjectives')
 - [TaskWeekReport](#T-OutlookObjectives-TaskWeekReport 'OutlookObjectives.TaskWeekReport')
   - [#ctor(callBack)](#M-OutlookObjectives-TaskWeekReport-#ctor-System-Action- 'OutlookObjectives.TaskWeekReport.#ctor(System.Action)')
   - [BackgroundProcess()](#M-OutlookObjectives-TaskWeekReport-BackgroundProcess 'OutlookObjectives.TaskWeekReport.BackgroundProcess')
@@ -209,6 +233,76 @@
 - [WindowFormRegionCollection](#T-OutlookObjectives-WindowFormRegionCollection 'OutlookObjectives.WindowFormRegionCollection')
   - [#ctor()](#M-OutlookObjectives-WindowFormRegionCollection-#ctor-System-Collections-Generic-IList{Microsoft-Office-Tools-Outlook-IFormRegion}- 'OutlookObjectives.WindowFormRegionCollection.#ctor(System.Collections.Generic.IList{Microsoft.Office.Tools.Outlook.IFormRegion})')
 
+<a name='T-OutlookObjectives-ServiceReference1-Client'></a>
+## Client `type`
+
+##### Namespace
+
+OutlookObjectives.ServiceReference1
+
+##### Summary
+
+Client class.
+
+<a name='P-OutlookObjectives-ServiceReference1-Client-EntryId'></a>
+### EntryId `property`
+
+##### Summary
+
+EntryId property.
+
+<a name='P-OutlookObjectives-ServiceReference1-Client-ExtensionData'></a>
+### ExtensionData `property`
+
+##### Summary
+
+ExtensionData property.
+
+<a name='P-OutlookObjectives-ServiceReference1-Client-Title'></a>
+### Title `property`
+
+##### Summary
+
+Title property.
+
+<a name='T-OutlookObjectives-ServiceReference1-ClientList'></a>
+## ClientList `type`
+
+##### Namespace
+
+OutlookObjectives.ServiceReference1
+
+##### Summary
+
+ClientList class.
+
+<a name='P-OutlookObjectives-ServiceReference1-ClientList-Clients'></a>
+### Clients `property`
+
+##### Summary
+
+Clients method.
+
+<a name='P-OutlookObjectives-ServiceReference1-ClientList-Count'></a>
+### Count `property`
+
+##### Summary
+
+Count method.
+
+<a name='M-OutlookObjectives-ServiceReference1-ClientList-RaisePropertyChanged-System-String-'></a>
+### RaisePropertyChanged(propertyName) `method`
+
+##### Summary
+
+RaisePropertyChanged method.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| propertyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The property that is changing. |
+
 <a name='T-OutlookObjectives-FRObjectivesDayReport'></a>
 ## FRObjectivesDayReport `type`
 
@@ -243,14 +337,14 @@ This method has no parameters.
 
 ##### Summary
 
-
+FRObjectivesDayReport_FormRegionShowing method.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Also unused. |
 
 <a name='M-OutlookObjectives-FRObjectivesDayReport-InitializeComponent'></a>
 ### InitializeComponent() `method`
@@ -276,12 +370,27 @@ the contents of this method with the code editor.
 
 This method has no parameters.
 
+<a name='T-OutlookObjectives-FRObjectivesDayReport-FRObjectivesDayReportFactory'></a>
+## FRObjectivesDayReportFactory `type`
+
+##### Namespace
+
+OutlookObjectives.FRObjectivesDayReport
+
+##### Summary
+
+FRObjectivesDayReportFactory.
+
 <a name='T-OutlookObjectives-FRObjectivesMonthReport'></a>
 ## FRObjectivesMonthReport `type`
 
 ##### Namespace
 
 OutlookObjectives
+
+##### Summary
+
+FRObjectivesMonthReport class.
 
 <a name='F-OutlookObjectives-FRObjectivesMonthReport-components'></a>
 ### components `constants`
@@ -325,12 +434,27 @@ the contents of this method with the code editor.
 
 This method has no parameters.
 
+<a name='T-OutlookObjectives-FRObjectivesMonthReport-FRObjectivesMonthReportFactory'></a>
+## FRObjectivesMonthReportFactory `type`
+
+##### Namespace
+
+OutlookObjectives.FRObjectivesMonthReport
+
+##### Summary
+
+FRObjectivesMonthReportFactory.
+
 <a name='T-OutlookObjectives-FRObjectivesWeekReport'></a>
 ## FRObjectivesWeekReport `type`
 
 ##### Namespace
 
 OutlookObjectives
+
+##### Summary
+
+FRObjectivesWeekReport class.
 
 <a name='F-OutlookObjectives-FRObjectivesWeekReport-components'></a>
 ### components `constants`
@@ -374,6 +498,17 @@ the contents of this method with the code editor.
 
 This method has no parameters.
 
+<a name='T-OutlookObjectives-FRObjectivesWeekReport-FRObjectivesWeekReportFactory'></a>
+## FRObjectivesWeekReportFactory `type`
+
+##### Namespace
+
+OutlookObjectives.FRObjectivesWeekReport
+
+##### Summary
+
+FRObjectivesWeekReportFactory class.
+
 <a name='T-OutlookObjectives-FormChangeWorkType'></a>
 ## FormChangeWorkType `type`
 
@@ -408,7 +543,7 @@ Required designer variable.
 
 ##### Summary
 
-The WorkType to be review or modified.
+Gets or sets the WorkType to be review or modified.
 
 <a name='M-OutlookObjectives-FormChangeWorkType-ComboApplication_SelectedIndexChanged-System-Object,System-EventArgs-'></a>
 ### ComboApplication_SelectedIndexChanged(sender,e) `method`
@@ -422,7 +557,7 @@ Updates the application associated with the WorkType.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | This parameter is unused. |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter is unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter also is unused. |
 
 <a name='M-OutlookObjectives-FormChangeWorkType-Dispose-System-Boolean-'></a>
 ### Dispose(disposing) `method`
@@ -449,7 +584,7 @@ Setup the UI.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | This parameter is unused. |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter is unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter also is unused. |
 
 <a name='M-OutlookObjectives-FormChangeWorkType-InitializeComponent'></a>
 ### InitializeComponent() `method`
@@ -475,7 +610,7 @@ Updates the WorkType Cost per Hour.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | This parameter is unused. |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter is unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter also is unused. |
 
 <a name='M-OutlookObjectives-FormChangeWorkType-NumMaxMinutes_ValueChanged-System-Object,System-EventArgs-'></a>
 ### NumMaxMinutes_ValueChanged(sender,e) `method`
@@ -489,7 +624,7 @@ Updates the maximum number of minutes per day.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | This parameter is unused. |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter is unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter also is unused. |
 
 <a name='M-OutlookObjectives-FormChangeWorkType-NumMinMinutes_ValueChanged-System-Object,System-EventArgs-'></a>
 ### NumMinMinutes_ValueChanged(sender,e) `method`
@@ -503,7 +638,7 @@ Updates the minimum number of minutes per day.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | This parameter is unused. |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter is unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter also is unused. |
 
 <a name='M-OutlookObjectives-FormChangeWorkType-SetupForm'></a>
 ### SetupForm() `method`
@@ -528,7 +663,7 @@ Updates the WorkType Description.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | This parameter is unused. |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter is unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter also is unused. |
 
 <a name='M-OutlookObjectives-FormChangeWorkType-TextName_TextChanged-System-Object,System-EventArgs-'></a>
 ### TextName_TextChanged(sender,e) `method`
@@ -542,7 +677,7 @@ Updates the WorkType Name.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | This parameter is unused. |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter is unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | This parameter also is unused. |
 
 <a name='T-OutlookObjectives-FormCreateObjective'></a>
 ## FormCreateObjective `type`
@@ -560,7 +695,7 @@ UI form to provide an interface for the user to create a new Objective.
 
 ##### Summary
 
-Constructor.
+Initializes a new instance of the [FormCreateObjective](#T-OutlookObjectives-FormCreateObjective 'OutlookObjectives.FormCreateObjective') class.
 
 ##### Parameters
 
@@ -584,8 +719,8 @@ Checks is the Objective is correct and if so then creates a new Objective.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Also unused. |
 
 <a name='M-OutlookObjectives-FormCreateObjective-Dispose-System-Boolean-'></a>
 ### Dispose(disposing) `method`
@@ -646,7 +781,7 @@ Required designer variable.
 
 ##### Summary
 
-The objective to manage.
+Gets or sets the objective to manage.
 
 <a name='M-OutlookObjectives-FormObjectiveRates-Dispose-System-Boolean-'></a>
 ### Dispose(disposing) `method`
@@ -673,7 +808,7 @@ Save the objective when the form closes.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
-| e | [System.Windows.Forms.FormClosingEventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Windows.Forms.FormClosingEventArgs 'System.Windows.Forms.FormClosingEventArgs') | Unused. |
+| e | [System.Windows.Forms.FormClosingEventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Windows.Forms.FormClosingEventArgs 'System.Windows.Forms.FormClosingEventArgs') | Also unused. |
 
 <a name='M-OutlookObjectives-FormObjectiveRates-InitializeComponent'></a>
 ### InitializeComponent() `method`
@@ -699,7 +834,7 @@ Show the Change WorkType form when an item is double clicked.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Also unused. |
 
 <a name='M-OutlookObjectives-FormObjectiveRates-SetupControl'></a>
 ### SetupControl() `method`
@@ -766,7 +901,7 @@ Populate the form with the original details.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Also unused. |
 
 <a name='M-OutlookObjectives-FormSettings-InitializeComponent'></a>
 ### InitializeComponent() `method`
@@ -792,7 +927,7 @@ Update the archive folder.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Also unused. |
 
 <a name='M-OutlookObjectives-FormSettings-TextBoxObjectivesRootFolder_TextChanged-System-Object,System-EventArgs-'></a>
 ### TextBoxObjectivesRootFolder_TextChanged(sender,e) `method`
@@ -806,7 +941,7 @@ Update the root folder.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Also unused. |
 
 <a name='T-OutlookObjectives-Globals'></a>
 ## Globals `type`
@@ -838,14 +973,68 @@ Appointment Interface for the inspector wrapper.
 
 ##### Summary
 
-The type of appointment.
+Gets or sets the type of appointment.
 
 <a name='P-OutlookObjectives-IAppointment-FolderPath'></a>
 ### FolderPath `property`
 
 ##### Summary
 
-The outlook folder path.
+Gets or sets the outlook folder path.
+
+<a name='T-OutlookObjectives-IWAppointment'></a>
+## IWAppointment `type`
+
+##### Namespace
+
+OutlookObjectives
+
+##### Summary
+
+IWAppointment class.
+
+<a name='M-OutlookObjectives-IWAppointment-#ctor-Microsoft-Office-Interop-Outlook-Inspector,System-String,CommonObjectives-AppointmentType-'></a>
+### #ctor(inspector,folderPath,appointmentType) `constructor`
+
+##### Summary
+
+Initializes a new instance of the [IWAppointment](#T-OutlookObjectives-IWAppointment 'OutlookObjectives.IWAppointment') class.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| inspector | [Microsoft.Office.Interop.Outlook.Inspector](#T-Microsoft-Office-Interop-Outlook-Inspector 'Microsoft.Office.Interop.Outlook.Inspector') | The inspector associated with the appointment. |
+| folderPath | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The folder path of the appointment. |
+| appointmentType | [CommonObjectives.AppointmentType](#T-CommonObjectives-AppointmentType 'CommonObjectives.AppointmentType') | The type of appointment. |
+
+<a name='P-OutlookObjectives-IWAppointment-Appointment'></a>
+### Appointment `property`
+
+##### Summary
+
+Gets the Appointment.
+
+<a name='P-OutlookObjectives-IWAppointment-AppointmentType'></a>
+### AppointmentType `property`
+
+##### Summary
+
+Gets or sets the appointment type.
+
+<a name='P-OutlookObjectives-IWAppointment-FolderPath'></a>
+### FolderPath `property`
+
+##### Summary
+
+Gets or sets the folder path.
+
+<a name='P-OutlookObjectives-IWAppointment-Inspector'></a>
+### Inspector `property`
+
+##### Summary
+
+Gets the Inspector associated with the appointment.
 
 <a name='T-OutlookObjectives-IWAppointmentObjectivesDayReport'></a>
 ## IWAppointmentObjectivesDayReport `type`
@@ -859,7 +1048,7 @@ OutlookObjectives
 IWAppointmentObjectivesDayReport class.
 
 <a name='M-OutlookObjectives-IWAppointmentObjectivesDayReport-#ctor-Microsoft-Office-Interop-Outlook-Inspector,System-String,CommonObjectives-AppointmentType-'></a>
-### #ctor(Inspector,folderPath,appointmentType) `constructor`
+### #ctor(inspector,folderPath,appointmentType) `constructor`
 
 ##### Summary
 
@@ -869,7 +1058,7 @@ Initializes a new instance of the [IWAppointmentObjectivesDayReport](#T-OutlookO
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| Inspector | [Microsoft.Office.Interop.Outlook.Inspector](#T-Microsoft-Office-Interop-Outlook-Inspector 'Microsoft.Office.Interop.Outlook.Inspector') | Passes the Inspector of the appointment. |
+| inspector | [Microsoft.Office.Interop.Outlook.Inspector](#T-Microsoft-Office-Interop-Outlook-Inspector 'Microsoft.Office.Interop.Outlook.Inspector') | Passes the Inspector of the appointment. |
 | folderPath | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The Outlook folder path to the appointment. |
 | appointmentType | [CommonObjectives.AppointmentType](#T-CommonObjectives-AppointmentType 'CommonObjectives.AppointmentType') | The type of appointment. |
 
@@ -878,28 +1067,28 @@ Initializes a new instance of the [IWAppointmentObjectivesDayReport](#T-OutlookO
 
 ##### Summary
 
-A reference to the appointment object.
+Gets a reference to the appointment object.
 
 <a name='P-OutlookObjectives-IWAppointmentObjectivesDayReport-AppointmentType'></a>
 ### AppointmentType `property`
 
 ##### Summary
 
-The type of appointment.
+Gets or sets the type of appointment.
 
 <a name='P-OutlookObjectives-IWAppointmentObjectivesDayReport-FolderPath'></a>
 ### FolderPath `property`
 
 ##### Summary
 
-The Outlook path to the folder that contains the appointment.
+Gets or sets the Outlook path to the folder that contains the appointment.
 
 <a name='P-OutlookObjectives-IWAppointmentObjectivesDayReport-Inspector'></a>
 ### Inspector `property`
 
 ##### Summary
 
-A reference to the Inspector displaying the appointment.
+Gets a reference to the Inspector displaying the appointment.
 
 <a name='M-OutlookObjectives-IWAppointmentObjectivesDayReport-Appointment_Close-System-Boolean@-'></a>
 ### Appointment_Close(cancel) `method`
@@ -969,35 +1158,35 @@ Version number for the WorkItem.
 
 ##### Summary
 
-The path to the Objectives archive folder.
+Gets or sets the path to the Objectives archive folder.
 
 <a name='P-OutlookObjectives-InTouch-ObjectivesRootFolder'></a>
 ### ObjectivesRootFolder `property`
 
 ##### Summary
 
-The path to the Objectives root folder.
+Gets or sets the path to the Objectives root folder.
 
 <a name='P-OutlookObjectives-InTouch-ObjectivesStorageFolder'></a>
 ### ObjectivesStorageFolder `property`
 
 ##### Summary
 
-The path to the Objectives storage folder.
+Gets or sets the path to the Objectives storage folder.
 
 <a name='P-OutlookObjectives-InTouch-TaskManager'></a>
 ### TaskManager `property`
 
 ##### Summary
 
-Initializes a new instance of the [TaskManager](#P-OutlookObjectives-InTouch-TaskManager 'OutlookObjectives.InTouch.TaskManager') class.
+Gets the task manager.
 
 <a name='P-OutlookObjectives-InTouch-WorkTypes'></a>
 ### WorkTypes `property`
 
 ##### Summary
 
-Dictionary of WorkTypes.
+Gets or sets the Dictionary of WorkTypes.
 
 ##### Remarks
 
@@ -1036,7 +1225,7 @@ Get an Objective object from a path.
 
 ##### Returns
 
-
+An objective.
 
 ##### Parameters
 
@@ -1053,7 +1242,7 @@ Gets a formatted time string from an int of minutes.
 
 ##### Returns
 
-
+A string of the time.
 
 ##### Parameters
 
@@ -1072,7 +1261,59 @@ Saves and Objective object to file.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| objective | [CommonObjectives.Objective](#T-CommonObjectives-Objective 'CommonObjectives.Objective') |  |
+| objective | [CommonObjectives.Objective](#T-CommonObjectives-Objective 'CommonObjectives.Objective') | The objective to save. |
+
+<a name='T-OutlookObjectives-ServiceReference1-Objective'></a>
+## Objective `type`
+
+##### Namespace
+
+OutlookObjectives.ServiceReference1
+
+##### Summary
+
+Objective class.
+
+<a name='P-OutlookObjectives-ServiceReference1-Objective-Archived'></a>
+### Archived `property`
+
+##### Summary
+
+Archived method.
+
+<a name='P-OutlookObjectives-ServiceReference1-Objective-Created'></a>
+### Created `property`
+
+##### Summary
+
+Created method.
+
+<a name='P-OutlookObjectives-ServiceReference1-Objective-ExtensionData'></a>
+### ExtensionData `property`
+
+##### Summary
+
+ExtensionData method.
+
+<a name='P-OutlookObjectives-ServiceReference1-Objective-ObjectiveName'></a>
+### ObjectiveName `property`
+
+##### Summary
+
+ObjectiveName method.
+
+<a name='M-OutlookObjectives-ServiceReference1-Objective-RaisePropertyChanged-System-String-'></a>
+### RaisePropertyChanged(propertyName) `method`
+
+##### Summary
+
+RaisePropertyChanged method.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| propertyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The property that is changing. |
 
 <a name='T-OutlookObjectives-Properties-Resources'></a>
 ## Resources `type`
@@ -1166,7 +1407,7 @@ Create the Appointment ribbon.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | This parameter is unused. |
-| e | [Microsoft.Office.Tools.Ribbon.RibbonUIEventArgs](#T-Microsoft-Office-Tools-Ribbon-RibbonUIEventArgs 'Microsoft.Office.Tools.Ribbon.RibbonUIEventArgs') | This parameter is unused. |
+| e | [Microsoft.Office.Tools.Ribbon.RibbonUIEventArgs](#T-Microsoft-Office-Tools-Ribbon-RibbonUIEventArgs 'Microsoft.Office.Tools.Ribbon.RibbonUIEventArgs') | This parameter also is unused. |
 
 <a name='T-OutlookObjectives-RibExplorer'></a>
 ## RibExplorer `type`
@@ -1209,7 +1450,7 @@ Event for the New Objective button.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
-| e | [Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs](#T-Microsoft-Office-Tools-Ribbon-RibbonControlEventArgs 'Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs') | Unused. |
+| e | [Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs](#T-Microsoft-Office-Tools-Ribbon-RibbonControlEventArgs 'Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs') | Also unused. |
 
 <a name='M-OutlookObjectives-RibExplorer-Dispose-System-Boolean-'></a>
 ### Dispose(disposing) `method`
@@ -1259,7 +1500,7 @@ Load event for the ribbon.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
-| e | [Microsoft.Office.Tools.Ribbon.RibbonUIEventArgs](#T-Microsoft-Office-Tools-Ribbon-RibbonUIEventArgs 'Microsoft.Office.Tools.Ribbon.RibbonUIEventArgs') | Unused. |
+| e | [Microsoft.Office.Tools.Ribbon.RibbonUIEventArgs](#T-Microsoft-Office-Tools-Ribbon-RibbonUIEventArgs 'Microsoft.Office.Tools.Ribbon.RibbonUIEventArgs') | Also unused. |
 
 <a name='T-OutlookObjectives-TaskConvertVersion'></a>
 ## TaskConvertVersion `type`
@@ -1277,13 +1518,13 @@ Day Report Task to generate Objectives Day Reports.
 
 ##### Summary
 
-Returns control back to the TaskManager.
+Initializes a new instance of the [TaskConvertVersion](#T-OutlookObjectives-TaskConvertVersion 'OutlookObjectives.TaskConvertVersion') class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| callBack | [System.Action](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action') |  |
+| callBack | [System.Action](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action') | The callback to return. |
 
 <a name='M-OutlookObjectives-TaskConvertVersion-BackgroundProcess'></a>
 ### BackgroundProcess() `method`
@@ -1305,15 +1546,15 @@ Get the appointments that fall in the range of the timespan.
 
 ##### Returns
 
-
+A collection of outlook items that match the filter.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| folder | [Microsoft.Office.Interop.Outlook.Folder](#T-Microsoft-Office-Interop-Outlook-Folder 'Microsoft.Office.Interop.Outlook.Folder') |  |
-| startTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
-| endTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
+| folder | [Microsoft.Office.Interop.Outlook.Folder](#T-Microsoft-Office-Interop-Outlook-Folder 'Microsoft.Office.Interop.Outlook.Folder') | The folder to search. |
+| startTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | The start time. |
+| endTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | The finish time. |
 
 <a name='M-OutlookObjectives-TaskConvertVersion-GetAppointmentsWithinRange-Microsoft-Office-Interop-Outlook-Folder,System-DateTime,System-DateTime-'></a>
 ### GetAppointmentsWithinRange(folder,startTime,endTime) `method`
@@ -1324,15 +1565,15 @@ Get the appointments within the timespan.
 
 ##### Returns
 
-
+A collection of outlook items that fit the filter.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| folder | [Microsoft.Office.Interop.Outlook.Folder](#T-Microsoft-Office-Interop-Outlook-Folder 'Microsoft.Office.Interop.Outlook.Folder') |  |
-| startTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
-| endTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
+| folder | [Microsoft.Office.Interop.Outlook.Folder](#T-Microsoft-Office-Interop-Outlook-Folder 'Microsoft.Office.Interop.Outlook.Folder') | The folder of the appointment. |
+| startTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | The start time of the appointment. |
+| endTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | The finish time of the appointment. |
 
 <a name='M-OutlookObjectives-TaskConvertVersion-ProcessAppointments'></a>
 ### ProcessAppointments() `method`
@@ -1372,13 +1613,14 @@ Day Report Task to generate Objectives Day Reports.
 
 ##### Summary
 
+Initializes a new instance of the [TaskDayReport](#T-OutlookObjectives-TaskDayReport 'OutlookObjectives.TaskDayReport') class.
 Returns control back to the TaskManager.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| callBack | [System.Action](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action') |  |
+| callBack | [System.Action](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action') | Callback for when the task has finished. |
 
 <a name='M-OutlookObjectives-TaskDayReport-BackgroundProcess'></a>
 ### BackgroundProcess() `method`
@@ -1397,10 +1639,6 @@ This method has no parameters.
 ##### Summary
 
 Creates the HTML for the report.
-
-##### Returns
-
-
 
 ##### Parameters
 
@@ -1459,7 +1697,7 @@ Find the day that is suitable to create the report for.
 
 ##### Returns
 
-
+A date time of the day found.
 
 ##### Parameters
 
@@ -1474,15 +1712,15 @@ Get the appointments that fall in the range of the timespan.
 
 ##### Returns
 
-
+A collection of outlook items that match the filter.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| folder | [Microsoft.Office.Interop.Outlook.Folder](#T-Microsoft-Office-Interop-Outlook-Folder 'Microsoft.Office.Interop.Outlook.Folder') |  |
-| startTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
-| endTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
+| folder | [Microsoft.Office.Interop.Outlook.Folder](#T-Microsoft-Office-Interop-Outlook-Folder 'Microsoft.Office.Interop.Outlook.Folder') | The folder to search. |
+| startTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | The start time. |
+| endTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | The finish time. |
 
 <a name='M-OutlookObjectives-TaskDayReport-GetAppointmentsWithinRange-Microsoft-Office-Interop-Outlook-Folder,System-DateTime,System-DateTime-'></a>
 ### GetAppointmentsWithinRange(folder,startTime,endTime) `method`
@@ -1493,15 +1731,15 @@ Get the appointments within the timespan.
 
 ##### Returns
 
-
+A collection of outlook items that match the filter.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| folder | [Microsoft.Office.Interop.Outlook.Folder](#T-Microsoft-Office-Interop-Outlook-Folder 'Microsoft.Office.Interop.Outlook.Folder') |  |
-| startTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
-| endTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
+| folder | [Microsoft.Office.Interop.Outlook.Folder](#T-Microsoft-Office-Interop-Outlook-Folder 'Microsoft.Office.Interop.Outlook.Folder') | The folder to search. |
+| startTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | The start time. |
+| endTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | The finish time. |
 
 <a name='M-OutlookObjectives-TaskDayReport-ProcessAppointments'></a>
 ### ProcessAppointments() `method`
@@ -1525,7 +1763,7 @@ Process the system idle data.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| json | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| json | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | JSON to be parsed. |
 
 <a name='M-OutlookObjectives-TaskDayReport-ProcessSystemUptime-System-String-'></a>
 ### ProcessSystemUptime(json) `method`
@@ -1538,7 +1776,7 @@ Process the system time data.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| json | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| json | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | JSON to be parsed. |
 
 <a name='M-OutlookObjectives-TaskDayReport-ProcessVisualStudio-System-String-'></a>
 ### ProcessVisualStudio(json) `method`
@@ -1551,7 +1789,7 @@ Process the Visual Studio data.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| json | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| json | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | JSON to be parsed. |
 
 <a name='M-OutlookObjectives-TaskDayReport-ProcessWorkItem-System-String-'></a>
 ### ProcessWorkItem(json) `method`
@@ -1564,7 +1802,7 @@ Process the Work Item data.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| json | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') |  |
+| json | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | JSON to be parsed. |
 
 <a name='M-OutlookObjectives-TaskDayReport-RunTask'></a>
 ### RunTask() `method`
@@ -1599,7 +1837,7 @@ Initializes a new instance of the [TaskImportData](#T-OutlookObjectives-TaskImpo
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| callBack | [System.Action](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action') |  |
+| callBack | [System.Action](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action') | Callback. |
 
 <a name='M-OutlookObjectives-TaskImportData-BackgroundProcess'></a>
 ### BackgroundProcess() `method`
@@ -1621,7 +1859,7 @@ Converts the Idle event and stores it in an appointment item.
 
 ##### Returns
 
-
+A value indicating the success.
 
 ##### Parameters
 
@@ -1638,7 +1876,7 @@ Converts the sleep event and stores it in an appointment item.
 
 ##### Returns
 
-
+A value indicating the success.
 
 ##### Parameters
 
@@ -1655,7 +1893,7 @@ Converts the Uptime event and stores it in an appointment item.
 
 ##### Returns
 
-
+A value indicating the success.
 
 ##### Parameters
 
@@ -1672,7 +1910,7 @@ Converts the WorkItem and stores it in an appointment item.
 
 ##### Returns
 
-
+A value indicating the success.
 
 ##### Parameters
 
@@ -1715,7 +1953,7 @@ TaskManager manages the background tasks.
 
 ##### Remarks
 
-The TaskManager is used to manage the background tasks that perform 
+The TaskManager is used to manage the background tasks that perform
 operations such as moving emails from the Inbox. It provides a queue to store tasks
 and executes them one at a time.
 
@@ -1735,14 +1973,14 @@ This constructor has no parameters.
 
 ##### Summary
 
-A queue of Task to be performed.
+Gets a queue of Task to be performed.
 
 <a name='P-OutlookObjectives-TaskManager-CurrentAction'></a>
 ### CurrentAction `property`
 
 ##### Summary
 
-The current action to be called when finished.
+Gets or sets the current action to be called when finished.
 
 <a name='M-OutlookObjectives-TaskManager-BackgroundProcess'></a>
 ### BackgroundProcess() `method`
@@ -1876,7 +2114,7 @@ Find the day that is suitable to create the report for.
 
 ##### Returns
 
-
+The date that is found.
 
 ##### Parameters
 
@@ -1891,15 +2129,15 @@ Get the appointments that fall in the range of the timespan.
 
 ##### Returns
 
-
+A collection of outlook items that match the filter.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| folder | [Microsoft.Office.Interop.Outlook.Folder](#T-Microsoft-Office-Interop-Outlook-Folder 'Microsoft.Office.Interop.Outlook.Folder') |  |
-| startTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
-| endTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
+| folder | [Microsoft.Office.Interop.Outlook.Folder](#T-Microsoft-Office-Interop-Outlook-Folder 'Microsoft.Office.Interop.Outlook.Folder') | The folder to search. |
+| startTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | The start time. |
+| endTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | The finish time. |
 
 <a name='M-OutlookObjectives-TaskMonthReport-GetAppointmentsWithinRange-Microsoft-Office-Interop-Outlook-Folder,System-DateTime,System-DateTime-'></a>
 ### GetAppointmentsWithinRange(folder,startTime,endTime) `method`
@@ -1910,15 +2148,15 @@ Get the appointments within the timespan.
 
 ##### Returns
 
-
+A collection of outlook items that match the filter.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| folder | [Microsoft.Office.Interop.Outlook.Folder](#T-Microsoft-Office-Interop-Outlook-Folder 'Microsoft.Office.Interop.Outlook.Folder') |  |
-| startTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
-| endTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
+| folder | [Microsoft.Office.Interop.Outlook.Folder](#T-Microsoft-Office-Interop-Outlook-Folder 'Microsoft.Office.Interop.Outlook.Folder') | The folder to search. |
+| startTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | The start time. |
+| endTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | The finish time. |
 
 <a name='M-OutlookObjectives-TaskMonthReport-RunTask'></a>
 ### RunTask() `method`
@@ -1940,18 +2178,20 @@ OutlookObjectives
 
 ##### Summary
 
-
+TaskWebSync class syncs data to the SQL Server.
 
 <a name='M-OutlookObjectives-TaskWebSync-#ctor-System-Action-'></a>
-### #ctor() `constructor`
+### #ctor(callBack) `constructor`
 
 ##### Summary
 
-
+Initializes a new instance of the [TaskWebSync](#T-OutlookObjectives-TaskWebSync 'OutlookObjectives.TaskWebSync') class.
 
 ##### Parameters
 
-This constructor has no parameters.
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| callBack | [System.Action](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Action 'System.Action') | The callback when the task is done. |
 
 <a name='M-OutlookObjectives-TaskWebSync-BackgroundProcess'></a>
 ### BackgroundProcess() `method`
@@ -1980,7 +2220,18 @@ This method has no parameters.
 
 ##### Summary
 
+Syncs client objects to the SQL Server.
 
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-OutlookObjectives-TaskWebSync-SyncObjectives'></a>
+### SyncObjectives() `method`
+
+##### Summary
+
+Syncs the Objectives to the SQL Server.
 
 ##### Parameters
 
@@ -2041,7 +2292,7 @@ Find the day that is suitable to create the report for.
 
 ##### Returns
 
-
+The date that is found.
 
 ##### Parameters
 
@@ -2056,15 +2307,15 @@ Get the appointments that fall in the range of the timespan.
 
 ##### Returns
 
-
+A collection of outlook items that match the filter.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| folder | [Microsoft.Office.Interop.Outlook.Folder](#T-Microsoft-Office-Interop-Outlook-Folder 'Microsoft.Office.Interop.Outlook.Folder') |  |
-| startTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
-| endTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') |  |
+| folder | [Microsoft.Office.Interop.Outlook.Folder](#T-Microsoft-Office-Interop-Outlook-Folder 'Microsoft.Office.Interop.Outlook.Folder') | The folder to search. |
+| startTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | The start time. |
+| endTime | [System.DateTime](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.DateTime 'System.DateTime') | The finish time. |
 
 <a name='M-OutlookObjectives-TaskWeekReport-GetDays'></a>
 ### GetDays() `method`
@@ -2075,7 +2326,7 @@ Get the DayReports for the week.
 
 ##### Returns
 
-
+A value indicating success.
 
 ##### Parameters
 
@@ -2126,7 +2377,7 @@ This constructor has no parameters.
 
 ##### Summary
 
-Dictionary to hold the wrappers for Appointments.
+Gets the Dictionary to hold the wrappers for Appointment objects..
 
 <a name='M-OutlookObjectives-ThisAddIn-BeginInitialization'></a>
 ### BeginInitialization() `method`
@@ -2265,7 +2516,7 @@ Primary timer event.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | source | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
-| e | [System.Timers.ElapsedEventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Timers.ElapsedEventArgs 'System.Timers.ElapsedEventArgs') | Unused. |
+| e | [System.Timers.ElapsedEventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Timers.ElapsedEventArgs 'System.Timers.ElapsedEventArgs') | Also unused. |
 
 <a name='M-OutlookObjectives-ThisAddIn-OnShutdown'></a>
 ### OnShutdown() `method`
@@ -2310,8 +2561,8 @@ Primary entry for the AddIn.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Also unused. |
 
 <a name='T-OutlookObjectives-ThisFormRegionCollection'></a>
 ## ThisFormRegionCollection `type`
@@ -2357,7 +2608,7 @@ A User Control to be used as the UI for the Objectives Pane.
 
 ##### Summary
 
-Constructor.
+Initializes a new instance of the [UCObjectives](#T-OutlookObjectives-UCObjectives 'OutlookObjectives.UCObjectives') class.
 
 ##### Parameters
 
@@ -2406,8 +2657,8 @@ Mange the change of selection.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Also unused. |
 
 <a name='M-OutlookObjectives-UCObjectives-MenuActivate_Click-System-Object,System-EventArgs-'></a>
 ### MenuActivate_Click(sender,e) `method`
@@ -2420,8 +2671,8 @@ Re-activate the Objective from archive.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Also unused. |
 
 <a name='M-OutlookObjectives-UCObjectives-MenuArchive_Click-System-Object,System-EventArgs-'></a>
 ### MenuArchive_Click(sender,e) `method`
@@ -2434,8 +2685,8 @@ Archive the Objective.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Also unused. |
 
 <a name='M-OutlookObjectives-UCObjectives-MenuRates_Click-System-Object,System-EventArgs-'></a>
 ### MenuRates_Click(sender,e) `method`
@@ -2448,8 +2699,8 @@ Display the Rates and Costs for the Objective.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Also unused. |
 
 <a name='M-OutlookObjectives-UCObjectives-UCObjectives_Load-System-Object,System-EventArgs-'></a>
 ### UCObjectives_Load(sender,e) `method`
@@ -2462,8 +2713,8 @@ Fills the UI with Objectives.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Also unused. |
 
 <a name='M-OutlookObjectives-UCObjectives-UCObjectives_Resize-System-Object,System-EventArgs-'></a>
 ### UCObjectives_Resize(sender,e) `method`
@@ -2476,8 +2727,8 @@ Manage the control being resized.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Also unused. |
 
 <a name='T-OutlookObjectives-WindowFormRegionCollection'></a>
 ## WindowFormRegionCollection `type`

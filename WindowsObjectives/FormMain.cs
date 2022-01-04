@@ -41,6 +41,12 @@
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern int GetWindowTextLength(IntPtr hWnd);
 
+        /// <summary>
+        /// GetWindowThreadProcessId method.
+        /// </summary>
+        /// <param name="hWnd">The window handle.</param>
+        /// <param name="lpdwProcessId">The process Id.</param>
+        /// <returns>A uint of the process Id.</returns>
         [DllImport("user32.dll", SetLastError = true)]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 

@@ -77,11 +77,51 @@ namespace AutoCADObjectives
                 m_docMan.DocumentToBeActivated += new DocumentCollectionEventHandler(Callback_DocumentToBeActivated);
                 m_docMan.DocumentActivated += new DocumentCollectionEventHandler(Callback_DocumentActivated);
                 m_docMan.DocumentToBeDeactivated += new DocumentCollectionEventHandler(Callback_DocumentToBeDeactivated);
+                m_docMan.DocumentLockModeChanged += new DocumentLockModeChangedEventHandler(Callback_DocumentLockModeChanged);
+                m_docMan.DocumentBecameCurrent += new DocumentCollectionEventHandler(Callback_DocumentBecameCurrent);
             }
             catch (System.Exception ex)
             {
                 Log.Error(ex);
             }
+        }
+
+        private void Callback_DocumentBecameCurrent(object sender, DocumentCollectionEventArgs e)
+        {
+            if (e.Document is object)
+            {
+                if (e.Document.Name is object)
+                {
+                    Log.Info(e.Document.Name);
+                }
+                else
+                {
+                    Log.Info("e.Document.Name is null.");
+                }
+            }
+            else
+            {
+                Log.Info("e.Document is null.");
+            }
+        }
+
+        private void Callback_DocumentLockModeChanged(object sender, DocumentLockModeChangedEventArgs e)
+        {
+            //if (e.Document is object)
+            //{
+            //    if (e.Document.Name is object)
+            //    {
+            //        Log.Info(e.Document.Name);
+            //    }
+            //    else
+            //    {
+            //        Log.Info("e.Document.Name is null.");
+            //    }
+            //}
+            //else
+            //{
+            //    Log.Info("e.Document is null.");
+            //}
         }
 
         /// <summary>
@@ -161,6 +201,7 @@ namespace AutoCADObjectives
 
                     workItems.Add(newDrawing.FilePath, newDrawing);
                 }
+
             }
             catch (System.Exception ex)
             {
@@ -202,9 +243,20 @@ namespace AutoCADObjectives
                 {
                     if (doc.IsNamedDrawing)
                     {
-                        WorkItem drawing = (WorkItem)workItems[doc.Name];
-                        SaveData(drawing);
-                        _ = workItems.Remove(drawing.FilePath);
+                        if (workItems.ContainsKey(doc.Name))
+                        {
+                            WorkItem drawing = (WorkItem)workItems[doc.Name];
+                            SaveData(drawing);
+                            _ = workItems.Remove(drawing.FilePath);
+                        }
+                        else
+                        {
+                            Log.Info($"Drawing not found in work items. [{doc.Name}]");
+                        }
+                    }
+                    else
+                    {
+                        Log.Info($"Drawing is not named drawing. [{doc.Name}]");
                     }
                 }
             }
@@ -269,6 +321,21 @@ namespace AutoCADObjectives
         /// <param name="e">parameter also is unused.</param>
         private void Callback_DocumentToBeActivated(object sender, DocumentCollectionEventArgs e)
         {
+            if (e.Document is object)
+            {
+                if (e.Document.Name is object)
+                {
+                    Log.Info(e.Document.Name);
+                }
+                else
+                {
+                    Log.Info("e.Document.Name is null.");
+                }
+            }
+            else
+            {
+                Log.Info("e.Document is null.");
+            }
         }
 
         /// <summary>

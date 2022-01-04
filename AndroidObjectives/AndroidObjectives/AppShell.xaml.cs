@@ -21,7 +21,6 @@
             Routing.RegisterRoute(nameof(ObjectivesPage), typeof(ObjectivesPage));
         }
 
-
         /// <summary>
         /// OnMenuItemClicked method.
         /// </summary>

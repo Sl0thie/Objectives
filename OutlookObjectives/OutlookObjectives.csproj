@@ -373,6 +373,7 @@
     <Compile Include="Ribbons\RibExplorer.Designer.cs">
       <DependentUpon>RibExplorer.cs</DependentUpon>
     </Compile>
+    <Compile Include="TaskArchive.cs" />
     <Compile Include="Tasks\TaskConvertVersion.cs" />
     <Compile Include="Tasks\TaskDayReport.cs" />
     <Compile Include="Tasks\TaskImportData.cs" />

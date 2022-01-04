@@ -285,6 +285,8 @@ namespace VisualStudioObjectives
         /// <param name="e">This parameter also is unused.</param>
         private void SolutionEvents_OnAfterBackgroundSolutionLoadComplete(object sender, EventArgs e)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             try
             {
                 // Create a new work item for the loaded solution.
@@ -304,6 +306,8 @@ namespace VisualStudioObjectives
         /// <param name="e">This parameter also is unused.</param>
         private void SolutionEvents_OnBeforeCloseSolution(object sender, EventArgs e)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
             try
             {
                 // Get the finished data and save to file.

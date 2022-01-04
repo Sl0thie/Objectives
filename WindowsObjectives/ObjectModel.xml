@@ -9,6 +9,14 @@
             FormMain Form.
             </summary>
         </member>
+        <member name="M:WindowsObjectives.FormMain.GetWindowThreadProcessId(System.IntPtr,System.UInt32@)">
+            <summary>
+            GetWindowThreadProcessId method.
+            </summary>
+            <param name="hWnd">The window handle.</param>
+            <param name="lpdwProcessId">The process Id.</param>
+            <returns>A uint of the process Id.</returns>
+        </member>
         <member name="M:WindowsObjectives.FormMain.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:WindowsObjectives.FormMain"/> class.

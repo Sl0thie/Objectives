@@ -11,9 +11,9 @@
 - [ThisAddIn](#T-WordObjectives-ThisAddIn 'WordObjectives.ThisAddIn')
   - [#ctor()](#M-WordObjectives-ThisAddIn-#ctor-Microsoft-Office-Tools-Word-ApplicationFactory,System-IServiceProvider- 'WordObjectives.ThisAddIn.#ctor(Microsoft.Office.Tools.Word.ApplicationFactory,System.IServiceProvider)')
   - [AddDocument(doc)](#M-WordObjectives-ThisAddIn-AddDocument-Microsoft-Office-Interop-Word-Document- 'WordObjectives.ThisAddIn.AddDocument(Microsoft.Office.Interop.Word.Document)')
-  - [Application_DocumentBeforeClose(Doc,Cancel)](#M-WordObjectives-ThisAddIn-Application_DocumentBeforeClose-Microsoft-Office-Interop-Word-Document,System-Boolean@- 'WordObjectives.ThisAddIn.Application_DocumentBeforeClose(Microsoft.Office.Interop.Word.Document,System.Boolean@)')
+  - [Application_DocumentBeforeClose(doc,cancel)](#M-WordObjectives-ThisAddIn-Application_DocumentBeforeClose-Microsoft-Office-Interop-Word-Document,System-Boolean@- 'WordObjectives.ThisAddIn.Application_DocumentBeforeClose(Microsoft.Office.Interop.Word.Document,System.Boolean@)')
   - [Application_DocumentChange()](#M-WordObjectives-ThisAddIn-Application_DocumentChange 'WordObjectives.ThisAddIn.Application_DocumentChange')
-  - [Application_DocumentOpen(Doc)](#M-WordObjectives-ThisAddIn-Application_DocumentOpen-Microsoft-Office-Interop-Word-Document- 'WordObjectives.ThisAddIn.Application_DocumentOpen(Microsoft.Office.Interop.Word.Document)')
+  - [Application_DocumentOpen(doc)](#M-WordObjectives-ThisAddIn-Application_DocumentOpen-Microsoft-Office-Interop-Word-Document- 'WordObjectives.ThisAddIn.Application_DocumentOpen(Microsoft.Office.Interop.Word.Document)')
   - [BeginInitialization()](#M-WordObjectives-ThisAddIn-BeginInitialization 'WordObjectives.ThisAddIn.BeginInitialization')
   - [BindToData()](#M-WordObjectives-ThisAddIn-BindToData 'WordObjectives.ThisAddIn.BindToData')
   - [CheckDocuments()](#M-WordObjectives-ThisAddIn-CheckDocuments 'WordObjectives.ThisAddIn.CheckDocuments')
@@ -112,7 +112,7 @@ The document's detail are then collected and added to the dictionary of document
 | doc | [Microsoft.Office.Interop.Word.Document](#T-Microsoft-Office-Interop-Word-Document 'Microsoft.Office.Interop.Word.Document') | The document to add to the dictionary. |
 
 <a name='M-WordObjectives-ThisAddIn-Application_DocumentBeforeClose-Microsoft-Office-Interop-Word-Document,System-Boolean@-'></a>
-### Application_DocumentBeforeClose(Doc,Cancel) `method`
+### Application_DocumentBeforeClose(doc,cancel) `method`
 
 ##### Summary
 
@@ -123,12 +123,12 @@ Occurs immediately before any open document closes.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| Doc | [Microsoft.Office.Interop.Word.Document](#T-Microsoft-Office-Interop-Word-Document 'Microsoft.Office.Interop.Word.Document') | The document that is closing. |
-| Cancel | [System.Boolean@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean@ 'System.Boolean@') | Bool value to cancel the closing of the document. |
+| doc | [Microsoft.Office.Interop.Word.Document](#T-Microsoft-Office-Interop-Word-Document 'Microsoft.Office.Interop.Word.Document') | The document that is closing. |
+| cancel | [System.Boolean@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean@ 'System.Boolean@') | Bool value to cancel the closing of the document. |
 
 ##### Remarks
 
-[Application.DocumentBeforeClose Event (Word)](Https://docs.microsoft.com/en-us/office/vba/api/word.application.documentbeforeclose)
+[Application.DocumentBeforeClose Event (Word)](Https://docs.microsoft.com/en-us/office/vba/api/word.application.documentbeforeclose).
 
 <a name='M-WordObjectives-ThisAddIn-Application_DocumentChange'></a>
 ### Application_DocumentChange() `method`
@@ -147,7 +147,7 @@ This method has no parameters.
 
 
 <a name='M-WordObjectives-ThisAddIn-Application_DocumentOpen-Microsoft-Office-Interop-Word-Document-'></a>
-### Application_DocumentOpen(Doc) `method`
+### Application_DocumentOpen(doc) `method`
 
 ##### Summary
 
@@ -157,7 +157,7 @@ Event handler for when a document is opened.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| Doc | [Microsoft.Office.Interop.Word.Document](#T-Microsoft-Office-Interop-Word-Document 'Microsoft.Office.Interop.Word.Document') | The document that was opened. |
+| doc | [Microsoft.Office.Interop.Word.Document](#T-Microsoft-Office-Interop-Word-Document 'Microsoft.Office.Interop.Word.Document') | The document that was opened. |
 
 <a name='M-WordObjectives-ThisAddIn-BeginInitialization'></a>
 ### BeginInitialization() `method`
@@ -336,14 +336,14 @@ This method has no parameters.
 
 ##### Summary
 
-
+ThisAddIn_Startup manages startup of the class.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') |  |
-| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') |  |
+| sender | [System.Object](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Object 'System.Object') | Unused. |
+| e | [System.EventArgs](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.EventArgs 'System.EventArgs') | Also unused. |
 
 <a name='T-WordObjectives-ThisRibbonCollection'></a>
 ## ThisRibbonCollection `type`

@@ -26,7 +26,8 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
-    <DocumentationFile>ObjectModel.xml</DocumentationFile>
+    <DocumentationFile>
+    </DocumentationFile>
     <DocumentationMarkdown>$(MSBuildProjectDirectory)\Docs\ObjectModel.md</DocumentationMarkdown>
     <VsxmdAutoDeleteXml>True</VsxmdAutoDeleteXml>
   </PropertyGroup>
