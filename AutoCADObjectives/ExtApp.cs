@@ -79,10 +79,24 @@ namespace AutoCADObjectives
                 m_docMan.DocumentToBeDeactivated += new DocumentCollectionEventHandler(Callback_DocumentToBeDeactivated);
                 m_docMan.DocumentLockModeChanged += new DocumentLockModeChangedEventHandler(Callback_DocumentLockModeChanged);
                 m_docMan.DocumentBecameCurrent += new DocumentCollectionEventHandler(Callback_DocumentBecameCurrent);
+
+                m_docMan.DocumentDestroyed += new DocumentDestroyedEventHandler(Callback_DocumentDestroyed);
             }
             catch (System.Exception ex)
             {
                 Log.Error(ex);
+            }
+        }
+
+        private void Callback_DocumentDestroyed(object sender, DocumentDestroyedEventArgs e)
+        {
+            if (e.FileName is object)
+            {
+                Log.Info(e.FileName);
+            }
+            else
+            {
+                Log.Info("e.FileName is null.");
             }
         }
 
@@ -107,21 +121,23 @@ namespace AutoCADObjectives
 
         private void Callback_DocumentLockModeChanged(object sender, DocumentLockModeChangedEventArgs e)
         {
-            //if (e.Document is object)
-            //{
-            //    if (e.Document.Name is object)
-            //    {
-            //        Log.Info(e.Document.Name);
-            //    }
-            //    else
-            //    {
-            //        Log.Info("e.Document.Name is null.");
-            //    }
-            //}
-            //else
-            //{
-            //    Log.Info("e.Document is null.");
-            //}
+            if (e.Document is object)
+            {
+                if (e.Document.Name is object)
+                {
+                    Log.Info(e.Document.Name);
+                }
+                else
+                {
+                    Log.Info("e.Document.Name is null.");
+                }
+            }
+            else
+            {
+                Log.Info("e.Document is null.");
+            }
+
+            Log.Info($" {e.CurrentMode.ToString()} {e.GlobalCommandName.ToString()}");
         }
 
         /// <summary>
