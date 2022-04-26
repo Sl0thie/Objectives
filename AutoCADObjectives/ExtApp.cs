@@ -72,20 +72,36 @@ namespace AutoCADObjectives
 
                 // Hook the events needed from the DocumentManager.
                 DocumentCollection m_docMan = Application.DocumentManager;
+
+                m_docMan.DocumentBecameCurrent += new DocumentCollectionEventHandler(Callback_DocumentBecameCurrent);
                 m_docMan.DocumentCreated += new DocumentCollectionEventHandler(Callback_DocumentCreated);
+                m_docMan.DocumentCreateStarted += new DocumentCollectionEventHandler(Callback_DocumentCreateStarted);
+                m_docMan.DocumentCreationCanceled += new DocumentCollectionEventHandler(Callback_DocumentCreationCanceled);
+
                 m_docMan.DocumentToBeDestroyed += new DocumentCollectionEventHandler(Callback_DocumentToBeDestroyed);
+                m_docMan.DocumentDestroyed += new DocumentDestroyedEventHandler(Callback_DocumentDestroyed);
                 m_docMan.DocumentToBeActivated += new DocumentCollectionEventHandler(Callback_DocumentToBeActivated);
                 m_docMan.DocumentActivated += new DocumentCollectionEventHandler(Callback_DocumentActivated);
                 m_docMan.DocumentToBeDeactivated += new DocumentCollectionEventHandler(Callback_DocumentToBeDeactivated);
                 m_docMan.DocumentLockModeChanged += new DocumentLockModeChangedEventHandler(Callback_DocumentLockModeChanged);
-                m_docMan.DocumentBecameCurrent += new DocumentCollectionEventHandler(Callback_DocumentBecameCurrent);
 
-                m_docMan.DocumentDestroyed += new DocumentDestroyedEventHandler(Callback_DocumentDestroyed);
+
+                
             }
             catch (System.Exception ex)
             {
                 Log.Error(ex);
             }
+        }
+
+        private void Callback_DocumentCreationCanceled(object sender, DocumentCollectionEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Callback_DocumentCreateStarted(object sender, DocumentCollectionEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void Callback_DocumentDestroyed(object sender, DocumentDestroyedEventArgs e)
