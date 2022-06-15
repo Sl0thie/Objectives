@@ -84,9 +84,6 @@ namespace AutoCADObjectives
                 m_docMan.DocumentActivated += new DocumentCollectionEventHandler(Callback_DocumentActivated);
                 m_docMan.DocumentToBeDeactivated += new DocumentCollectionEventHandler(Callback_DocumentToBeDeactivated);
                 m_docMan.DocumentLockModeChanged += new DocumentLockModeChangedEventHandler(Callback_DocumentLockModeChanged);
-
-
-                
             }
             catch (System.Exception ex)
             {
@@ -96,12 +93,30 @@ namespace AutoCADObjectives
 
         private void Callback_DocumentCreationCanceled(object sender, DocumentCollectionEventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+            if (e.Document is object)
+            {
+                Log.Info(e.Document.Name);
+            }
+            else
+            {
+                Log.Info("e.FileName is null.");
+            }
         }
 
         private void Callback_DocumentCreateStarted(object sender, DocumentCollectionEventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+            if (e.Document is object)
+            {
+                Log.Info(e.Document.Name);
+            }
+            else
+            {
+                Log.Info("e.FileName is null.");
+            }
         }
 
         private void Callback_DocumentDestroyed(object sender, DocumentDestroyedEventArgs e)
@@ -233,7 +248,6 @@ namespace AutoCADObjectives
 
                     workItems.Add(newDrawing.FilePath, newDrawing);
                 }
-
             }
             catch (System.Exception ex)
             {

@@ -1,0 +1,1266 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>OutlookObjectives</name>
+    </assembly>
+    <members>
+        <member name="T:OutlookObjectives.ServiceReference1.Objective">
+            <summary>
+            Objective class.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.ServiceReference1.Objective.ExtensionData">
+            <summary>
+            ExtensionData method.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.ServiceReference1.Objective.ObjectiveName">
+            <summary>
+            ObjectiveName method.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.ServiceReference1.Objective.Created">
+            <summary>
+            Created method.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.ServiceReference1.Objective.Archived">
+            <summary>
+            Archived method.
+            </summary>
+        </member>
+        <member name="E:OutlookObjectives.ServiceReference1.Objective.PropertyChanged">
+            <summary>
+            PropertyChanged event handler.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.ServiceReference1.Objective.RaisePropertyChanged(System.String)">
+            <summary>
+            RaisePropertyChanged method.
+            </summary>
+            <param name="propertyName">The property that is changing.</param>
+        </member>
+        <member name="T:OutlookObjectives.ServiceReference1.ClientList">
+            <summary>
+            ClientList class.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.ServiceReference1.ClientList.Count">
+            <summary>
+            Count method.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.ServiceReference1.ClientList.Clients">
+            <summary>
+            Clients method.
+            </summary>
+        </member>
+        <member name="E:OutlookObjectives.ServiceReference1.ClientList.PropertyChanged">
+            <summary>
+            PropertyChanged event handler.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.ServiceReference1.ClientList.RaisePropertyChanged(System.String)">
+            <summary>
+            RaisePropertyChanged method.
+            </summary>
+            <param name="propertyName">The property that is changing.</param>
+        </member>
+        <member name="T:OutlookObjectives.ServiceReference1.Client">
+            <summary>
+            Client class.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.ServiceReference1.Client.ExtensionData">
+            <summary>
+            ExtensionData property.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.ServiceReference1.Client.EntryId">
+            <summary>
+            EntryId property.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.ServiceReference1.Client.Title">
+            <summary>
+            Title property.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.UCObjectives">
+            <summary>
+            A User Control to be used as the UI for the Objectives Pane.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.UCObjectives.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.UCObjectives"/> class.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.UCObjectives.UCObjectives_Load(System.Object,System.EventArgs)">
+            <summary>
+            Fills the UI with Objectives.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.UCObjectives.UCObjectives_Resize(System.Object,System.EventArgs)">
+            <summary>
+            Manage the control being resized.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.UCObjectives.ListObjectives_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Mange the change of selection.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.UCObjectives.MenuArchive_Click(System.Object,System.EventArgs)">
+            <summary>
+            Archive the Objective.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.UCObjectives.MenuActivate_Click(System.Object,System.EventArgs)">
+            <summary>
+            Re-activate the Objective from archive.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.UCObjectives.MenuRates_Click(System.Object,System.EventArgs)">
+            <summary>
+            Display the Rates and Costs for the Objective.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="F:OutlookObjectives.UCObjectives.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.UCObjectives.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OutlookObjectives.UCObjectives.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.FormChangeWorkType">
+            <summary>
+            UI to review or make changes to the WorkTypes.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.FormChangeWorkType.WorkType">
+            <summary>
+            Gets or sets the WorkType to be review or modified.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormChangeWorkType.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.FormChangeWorkType"/> class.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormChangeWorkType.FormChangeWorkType_Load(System.Object,System.EventArgs)">
+            <summary>
+            Setup the UI.
+            </summary>
+            <param name="sender">This parameter is unused.</param>
+            <param name="e">This parameter also is unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormChangeWorkType.SetupForm">
+            <summary>
+            Load the data from the WorkType to the UI.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormChangeWorkType.TextName_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Updates the WorkType Name.
+            </summary>
+            <param name="sender">This parameter is unused.</param>
+            <param name="e">This parameter also is unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormChangeWorkType.TextDescription_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Updates the WorkType Description.
+            </summary>
+            <param name="sender">This parameter is unused.</param>
+            <param name="e">This parameter also is unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormChangeWorkType.NumCostPerHour_ValueChanged(System.Object,System.EventArgs)">
+            <summary>
+            Updates the WorkType Cost per Hour.
+            </summary>
+            <param name="sender">This parameter is unused.</param>
+            <param name="e">This parameter also is unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormChangeWorkType.NumMinMinutes_ValueChanged(System.Object,System.EventArgs)">
+            <summary>
+            Updates the minimum number of minutes per day.
+            </summary>
+            <param name="sender">This parameter is unused.</param>
+            <param name="e">This parameter also is unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormChangeWorkType.NumMaxMinutes_ValueChanged(System.Object,System.EventArgs)">
+            <summary>
+            Updates the maximum number of minutes per day.
+            </summary>
+            <param name="sender">This parameter is unused.</param>
+            <param name="e">This parameter also is unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormChangeWorkType.ComboApplication_SelectedIndexChanged(System.Object,System.EventArgs)">
+            <summary>
+            Updates the application associated with the WorkType.
+            </summary>
+            <param name="sender">This parameter is unused.</param>
+            <param name="e">This parameter also is unused.</param>
+        </member>
+        <member name="F:OutlookObjectives.FormChangeWorkType.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormChangeWorkType.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormChangeWorkType.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.FormCreateObjective">
+            <summary>
+            UI form to provide an interface for the user to create a new Objective.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormCreateObjective.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.FormCreateObjective"/> class.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormCreateObjective.ButtonCreateObjective_Click(System.Object,System.EventArgs)">
+            <summary>
+            Checks is the Objective is correct and if so then creates a new Objective.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="F:OutlookObjectives.FormCreateObjective.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormCreateObjective.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormCreateObjective.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.FormObjectiveRates">
+            <summary>
+            Form to manage the Objectives Rates and Costs.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.FormObjectiveRates.Objective">
+            <summary>
+            Gets or sets the objective to manage.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormObjectiveRates.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.FormObjectiveRates"/> class.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormObjectiveRates.SetupControl">
+            <summary>
+            Setup the form to suit the supplied objective.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormObjectiveRates.ListWorkTypes_DoubleClick(System.Object,System.EventArgs)">
+            <summary>
+            Show the Change WorkType form when an item is double clicked.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormObjectiveRates.FormObjectiveRates_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Save the objective when the form closes.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="F:OutlookObjectives.FormObjectiveRates.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormObjectiveRates.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormObjectiveRates.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.FormSettings">
+            <summary>
+            Form to manage Objectives Settings.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.FormSettings"/> class.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormSettings.FormSettings_Load(System.Object,System.EventArgs)">
+            <summary>
+            Populate the form with the original details.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormSettings.TextBoxObjectivesRootFolder_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Update the root folder.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormSettings.TextBoxArchiveFolder_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Update the archive folder.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="F:OutlookObjectives.FormSettings.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FormSettings.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OutlookObjectives.FormSettings.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.IAppointment">
+            <summary>
+            Appointment Interface for the inspector wrapper.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.IAppointment.FolderPath">
+            <summary>
+            Gets or sets the outlook folder path.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.IAppointment.AppointmentType">
+            <summary>
+            Gets or sets the type of appointment.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.IWAppointment">
+            <summary>
+            IWAppointment class.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.IWAppointment.Appointment">
+            <summary>
+            Gets the Appointment.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.IWAppointment.Inspector">
+            <summary>
+            Gets the Inspector associated with the appointment.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.IWAppointment.FolderPath">
+            <summary>
+            Gets or sets the folder path.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.IWAppointment.AppointmentType">
+            <summary>
+            Gets or sets the appointment type.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.IWAppointment.#ctor(Microsoft.Office.Interop.Outlook.Inspector,System.String,CommonObjectives.AppointmentType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.IWAppointment"/> class.
+            </summary>
+            <param name="inspector">The inspector associated with the appointment.</param>
+            <param name="folderPath">The folder path of the appointment.</param>
+            <param name="appointmentType">The type of appointment.</param>
+        </member>
+        <member name="T:OutlookObjectives.IWAppointmentObjectivesDayReport">
+            <summary>
+            IWAppointmentObjectivesDayReport class.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.IWAppointmentObjectivesDayReport.Inspector">
+            <summary>
+            Gets a reference to the Inspector displaying the appointment.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.IWAppointmentObjectivesDayReport.Appointment">
+            <summary>
+            Gets a reference to the appointment object.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.IWAppointmentObjectivesDayReport.FolderPath">
+            <summary>
+            Gets or sets the Outlook path to the folder that contains the appointment.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.IWAppointmentObjectivesDayReport.AppointmentType">
+            <summary>
+            Gets or sets the type of appointment.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.IWAppointmentObjectivesDayReport.#ctor(Microsoft.Office.Interop.Outlook.Inspector,System.String,CommonObjectives.AppointmentType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.IWAppointmentObjectivesDayReport"/> class.
+            </summary>
+            <param name="inspector">Passes the Inspector of the appointment.</param>
+            <param name="folderPath">The Outlook folder path to the appointment.</param>
+            <param name="appointmentType">The type of appointment.</param>
+        </member>
+        <member name="M:OutlookObjectives.IWAppointmentObjectivesDayReport.InspectorWrapper_Close">
+            <summary>
+            Method to remove the event handlers and remove this from the collection of inspectors.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.IWAppointmentObjectivesDayReport.Appointment_Close(System.Boolean@)">
+            <summary>
+            Method to save the appointment when it is closed.
+            </summary>
+            <param name="cancel">This parameter is unused.</param>
+        </member>
+        <member name="T:OutlookObjectives.InTouch">
+            <summary>
+            Class to hold the static objects and helper functions.
+            </summary>
+        </member>
+        <member name="F:OutlookObjectives.InTouch.RibbonHeight">
+            <summary>
+            The height of the ribbon in pixels.
+            </summary>
+        </member>
+        <member name="F:OutlookObjectives.InTouch.WorkItemVersion">
+            <summary>
+            Version number for the WorkItem.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.InTouch.TaskManager">
+            <summary>
+            Gets the task manager.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.InTouch.ObjectivesRootFolder">
+            <summary>
+            Gets or sets the path to the Objectives root folder.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.InTouch.ObjectivesArchiveFolder">
+            <summary>
+            Gets or sets the path to the Objectives archive folder.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.InTouch.ObjectivesStorageFolder">
+            <summary>
+            Gets or sets the path to the Objectives storage folder.
+            </summary>
+        </member>
+        <member name="F:OutlookObjectives.InTouch.DpiX">
+            <summary>
+            Value to multiply the DPI X scale.
+            </summary>
+        </member>
+        <member name="F:OutlookObjectives.InTouch.DpiY">
+            <summary>
+            Value to multiply the DPI Y scale.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.InTouch.WorkTypes">
+            <summary>
+            Gets or sets the Dictionary of WorkTypes.
+            </summary>
+            <remarks>
+            These are the default WorkTypes to use if the Objective does not contain a similar WorkType.
+            </remarks>
+        </member>
+        <member name="M:OutlookObjectives.InTouch.GetObjective(System.String)">
+            <summary>
+            Get an Objective object from a path.
+            </summary>
+            <param name="path">The path to the objective.</param>
+            <returns>An objective.</returns>
+        </member>
+        <member name="M:OutlookObjectives.InTouch.CreateObjective(System.String)">
+            <summary>
+            Create a new Objective.
+            </summary>
+            <param name="objectiveName">The name of the new Objective.</param>
+        </member>
+        <member name="M:OutlookObjectives.InTouch.SaveObjective(CommonObjectives.Objective)">
+            <summary>
+            Saves and Objective object to file.
+            </summary>
+            <param name="objective">The objective to save.</param>
+        </member>
+        <member name="M:OutlookObjectives.InTouch.GetTimeStringFromMinutes(System.Int32)">
+            <summary>
+            Gets a formatted time string from an int of minutes.
+            </summary>
+            <param name="minutes">The number of minutes.</param>
+            <returns>A string of the time.</returns>
+        </member>
+        <member name="M:OutlookObjectives.InTouch.CreateCSS">
+            <summary>
+            Creates a CSS file for use by the reports.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.FRObjectivesDayReport">
+            <summary>
+            A Form Region for the Objectives Day Report.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.FRObjectivesDayReport.FRObjectivesDayReportFactory">
+            <summary>
+            FRObjectivesDayReportFactory.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesDayReport.FRObjectivesDayReport_FormRegionShowing(System.Object,System.EventArgs)">
+            <summary>
+            FRObjectivesDayReport_FormRegionShowing method.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="F:OutlookObjectives.FRObjectivesDayReport.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesDayReport.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesDayReport.InitializeManifest(Microsoft.Office.Tools.Outlook.FormRegionManifest,Microsoft.Office.Tools.Outlook.Factory)">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesDayReport.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.WindowFormRegionCollection">
+            
+        </member>
+        <member name="M:OutlookObjectives.WindowFormRegionCollection.#ctor(System.Collections.Generic.IList{Microsoft.Office.Tools.Outlook.IFormRegion})">
+            
+        </member>
+        <member name="T:OutlookObjectives.FRObjectivesMonthReport">
+            <summary>
+            FRObjectivesMonthReport class.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.FRObjectivesMonthReport.FRObjectivesMonthReportFactory">
+            <summary>
+            FRObjectivesMonthReportFactory.
+            </summary>
+        </member>
+        <member name="F:OutlookObjectives.FRObjectivesMonthReport.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesMonthReport.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesMonthReport.InitializeManifest(Microsoft.Office.Tools.Outlook.FormRegionManifest,Microsoft.Office.Tools.Outlook.Factory)">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesMonthReport.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.FRObjectivesWeekReport">
+            <summary>
+            FRObjectivesWeekReport class.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.FRObjectivesWeekReport.FRObjectivesWeekReportFactory">
+            <summary>
+            FRObjectivesWeekReportFactory class.
+            </summary>
+        </member>
+        <member name="F:OutlookObjectives.FRObjectivesWeekReport.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesWeekReport.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesWeekReport.InitializeManifest(Microsoft.Office.Tools.Outlook.FormRegionManifest,Microsoft.Office.Tools.Outlook.Factory)">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.FRObjectivesWeekReport.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.RibAppointment">
+            <summary>
+            RibAppointment class for the Appointment ribbon.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.RibAppointment.RibAppointment_Load(System.Object,Microsoft.Office.Tools.Ribbon.RibbonUIEventArgs)">
+            <summary>
+            Create the Appointment ribbon.
+            </summary>
+            <param name="sender">This parameter is unused.</param>
+            <param name="e">This parameter also is unused.</param>
+        </member>
+        <member name="F:OutlookObjectives.RibAppointment.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.RibAppointment.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.RibAppointment"/> class.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.RibAppointment.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OutlookObjectives.RibAppointment.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.ThisRibbonCollection">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisRibbonCollection.#ctor(Microsoft.Office.Tools.Ribbon.RibbonFactory)">
+            
+        </member>
+        <member name="T:OutlookObjectives.RibExplorer">
+            <summary>
+            Ribbon for the Explorer.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.RibExplorer.RibExplorer_Load(System.Object,Microsoft.Office.Tools.Ribbon.RibbonUIEventArgs)">
+            <summary>
+            Load event for the ribbon.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.RibExplorer.Explorer_FolderSwitch">
+            <summary>
+            Manage the folder switch event.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.RibExplorer.ButtonNewObjective_Click(System.Object,Microsoft.Office.Tools.Ribbon.RibbonControlEventArgs)">
+            <summary>
+            Event for the New Objective button.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="F:OutlookObjectives.RibExplorer.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.RibExplorer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.RibExplorer"/> class.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.RibExplorer.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:OutlookObjectives.RibExplorer.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.TaskConvertVersion">
+            <summary>
+            Day Report Task to generate Objectives Day Reports.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskConvertVersion.#ctor(System.Action)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.TaskConvertVersion"/> class.
+            </summary>
+            <param name="callBack">The callback to return.</param>
+        </member>
+        <member name="M:OutlookObjectives.TaskConvertVersion.RunTask">
+            <summary>
+            Creates a thread to run the Task.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskConvertVersion.BackgroundProcess">
+            <summary>
+            The starting point for the new process.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskConvertVersion.ProcessAppointments">
+            <summary>
+            Primary process to create a DayReport.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskConvertVersion.GetAppointmentsWithinRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)">
+            <summary>
+            Get the appointments within the timespan.
+            </summary>
+            <param name="folder">The folder of the appointment.</param>
+            <param name="startTime">The start time of the appointment.</param>
+            <param name="endTime">The finish time of the appointment.</param>
+            <returns>A collection of outlook items that fit the filter.</returns>
+        </member>
+        <member name="M:OutlookObjectives.TaskConvertVersion.GetAppointmentsInRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)">
+            <summary>
+            Get the appointments that fall in the range of the timespan.
+            </summary>
+            <param name="folder">The folder to search.</param>
+            <param name="startTime">The start time.</param>
+            <param name="endTime">The finish time.</param>
+            <returns>A collection of outlook items that match the filter.</returns>
+        </member>
+        <member name="T:OutlookObjectives.TaskDayReport">
+            <summary>
+            Day Report Task to generate Objectives Day Reports.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.#ctor(System.Action)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.TaskDayReport"/> class.
+            Returns control back to the TaskManager.
+            </summary>
+            <param name="callBack">Callback for when the task has finished.</param>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.RunTask">
+            <summary>
+            Creates a thread to run the Task.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.BackgroundProcess">
+            <summary>
+            The starting point for the new process.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.FindDay">
+            <summary>
+            Find the day that is suitable to create the report for.
+            </summary>
+            <returns>A date time of the day found.</returns>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.ProcessAppointments">
+            <summary>
+            Primary process to create a DayReport.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.CreateHTML">
+            <summary>
+            Creates the HTML for the report.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.DrawDayBarImage">
+            <summary>
+            Draws the Day Bar image.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.DrawApplicationsImage">
+            <summary>
+            Draw the applications graph.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.DrawSystemTimeImage">
+            <summary>
+            Draw the system time graph.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.DrawObjectiveImage">
+            <summary>
+            Draw the objectives graph.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.ProcessSystemUptime(System.String)">
+            <summary>
+            Process the system time data.
+            </summary>
+            <param name="json">JSON to be parsed.</param>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.ProcessSystemIdle(System.String)">
+            <summary>
+            Process the system idle data.
+            </summary>
+            <param name="json">JSON to be parsed.</param>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.ProcessWorkItem(System.String)">
+            <summary>
+            Process the Work Item data.
+            </summary>
+            <param name="json">JSON to be parsed.</param>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.ProcessVisualStudio(System.String)">
+            <summary>
+            Process the Visual Studio data.
+            </summary>
+            <param name="json">JSON to be parsed.</param>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.GetAppointmentsWithinRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)">
+            <summary>
+            Get the appointments within the timespan.
+            </summary>
+            <param name="folder">The folder to search.</param>
+            <param name="startTime">The start time.</param>
+            <param name="endTime">The finish time.</param>
+            <returns>A collection of outlook items that match the filter.</returns>
+        </member>
+        <member name="M:OutlookObjectives.TaskDayReport.GetAppointmentsInRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)">
+            <summary>
+            Get the appointments that fall in the range of the timespan.
+            </summary>
+            <param name="folder">The folder to search.</param>
+            <param name="startTime">The start time.</param>
+            <param name="endTime">The finish time.</param>
+            <returns>A collection of outlook items that match the filter.</returns>
+        </member>
+        <member name="T:OutlookObjectives.TaskImportData">
+            <summary>
+            Processes data files in the storage folder into appointment items.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskImportData.#ctor(System.Action)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.TaskImportData"/> class.
+            </summary>
+            <param name="callBack">Callback.</param>
+        </member>
+        <member name="M:OutlookObjectives.TaskImportData.RunTask">
+            <summary>
+            Method to create and start a background thread to perform the task.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskImportData.BackgroundProcess">
+            <summary>
+            The process to perform the data import.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskImportData.ReadFiles">
+            <summary>
+            This method reads all the files and converts them to JSON.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskImportData.ImportWorkItem(System.String)">
+            <summary>
+            Converts the WorkItem and stores it in an appointment item.
+            </summary>
+            <param name="json">JSON Data containing a WorkItem.</param>
+            <returns>A value indicating the success.</returns>
+        </member>
+        <member name="M:OutlookObjectives.TaskImportData.ImportSystemUptime(System.String)">
+            <summary>
+            Converts the Uptime event and stores it in an appointment item.
+            </summary>
+            <param name="json">JSON Data containing a Uptime event.</param>
+            <returns>A value indicating the success.</returns>
+        </member>
+        <member name="M:OutlookObjectives.TaskImportData.ImportSystemIdle(System.String)">
+            <summary>
+            Converts the Idle event and stores it in an appointment item.
+            </summary>
+            <param name="json">JSON Data containing a idle event.</param>
+            <returns>A value indicating the success.</returns>
+        </member>
+        <member name="M:OutlookObjectives.TaskImportData.ImportSystemSleep(System.String)">
+            <summary>
+            Converts the sleep event and stores it in an appointment item.
+            </summary>
+            <param name="json">JSON Data containing a sleep event.</param>
+            <returns>A value indicating the success.</returns>
+        </member>
+        <member name="T:OutlookObjectives.TaskManager">
+            <summary>
+            TaskManager manages the background tasks.
+            </summary>
+            <remarks>The TaskManager is used to manage the background tasks that perform
+            operations such as moving emails from the Inbox. It provides a queue to store tasks
+            and executes them one at a time.</remarks>
+        </member>
+        <member name="P:OutlookObjectives.TaskManager.BackgroundTasks">
+            <summary>
+            Gets a queue of Task to be performed.
+            </summary>
+        </member>
+        <member name="P:OutlookObjectives.TaskManager.CurrentAction">
+            <summary>
+            Gets or sets the current action to be called when finished.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.TaskManager"/> class.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskManager.TaskFinished">
+            <summary>
+            Callback for when the current task is finished.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskManager.BackgroundProcess">
+            <summary>
+            Main loop for managing tasks.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskManager.EnqueueImportDataTask">
+            <summary>
+            Enqueues a Import Data Task.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskManager.EnqueueDayReportTask">
+            <summary>
+            Enqueues a Day Report Task.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskManager.EnqueueWeekReportTask">
+            <summary>
+            Enqueues a Week Report Task.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskManager.EnqueueMonthReportTask">
+            <summary>
+            Enqueues a Month Report Task.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskManager.EnqueueConvertVersionTask">
+            <summary>
+            Enqueues a Conversion Task.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskManager.EnqueueWebSyncTask">
+            <summary>
+            Enqueues a Month Report Task.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.TaskMonthReport">
+            <summary>
+            Task to process Monthly totals.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskMonthReport.#ctor(System.Action)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.TaskMonthReport"/> class.
+            </summary>
+            <param name="callBack">The action to call when finished.</param>
+        </member>
+        <member name="M:OutlookObjectives.TaskMonthReport.RunTask">
+            <summary>
+            Method to start the task.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskMonthReport.BackgroundProcess">
+            <summary>
+            Method to perform in the background.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskMonthReport.FindDay">
+            <summary>
+            Find the day that is suitable to create the report for.
+            </summary>
+            <returns>The date that is found.</returns>
+        </member>
+        <member name="M:OutlookObjectives.TaskMonthReport.GetAppointmentsWithinRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)">
+            <summary>
+            Get the appointments within the timespan.
+            </summary>
+            <param name="folder">The folder to search.</param>
+            <param name="startTime">The start time.</param>
+            <param name="endTime">The finish time.</param>
+            <returns>A collection of outlook items that match the filter.</returns>
+        </member>
+        <member name="M:OutlookObjectives.TaskMonthReport.GetAppointmentsInRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)">
+            <summary>
+            Get the appointments that fall in the range of the timespan.
+            </summary>
+            <param name="folder">The folder to search.</param>
+            <param name="startTime">The start time.</param>
+            <param name="endTime">The finish time.</param>
+            <returns>A collection of outlook items that match the filter.</returns>
+        </member>
+        <member name="T:OutlookObjectives.TaskWebSync">
+            <summary>
+            TaskWebSync class syncs data to the SQL Server.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskWebSync.#ctor(System.Action)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.TaskWebSync"/> class.
+            </summary>
+            <param name="callBack">The callback when the task is done.</param>
+        </member>
+        <member name="M:OutlookObjectives.TaskWebSync.RunTask">
+            <summary>
+            Creates a thread to run the Task.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskWebSync.BackgroundProcess">
+            <summary>
+            The starting point for the new process.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskWebSync.SyncClients">
+            <summary>
+            Syncs client objects to the SQL Server.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskWebSync.SyncObjectives">
+            <summary>
+            Syncs the Objectives to the SQL Server.
+            </summary>
+        </member>
+        <member name="T:OutlookObjectives.TaskWeekReport">
+            <summary>
+            Task to process weekly totals.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskWeekReport.#ctor(System.Action)">
+            <summary>
+            Initializes a new instance of the <see cref="T:OutlookObjectives.TaskWeekReport"/> class.
+            </summary>
+            <param name="callBack">The action to call when finished.</param>
+        </member>
+        <member name="M:OutlookObjectives.TaskWeekReport.RunTask">
+            <summary>
+            Method to start the process.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskWeekReport.BackgroundProcess">
+            <summary>
+            Method to start in the background.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskWeekReport.FindDay">
+            <summary>
+            Find the day that is suitable to create the report for.
+            </summary>
+            <returns>The date that is found.</returns>
+        </member>
+        <member name="M:OutlookObjectives.TaskWeekReport.GetDays">
+            <summary>
+            Get the DayReports for the week.
+            </summary>
+            <returns>A value indicating success.</returns>
+        </member>
+        <member name="M:OutlookObjectives.TaskWeekReport.GetWorkItemFromDays">
+            <summary>
+            Get all the work items from the days.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskWeekReport.CreateHTML">
+            <summary>
+            Creates the HTML for the report.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.TaskWeekReport.GetAppointmentsInRange(Microsoft.Office.Interop.Outlook.Folder,System.DateTime,System.DateTime)">
+            <summary>
+            Get the appointments that fall in the range of the timespan.
+            </summary>
+            <param name="folder">The folder to search.</param>
+            <param name="startTime">The start time.</param>
+            <param name="endTime">The finish time.</param>
+            <returns>A collection of outlook items that match the filter.</returns>
+        </member>
+        <member name="T:OutlookObjectives.ThisAddIn">
+            <summary>
+            Microsoft Outlook VSTO AddIn to track Objectives.
+            </summary>
+            
+        </member>
+        <member name="P:OutlookObjectives.ThisAddIn.IAppointments">
+            <summary>
+            Gets the Dictionary to hold the wrappers for Appointment objects..
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.ThisAddIn_Startup(System.Object,System.EventArgs)">
+            <summary>
+            Primary entry for the AddIn.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.Inspectors_NewInspector(Microsoft.Office.Interop.Outlook.Inspector)">
+            <summary>
+            Event when new inspectors are opened.
+            </summary>
+            <param name="inspector">The inspector to manage.</param>
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.OnMainTimerEvent(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+             Primary timer event.
+            </summary>
+            <param name="source">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.CheckSystemRequirements">
+            <summary>
+            Checks the system requirements.
+            Required: registry settings.
+            Required: Root Folder.
+            Required: Storage folder.
+            Required: Objectives Calendar.
+            Required: System Calendar.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.ShowSettings">
+            <summary>
+            Shows the Settings Form.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.InternalStartup">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.#ctor(Microsoft.Office.Tools.Outlook.Factory,System.IServiceProvider)">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.Initialize">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.FinishInitialization">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.InitializeDataBindings">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.InitializeCachedData">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.InitializeData">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.BindToData">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.StartCaching(System.String)">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.StopCaching(System.String)">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.IsCached(System.String)">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.BeginInitialization">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.EndInitialization">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.InitializeControls">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.InitializeComponents">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.NeedsFill(System.String)">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisAddIn.OnShutdown">
+            
+        </member>
+        <member name="T:OutlookObjectives.Globals">
+            
+        </member>
+        <member name="M:OutlookObjectives.Globals.#ctor">
+            
+        </member>
+        <member name="T:OutlookObjectives.ThisFormRegionCollection">
+            
+        </member>
+        <member name="M:OutlookObjectives.ThisFormRegionCollection.#ctor(System.Collections.Generic.IList{Microsoft.Office.Tools.Outlook.IFormRegion})">
+            
+        </member>
+    </members>
+</doc>

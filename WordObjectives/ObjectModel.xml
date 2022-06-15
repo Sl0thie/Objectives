@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WordObjectives</name>
+    </assembly>
+    <members>
+        <member name="T:WordObjectives.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:WordObjectives.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:WordObjectives.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:WordObjectives.ThisAddIn">
+            <summary>
+            Microsoft Word VSTO AddIn to track Objectives.
+            </summary>
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.ThisAddIn_Startup(System.Object,System.EventArgs)">
+            <summary>
+            ThisAddIn_Startup manages startup of the class.
+            </summary>
+            <param name="sender">Unused.</param>
+            <param name="e">Also unused.</param>
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.Application_DocumentBeforeClose(Microsoft.Office.Interop.Word.Document,System.Boolean@)">
+            <summary>
+            Event handler to manage when documents are closed.
+            Occurs immediately before any open document closes.
+            </summary>
+            <remarks>
+            [Application.DocumentBeforeClose Event (Word)](Https://docs.microsoft.com/en-us/office/vba/api/word.application.documentbeforeclose).
+            </remarks>
+            <param name="doc">The document that is closing.</param>
+            <param name="cancel">Bool value to cancel the closing of the document.</param>
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.Application_DocumentChange">
+            <summary>
+            Event handler for when documents change.
+            Occurs when a new document is created, when an existing document is opened, or when another document is made the active document.
+            </summary>
+            <remarks>
+            <seealso href="https://docs.microsoft.com/en-us/office/vba/api/word.application.documentchange">Application.DocumentChange event (Word)</seealso>
+            </remarks>
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.Application_DocumentOpen(Microsoft.Office.Interop.Word.Document)">
+            <summary>
+            Event handler for when a document is opened.
+            <seealso href="https://docs.microsoft.com/en-us/office/vba/api/word.application.documentopen">Application.DocumentOpen event (Word)</seealso>
+            </summary>
+            <param name="doc">The document that was opened.</param>
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.CheckDocuments">
+            <summary>
+            Check to see if documents are in the dictionary.
+            </summary>
+            <remarks>
+            First add all documents to the dictionary.
+            Then remove all key-pairs that are not in the document collection.
+            </remarks>
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.RefreshTimer_Tick(System.Object)">
+            <summary>
+            The main timer event.
+            </summary>
+            <param name="stateInfo">parameter is unused.</param>
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.AddDocument(Microsoft.Office.Interop.Word.Document)">
+            <summary>
+            Method to manage the addition of documents.
+            Documents are checked to see if they already exist. The reason for this is some office events fire more than once.
+            The document's detail are then collected and added to the dictionary of document details.
+            </summary>
+            <param name="doc">The document to add to the dictionary.</param>
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.RemoveDocument(System.String)">
+            <summary>
+            Method to remove documents from the collection.
+            </summary>
+            <param name="path">The path to the document to remove from the dictionary.</param>
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.SaveData(CommonObjectives.WorkItem)">
+            <summary>
+            Method to save the data to a json file in the storage folder.
+            </summary>
+            <param name="workItem">A WordSession object to save to file.</param>
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.InternalStartup">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.#ctor(Microsoft.Office.Tools.Word.ApplicationFactory,System.IServiceProvider)">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.Initialize">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.FinishInitialization">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.InitializeDataBindings">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.InitializeCachedData">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.InitializeData">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.BindToData">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.StartCaching(System.String)">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.StopCaching(System.String)">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.IsCached(System.String)">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.BeginInitialization">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.EndInitialization">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.InitializeControls">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.InitializeComponents">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.NeedsFill(System.String)">
+            
+        </member>
+        <member name="M:WordObjectives.ThisAddIn.OnShutdown">
+            
+        </member>
+        <member name="T:WordObjectives.Globals">
+            
+        </member>
+        <member name="M:WordObjectives.Globals.#ctor">
+            
+        </member>
+        <member name="T:WordObjectives.ThisRibbonCollection">
+            
+        </member>
+        <member name="M:WordObjectives.ThisRibbonCollection.#ctor(Microsoft.Office.Tools.Ribbon.RibbonFactory)">
+            
+        </member>
+    </members>
+</doc>
