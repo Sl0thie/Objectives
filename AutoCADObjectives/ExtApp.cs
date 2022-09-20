@@ -5,8 +5,10 @@ using System.Timers;
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.Runtime;
 using CommonObjectives;
-using LogNET;
+//using LogNET;
 using Newtonsoft.Json;
+
+using Serilog;
 
 [assembly: ExtensionApplication(typeof(AutoCADObjectives.ExtApp))]
 [assembly: CommandClass(null)]
@@ -39,7 +41,7 @@ namespace AutoCADObjectives
         /// </summary>
         public ExtApp()
         {
-            Log.MethodEntry();
+            //Log.MethodEntry();
         }
 
         /// <summary>
@@ -50,7 +52,7 @@ namespace AutoCADObjectives
         /// </remarks>
         public void Terminate()
         {
-            Log.MethodEntry();
+            //Log.MethodEntry();
         }
 
         /// <summary>
@@ -58,7 +60,13 @@ namespace AutoCADObjectives
         /// </summary>
         public void Initialize()
         {
-            Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
+            // Setup logging for the application.
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File("AutoCADObjectives - .txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
+            //Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
 
             try
             {
@@ -87,7 +95,7 @@ namespace AutoCADObjectives
             }
             catch (System.Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
         }
 
@@ -97,11 +105,11 @@ namespace AutoCADObjectives
 
             if (e.Document is object)
             {
-                Log.Info(e.Document.Name);
+                Log.Information(e.Document.Name);
             }
             else
             {
-                Log.Info("e.FileName is null.");
+                Log.Information("e.FileName is null.");
             }
         }
 
@@ -111,11 +119,11 @@ namespace AutoCADObjectives
 
             if (e.Document is object)
             {
-                Log.Info(e.Document.Name);
+                Log.Information(e.Document.Name);
             }
             else
             {
-                Log.Info("e.FileName is null.");
+                Log.Information("e.FileName is null.");
             }
         }
 
@@ -123,11 +131,11 @@ namespace AutoCADObjectives
         {
             if (e.FileName is object)
             {
-                Log.Info(e.FileName);
+                Log.Information(e.FileName);
             }
             else
             {
-                Log.Info("e.FileName is null.");
+                Log.Information("e.FileName is null.");
             }
         }
 
@@ -137,16 +145,16 @@ namespace AutoCADObjectives
             {
                 if (e.Document.Name is object)
                 {
-                    Log.Info(e.Document.Name);
+                    Log.Information(e.Document.Name);
                 }
                 else
                 {
-                    Log.Info("e.Document.Name is null.");
+                    Log.Information("e.Document.Name is null.");
                 }
             }
             else
             {
-                Log.Info("e.Document is null.");
+                Log.Information("e.Document is null.");
             }
         }
 
@@ -156,19 +164,19 @@ namespace AutoCADObjectives
             {
                 if (e.Document.Name is object)
                 {
-                    Log.Info(e.Document.Name);
+                    Log.Information(e.Document.Name);
                 }
                 else
                 {
-                    Log.Info("e.Document.Name is null.");
+                    Log.Information("e.Document.Name is null.");
                 }
             }
             else
             {
-                Log.Info("e.Document is null.");
+                Log.Information("e.Document is null.");
             }
 
-            Log.Info($" {e.CurrentMode.ToString()} {e.GlobalCommandName.ToString()}");
+            Log.Information($" {e.CurrentMode.ToString()} {e.GlobalCommandName.ToString()}");
         }
 
         /// <summary>
@@ -199,16 +207,16 @@ namespace AutoCADObjectives
             {
                 if (e.Document.Name is object)
                 {
-                    Log.Info(e.Document.Name);
+                    Log.Information(e.Document.Name);
                 }
                 else
                 {
-                    Log.Info("e.Document.Name is null.");
+                    Log.Information("e.Document.Name is null.");
                 }
             }
             else
             {
-                Log.Info("e.Document is null.");
+                Log.Information("e.Document is null.");
             }
 
             try
@@ -251,7 +259,7 @@ namespace AutoCADObjectives
             }
             catch (System.Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
         }
 
@@ -270,16 +278,16 @@ namespace AutoCADObjectives
             {
                 if (e.Document.Name is object)
                 {
-                    Log.Info(e.Document.Name);
+                    Log.Information(e.Document.Name);
                 }
                 else
                 {
-                    Log.Info("e.Document.Name is null.");
+                    Log.Information("e.Document.Name is null.");
                 }
             }
             else
             {
-                Log.Info("e.Document is null.");
+                Log.Information("e.Document is null.");
             }
 
             try
@@ -297,18 +305,18 @@ namespace AutoCADObjectives
                         }
                         else
                         {
-                            Log.Info($"Drawing not found in work items. [{doc.Name}]");
+                            Log.Information($"Drawing not found in work items. [{doc.Name}]");
                         }
                     }
                     else
                     {
-                        Log.Info($"Drawing is not named drawing. [{doc.Name}]");
+                        Log.Information($"Drawing is not named drawing. [{doc.Name}]");
                     }
                 }
             }
             catch (System.Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
         }
 
@@ -326,16 +334,16 @@ namespace AutoCADObjectives
             {
                 if (e.Document.Name is object)
                 {
-                    Log.Info(e.Document.Name);
+                    Log.Information(e.Document.Name);
                 }
                 else
                 {
-                    Log.Info("e.Document.Name is null.");
+                    Log.Information("e.Document.Name is null.");
                 }
             }
             else
             {
-                Log.Info("e.Document is null.");
+                Log.Information("e.Document is null.");
             }
 
             try
@@ -349,13 +357,13 @@ namespace AutoCADObjectives
                     }
                     else
                     {
-                        Log.Info("Doc Name : " + doc.Name);
+                        Log.Information("Doc Name : " + doc.Name);
                     }
                 }
             }
             catch (System.Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
         }
 
@@ -371,16 +379,16 @@ namespace AutoCADObjectives
             {
                 if (e.Document.Name is object)
                 {
-                    Log.Info(e.Document.Name);
+                    Log.Information(e.Document.Name);
                 }
                 else
                 {
-                    Log.Info("e.Document.Name is null.");
+                    Log.Information("e.Document.Name is null.");
                 }
             }
             else
             {
-                Log.Info("e.Document is null.");
+                Log.Information("e.Document is null.");
             }
         }
 
@@ -396,16 +404,16 @@ namespace AutoCADObjectives
             {
                 if (e.Document.Name is object)
                 {
-                    Log.Info(e.Document.Name);
+                    Log.Information(e.Document.Name);
                 }
                 else
                 {
-                    Log.Info("e.Document.Name is null.");
+                    Log.Information("e.Document.Name is null.");
                 }
             }
             else
             {
-                Log.Info("e.Document is null.");
+                Log.Information("e.Document is null.");
             }
 
             try
@@ -422,7 +430,7 @@ namespace AutoCADObjectives
             }
             catch (System.Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
         }
 
@@ -436,16 +444,16 @@ namespace AutoCADObjectives
             {
                 if (workItem.FilePath is object)
                 {
-                    Log.Info(workItem.FilePath);
+                    Log.Information(workItem.FilePath);
                 }
                 else
                 {
-                    Log.Info("drawing.FilePath is null");
+                    Log.Information("drawing.FilePath is null");
                 }
             }
             else
             {
-                Log.Info("drawing is null");
+                Log.Information("drawing is null");
             }
 
             try
@@ -474,7 +482,7 @@ namespace AutoCADObjectives
             }
             catch (System.Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
         }
     }
