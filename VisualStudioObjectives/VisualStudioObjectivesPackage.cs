@@ -151,7 +151,7 @@ namespace VisualStudioObjectives
             // Check if the projects are saved.
             for (int i = 1; i <= solution.Projects.Count; i++)
             {
-                var project = solution.Projects.Item(i);
+                Project project = solution.Projects.Item(i);
                 switch (project.Kind)
                 {
                     case EnvDTE.Constants.vsProjectKindMisc:
@@ -183,7 +183,7 @@ namespace VisualStudioObjectives
                 // Check if the project items are saved as well.
                 for (int j = 1; j <= project.ProjectItems.Count; j++)
                 {
-                    var item = project.ProjectItems.Item(j);
+                    ProjectItem item = project.ProjectItems.Item(j);
                     if (await IsProjectItemsUnsavedAsync(item, save))
                     {
                         rv = true;
@@ -219,7 +219,7 @@ namespace VisualStudioObjectives
                 case EnvDTE.Constants.vsProjectItemKindPhysicalFolder:
                     for (int j = 1; j <= item.ProjectItems.Count; j++)
                     {
-                        var subitem = item.ProjectItems.Item(j);
+                        ProjectItem subitem = item.ProjectItems.Item(j);
 
                         if (await IsProjectItemsUnsavedAsync(subitem, save))
                         {

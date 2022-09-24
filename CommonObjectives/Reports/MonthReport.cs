@@ -15,7 +15,18 @@
         /// <summary>
         /// Gets or sets the Day the report start on.
         /// </summary>
-        public DateTime Day { get => day; set => day = value; }
+        public DateTime Day
+        {
+            get
+            {
+                return day;
+            }
+
+            set
+            {
+                day = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the WorkItems within the month of the report.

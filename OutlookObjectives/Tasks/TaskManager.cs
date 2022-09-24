@@ -26,12 +26,29 @@
         /// <summary>
         /// Gets a queue of Task to be performed.
         /// </summary>
-        public ConcurrentQueue<Action> BackgroundTasks { get => backgroundTasks; }
+        public ConcurrentQueue<Action> BackgroundTasks
+        {
+            get
+            {
+                return backgroundTasks;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the current action to be called when finished.
         /// </summary>
-        public Action CurrentAction { get => currentAction; set => currentAction = value; }
+        public Action CurrentAction
+        {
+            get
+            {
+                return currentAction;
+            }
+
+            set
+            {
+                currentAction = value;
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskManager"/> class.

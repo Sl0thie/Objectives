@@ -15,7 +15,18 @@
         /// <summary>
         /// Gets or sets the day of the beginning of the report period.
         /// </summary>
-        public DateTime Day { get => day; set => day = value; }
+        public DateTime Day
+        {
+            get
+            {
+                return day;
+            }
+
+            set
+            {
+                day = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets a dictionary of WorkItems from the report period.

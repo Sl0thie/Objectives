@@ -47,7 +47,7 @@
         {
             ListWorkTypes.Items.Clear();
 
-            foreach (var next in InTouch.WorkTypes)
+            foreach (System.Collections.Generic.KeyValuePair<int, WorkType> next in InTouch.WorkTypes)
             {
                 ListViewItem nextItem = new ListViewItem(next.Value.Index.ToString("000"))
                 {
@@ -65,7 +65,7 @@
             labelObjectiveName.Text = objective.ObjectiveName;
             labelDateCreated.Text = objective.Created.ToString("d/MM/yyyy");
 
-            foreach (var next in objective.WorkTypes)
+            foreach (System.Collections.Generic.KeyValuePair<int, WorkType> next in objective.WorkTypes)
             {
                 bool same = true;
                 ListViewItem nextItem = ListWorkTypes.Items[next.Key];

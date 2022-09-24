@@ -101,7 +101,7 @@
                 item.Created = baseDir.CreationTime;
 
                 // Check for older source file as some projects will probably be backdated.
-                foreach (var file in Directory.EnumerateFiles(path + @"\Documents", "*.*", SearchOption.AllDirectories))
+                foreach (string file in Directory.EnumerateFiles(path + @"\Documents", "*.*", SearchOption.AllDirectories))
                 {
                     try
                     {
@@ -122,7 +122,7 @@
                     }
                 }
 
-                foreach (var file in Directory.EnumerateFiles(path + @"\Projects", "*.*", SearchOption.AllDirectories))
+                foreach (string file in Directory.EnumerateFiles(path + @"\Projects", "*.*", SearchOption.AllDirectories))
                 {
                     try
                     {

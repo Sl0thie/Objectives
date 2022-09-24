@@ -9,14 +9,14 @@
     /// <summary>
     /// AppShell class.
     /// </summary>
-    public partial class AppShell : Xamarin.Forms.Shell
+    public partial class AppShell : Shell
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AppShell"/> class.
         /// </summary>
         public AppShell()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             Routing.RegisterRoute(nameof(ObjectivePage), typeof(ObjectivePage));
             Routing.RegisterRoute(nameof(ObjectivesPage), typeof(ObjectivesPage));
         }
@@ -28,7 +28,7 @@
         /// <param name="e">Also unused.</param>
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//LoginPage");
+            await Current.GoToAsync("//LoginPage");
         }
     }
 }

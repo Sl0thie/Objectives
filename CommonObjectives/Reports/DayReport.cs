@@ -20,22 +20,66 @@
         /// <summary>
         /// Gets or sets the Date value of the report.
         /// </summary>
-        public DateTime Day { get => day; set => day = value; }
+        public DateTime Day
+        {
+            get
+            {
+                return day;
+            }
+
+            set
+            {
+                day = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the int value returning the total number of minutes the system was up that day.
         /// </summary>
-        public int TotalUptime { get => totalUptime; set => totalUptime = value; }
+        public int TotalUptime
+        {
+            get
+            {
+                return totalUptime;
+            }
+
+            set
+            {
+                totalUptime = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the int value returning the total number of minutes the system was idle during up time.
         /// </summary>
-        public int TotalIdle { get => totalIdle; set => totalIdle = value; }
+        public int TotalIdle
+        {
+            get
+            {
+                return totalIdle;
+            }
+
+            set
+            {
+                totalIdle = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the int value returning how many minutes of work time was determined.
         /// </summary>
-        public int TotalWork { get => totalWork; set => totalWork = value; }
+        public int TotalWork
+        {
+            get
+            {
+                return totalWork;
+            }
+
+            set
+            {
+                totalWork = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets a dictionary for the Objective's Totals.
@@ -58,7 +102,18 @@
         /// <summary>
         /// Gets or sets an array of the minute objects for the day.
         /// </summary>
-        public Minute[] Minutes { get => minutes; set => minutes = value; }
+        public Minute[] Minutes
+        {
+            get
+            {
+                return minutes;
+            }
+
+            set
+            {
+                minutes = value;
+            }
+        }
 
         /// <summary>
         /// Gets or sets a string containing the HTML for the report.

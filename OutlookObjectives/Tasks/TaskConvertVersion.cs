@@ -192,7 +192,7 @@
 
                 Objective obj = InTouch.GetObjective(InTouch.ObjectivesRootFolder + "\\" + workItem.ObjectiveName);
 
-                foreach (var next in obj.WorkTypes)
+                foreach (System.Collections.Generic.KeyValuePair<int, WorkType> next in obj.WorkTypes)
                 {
                     if (next.Value.Application == workItem.Application)
                     {
@@ -203,7 +203,7 @@
 
                 if (workItem.WorkType is null)
                 {
-                    foreach (var next in InTouch.WorkTypes)
+                    foreach (System.Collections.Generic.KeyValuePair<int, WorkType> next in InTouch.WorkTypes)
                     {
                         if (next.Value.Application == workItem.Application)
                         {

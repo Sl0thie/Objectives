@@ -142,7 +142,7 @@
             Outlook.Items appointments = GetAppointmentsWithinRange(system, start, finsh);
 
             // Process all the system appointments.
-            foreach (var appointment in appointments)
+            foreach (object appointment in appointments)
             {
                 Outlook.AppointmentItem next = (Outlook.AppointmentItem)appointment;
                 switch (next.Categories)
@@ -165,7 +165,7 @@
             appointments = GetAppointmentsWithinRange(calendar, start, finsh);
 
             // Process the appointments based on the application type.
-            foreach (var appointment in appointments)
+            foreach (object appointment in appointments)
             {
                 Outlook.AppointmentItem next = (Outlook.AppointmentItem)appointment;
                 Outlook.UserProperty customProperty = next.UserProperties.Find("Application");
@@ -295,10 +295,10 @@
         private void CalculateBillableItems()
         {
             // Loop though the work items.
-            foreach (var next in dayReport.WorkItems)
+            foreach (KeyValuePair<string, WorkItem> next in dayReport.WorkItems)
             {
                 // Calculate the cost of the total minutes for the day.
-                next.Value.Cost = (next.Value.WorkType.CostPerHour / 60) * next.Value.Minutes;
+                next.Value.Cost = next.Value.WorkType.CostPerHour / 60 * next.Value.Minutes;
 
                 // Parse to truncate the precision to suit dollars and cents.
                 next.Value.Cost = decimal.Parse(next.Value.Cost.ToString("0.00"));
@@ -352,7 +352,7 @@
             int totaltime = 0;
             decimal totalcost = 0;
 
-            foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
+            foreach (KeyValuePair<string, WorkItem> next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
             {
                 if (next.Value.Cost > 0)
                 {
@@ -395,7 +395,7 @@
             int objectiveTime = 0;
             int totalTime = 0;
 
-            foreach (var next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
+            foreach (KeyValuePair<string, WorkItem> next in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
             {
                 if (lastObjectiveName == string.Empty)
                 {
@@ -720,32 +720,32 @@
             // Draw the uptime segment.
             int rv1 = chart.Series[series2].Points.AddXY("Up Time", dayReport.TotalUptime);
             chart.Series[series2].Points[rv1].Color = colorUptime;
-            chart.Series[series2].Points[rv1].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            chart.Series[series2].Points[rv1].LabelForeColor = Color.FromArgb(255, 255, 255);
 
             // Draw the uptime segment.
             int rv2 = chart.Series[series2].Points.AddY(1440 - dayReport.TotalUptime);
-            chart.Series[series2].Points[rv2].Color = System.Drawing.Color.FromArgb(0, 0, 0, 0);
-            chart.Series[series2].Points[rv2].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            chart.Series[series2].Points[rv2].Color = Color.FromArgb(0, 0, 0, 0);
+            chart.Series[series2].Points[rv2].LabelForeColor = Color.FromArgb(255, 255, 255);
 
             // Draw the billable segment.
             int rv3 = chart.Series[series1].Points.AddXY("Billable Time", dayReport.TotalWork);
             chart.Series[series1].Points[rv3].Color = colorBillable;
-            chart.Series[series1].Points[rv3].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            chart.Series[series1].Points[rv3].LabelForeColor = Color.FromArgb(255, 255, 255);
 
             // Draw the other time segment.
             int rv4 = chart.Series[series1].Points.AddXY("Other Time", dayReport.TotalUptime - dayReport.TotalIdle - dayReport.TotalWork);
             chart.Series[series1].Points[rv4].Color = colorOther;
-            chart.Series[series1].Points[rv4].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            chart.Series[series1].Points[rv4].LabelForeColor = Color.FromArgb(255, 255, 255);
 
             // Draw the idle time segment.
             int rv5 = chart.Series[series1].Points.AddXY("Idle Time", dayReport.TotalIdle);
             chart.Series[series1].Points[rv5].Color = colorIdle;
-            chart.Series[series1].Points[rv5].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            chart.Series[series1].Points[rv5].LabelForeColor = Color.FromArgb(255, 255, 255);
 
             // Draw the downtime segment as transparent.
             int rv6 = chart.Series[series1].Points.AddY(1440 - dayReport.TotalUptime);
-            chart.Series[series1].Points[rv6].Color = System.Drawing.Color.FromArgb(0, 0, 0, 0);
-            chart.Series[series1].Points[rv6].LabelForeColor = System.Drawing.Color.FromArgb(255, 255, 255);
+            chart.Series[series1].Points[rv6].Color = Color.FromArgb(0, 0, 0, 0);
+            chart.Series[series1].Points[rv6].LabelForeColor = Color.FromArgb(255, 255, 255);
 
             // Save the image to file.
             chart.SaveImage(System.IO.Path.GetTempPath() + "SystemTime.png", ChartImageFormat.Png);
@@ -802,7 +802,7 @@
             {
                 int totalminutes = 0;
 
-                foreach (var inner in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.Application))
+                foreach (KeyValuePair<string, WorkItem> inner in dayReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.Application))
                 {
                     if (inner.Value.ObjectiveName == outer)
                     {

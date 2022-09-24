@@ -1,10 +1,12 @@
-﻿using System;
-using AndroidObjectives.Views;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace AndroidObjectives
+﻿namespace AndroidObjectives
 {
+    using System;
+
+    using AndroidObjectives.Views;
+
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
+
     /// <summary>
     /// App class.
     /// </summary>
@@ -15,7 +17,7 @@ namespace AndroidObjectives
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             MainPage = new AppShell();
         }
 

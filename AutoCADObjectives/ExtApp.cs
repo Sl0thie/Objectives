@@ -5,7 +5,6 @@ using System.Timers;
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.Runtime;
 using CommonObjectives;
-//using LogNET;
 using Newtonsoft.Json;
 
 using Serilog;
@@ -41,7 +40,6 @@ namespace AutoCADObjectives
         /// </summary>
         public ExtApp()
         {
-            //Log.MethodEntry();
         }
 
         /// <summary>
@@ -52,7 +50,6 @@ namespace AutoCADObjectives
         /// </remarks>
         public void Terminate()
         {
-            //Log.MethodEntry();
         }
 
         /// <summary>
@@ -65,8 +62,6 @@ namespace AutoCADObjectives
                 .MinimumLevel.Debug()
                 .WriteTo.File("AutoCADObjectives - .txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
-
-            //Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
 
             try
             {
@@ -101,8 +96,6 @@ namespace AutoCADObjectives
 
         private void Callback_DocumentCreationCanceled(object sender, DocumentCollectionEventArgs e)
         {
-            //throw new NotImplementedException();
-
             if (e.Document is object)
             {
                 Log.Information(e.Document.Name);
@@ -115,8 +108,6 @@ namespace AutoCADObjectives
 
         private void Callback_DocumentCreateStarted(object sender, DocumentCollectionEventArgs e)
         {
-            //throw new NotImplementedException();
-
             if (e.Document is object)
             {
                 Log.Information(e.Document.Name);
@@ -176,7 +167,7 @@ namespace AutoCADObjectives
                 Log.Information("e.Document is null.");
             }
 
-            Log.Information($" {e.CurrentMode.ToString()} {e.GlobalCommandName.ToString()}");
+            Log.Information($" {e.CurrentMode} {e.GlobalCommandName}");
         }
 
         /// <summary>
@@ -188,7 +179,7 @@ namespace AutoCADObjectives
         {
             if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
             {
-                foreach (var next in workItems)
+                foreach (KeyValuePair<string, WorkItem> next in workItems)
                 {
                     WorkItem drawing = (WorkItem)next.Value;
                     SaveData(drawing);

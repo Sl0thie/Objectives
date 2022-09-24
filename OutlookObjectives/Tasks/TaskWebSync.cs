@@ -104,7 +104,7 @@
         {
             soap = new ServiceReference1.ObjectivesSoapClient();
 
-            foreach (var path in Directory.EnumerateDirectories(InTouch.ObjectivesRootFolder, "*", SearchOption.TopDirectoryOnly))
+            foreach (string path in Directory.EnumerateDirectories(InTouch.ObjectivesRootFolder, "*", SearchOption.TopDirectoryOnly))
             {
                 Objective objective = InTouch.GetObjective(path);
                 objective.Archived = false;
@@ -121,7 +121,7 @@
                 soap.SaveObjective(obj);
             }
 
-            foreach (var path in Directory.EnumerateDirectories(InTouch.ObjectivesArchiveFolder, "*", SearchOption.TopDirectoryOnly))
+            foreach (string path in Directory.EnumerateDirectories(InTouch.ObjectivesArchiveFolder, "*", SearchOption.TopDirectoryOnly))
             {
                 Objective objective = InTouch.GetObjective(path);
                 objective.Archived = true;

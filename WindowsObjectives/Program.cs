@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace WindowsObjectives
+﻿namespace WindowsObjectives
 {
+    using System;
+    using System.Windows.Forms;
+
     /// <summary>
     /// Program class.
     /// </summary>

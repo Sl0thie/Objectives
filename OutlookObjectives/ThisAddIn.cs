@@ -294,17 +294,17 @@
                 workTypesKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes");
                 if (workTypesKey is object)
                 {
-                    var subkeys = workTypesKey.GetSubKeyNames();
+                    string[] subkeys = workTypesKey.GetSubKeyNames();
 
-                    foreach (var subkey in subkeys)
+                    foreach (string subkey in subkeys)
                     {
                         WorkType nextType = new WorkType();
                         subKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\InTouch\Objectives\WorkTypes\" + subkey);
                         nextType.Index = Convert.ToInt32(subkey);
 
-                        foreach (var valueName in subKey.GetValueNames())
+                        foreach (string valueName in subKey.GetValueNames())
                         {
-                            var val = subKey.GetValue(valueName);
+                            object val = subKey.GetValue(valueName);
                             switch (valueName)
                             {
                                 case "Name":

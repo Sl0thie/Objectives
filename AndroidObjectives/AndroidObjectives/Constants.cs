@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
-
-namespace AndroidObjectives
+﻿namespace AndroidObjectives
 {
+    using System;
+    using System.IO;
+
     /// <summary>
     /// Constants class manages global constants.
     /// </summary>
@@ -34,7 +34,7 @@ namespace AndroidObjectives
         {
             get
             {
-                var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                string basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 return Path.Combine(basePath, DatabaseFilename);
             }
         }

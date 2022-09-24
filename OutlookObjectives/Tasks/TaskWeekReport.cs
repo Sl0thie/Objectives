@@ -153,7 +153,7 @@
             for (int i = 0; i < 7; i++)
             {
                 // Loop though the work items.
-                foreach (var next in dayReports[i].WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
+                foreach (System.Collections.Generic.KeyValuePair<string, WorkItem> next in dayReports[i].WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
                 {
                     weekReport.WorkItems.Add(dayReports[i].Day.ToString("yyyy-MM-dd") + next.Value.ObjectiveName + next.Value.Name + next.Value.WorkType.Index, next.Value);
                 }
@@ -178,7 +178,7 @@
             rv += "<h2>Objectives Totals</h2>" + "\n";
             rv += "<table width=\"100%\">" + "\n";
 
-            foreach (var next in weekReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
+            foreach (System.Collections.Generic.KeyValuePair<string, WorkItem> next in weekReport.WorkItems.OrderBy(x => x.Value.ObjectiveName).ThenBy(x => x.Value.Name).ThenBy(x => x.Value.WorkType.Index))
             {
                 rv += "<tr>" + "\n";
                 rv += "<td style=\"max-height:18px;\">" + next.Value.ObjectiveName + "</td>\n";

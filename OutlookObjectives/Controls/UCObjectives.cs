@@ -26,7 +26,7 @@
         /// <param name="e">Also unused.</param>
         private void UCObjectives_Load(object sender, EventArgs e)
         {
-            foreach (var path in Directory.EnumerateDirectories(InTouch.ObjectivesRootFolder, "*", SearchOption.TopDirectoryOnly))
+            foreach (string path in Directory.EnumerateDirectories(InTouch.ObjectivesRootFolder, "*", SearchOption.TopDirectoryOnly))
             {
                 Objective objective = InTouch.GetObjective(path);
                 ListViewItem nextItem = new ListViewItem(objective.ObjectiveName)
@@ -37,7 +37,7 @@
                 _ = ListObjectives.Items.Add(nextItem);
             }
 
-            foreach (var path in Directory.EnumerateDirectories(InTouch.ObjectivesArchiveFolder, "*", SearchOption.TopDirectoryOnly))
+            foreach (string path in Directory.EnumerateDirectories(InTouch.ObjectivesArchiveFolder, "*", SearchOption.TopDirectoryOnly))
             {
                 Objective objective = InTouch.GetObjective(path);
                 ListViewItem nextItem = new ListViewItem(objective.ObjectiveName)

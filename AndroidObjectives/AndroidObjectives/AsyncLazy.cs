@@ -1,9 +1,9 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-
-namespace AndroidObjectives
+﻿namespace AndroidObjectives
 {
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// AsyncLazt class.
     /// </summary>
@@ -44,7 +44,7 @@ namespace AndroidObjectives
         /// </summary>
         public void Start()
         {
-            var unused = instance.Value;
+            Task<T> unused = instance.Value;
         }
     }
 }
