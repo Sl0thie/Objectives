@@ -4,7 +4,7 @@
     using System.Runtime.InteropServices;
     using System.Threading;
     using CommonObjectives;
-    using LogNET;
+    using Serilog;
     using Newtonsoft.Json;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
@@ -58,7 +58,7 @@
 
             while (keepLooking)
             {
-                Log.Info("Processing Day: " + day.ToString());
+                Log.Information("Processing Day: " + day.ToString());
                 ProcessAppointments();
 
                 if (day <= finishDay)
@@ -97,18 +97,18 @@
                         Outlook.UserProperty customProperty = next.UserProperties.Find("WorkItemVersion");
                         if (customProperty is null)
                         {
-                            Log.Info("No WorkItemVersion - Processing " + next.Subject + " " + next.Start.ToString());
+                            Log.Information("No WorkItemVersion - Processing " + next.Subject + " " + next.Start.ToString());
                             ProcessVisualStudio(next);
                         }
                         else
                         {
                             if (customProperty.Value == 5)
                             {
-                                Log.Info("Found WorkItemVersion - Skipping " + next.Subject + " " + next.Start.ToString());
+                                Log.Information("Found WorkItemVersion - Skipping " + next.Subject + " " + next.Start.ToString());
                             }
                             else
                             {
-                                Log.Info("Wrong WorkItemVersion - Error " + next.Subject + " " + next.Start.ToString());
+                                Log.Information("Wrong WorkItemVersion - Error " + next.Subject + " " + next.Start.ToString());
                             }
                         }
 
@@ -127,18 +127,18 @@
                         Outlook.UserProperty customProperty2 = next.UserProperties.Find("WorkItemVersion");
                         if (customProperty2 is null)
                         {
-                            Log.Info("No WorkItemVersion - Error " + next.Subject + " " + next.Start.ToString());
+                            Log.Information("No WorkItemVersion - Error " + next.Subject + " " + next.Start.ToString());
                             ProcessVisualStudio(next);
                         }
                         else
                         {
                             if (customProperty2.Value == 5)
                             {
-                                Log.Info("Found WorkItemVersion - Ok " + next.Subject + " " + next.Start.ToString());
+                                Log.Information("Found WorkItemVersion - Ok " + next.Subject + " " + next.Start.ToString());
                             }
                             else
                             {
-                                Log.Info("Wrong WorkItemVersion - Error " + customProperty2.Value + " " + next.Subject + " " + next.Start.ToString());
+                                Log.Information("Wrong WorkItemVersion - Error " + customProperty2.Value + " " + next.Subject + " " + next.Start.ToString());
                             }
                         }
 
@@ -150,7 +150,7 @@
                         break;
 
                     default:
-                        Log.Info("Unmanaged Category : " + next.Categories);
+                        Log.Information("Unmanaged Category : " + next.Categories);
                         break;
                 }
             }
@@ -166,12 +166,12 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
 
             if (item is object)
             {
-                Log.Info(item.Name);
+                Log.Information(item.Name);
 
                 WorkItem workItem = new WorkItem(item.Name)
                 {

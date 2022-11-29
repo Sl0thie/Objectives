@@ -100,7 +100,6 @@
             Microsoft.VisualStudio.Shell.Events.SolutionEvents.OnBeforeCloseSolution += SolutionEvents_OnBeforeCloseSolution;
         }
 
-
         #endregion
 
         /// <summary>
@@ -313,6 +312,7 @@
             try
             {
                 // Create a new work item for the loaded solution.
+                Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
                 GetStartValues();
                 GetCurrentValues();
             }
@@ -332,6 +332,7 @@
             try
             {
                 // Get the finished data and save to file.
+                Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
                 GetCurrentValues();
                 _ = SaveDataAsync();
             }

@@ -4,7 +4,7 @@
     using System.IO;
     using System.Threading;
     using CommonObjectives;
-    using LogNET;
+    using Serilog;
 
     /// <summary>
     /// TaskWebSync class syncs data to the SQL Server.
@@ -35,6 +35,7 @@
                 IsBackground = true,
                 Priority = ThreadPriority.Normal,
             };
+
             backgroundThread.SetApartmentState(ApartmentState.STA);
             backgroundThread.Start();
         }
@@ -93,7 +94,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
         }
 
@@ -115,8 +116,8 @@
                     ObjectiveName = objective.ObjectiveName,
                 };
 
-                Log.Info("ObjectiveName: " + obj.ObjectiveName);
-                Log.Info("DateTime: " + obj.Created);
+                Log.Information("ObjectiveName: " + obj.ObjectiveName);
+                Log.Information("DateTime: " + obj.Created);
 
                 soap.SaveObjective(obj);
             }
@@ -132,8 +133,8 @@
                     ObjectiveName = objective.ObjectiveName,
                 };
 
-                Log.Info("ObjectiveName: " + obj.ObjectiveName);
-                Log.Info("DateTime: " + obj.Created);
+                Log.Information("ObjectiveName: " + obj.ObjectiveName);
+                Log.Information("DateTime: " + obj.Created);
 
                 soap.SaveObjective(obj);
             }

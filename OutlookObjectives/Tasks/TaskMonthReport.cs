@@ -3,7 +3,7 @@
     using System;
     using System.Threading;
     using CommonObjectives;
-    using LogNET;
+    using Serilog;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
@@ -49,11 +49,11 @@
             if (day != DateTime.MinValue)
             {
                 day = day.AddDays(-1);
-                Log.Info("Processing Month :" + day.ToString());
+                Log.Information("Processing Month :" + day.ToString());
             }
             else
             {
-                Log.Info("No Month found to process.");
+                Log.Information("No Month found to process.");
             }
 
             callBack?.Invoke();
@@ -71,10 +71,10 @@
 
             while (keepLooking)
             {
-                Log.Info("Keep Looking: " + returnValue.ToString());
+                Log.Information("Keep Looking: " + returnValue.ToString());
                 if (returnValue.Day == 1)
                 {
-                    Log.Info("Checking Day: " + returnValue.ToString());
+                    Log.Information("Checking Day: " + returnValue.ToString());
                     keepLooking = false;
 
                     Outlook.Items billingItems = GetAppointmentsInRange(objectivesCalendar, returnValue, returnValue.AddDays(1));

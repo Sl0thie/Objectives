@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using CommonObjectives;
-    using LogNET;
+    using Serilog;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -118,7 +118,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex);
+                        Log.Error(ex.Message, ex);
                     }
                 }
 
@@ -139,7 +139,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex);
+                        Log.Error(ex.Message, ex);
                     }
                 }
 

@@ -65,13 +65,13 @@ namespace WindowsObjectives
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -96,6 +96,7 @@ namespace WindowsObjectives
             this.eventLogSystem.EnableRaisingEvents = true;
             this.eventLogSystem.Log = "System";
             this.eventLogSystem.SynchronizingObject = this;
+            this.eventLogSystem.EntryWritten += new System.Diagnostics.EntryWrittenEventHandler(this.eventLogSystem_EntryWritten);
             // 
             // timerMain
             // 

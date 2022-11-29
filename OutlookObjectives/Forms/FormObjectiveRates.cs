@@ -3,7 +3,7 @@
     using System;
     using System.Windows.Forms;
     using CommonObjectives;
-    using LogNET;
+    using Serilog;
 
     /// <summary>
     /// Form to manage the Objectives Rates and Costs.
@@ -114,7 +114,7 @@
 
                 if (!same)
                 {
-                    Log.Info("Not the same");
+                    Log.Information("Not the same");
                 }
             }
         }

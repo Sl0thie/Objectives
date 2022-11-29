@@ -4,7 +4,7 @@
     using System.IO;
     using System.Windows.Forms;
     using CommonObjectives;
-    using LogNET;
+    using Serilog;
 
     /// <summary>
     /// A User Control to be used as the UI for the Objectives Pane.
@@ -98,8 +98,8 @@
             string pathto = InTouch.ObjectivesArchiveFolder + "\\" + ListObjectives.SelectedItems[0].Text;
             string pathfrom = InTouch.ObjectivesRootFolder + "\\" + ListObjectives.SelectedItems[0].Text;
 
-            Log.Info("To  : " + pathto);
-            Log.Info("From: " + pathfrom);
+            Log.Information("To  : " + pathto);
+            Log.Information("From: " + pathfrom);
         }
 
         /// <summary>
@@ -112,8 +112,8 @@
             string pathfrom = InTouch.ObjectivesArchiveFolder + "\\" + ListObjectives.SelectedItems[0].Text;
             string pathto = InTouch.ObjectivesRootFolder + "\\" + ListObjectives.SelectedItems[0].Text;
 
-            Log.Info("To  : " + pathto);
-            Log.Info("From: " + pathfrom);
+            Log.Information("To  : " + pathto);
+            Log.Information("From: " + pathfrom);
         }
 
         /// <summary>

@@ -3,7 +3,7 @@
     using System;
     using System.IO;
     using System.Windows.Forms;
-    using LogNET;
+    using Serilog;
     using Microsoft.Win32;
 
     /// <summary>
@@ -40,7 +40,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
                 return;
             }
 
@@ -55,7 +55,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
 
             try
@@ -68,7 +68,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
 
             try
@@ -81,7 +81,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
         }
 
@@ -104,7 +104,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
         }
 
@@ -127,7 +127,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
         }
 
@@ -145,7 +145,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
         }
 
@@ -192,7 +192,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
                 return;
             }
 
@@ -202,7 +202,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
 
             try
@@ -211,7 +211,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
 
             try
@@ -220,7 +220,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
 
             Close();

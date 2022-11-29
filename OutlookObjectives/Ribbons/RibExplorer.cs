@@ -1,7 +1,7 @@
 ﻿namespace OutlookObjectives
 {
     using System;
-    using LogNET;
+    using Serilog;
     using Microsoft.Office.Tools;
     using Microsoft.Office.Tools.Ribbon;
     using Outlook = Microsoft.Office.Interop.Outlook;
@@ -53,7 +53,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex);
+                        Log.Error(ex.Message, ex);
                     }
 
                     break;
@@ -65,7 +65,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex);
+                        Log.Error(ex.Message, ex);
                     }
 
                     break;
@@ -77,7 +77,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex);
+                        Log.Error(ex.Message, ex);
                     }
 
                     break;
@@ -85,12 +85,12 @@
                 default:
                     try
                     {
-                        Log.Info("FolderLocation: " + folderLocation);
+                        Log.Information("FolderLocation: " + folderLocation);
                         taskPaneObjectives.Visible = false;
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex);
+                        Log.Error(ex.Message, ex);
                     }
 
                     break;

@@ -6,7 +6,7 @@
 
     using CommonObjectives;
 
-    using LogNET;
+    using Serilog;
 
     using Newtonsoft.Json;
 

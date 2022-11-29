@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using CommonObjectives;
-    using LogNET;
+    using Serilog;
     using Microsoft.Win32;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
@@ -35,8 +35,14 @@
         /// <param name="e">Also unused.</param>
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            // Start the logging.
-            Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
+            // Setup logging for the application.
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Debug()
+                .WriteTo.File("OutlookObjectives - .txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+
+            Log.Information("Add-in Startup");
 
             // Check for the required items.
             CheckSystemRequirements();
@@ -73,8 +79,6 @@
         /// <param name="inspector">The inspector to manage.</param>
         private void Inspectors_NewInspector(Outlook.Inspector inspector)
         {
-            Log.MethodEntry();
-
             if (inspector.CurrentItem is Outlook.AppointmentItem)
             {
                 currentAppointment = null;
@@ -120,14 +124,12 @@
                         break;
 
                     default:
-                        Log.Info("Unknown Folder Path " + folderLocation);
+                        Log.Information("Unknown Folder Path " + folderLocation);
                         iAppointments.Add(inspector, new IWAppointment(inspector, folderLocation, AppointmentType.Standard));
 
                         break;
                 }
             }
-
-            Log.MethodExit();
         }
 
         /// <summary>
@@ -137,7 +139,7 @@
         /// <param name="e">Also unused.</param>
         private void OnMainTimerEvent(object source, System.Timers.ElapsedEventArgs e)
         {
-            Log.Info("Timer Tick");
+            Log.Information("Timer Tick");
 
             try
             {
@@ -285,7 +287,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
 
             // Load the work types from the registry.
@@ -339,7 +341,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
 
             // Check if the Objectives registry key exist.
@@ -355,7 +357,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
                 ShowSettings();
                 return;
             }
@@ -372,7 +374,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
                 ShowSettings();
                 return;
             }
@@ -387,7 +389,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
                 ShowSettings();
                 return;
             }
@@ -405,7 +407,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
                 ShowSettings();
                 return;
             }
@@ -421,11 +423,11 @@
                     return;
                 }
 
-                Log.Info("Stat.ObjectivesStorageFolder " + InTouch.ObjectivesStorageFolder);
+                Log.Information("Stat.ObjectivesStorageFolder " + InTouch.ObjectivesStorageFolder);
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
                 ShowSettings();
                 return;
             }

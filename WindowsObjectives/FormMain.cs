@@ -272,5 +272,9 @@
 
             return strTitle;
         }
+
+        private void eventLogSystem_EntryWritten(object sender, EntryWrittenEventArgs e)
+        {
+        }
     }
 }

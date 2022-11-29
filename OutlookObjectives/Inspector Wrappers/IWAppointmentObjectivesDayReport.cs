@@ -2,7 +2,7 @@
 {
     using System.Runtime.InteropServices;
     using CommonObjectives;
-    using LogNET;
+    using Serilog;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
     /// <summary>
@@ -55,8 +55,6 @@
         /// <param name="appointmentType">The type of appointment.</param>
         public IWAppointmentObjectivesDayReport(Outlook.Inspector inspector, string folderPath, AppointmentType appointmentType)
         {
-            Log.MethodEntry();
-
             this.inspector = inspector;
             this.folderPath = folderPath;
             appointment = (Outlook.AppointmentItem)this.inspector.CurrentItem;
@@ -64,8 +62,6 @@
 
             ((Outlook.ItemEvents_10_Event)appointment).Close += Appointment_Close;
             ((Outlook.InspectorEvents_Event)this.inspector).Close += new Outlook.InspectorEvents_CloseEventHandler(InspectorWrapper_Close);
-
-            Log.MethodExit();
         }
 
         /// <summary>
@@ -73,14 +69,10 @@
         /// </summary>
         private void InspectorWrapper_Close()
         {
-            Log.MethodEntry();
-
             _ = Globals.ThisAddIn.IAppointments.Remove(inspector);
 
             ((Outlook.InspectorEvents_Event)inspector).Close -= new Outlook.InspectorEvents_CloseEventHandler(InspectorWrapper_Close);
             inspector = null;
-
-            Log.MethodExit();
         }
 
         /// <summary>
@@ -89,23 +81,17 @@
         /// <param name="cancel">This parameter is unused.</param>
         private void Appointment_Close(ref bool cancel)
         {
-            Log.MethodEntry();
             ((Outlook.ItemEvents_10_Event)appointment).Close -= Appointment_Close;
-
-            Log.MethodEntry();
 
             if (!appointment.Saved)
             {
                 appointment.Save();
             }
 
-            Log.MethodEntry();
             if (appointment != null)
             {
                 _ = Marshal.ReleaseComObject(appointment);
             }
-
-            Log.MethodExit();
         }
     }
 }

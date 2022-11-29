@@ -4,7 +4,7 @@
     using System.IO;
     using System.Threading;
     using CommonObjectives;
-    using LogNET;
+    using Serilog;
     using Newtonsoft.Json;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
@@ -47,12 +47,12 @@
         {
             try
             {
-                Log.Info("Starting import JSON data task.");
+                Log.Information("Starting import JSON data task.");
                 ReadFiles();
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
             }
 
             callBack?.Invoke();
@@ -117,7 +117,7 @@
                         break;
 
                     default:
-                        Log.Info("Unknown Id: " + id);
+                        Log.Information("Unknown Id: " + id);
                         break;
                 }
             }
@@ -156,8 +156,8 @@
                     }
                 }
 
-                Log.Info(workItem.Name);
-                Log.Info(workItem.ObjectiveName);
+                Log.Information(workItem.Name);
+                Log.Information(workItem.ObjectiveName);
 
                 Outlook.Folder solutionsCalendarFolder = Globals.ThisAddIn.Application.GetNamespace("MAPI").GetDefaultFolder(Outlook.OlDefaultFolders.olFolderCalendar).Folders["Objectives"] as Outlook.Folder;
                 Outlook.AppointmentItem nextAppointment = solutionsCalendarFolder.Items.Add(Outlook.OlItemType.olAppointmentItem);
@@ -181,7 +181,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
                 return false;
             }
 
@@ -214,7 +214,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
                 return false;
             }
 
@@ -247,7 +247,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
                 return false;
             }
 
@@ -280,7 +280,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex.Message, ex);
                 return false;
             }
 

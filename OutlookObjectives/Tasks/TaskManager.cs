@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Concurrent;
     using System.Threading;
-    using LogNET;
+    using Serilog;
 
     /// <summary>
     /// TaskManager manages the background tasks.
@@ -97,13 +97,13 @@
                     {
                         taskRunning = true;
                         _ = BackgroundTasks.TryDequeue(out currentAction);
-                        Log.Info("TaskManager Starting " + currentAction.Target + "." + currentAction.Method.Name.ToString());
+                        Log.Information("TaskManager Starting " + currentAction.Target + "." + currentAction.Method.Name.ToString());
                         currentAction.Invoke();
                     }
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex);
+                    Log.Error(ex.Message, ex);
                     throw;
                 }
             }

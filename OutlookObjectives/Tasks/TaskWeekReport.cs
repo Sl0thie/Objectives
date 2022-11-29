@@ -4,7 +4,7 @@
     using System.Linq;
     using System.Threading;
     using CommonObjectives;
-    using LogNET;
+    using Serilog;
     using Newtonsoft.Json;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
@@ -57,7 +57,7 @@
                 day = day.AddDays(1);
                 if (GetDays())
                 {
-                    Log.Info("Processing Week :" + day.ToString());
+                    Log.Information("Processing Week :" + day.ToString());
 
                     GetWorkItemFromDays();
                     CreateHTML();
@@ -65,12 +65,12 @@
                 }
                 else
                 {
-                    Log.Info("Cannot find Full Week.");
+                    Log.Information("Cannot find Full Week.");
                 }
             }
             else
             {
-                Log.Info("No Week found to process.");
+                Log.Information("No Week found to process.");
             }
 
             callBack?.Invoke();
@@ -128,7 +128,7 @@
                     if (nextItem.Categories == "Objectives - Day Report")
                     {
                         dayReports[i] = JsonConvert.DeserializeObject<DayReport>(nextItem.Body);
-                        Log.Info("Day " + i.ToString() + " " + dayReports[i].Day.ToString());
+                        Log.Information("Day " + i.ToString() + " " + dayReports[i].Day.ToString());
                         break;
                     }
                 }

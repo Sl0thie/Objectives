@@ -9,7 +9,7 @@
     using System.Threading;
     using System.Windows.Forms.DataVisualization.Charting;
     using CommonObjectives;
-    using LogNET;
+    using Serilog;
     using Newtonsoft.Json;
     using Outlook = Microsoft.Office.Interop.Outlook;
 
@@ -66,7 +66,7 @@
             day = FindDay();
             if (day != DateTime.MinValue)
             {
-                Log.Info("Processing Day :" + day.ToString());
+                Log.Information("Processing Day :" + day.ToString());
 
                 // Initialize the array of minutes within the DayReport object.
                 for (int i = 0; i < 1440; i++)
@@ -86,7 +86,7 @@
             }
             else
             {
-                Log.Info("No day found to process.");
+                Log.Information("No day found to process.");
             }
 
             callBack?.Invoke();
@@ -156,7 +156,7 @@
                         break;
 
                     default:
-                        Log.Info("Category : " + next.Categories);
+                        Log.Information("Category : " + next.Categories);
                         break;
                 }
             }
@@ -171,7 +171,7 @@
                 Outlook.UserProperty customProperty = next.UserProperties.Find("Application");
                 if (customProperty is null)
                 {
-                    Log.Info("No Application Type " + next.Subject + " " + next.Start.ToString());
+                    Log.Information("No Application Type " + next.Subject + " " + next.Start.ToString());
                 }
                 else
                 {
@@ -231,7 +231,7 @@
                             break;
 
                         default:
-                            Log.Info("Unmanaged Application Type: " + (ApplicationType)customProperty.Value);
+                            Log.Information("Unmanaged Application Type: " + (ApplicationType)customProperty.Value);
                             break;
                     }
                 }
@@ -984,7 +984,7 @@
                 }
             }
 
-            Log.Info("Found All Idle: " + workItem.Start);
+            Log.Information("Found All Idle: " + workItem.Start);
             return false;
         }
 
