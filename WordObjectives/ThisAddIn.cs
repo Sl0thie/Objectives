@@ -6,9 +6,10 @@
     using System.Linq;
     using System.Threading;
     using CommonObjectives;
-    using LogNET;
+    using Serilog;
     using Newtonsoft.Json;
     using Word = Microsoft.Office.Interop.Word;
+    using System.Reflection;
 
     /// <summary>
     /// Microsoft Word VSTO AddIn to track Objectives.
@@ -36,7 +37,11 @@
         /// <param name="e">Also unused.</param>
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Console()
+                .WriteTo.File($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Logs\\{MethodBase.GetCurrentMethod().DeclaringType.Namespace} - .txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
 
             // Add events to monitor the documents as they are opened/closed/created/renamed.
             Globals.ThisAddIn.Application.DocumentOpen += Application_DocumentOpen;
@@ -111,7 +116,7 @@
                     {
                         if (!documents.ContainsKey(next.FullName))
                         {
-                            Log.Info("Adding " + next.FullName);
+                            Log.Information("Adding " + next.FullName);
                             AddDocument(next);
                         }
                         else
@@ -126,7 +131,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex, ex.Message);
             }
 
             try
@@ -145,14 +150,14 @@
 
                     if (!found)
                     {
-                        Log.Info("Removing " + path);
+                        Log.Information("Removing " + path);
                         RemoveDocument(path);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex, ex.Message);
             }
         }
 
@@ -182,11 +187,11 @@
         /// <param name="doc">The document to add to the dictionary.</param>
         private void AddDocument(Word.Document doc)
         {
-            Log.Info(doc.FullName);
+            Log.Information(doc.FullName);
 
             if (documents.ContainsKey(doc.FullName))
             {
-                Log.Info("Documents already contains key " + doc.FullName);
+                Log.Information("Documents already contains key " + doc.FullName);
             }
             else
             {
@@ -224,7 +229,7 @@
                 }
 
                 documents.Add(workItem.FilePath, workItem);
-                Log.Info("Added document " + doc.FullName);
+                Log.Information("Added document " + doc.FullName);
             }
         }
 
@@ -234,17 +239,17 @@
         /// <param name="path">The path to the document to remove from the dictionary.</param>
         private void RemoveDocument(string path)
         {
-            Log.Info(path);
+            Log.Information(path);
 
             if (documents.ContainsKey(path))
             {
                 SaveData(documents[path]);
                 _ = documents.Remove(path);
-                Log.Info("Removed document " + path);
+                Log.Information("Removed document " + path);
             }
             else
             {
-                Log.Info("Documents does not contains key " + path);
+                Log.Information("Documents does not contains key " + path);
             }
         }
 
@@ -262,7 +267,7 @@
                 workItem.FinishSize = wordFile.Length;
             }
 
-            Log.Info("SaveData has fired. Path = " + workItem.FilePath + " " + workItem.Start + " " + workItem.Finish);
+            Log.Information("SaveData has fired. Path = " + workItem.FilePath + " " + workItem.Start + " " + workItem.Finish);
 
             try
             {
@@ -299,7 +304,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex, ex.Message);
             }
         }
 

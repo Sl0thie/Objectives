@@ -1,5 +1,4 @@
-﻿// TODO Test "New Projects". Missed a few work items. Could be related to this.
-namespace VisualStudioObjectives
+﻿namespace VisualStudioObjectives2023
 {
     using System;
     using System.IO;
@@ -8,23 +7,45 @@ namespace VisualStudioObjectives
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
+
     using CommonObjectives;
+
     using EnvDTE;
+
     using Microsoft.VisualStudio;
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Shell.Events;
     using Microsoft.VisualStudio.Shell.Interop;
+
     using Newtonsoft.Json;
+
     using Serilog;
+
+    using static System.Net.WebRequestMethods;
+
     using Task = System.Threading.Tasks.Task;
 
     /// <summary>
-    /// VisualStudioObectivesPackage class.
+    /// This is the class that implements the package exposed by this assembly.
     /// </summary>
+    /// <remarks>
+    /// <para>
+    /// The minimum requirement for a class to be considered a valid package for Visual Studio
+    /// is to implement the IVsPackage interface and register itself with the shell.
+    /// This package uses the helper classes defined inside the Managed Package Framework (MPF)
+    /// to do it: it derives from the Package class that provides the implementation of the
+    /// IVsPackage interface and uses the registration attributes defined in the framework to
+    /// register itself and its components with the shell. These attributes tell the pkgdef creation
+    /// utility what data to put into .pkgdef file.
+    /// </para>
+    /// <para>
+    /// To get loaded into VS, the package must be referred by &lt;Asset Type="Microsoft.VisualStudio.VsPackage" ...&gt; in .vsixmanifest file.
+    /// </para>
+    /// </remarks>
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-    [Guid(PackageGuidString)]
+    [Guid(VisualStudioObjectives2023Package.PackageGuidString)]
     [ProvideAutoLoad(VSConstants.UICONTEXT.SolutionOpening_string, PackageAutoLoadFlags.BackgroundLoad)]
-    public sealed class VisualStudioObectivesPackage : AsyncPackage
+    public sealed class VisualStudioObjectives2023Package : AsyncPackage
     {
         private DTE dte;
         private string rootFolder;
@@ -32,27 +53,37 @@ namespace VisualStudioObjectives
         private WorkItem workItem;
 
         /// <summary>
-        /// GUID for the Package.
+        /// VisualStudioObjectives2023Package GUID string.
         /// </summary>
-        public const string PackageGuidString = "b0a6e816-4dcc-40fa-8189-b772f5265fda";
+        public const string PackageGuidString = "7b604da5-39c8-4a2b-8bf6-b18f40d81e60";
+
+        #region Package Members
 
         /// <summary>
-        /// Initializes the VisualStudioObectivesPackage.
+        /// Initialization of the package; this method is called right after the package is sited, so this is the place
+        /// where you can put all the initialization code that rely on services provided by VisualStudio.
         /// </summary>
-        /// <param name="cancellationToken">Token to manage cancellation.</param>
-        /// <param name="progress">Progress parameter.</param>
-        /// <returns>A task.</returns>
+        /// <param name="cancellationToken">A cancellation token to monitor for initialization cancellation, which can occur when VS is shutting down.</param>
+        /// <param name="progress">A provider for progress updates.</param>
+        /// <returns>A task representing the async work of package initialization, or an already completed task if there is none. Do not return null from this method.</returns>
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
-            // Access to the DTE has to be done on the UI thread.
-            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            // When initialized asynchronously, the current thread may be a background thread at this point.
+            // Do any initialization that requires the UI thread after switching to the UI thread.
+            await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             // Start logging for the extension.
+            string logpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Logs");
+            if (!Directory.Exists(logpath))
+            {
+                _ = Directory.CreateDirectory(logpath);
+            }
+            logpath = logpath + "\\" + MethodBase.GetCurrentMethod().DeclaringType.Namespace + " - .txt";
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .WriteTo.Console()
-                .WriteTo.File($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Logs\\{MethodBase.GetCurrentMethod().DeclaringType.Namespace} - .txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File(logpath, rollingInterval: RollingInterval.Day)
                 .CreateLogger();
+            Log.Information("Logging Started.");
 
             // Get the DTE service.
             dte = (DTE)GetGlobalService(typeof(DTE));
@@ -83,6 +114,8 @@ namespace VisualStudioObjectives
             Microsoft.VisualStudio.Shell.Events.SolutionEvents.OnBeforeCloseSolution += SolutionEvents_OnBeforeCloseSolution;
         }
 
+        #endregion
+
         /// <summary>
         /// Handles the MainTimer event.
         /// </summary>
@@ -93,13 +126,21 @@ namespace VisualStudioObjectives
             // Access to the solution should only be done on the UI thread.
             await JoinableTaskFactory.SwitchToMainThreadAsync();
 
-            try
+            if (workItem is object)
             {
-                if (workItem is object)
+                try
                 {
                     // Check for unsaved items. The project is active if there are unsaved items.
-                    workItem.IsActive = await IsSolutionUnsavedAsync(dte.Solution, false);
+                    workItem.IsActive = await IsSolutionUnsavedAsync(dte.Solution, false);                  
+                }
+                catch (Exception ex)
+                {
+                    Log.Information("MainTimer_Elapsed1");
+                    Log.Error(ex, ex.Message);
+                }
 
+                try
+                {
                     if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
                     {
                         GetCurrentValues();
@@ -111,7 +152,15 @@ namespace VisualStudioObjectives
                     // GetCurrentValues(); Not sure if this is necessary?
                     Log.Information("Tick: " + workItem.IsActive);
                 }
-                else
+                catch (Exception ex)
+                {
+                    Log.Information("MainTimer_Elapsed2");
+                    Log.Error(ex, ex.Message);
+                }
+            }
+            else
+            {
+                try
                 {
                     // If there is no work item then check if there is a solution. If so, create a new work item.
                     if (dte.Solution is object)
@@ -120,10 +169,11 @@ namespace VisualStudioObjectives
                         GetCurrentValues();
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, ex.Message);
+                catch (Exception ex)
+                {
+                    Log.Information("MainTimer_Elapsed3");
+                    Log.Error(ex, ex.Message);
+                }
             }
         }
 
@@ -143,57 +193,65 @@ namespace VisualStudioObjectives
 
             bool rv = false;
 
-            // Check if the solution is saved.
-            if (!solution.Saved)
+            try
             {
-                rv = true;
-                if (save)
+                // Check if the solution is saved.
+                if (!solution.Saved)
                 {
-                    solution.SaveAs(solution.FileName);
-                }
-            }
-
-            // Check if the projects are saved.
-            for (int i = 1; i <= solution.Projects.Count; i++)
-            {
-                Project project = solution.Projects.Item(i);
-                switch (project.Kind)
-                {
-                    case EnvDTE.Constants.vsProjectKindMisc:
-                        break;
-
-                    case EnvDTE.Constants.vsProjectKindSolutionItems:
-                        continue;
-
-                    case EnvDTE.Constants.vsProjectKindUnmodeled:
-                        break;
-
-                    case "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}": // C#
-                        break;
-
-                    default:
-                        break;
-                }
-
-                if (!project.Saved)
-                {
+                    rv = true;
                     if (save)
                     {
-                        project.Save();
+                        solution.SaveAs(solution.FileName);
                     }
-
-                    rv = true;
                 }
 
-                // Check if the project items are saved as well.
-                for (int j = 1; j <= project.ProjectItems.Count; j++)
+                // Check if the projects are saved.
+                for (int i = 1; i <= solution.Projects.Count; i++)
                 {
-                    ProjectItem item = project.ProjectItems.Item(j);
-                    if (await IsProjectItemsUnsavedAsync(item, save))
+                    Project project = solution.Projects.Item(i);
+                    switch (project.Kind)
                     {
+                        case EnvDTE.Constants.vsProjectKindMisc:
+                            break;
+
+                        case EnvDTE.Constants.vsProjectKindSolutionItems:
+                            continue;
+
+                        case EnvDTE.Constants.vsProjectKindUnmodeled:
+                            break;
+
+                        case "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}": // C#
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    if (!project.Saved)
+                    {
+                        if (save)
+                        {
+                            project.Save();
+                        }
+
                         rv = true;
                     }
+
+                    // Check if the project items are saved as well.
+                    for (int j = 1; j <= project.ProjectItems.Count; j++)
+                    {
+                        ProjectItem item = project.ProjectItems.Item(j);
+                        if (await IsProjectItemsUnsavedAsync(item, save))
+                        {
+                            rv = true;
+                        }
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Log.Information("IsSolutionUnsavedAsync");
+                Log.Error(ex, ex.Message);
             }
 
             return rv;
@@ -210,6 +268,7 @@ namespace VisualStudioObjectives
         {
             // Switch to main thread to access the DTE.
             await JoinableTaskFactory.SwitchToMainThreadAsync();
+
             bool rv = false;
 
             // Check if item is a folder. If so then check the sub items.
@@ -224,12 +283,20 @@ namespace VisualStudioObjectives
                 case EnvDTE.Constants.vsProjectItemKindPhysicalFolder:
                     for (int j = 1; j <= item.ProjectItems.Count; j++)
                     {
-                        ProjectItem subitem = item.ProjectItems.Item(j);
-
-                        if (await IsProjectItemsUnsavedAsync(subitem, save))
+                        try
                         {
-                            rv = true;
+                            ProjectItem subitem = item.ProjectItems.Item(j);
+
+                            if (await IsProjectItemsUnsavedAsync(subitem, save))
+                            {
+                                rv = true;
+                            }
                         }
+                        catch (Exception ex)
+                        {
+                            Log.Information($"IsProjectItemsUnsavedAsync {item.ProjectItems.Item(j).Name}");
+                            Log.Error(ex, ex.Message);
+                        }                    
                     }
 
                     break;
@@ -279,6 +346,7 @@ namespace VisualStudioObjectives
             }
             catch (Exception ex)
             {
+                Log.Information("GetRegistrySettings");
                 Log.Error(ex, ex.Message);
             }
         }
@@ -290,16 +358,16 @@ namespace VisualStudioObjectives
         /// <param name="e">This parameter also is unused.</param>
         private void SolutionEvents_OnAfterBackgroundSolutionLoadComplete(object sender, EventArgs e)
         {
-            ThreadHelper.ThrowIfNotOnUIThread();
-
             try
             {
                 // Create a new work item for the loaded solution.
+                Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
                 GetStartValues();
                 GetCurrentValues();
             }
             catch (Exception ex)
             {
+                Log.Information("SolutionEvents_OnAfterBackgroundSolutionLoadComplete");
                 Log.Error(ex, ex.Message);
             }
         }
@@ -311,16 +379,16 @@ namespace VisualStudioObjectives
         /// <param name="e">This parameter also is unused.</param>
         private void SolutionEvents_OnBeforeCloseSolution(object sender, EventArgs e)
         {
-            ThreadHelper.ThrowIfNotOnUIThread();
-
             try
             {
                 // Get the finished data and save to file.
+                Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
                 GetCurrentValues();
                 _ = SaveDataAsync();
             }
             catch (Exception ex)
             {
+                Log.Information("SolutionEvents_OnBeforeCloseSolution");
                 Log.Error(ex, ex.Message);
             }
         }
@@ -402,6 +470,7 @@ namespace VisualStudioObjectives
             }
             catch (Exception ex)
             {
+                Log.Information("GetStartValues");
                 Log.Error(ex, ex.Message);
             }
         }
@@ -416,7 +485,7 @@ namespace VisualStudioObjectives
             // await JoinableTaskFactory.SwitchToMainThreadAsync();
             try
             {
-                if (File.Exists(dte.Solution.FullName))
+                if (System.IO.File.Exists(dte.Solution.FullName))
                 {
                     if (!dte.Solution.Saved)
                     {
@@ -478,6 +547,7 @@ namespace VisualStudioObjectives
             }
             catch (Exception ex)
             {
+                Log.Information("GetCurrentValues");
                 Log.Error(ex, ex.Message);
             }
         }
@@ -489,9 +559,9 @@ namespace VisualStudioObjectives
         {
             try
             {
-                if (File.Exists(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')) + "\\.git\\logs\\HEAD"))
+                if (System.IO.File.Exists(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')) + "\\.git\\logs\\HEAD"))
                 {
-                    foreach (string line in File.ReadLines(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')) + "\\.git\\logs\\HEAD", Encoding.UTF8))
+                    foreach (string line in System.IO.File.ReadLines(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')) + "\\.git\\logs\\HEAD", Encoding.UTF8))
                     {
                         string temp = line.Substring(line.IndexOf('>') + 2);
                         temp = temp.Substring(0, temp.IndexOf(' '));
@@ -507,6 +577,7 @@ namespace VisualStudioObjectives
             }
             catch (Exception ex)
             {
+                Log.Information("GetHEADItems");
                 Log.Error(ex, ex.Message);
             }
         }
@@ -540,7 +611,7 @@ namespace VisualStudioObjectives
 
                     // Save the data to file in the storage folder.
                     string json = JsonConvert.SerializeObject(workItem, Formatting.Indented);
-                    File.WriteAllText(storageFolder + @"\" + (int)workItem.Application + "-" + workItem.Id.ToString() + ".json", json);
+                    System.IO.File.WriteAllText(storageFolder + @"\" + (int)workItem.Application + "-" + workItem.Id.ToString() + ".json", json);
 
                     // Reset the work item. This reuses the work item after it is saved every thirty minutes. If the work item is closed then it does not matter if these values have been reset.
                     workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
@@ -550,6 +621,7 @@ namespace VisualStudioObjectives
             }
             catch (Exception ex)
             {
+                Log.Information("SaveDataAsync");
                 Log.Error(ex, ex.Message);
             }
         }

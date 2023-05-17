@@ -1,0 +1,37 @@
+2023-05-17 21:32:10.696 +10:00 [INF] Logging Started.
+2023-05-17 21:33:00.914 +10:00 [ERR] No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE))
+System.InvalidCastException: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE))
+   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   at Microsoft.VisualStudio.CommonIDE.Solutions.Dte.IdeAutomationObject`1.<>c__21`1.<RunOnMainThreadHr>b__21_0(OutHrFunc`1 innerFunc)
+   at VisualStudioObjectives2023.VisualStudioObjectives2023Package.<IsProjectItemsUnsavedAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at VisualStudioObjectives2023.VisualStudioObjectives2023Package.<IsSolutionUnsavedAsync>d__7.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at VisualStudioObjectives2023.VisualStudioObjectives2023Package.<MainTimer_Elapsed>d__6.MoveNext()
+2023-05-17 21:33:51.032 +10:00 [ERR] No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE))
+System.InvalidCastException: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE))
+   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   at Microsoft.VisualStudio.CommonIDE.Solutions.Dte.IdeAutomationObject`1.<>c__21`1.<RunOnMainThreadHr>b__21_0(OutHrFunc`1 innerFunc)
+   at VisualStudioObjectives2023.VisualStudioObjectives2023Package.<IsProjectItemsUnsavedAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at VisualStudioObjectives2023.VisualStudioObjectives2023Package.<IsSolutionUnsavedAsync>d__7.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at VisualStudioObjectives2023.VisualStudioObjectives2023Package.<MainTimer_Elapsed>d__6.MoveNext()
+2023-05-17 21:34:33.819 +10:00 [ERR] No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE))
+System.InvalidCastException: No such interface supported (Exception from HRESULT: 0x80004002 (E_NOINTERFACE))
+   at System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   at Microsoft.VisualStudio.CommonIDE.Solutions.Dte.IdeAutomationObject`1.<>c__21`1.<RunOnMainThreadHr>b__21_0(OutHrFunc`1 innerFunc)
+   at VisualStudioObjectives2023.VisualStudioObjectives2023Package.<IsProjectItemsUnsavedAsync>d__8.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at VisualStudioObjectives2023.VisualStudioObjectives2023Package.<IsSolutionUnsavedAsync>d__7.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at VisualStudioObjectives2023.VisualStudioObjectives2023Package.<SaveDataAsync>d__16.MoveNext()

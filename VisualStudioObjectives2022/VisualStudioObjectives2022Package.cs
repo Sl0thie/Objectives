@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Text;
     using System.Threading;
@@ -11,14 +12,14 @@
 
     using EnvDTE;
 
-    using LogNET;
-
     using Microsoft.VisualStudio;
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Shell.Events;
     using Microsoft.VisualStudio.Shell.Interop;
 
     using Newtonsoft.Json;
+
+    using Serilog;
 
     using Task = System.Threading.Tasks.Task;
 
@@ -69,7 +70,11 @@
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             // Start logging for the extension.
-            Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Console()
+                .WriteTo.File($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Logs\\{MethodBase.GetCurrentMethod().DeclaringType.Namespace} - .txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
 
             // Get the DTE service.
             dte = (DTE)GetGlobalService(typeof(DTE));
@@ -128,7 +133,7 @@
                     }
 
                     // GetCurrentValues(); Not sure if this is necessary?
-                    Log.Info("Tick: " + workItem.IsActive);
+                    Log.Information("Tick: " + workItem.IsActive);
                 }
                 else
                 {
@@ -142,7 +147,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex, ex.Message);
             }
         }
 
@@ -298,7 +303,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex, ex.Message);
             }
         }
 
@@ -318,7 +323,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex, ex.Message);
             }
         }
 
@@ -338,7 +343,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex, ex.Message);
             }
         }
 
@@ -419,7 +424,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex, ex.Message);
             }
         }
 
@@ -495,7 +500,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex, ex.Message);
             }
         }
 
@@ -524,7 +529,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex, ex.Message);
             }
         }
 
@@ -567,7 +572,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex, ex.Message);
             }
         }
     }

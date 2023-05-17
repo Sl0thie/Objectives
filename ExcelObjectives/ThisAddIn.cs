@@ -3,10 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Reflection;
     using System.Threading;
     using CommonObjectives;
-    using LogNET;
     using Newtonsoft.Json;
+    using Serilog;
     using Excel = Microsoft.Office.Interop.Excel;
 
     /// <summary>
@@ -38,7 +39,11 @@
         /// <param name="e">This parameter also is unused.</param>
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            Log.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Visual Studio 2019\\Logs", true, true, false);
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.Console()
+                .WriteTo.File($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Logs\\{MethodBase.GetCurrentMethod().DeclaringType.Namespace} - .txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
 
             Globals.ThisAddIn.Application.WorkbookDeactivate += Application_WorkbookDeactivate;
             Globals.ThisAddIn.Application.WorkbookActivate += Application_WorkbookActivate;
@@ -64,7 +69,7 @@
         /// <param name="workbook">The workbook to  deactivate.</param>
         private void Application_WorkbookDeactivate(Excel.Workbook workbook)
         {
-            Log.Info(workbook.FullName);
+            Log.Information(workbook.FullName);
         }
 
         /// <summary>
@@ -74,7 +79,7 @@
         /// <param name="workbook">The workbook to activate.</param>
         private void Application_WorkbookActivate(Excel.Workbook workbook)
         {
-            Log.Info(workbook.FullName);
+            Log.Information(workbook.FullName);
         }
 
         /// <summary>
@@ -84,7 +89,7 @@
         /// <param name="cancel">Set to true to cancel closing the workbook.</param>
         private void Application_WorkbookBeforeClose(Excel.Workbook workbook, ref bool cancel)
         {
-            Log.Info(workbook.FullName);
+            Log.Information(workbook.FullName);
             RemoveWorkbook(workbook.FullName);
         }
 
@@ -94,7 +99,7 @@
         /// <param name="workbook">The workbook that is opening.</param>
         private void Application_WorkbookOpen(Excel.Workbook workbook)
         {
-            Log.Info(workbook.FullName);
+            Log.Information(workbook.FullName);
             AddWorkbook(workbook);
         }
 
@@ -174,11 +179,11 @@
         /// <param name="workbook">The workbook to add.</param>
         private void AddWorkbook(Excel.Workbook workbook)
         {
-            Log.Info("AddWorkbook " + workbook.FullName);
+            Log.Information("AddWorkbook " + workbook.FullName);
 
             if (workItems.ContainsKey(workbook.FullName))
             {
-                Log.Info("Workbooks already contains key " + workbook.FullName);
+                Log.Information("Workbooks already contains key " + workbook.FullName);
             }
             else
             {
@@ -227,7 +232,7 @@
                 }
 
                 workItems.Add(workItem.FilePath, workItem);
-                Log.Info("Added workbook " + workbook.FullName);
+                Log.Information("Added workbook " + workbook.FullName);
             }
         }
 
@@ -237,17 +242,17 @@
         /// <param name="path">The path to the workbook.</param>
         private void RemoveWorkbook(string path)
         {
-            Log.Info("RemoveWorkbook " + path);
+            Log.Information("RemoveWorkbook " + path);
 
             if (workItems.ContainsKey(path))
             {
                 SaveData(workItems[path]);
                 _ = workItems.Remove(path);
-                Log.Info("Removed workbook " + path);
+                Log.Information("Removed workbook " + path);
             }
             else
             {
-                Log.Info("Workbooks does not contains key " + path);
+                Log.Information("Workbooks does not contains key " + path);
             }
         }
 
@@ -300,7 +305,7 @@
             }
             catch (Exception ex)
             {
-                Log.Error(ex);
+                Log.Error(ex, ex.Message);
             }
         }
 
