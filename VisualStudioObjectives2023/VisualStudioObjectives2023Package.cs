@@ -4,6 +4,7 @@
     using System.IO;
     using System.Reflection;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
@@ -128,51 +129,27 @@
 
             if (workItem is object)
             {
-                try
+                // Check for unsaved items. The project is active if there are unsaved items.
+                workItem.IsActive = await IsSolutionUnsavedAsync(dte.Solution, false);
+
+                if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
                 {
-                    // Check for unsaved items. The project is active if there are unsaved items.
-                    workItem.IsActive = await IsSolutionUnsavedAsync(dte.Solution, false);                  
-                }
-                catch (Exception ex)
-                {
-                    Log.Information("MainTimer_Elapsed1");
-                    Log.Error(ex, ex.Message);
+                    GetCurrentValues();
+                    await SaveDataAsync();
+                    GetStartValues();
+                    GetCurrentValues();
                 }
 
-                try
-                {
-                    if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
-                    {
-                        GetCurrentValues();
-                        await SaveDataAsync();
-                        GetStartValues();
-                        GetCurrentValues();
-                    }
-
-                    // GetCurrentValues(); Not sure if this is necessary?
-                    Log.Information("Tick: " + workItem.IsActive);
-                }
-                catch (Exception ex)
-                {
-                    Log.Information("MainTimer_Elapsed2");
-                    Log.Error(ex, ex.Message);
-                }
+                // GetCurrentValues(); Not sure if this is necessary?
+                Log.Information("Tick: " + workItem.IsActive);
             }
             else
             {
-                try
+                // If there is no work item then check if there is a solution. If so, create a new work item.
+                if (dte.Solution is object)
                 {
-                    // If there is no work item then check if there is a solution. If so, create a new work item.
-                    if (dte.Solution is object)
-                    {
-                        GetStartValues();
-                        GetCurrentValues();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.Information("MainTimer_Elapsed3");
-                    Log.Error(ex, ex.Message);
+                    GetStartValues();
+                    GetCurrentValues();
                 }
             }
         }
@@ -278,25 +255,30 @@
                     break;
 
                 case EnvDTE.Constants.vsProjectItemKindPhysicalFile:
+
+                    // If the item is not saved then return true.
+                    if (!item.Saved)
+                    {
+                        if (save)
+                        {
+                            item.Save();
+                            //_ = item.Document.Save();
+                        }
+
+                        rv = true;
+                    }
+
                     break;
 
                 case EnvDTE.Constants.vsProjectItemKindPhysicalFolder:
                     for (int j = 1; j <= item.ProjectItems.Count; j++)
                     {
-                        try
-                        {
-                            ProjectItem subitem = item.ProjectItems.Item(j);
+                        ProjectItem subitem = item.ProjectItems.Item(j);
 
-                            if (await IsProjectItemsUnsavedAsync(subitem, save))
-                            {
-                                rv = true;
-                            }
-                        }
-                        catch (Exception ex)
+                        if (await IsProjectItemsUnsavedAsync(subitem, save))
                         {
-                            Log.Information($"IsProjectItemsUnsavedAsync {item.ProjectItems.Item(j).Name}");
-                            Log.Error(ex, ex.Message);
-                        }                    
+                            rv = true;
+                        }
                     }
 
                     break;
@@ -317,18 +299,10 @@
                     break;
 
                 default:
+
+                    Log.Information($"Type of unknown project item {item.GetType()}");
+
                     break;
-            }
-
-            // If the item is not saved then return true.
-            if (!item.Saved)
-            {
-                if (save)
-                {
-                    item.Save();
-                }
-
-                rv = true;
             }
 
             return rv;
@@ -339,16 +313,8 @@
         /// </summary>
         private void GetRegistrySettings()
         {
-            try
-            {
-                rootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", string.Empty);
-                storageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
-            }
-            catch (Exception ex)
-            {
-                Log.Information("GetRegistrySettings");
-                Log.Error(ex, ex.Message);
-            }
+            rootFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "RootFolder", string.Empty);
+            storageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
         }
 
         /// <summary>
@@ -358,18 +324,10 @@
         /// <param name="e">This parameter also is unused.</param>
         private void SolutionEvents_OnAfterBackgroundSolutionLoadComplete(object sender, EventArgs e)
         {
-            try
-            {
-                // Create a new work item for the loaded solution.
-                Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
-                GetStartValues();
-                GetCurrentValues();
-            }
-            catch (Exception ex)
-            {
-                Log.Information("SolutionEvents_OnAfterBackgroundSolutionLoadComplete");
-                Log.Error(ex, ex.Message);
-            }
+            // Create a new work item for the loaded solution.
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+            GetStartValues();
+            GetCurrentValues();
         }
 
         /// <summary>
@@ -379,18 +337,10 @@
         /// <param name="e">This parameter also is unused.</param>
         private void SolutionEvents_OnBeforeCloseSolution(object sender, EventArgs e)
         {
-            try
-            {
-                // Get the finished data and save to file.
-                Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
-                GetCurrentValues();
-                _ = SaveDataAsync();
-            }
-            catch (Exception ex)
-            {
-                Log.Information("SolutionEvents_OnBeforeCloseSolution");
-                Log.Error(ex, ex.Message);
-            }
+            // Get the finished data and save to file.
+            Microsoft.VisualStudio.Shell.ThreadHelper.ThrowIfNotOnUIThread();
+            GetCurrentValues();
+            _ = SaveDataAsync();
         }
 
         /// <summary>
@@ -413,65 +363,57 @@
             ThreadHelper.ThrowIfNotOnUIThread();
 
             // await JoinableTaskFactory.SwitchToMainThreadAsync();
-            try
+            workItem = new WorkItem(dte.Solution.FileName.Substring(dte.Solution.FileName.LastIndexOf('\\') + 1));
+            workItem.Name = workItem.Name.Substring(0, workItem.Name.Length - 4);
+            workItem.FilePath = dte.Solution.FileName;
+            if (workItem.FilePath.Substring(0, rootFolder.Length) == rootFolder)
             {
-                workItem = new WorkItem(dte.Solution.FileName.Substring(dte.Solution.FileName.LastIndexOf('\\') + 1));
-                workItem.Name = workItem.Name.Substring(0, workItem.Name.Length - 4);
-                workItem.FilePath = dte.Solution.FileName;
-                if (workItem.FilePath.Substring(0, rootFolder.Length) == rootFolder)
-                {
-                    workItem.ObjectiveName = workItem.FilePath.Substring(rootFolder.Length + 1);
-                    workItem.ObjectiveName = workItem.ObjectiveName.Substring(0, workItem.ObjectiveName.IndexOf(@"\"));
-                }
-                else
-                {
-                    workItem.ObjectiveName = "None";
-                }
-
-                workItem.StartSize = 0;
-                DirectoryInfo basePath = new DirectoryInfo(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')));
-
-                foreach (FileInfo nextFileInfo in basePath.EnumerateFiles("*.*", SearchOption.AllDirectories))
-                {
-                    switch (nextFileInfo.Extension.ToLower())
-                    {
-                        case ".ascx": // Source
-                        case ".asmx":
-                        case ".asp":
-                        case ".aspx":
-                        case ".config":
-                        case ".c":
-                        case ".cpp":
-                        case ".disco":
-                        case ".cs":
-                        case ".css":
-                        case ".cshtml":
-                        case ".h":
-                        case ".hta":
-                        case ".htc":
-                        case ".htm":
-                        case ".html":
-                        case ".js":
-                        case ".json":
-                        case ".ps1":
-                        case ".ps2":
-                        case ".resx":
-                        case ".vsto":
-                        case ".xaml":
-                        case ".xml":
-                        case ".xsp":
-                            workItem.StartSize += nextFileInfo.Length;
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
+                workItem.ObjectiveName = workItem.FilePath.Substring(rootFolder.Length + 1);
+                workItem.ObjectiveName = workItem.ObjectiveName.Substring(0, workItem.ObjectiveName.IndexOf(@"\"));
             }
-            catch (Exception ex)
+            else
             {
-                Log.Information("GetStartValues");
-                Log.Error(ex, ex.Message);
+                workItem.ObjectiveName = "None";
+            }
+
+            workItem.StartSize = 0;
+            DirectoryInfo basePath = new DirectoryInfo(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')));
+
+            foreach (FileInfo nextFileInfo in basePath.EnumerateFiles("*.*", SearchOption.AllDirectories))
+            {
+                switch (nextFileInfo.Extension.ToLower())
+                {
+                    case ".ascx": // Source
+                    case ".asmx":
+                    case ".asp":
+                    case ".aspx":
+                    case ".config":
+                    case ".c":
+                    case ".cpp":
+                    case ".disco":
+                    case ".cs":
+                    case ".css":
+                    case ".cshtml":
+                    case ".h":
+                    case ".hta":
+                    case ".htc":
+                    case ".htm":
+                    case ".html":
+                    case ".js":
+                    case ".json":
+                    case ".ps1":
+                    case ".ps2":
+                    case ".resx":
+                    case ".vsto":
+                    case ".xaml":
+                    case ".xml":
+                    case ".xsp":
+                        workItem.StartSize += nextFileInfo.Length;
+                        break;
+
+                    default:
+                        break;
+                }
             }
         }
 
@@ -483,73 +425,65 @@
             ThreadHelper.ThrowIfNotOnUIThread();
 
             // await JoinableTaskFactory.SwitchToMainThreadAsync();
-            try
+            if (System.IO.File.Exists(dte.Solution.FullName))
             {
-                if (System.IO.File.Exists(dte.Solution.FullName))
+                if (!dte.Solution.Saved)
                 {
-                    if (!dte.Solution.Saved)
-                    {
-                        dte.Solution.SaveAs(dte.Solution.FullName);
-                    }
+                    dte.Solution.SaveAs(dte.Solution.FullName);
                 }
-
-                workItem.FinishSize = 0;
-
-                DirectoryInfo basePath = new DirectoryInfo(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')));
-
-                foreach (FileInfo nextFileInfo in basePath.EnumerateFiles("*.*", SearchOption.AllDirectories))
-                {
-                    switch (nextFileInfo.Extension.ToLower())
-                    {
-                        case ".ascx": // Source
-                        case ".asmx":
-                        case ".asp":
-                        case ".aspx":
-                        case ".config":
-                        case ".c":
-                        case ".cpp":
-                        case ".disco":
-                        case ".cs":
-                        case ".css":
-                        case ".cshtml":
-                        case ".h":
-                        case ".hta":
-                        case ".htc":
-                        case ".htm":
-                        case ".html":
-                        case ".js":
-                        case ".json":
-                        case ".ps1":
-                        case ".ps2":
-                        case ".resx":
-                        case ".vsto":
-                        case ".xaml":
-                        case ".xml":
-                        case ".xsp":
-                            workItem.FinishSize += nextFileInfo.Length;
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-
-                if (workItem.StartSize != workItem.FinishSize)
-                {
-                    workItem.Application = ApplicationType.VisualStudioWrite;
-                }
-                else
-                {
-                    workItem.Application = ApplicationType.VisualStudioRead;
-                }
-
-                workItem.Finish = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
             }
-            catch (Exception ex)
+
+            workItem.FinishSize = 0;
+
+            DirectoryInfo basePath = new DirectoryInfo(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')));
+
+            foreach (FileInfo nextFileInfo in basePath.EnumerateFiles("*.*", SearchOption.AllDirectories))
             {
-                Log.Information("GetCurrentValues");
-                Log.Error(ex, ex.Message);
+                switch (nextFileInfo.Extension.ToLower())
+                {
+                    case ".ascx": // Source
+                    case ".asmx":
+                    case ".asp":
+                    case ".aspx":
+                    case ".config":
+                    case ".c":
+                    case ".cpp":
+                    case ".disco":
+                    case ".cs":
+                    case ".css":
+                    case ".cshtml":
+                    case ".h":
+                    case ".hta":
+                    case ".htc":
+                    case ".htm":
+                    case ".html":
+                    case ".js":
+                    case ".json":
+                    case ".ps1":
+                    case ".ps2":
+                    case ".resx":
+                    case ".vsto":
+                    case ".xaml":
+                    case ".xml":
+                    case ".xsp":
+                        workItem.FinishSize += nextFileInfo.Length;
+                        break;
+
+                    default:
+                        break;
+                }
             }
+
+            if (workItem.StartSize != workItem.FinishSize)
+            {
+                workItem.Application = ApplicationType.VisualStudioWrite;
+            }
+            else
+            {
+                workItem.Application = ApplicationType.VisualStudioRead;
+            }
+
+            workItem.Finish = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
         }
 
         /// <summary>
@@ -557,28 +491,20 @@
         /// </summary>
         private void GetHEADItems()
         {
-            try
+            if (System.IO.File.Exists(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')) + "\\.git\\logs\\HEAD"))
             {
-                if (System.IO.File.Exists(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')) + "\\.git\\logs\\HEAD"))
+                foreach (string line in System.IO.File.ReadLines(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')) + "\\.git\\logs\\HEAD", Encoding.UTF8))
                 {
-                    foreach (string line in System.IO.File.ReadLines(workItem.FilePath.Substring(0, workItem.FilePath.LastIndexOf('\\')) + "\\.git\\logs\\HEAD", Encoding.UTF8))
+                    string temp = line.Substring(line.IndexOf('>') + 2);
+                    temp = temp.Substring(0, temp.IndexOf(' '));
+                    DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Convert.ToDouble(temp));
+                    temp = line.Substring(line.IndexOf('+') + 1, 2);
+                    dt = dt.AddHours(Convert.ToInt32(temp));
+                    if ((dt >= workItem.Start) && (dt <= workItem.Finish))
                     {
-                        string temp = line.Substring(line.IndexOf('>') + 2);
-                        temp = temp.Substring(0, temp.IndexOf(' '));
-                        DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(Convert.ToDouble(temp));
-                        temp = line.Substring(line.IndexOf('+') + 1, 2);
-                        dt = dt.AddHours(Convert.ToInt32(temp));
-                        if ((dt >= workItem.Start) && (dt <= workItem.Finish))
-                        {
-                            workItem.Notes.Add(new Note("GitItem", line));
-                        }
+                        workItem.Notes.Add(new Note("GitItem", line));
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Log.Information("GetHEADItems");
-                Log.Error(ex, ex.Message);
             }
         }
 
@@ -590,39 +516,31 @@
             // Switch to the main thread to access the DTE.
             await JoinableTaskFactory.SwitchToMainThreadAsync();
 
-            try
+            // Check if the start and finish times are not the same. Outlook uses truncated DateTimes, no seconds or milliseconds.
+            if (workItem.Start != workItem.Finish)
             {
-                // Check if the start and finish times are not the same. Outlook uses truncated DateTimes, no seconds or milliseconds.
-                if (workItem.Start != workItem.Finish)
+                GetHEADItems();
+
+                workItem.IsActive = await IsSolutionUnsavedAsync(dte.Solution, true);
+
+                // If the work item is active then mark it as active.
+                if (workItem.IsActive || (workItem.StartSize != workItem.FinishSize))
                 {
-                    GetHEADItems();
-
-                    workItem.IsActive = await IsSolutionUnsavedAsync(dte.Solution, true);
-
-                    // If the work item is active then mark it as active.
-                    if (workItem.IsActive || (workItem.StartSize != workItem.FinishSize))
-                    {
-                        workItem.Application = ApplicationType.VisualStudioWrite;
-                    }
-                    else
-                    {
-                        workItem.Application = ApplicationType.VisualStudioRead;
-                    }
-
-                    // Save the data to file in the storage folder.
-                    string json = JsonConvert.SerializeObject(workItem, Formatting.Indented);
-                    System.IO.File.WriteAllText(storageFolder + @"\" + (int)workItem.Application + "-" + workItem.Id.ToString() + ".json", json);
-
-                    // Reset the work item. This reuses the work item after it is saved every thirty minutes. If the work item is closed then it does not matter if these values have been reset.
-                    workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
-                    workItem.IsActive = false;
-                    workItem.StartSize = workItem.FinishSize;
+                    workItem.Application = ApplicationType.VisualStudioWrite;
                 }
-            }
-            catch (Exception ex)
-            {
-                Log.Information("SaveDataAsync");
-                Log.Error(ex, ex.Message);
+                else
+                {
+                    workItem.Application = ApplicationType.VisualStudioRead;
+                }
+
+                // Save the data to file in the storage folder.
+                string json = JsonConvert.SerializeObject(workItem, Formatting.Indented);
+                System.IO.File.WriteAllText(storageFolder + @"\" + (int)workItem.Application + "-" + workItem.Id.ToString() + ".json", json);
+
+                // Reset the work item. This reuses the work item after it is saved every thirty minutes. If the work item is closed then it does not matter if these values have been reset.
+                workItem.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
+                workItem.IsActive = false;
+                workItem.StartSize = workItem.FinishSize;
             }
         }
     }

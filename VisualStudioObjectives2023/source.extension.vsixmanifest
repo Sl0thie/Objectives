@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="VisualStudioObjectives2023.3d0e97bd-c3ed-4318-bb74-394184dc44d5" Version="1.19" Language="en-US" Publisher="Dallas Adams" />
+    <Identity Id="VisualStudioObjectives2023.3d0e97bd-c3ed-4318-bb74-394184dc44d5" Version="1.27" Language="en-US" Publisher="Dallas Adams" />
     <DisplayName>VisualStudioObjectives2023</DisplayName>
     <Description>VisualStudioObjectives2023 is a Visual Studio Extension to monitor solutions.</Description>
     <Icon>IMPOSSBL.ICO</Icon>
