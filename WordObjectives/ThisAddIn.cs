@@ -4,12 +4,12 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Threading;
     using CommonObjectives;
-    using Serilog;
     using Newtonsoft.Json;
+    using Serilog;
     using Word = Microsoft.Office.Interop.Word;
-    using System.Reflection;
 
     /// <summary>
     /// Microsoft Word VSTO AddIn to track Objectives.
@@ -37,11 +37,20 @@
         /// <param name="e">Also unused.</param>
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
+            // Start logging for the extension.
+            string logpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Logs");
+            if (!Directory.Exists(logpath))
+            {
+                _ = Directory.CreateDirectory(logpath);
+            }
+
+            logpath = logpath + "\\" + MethodBase.GetCurrentMethod().DeclaringType.Namespace + " - .txt";
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
-                .WriteTo.File($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Logs\\{MethodBase.GetCurrentMethod().DeclaringType.Namespace} - .txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File(logpath, rollingInterval: RollingInterval.Day)
                 .CreateLogger();
+            Log.Information("Logging Started.");
 
             // Add events to monitor the documents as they are opened/closed/created/renamed.
             Globals.ThisAddIn.Application.DocumentOpen += Application_DocumentOpen;

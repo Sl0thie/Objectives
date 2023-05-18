@@ -7,6 +7,7 @@
     using Serilog;
     using Microsoft.Win32;
     using Outlook = Microsoft.Office.Interop.Outlook;
+    using System.Reflection;
 
     /// <summary>
     /// Microsoft Outlook VSTO AddIn to track Objectives.
@@ -35,14 +36,19 @@
         /// <param name="e">Also unused.</param>
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            // Setup logging for the application.
+            // Start logging for the extension.
+            string logpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Logs");
+            if (!Directory.Exists(logpath))
+            {
+                _ = Directory.CreateDirectory(logpath);
+            }
+            logpath = logpath + "\\" + MethodBase.GetCurrentMethod().DeclaringType.Namespace + " - .txt";
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Debug()
-                .WriteTo.File("OutlookObjectives - .txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File(logpath, rollingInterval: RollingInterval.Day)
                 .CreateLogger();
-
-            Log.Information("Add-in Startup");
+            Log.Information("Logging Started.");
 
             // Check for the required items.
             CheckSystemRequirements();

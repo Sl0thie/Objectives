@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Timers;
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.Runtime;
@@ -57,11 +58,19 @@ namespace AutoCADObjectives
         /// </summary>
         public void Initialize()
         {
-            // Setup logging for the application.
+            // Start logging for the Add-in.
+            string logpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Logs");
+            if (!Directory.Exists(logpath))
+            {
+                _ = Directory.CreateDirectory(logpath);
+            }
+
+            logpath = logpath + "\\" + MethodBase.GetCurrentMethod().DeclaringType.Namespace + " - .txt";
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .WriteTo.File("AutoCADObjectives - .txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File(logpath, rollingInterval: RollingInterval.Day)
                 .CreateLogger();
+            Log.Information("Logging Started.");
 
             try
             {

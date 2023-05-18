@@ -39,11 +39,19 @@
         /// <param name="e">This parameter also is unused.</param>
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
+            // Start logging for the extension.
+            string logpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Logs");
+            if (!Directory.Exists(logpath))
+            {
+                _ = Directory.CreateDirectory(logpath);
+            }
+            logpath = logpath + "\\" + MethodBase.GetCurrentMethod().DeclaringType.Namespace + " - .txt";
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
-                .WriteTo.File($"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Logs\\{MethodBase.GetCurrentMethod().DeclaringType.Namespace} - .txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File(logpath, rollingInterval: RollingInterval.Day)
                 .CreateLogger();
+            Log.Information("Logging Started.");
 
             Globals.ThisAddIn.Application.WorkbookDeactivate += Application_WorkbookDeactivate;
             Globals.ThisAddIn.Application.WorkbookActivate += Application_WorkbookActivate;

@@ -3,12 +3,15 @@
     using System;
     using System.Diagnostics;
     using System.IO;
+    using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Text;
     using System.Windows.Forms;
     using CommonObjectives;
     using Microsoft.Win32;
     using Newtonsoft.Json;
+
+    using Serilog;
 
     /// <summary>
     /// FormMain Form.
@@ -85,6 +88,20 @@
         private void FormMain_Load(object sender, EventArgs e)
         {
             Visible = false;
+
+            // Start logging for the extension.
+            string logpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Logs");
+            if (!Directory.Exists(logpath))
+            {
+                _ = Directory.CreateDirectory(logpath);
+            }
+            logpath = logpath + "\\" + MethodBase.GetCurrentMethod().DeclaringType.Namespace + " - .txt";
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File(logpath, rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+            Log.Information("Logging Started.");
+
             SystemEvents.PowerModeChanged += OnPowerChange;
 
             storageFolder = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\SOFTWARE\\InTouch\\Objectives", "StorageFolder", string.Empty);
