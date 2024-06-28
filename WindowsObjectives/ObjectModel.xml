@@ -15,12 +15,18 @@
             </summary>
             <param name="hWnd">The window handle.</param>
             <param name="lpdwProcessId">The process Id.</param>
-            <returns>A uint of the process Id.</returns>
+            <returns>A unit of the process Id.</returns>
         </member>
         <member name="M:WindowsObjectives.FormMain.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:WindowsObjectives.FormMain"/> class.
             </summary>
+        </member>
+        <member name="M:WindowsObjectives.FormMain.GetCaptionOfActiveWindow">
+            <summary>
+            This function returns the caption of the active window.
+            </summary>
+            <returns>A string of the caption of the active window.</returns>
         </member>
         <member name="F:WindowsObjectives.FormMain.components">
             <summary>

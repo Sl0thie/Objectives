@@ -74,11 +74,12 @@
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             // Start logging for the extension.
-            string logpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Logs");
-            if (!Directory.Exists(logpath))
-            {
-                _ = Directory.CreateDirectory(logpath);
-            }
+            string logpath =  "F:\\Logs";
+            //string logpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Logs");
+            //if (!Directory.Exists(logpath))
+            //{
+            //    _ = Directory.CreateDirectory(logpath);
+            //}
             logpath = logpath + "\\" + MethodBase.GetCurrentMethod().DeclaringType.Namespace + " - .txt";
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()

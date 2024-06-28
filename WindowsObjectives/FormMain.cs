@@ -12,6 +12,8 @@
     using Newtonsoft.Json;
 
     using Serilog;
+    using Serilog.Exceptions;
+    using Serilog.Formatting.Json;
 
     /// <summary>
     /// FormMain Form.
@@ -49,7 +51,7 @@
         /// </summary>
         /// <param name="hWnd">The window handle.</param>
         /// <param name="lpdwProcessId">The process Id.</param>
-        /// <returns>A uint of the process Id.</returns>
+        /// <returns>A unit of the process Id.</returns>
         [DllImport("user32.dll", SetLastError = true)]
         public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
@@ -83,24 +85,35 @@
         public FormMain()
         {
             InitializeComponent();
+            WindowState = FormWindowState.Minimized;
+            ShowInTaskbar = false;
+            Visible = false;
+
+
+            ////// Start logging for the extension.
+            //string logpath = Path.Combine(@"F:\", "Logs");
+            //if (!Directory.Exists(logpath))
+            //{
+            //    _ = Directory.CreateDirectory(logpath);
+            //}
+            //logpath = logpath + "\\" + MethodBase.GetCurrentMethod().DeclaringType.Namespace + " - .txt";
+
+            string logpath = MethodBase.GetCurrentMethod().DeclaringType.Namespace + " - .txt";
+
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.WithExceptionDetails()
+                .WriteTo.File(new JsonFormatter(renderMessage: true), logpath, rollingInterval: RollingInterval.Day)
+                .WriteTo.Console(new JsonFormatter(renderMessage: true))
+                .CreateLogger();
+
+            Log.Information("Logging Started.");
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            WindowState = FormWindowState.Minimized;
+            ShowInTaskbar = false;
             Visible = false;
-
-            // Start logging for the extension.
-            string logpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Logs");
-            if (!Directory.Exists(logpath))
-            {
-                _ = Directory.CreateDirectory(logpath);
-            }
-            logpath = logpath + "\\" + MethodBase.GetCurrentMethod().DeclaringType.Namespace + " - .txt";
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.File(logpath, rollingInterval: RollingInterval.Day)
-                .CreateLogger();
-            Log.Information("Logging Started.");
 
             SystemEvents.PowerModeChanged += OnPowerChange;
 
@@ -181,6 +194,7 @@
             systemUptime.Start = DateTime.Parse(DateTime.Now.ToString(@"yyyy-MM-dd HH:mm"));
         }
 
+
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (isAsleep)
@@ -203,6 +217,8 @@
 
         private void TimerMain_Tick(object sender, EventArgs e)
         {
+            //Log.Information("TimerMain Tick.");
+
             int nextValue = GetLastInputTime();
             if (armed)
             {
@@ -228,8 +244,8 @@
 
             lastValue = nextValue;
 
-            Debug.WriteLine(nextValue + " " + lastValue);
-            Debug.WriteLine("Idle : " + isIdle + " Sleep : " + isAsleep);
+            //Debug.WriteLine(nextValue + " " + lastValue);
+            //Debug.WriteLine("Idle : " + isIdle + " Sleep : " + isAsleep);
 
             if ((DateTime.Now.Minute == 0) || (DateTime.Now.Minute == 30))
             {
@@ -267,13 +283,28 @@
             }
             catch (Exception ex)
             {
-                app.Application = "Unknown: ";
-                app.Title = "Unknown" + ex.Message;
+                switch (ex.HResult)
+                {
+                    case 80004005:
+                        app.Application = "Unknown: possibly asleep";
+                        app.Title = "Unknown";
+                        break;
+
+                    default:
+                        app.Application = "Unknown: ";
+                        app.Title = "Unknown " + ex.Message;
+                        Log.Error(ex, ex.Message);
+                        break;
+                }
             }
 
             systemUptime.ActiveApplications.Add(app);
         }
 
+        /// <summary>
+        /// This function returns the caption of the active window.
+        /// </summary>
+        /// <returns>A string of the caption of the active window.</returns>
         private string GetCaptionOfActiveWindow()
         {
             string strTitle = string.Empty;
