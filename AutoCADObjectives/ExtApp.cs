@@ -59,7 +59,8 @@ namespace AutoCADObjectives
         public void Initialize()
         {
             // Start logging for the Add-in.
-            string logpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Logs");
+            //string logpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Logs");
+            string logpath = "F:\\Logs";
             if (!Directory.Exists(logpath))
             {
                 _ = Directory.CreateDirectory(logpath);

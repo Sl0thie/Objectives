@@ -38,12 +38,7 @@
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             // Start logging for the extension.
-            string logpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Logs");
-            if (!Directory.Exists(logpath))
-            {
-                _ = Directory.CreateDirectory(logpath);
-            }
-
+            string logpath = "F:\\Logs";
             logpath = logpath + "\\" + MethodBase.GetCurrentMethod().DeclaringType.Namespace + " - .txt";
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
